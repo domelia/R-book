@@ -6,12 +6,23 @@ book:
   search: true
   repo-url: https://github.com/domelia/R-book/
   repo-actions: edit
+  cover-image: cover.jpg
   downloads:
   - epub
   chapters:
   - index.qmd
   - lesson1.qmd
   - lesson2.qmd
+  - lesson3.qmd
+  - lesson4.qmd
+  - lesson5.qmd
+  - lesson6.qmd
+  - lesson7.qmd
+  - lesson8.qmd
+  - lesson9.qmd
+  - lesson10.qmd
+  - lesson12.qmd
+  - lesson13.qmd
 lang: ru
 comments:
   hypothesis: true
