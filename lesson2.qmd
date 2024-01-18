@@ -286,24 +286,22 @@ install_github("DeveloperName/PackageName")
 
 **1. Какой код нужно написать, чтобы подключить для использования уже установленную библиотеку `tidyverse`?**
 
-    ```{r echo=FALSE}
-    opts_r <- c(
-        answer ="library(tidyverse)",
-       "install('tidyverse')",
-       "package(tidyverse)"
-    )
-    ```
+```{r}
+opts_r <- c(answer ="library(tidyverse)",
+       "install(tidyverse)",
+       "package(tidyverse)")
+```
 
-    `r longmcq(opts_r)`
+`r longmcq(opts_r)`
 
-**2. Библиотека, используемая для установки пакетов с github:
-    ```{r echo=FALSE}
-    opts <- c(
+**2. Библиотека, используемая для установки пакетов с github**:
+
+```{r}
+opts <- c(
         answer ="devtools",
        "dplyr",
-       "tidyverse"
-    )
-    ```
+       "tidyverse")
+```
 
-    `r longmcq(opts)`
+`r longmcq(opts)`
 
