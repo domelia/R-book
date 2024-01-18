@@ -1,23 +1,25 @@
 project:
   type: book
-
 book:
-  title: "R-book"
-  author: "Norah Jones"
-  date: "18.01.2024"
+  title: R в социологических исследованиях
+  author: Дарья Омельченко
+  search: true
+  repo-url: https://github.com/domelia/R-book/
+  repo-actions: edit
+  downloads:
+  - epub
   chapters:
-    - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
-
+  - index.qmd
+  - lesson1.qmd
+  - lesson2.qmd
+lang: ru
+comments:
+  hypothesis: true
 bibliography: references.bib
-
 format:
   html:
-    theme: cosmo
-  pdf:
-    documentclass: scrreprt
-
+    theme: Pulse
+    css: include/webex.css
+    include-after-body: include/webex.js
+    embed-resources: true
 editor: visual
-

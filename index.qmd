@@ -1,5 +1,3 @@
-# Preface {.unnumbered}
+# В качестве предисловия... {.unnumbered}
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Это электронное пособие написано для магистрантов, обучающихся по направлению...

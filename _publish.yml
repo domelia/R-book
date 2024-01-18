@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: ded544e9-7bd9-4c64-bc32-5c9821d4946d
+      url: 'https://domelia.quarto.pub/r-book-for-sociologists'
