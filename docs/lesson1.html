@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R в социологических исследованиях - 1&nbsp; Основные сведения об R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lesson2.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lesson1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R в социологических исследованиях</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/domelia/R-book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./R-в-социологических-исследованиях.epub" rel="" title="Download ePub" class="quarto-navigation-tool px-1" aria-label="Download ePub"><i class="bi bi-journal"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">В качестве предисловия…</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Типы и структуры данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Функции в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Трансформации данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Основы визуализации</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Импорт из экспорт данных из разных источников</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Статистические гипотезы и критерии</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Регрессионный анализ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Моделировние структурными уравнениями в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#что-такое-r" id="toc-что-такое-r" class="nav-link active" data-scroll-target="#что-такое-r"><span class="header-section-number">1.1</span> Что такое R?</a></li>
+  <li><a href="#немного-истории" id="toc-немного-истории" class="nav-link" data-scroll-target="#немного-истории"><span class="header-section-number">1.2</span> Немного истории</a></li>
+  <li><a href="#каковы-преимущества-r" id="toc-каковы-преимущества-r" class="nav-link" data-scroll-target="#каковы-преимущества-r"><span class="header-section-number">1.3</span> Каковы преимущества R?</a></li>
+  <li><a href="#кое-что-еще-о-разработчиках-r" id="toc-кое-что-еще-о-разработчиках-r" class="nav-link" data-scroll-target="#кое-что-еще-о-разработчиках-r"><span class="header-section-number">2</span> Кое-что еще о разработчиках R</a></li>
+  <li><a href="#вопросы-для-самопроверки" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#вопросы-для-самопроверки"><span class="header-section-number">3</span> Вопросы для самопроверки</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/domelia/R-book/edit/main/lesson1.qmd" class="toc-action">Редактировать страницу</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="что-такое-r" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="что-такое-r"><span class="header-section-number">1.1</span> Что такое R?</h2>
+<p>R – это язык программирования и свободная программная среда для статистической обработки и визуализации данных.</p>
+<p>Несмотря на наличие огромного количества языков и различных программ для статистической обработки данных, R в течение двух десятилетий остается популярным языком и средой обработки и анализа данных для специалистов из разных областей знания.</p>
+<p>Позиции языка R как средства разработки среди других языков программирования довольно высоки. Так, по данным индекса Tiobe за 2022 год, R занимал12-е место в мире, и хотя в 2024 году его авторитет заметно упал (23-е место), его используют миллионы аналитиков и разработчиков по всему миру:</p>
+<p><img src="https://raw.githubusercontent.com/domelia/rcourse/main/inst/tutorials/lesson1/images/tiobe.png" class="img-fluid"></p>
+<p>Прежде всего, это язык, который используют ученые, специалисты, работающие в различных отраслях экономики, менеджеры для анализа реальных данных и разработки научно обоснованных систем принятия решений, поэтому место в общем рейтинге не так высоко. Если посмотреть сферы использования, то на первом месте - академическая среда, на втором - сфера здравоохранения, на третьем - правительственные учреждения.</p>
+<p><img src="https://cdn.stackoverflow.co/images/jo7n4k8s/production/4304a6e40e6cb86c9905d6ef22e68fea550c82d6-675x675.png" class="img-fluid"></p>
+<p>R используют банки и маркетинговые агентства, технические компании и информационные корпорации для разных целей - от обработки данных до прогнозирования и представления интерактивной инфографики.</p>
+<p>Вот только небольшой список тех компаний, которые используют R в своей деятельности.</p>
+<p><img src="https://gilesd-j.com/wp-content/uploads/2019/01/4-companies-using-R.jpg" class="img-fluid"></p>
+</section>
+<section id="немного-истории" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="немного-истории"><span class="header-section-number">1.2</span> Немного истории</h2>
+<p>R был создан профессорами <strong>Россом Айхэка</strong> и <strong>Робертом Джентельменом</strong> (Ross Ihaka и Robert Gentleman) в 1992 году, сначала как язык программирования для обучения студентов статистике в университете Окленда (Новая Зеландия). Авторы вдохновлялись при создании языком S, используемым в лаборатории Bell, и ради шутки назвали язык R - по первым буквам собственных имен.</p>
+<p>В июне 1995 года статистик <strong>Мартин Махлер</strong> убедил Айхэку и Джентельмена опубликовать R как язык со свободным исходным кодом под публичной лицензией GNU. Первая официальная версия была выпущена 29 февраля 2000 года.</p>
+<p>Чуть ранее, в 1997 году <strong>Куртом Хорником</strong> и <strong>Фрицем Лейшем</strong> была основана Сеть для архивирования кода R (CRAN, The Comprehensive R Archive Network), цель которой заключалась в хранении исходного кода, выполняемых файлов, документации и библиотек, создаваемых пользователями. На момент декабря 2022 года CRAN имел 103 зеркальных сервера и 18 976 библиотек.</p>
+<p>Команда разработчиков (R Core Team) также была основана в 1997 году для дальнейшего развития языка. Сейчас в ней состоят ведующие разработчики, статистики, специалисты по компьютерным наукам, всего более 20 человек. В апреле 2003 года для развития проекта была создана некоммерческая организация R Foundation. Цель фонда заключается в предоставлении технической поддержки и коммуникации с создателями R, хранении и управлении технической документацией и интеллектуальной собственностью.</p>
+<p>Подробнее об истории создания R можно узнать из таймлайна: <img src="https://www.researchgate.net/publication/360246719/figure/fig1/AS:1160745526005760@1653754707412/Timeline-of-R-history-with-selected-milestones.png" class="img-fluid"></p>
+<p>Создатели R (Питер Далгаард - датский ученый, один из членов R Core Team): <img src="https://rss.onlinelibrary.wiley.com/cms/asset/25d367ff-1eb8-48d4-b457-f767bd7ec036/sign1169-gra-0004-m.jpg" class="img-fluid"></p>
+</section>
+<section id="каковы-преимущества-r" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="каковы-преимущества-r"><span class="header-section-number">1.3</span> Каковы преимущества R?</h2>
+<p>Их довольно много:</p>
+<ol type="1">
+<li>Возможности для <strong>статистической обработки</strong>, от простых функций до сложных моделей.</li>
+</ol>
+<p>Почти все новое, что появляется в области статистики, можно найти в одной из библиотек R. Например, ANZ банк использует R для моделирования невыплат по ипотечному кредитованию, а The Bank Of America применяет R для формирования финансовой отчетности.</p>
+<ol start="2" type="1">
+<li>Это язык программирования <strong>с открытым исходным кодом</strong> (Open-source)</li>
+</ol>
+<p>Что это значит? Это значит, что, во-первых, все написанное на R открыто для изучения и критики, а, во-вторых, каждый может внести вклад в его развитие и улучшение путем создания новых библиотек и новых функций для решения различных задач.</p>
+<ol start="3" type="1">
+<li><strong>Поддержка сообщества</strong> (Community)</li>
+</ol>
+<p>У R - более 2 миллионов пользователей по всему миру, сообщество пользователей R не только внушительное по размеру, но и очень активное. Каким бы ни был ваш проект - учебным или крупномасштабным, всегда найдется тот, кто поможет разобраться в коде и принять правильное решение. Вы тоже можете найти себе единомышленников и подключаться к другим проектам.</p>
+<p>Некоторые полезные ссылки:</p>
+<ul>
+<li><a href="https://community.rstudio.com/" class="uri">https://community.rstudio.com/</a></li>
+<li><a href="https://www.r-bloggers.com/" class="uri">https://www.r-bloggers.com/</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/r" class="uri">https://stackoverflow.com/questions/tagged/r</a></li>
+<li><a href="https://rweekly.org/" class="uri">https://rweekly.org/</a> <a href="https://www.reddit.com/r/Rlanguage/" class="uri">https://www.reddit.com/r/Rlanguage/</a></li>
+<li><a href="https://r.awesome-programming.com/en/awesome/r-language-02/community" class="uri">https://r.awesome-programming.com/en/awesome/r-language-02/community</a></li>
+</ul>
+<p>Коммьюнити пользователей R это совсем не Man’s World: весьма активно женское сообщество <a href="https://en.wikipedia.org/wiki/R-Ladies">RLadies</a>, устраивающее митапы по всему миру и продвигающее свой особый, женский, взгляд на использование R для разработки и анализа данных.</p>
+<ol start="4" type="1">
+<li>Огромная <strong>коллекция библиотек и полезных функций</strong>, позволяющих расширить возможности базового языка</li>
+</ol>
+<p>Самые авторитетные хранятся в CRAN (Comprehensive R Archive Network), их более 10 тысяч, однако, чтобы попасть туда, необходимо, чтобы документация и код соответствовали определенным требованиям, что требует времени. До того момента, когда библиотека загружена на CRAN, она, как правило, хранится в открытом доступе, например, на <a href="https://github.com/search?q=R">github</a>, где каждый желающий может принять участие в ее тестировании и доработке.</p>
+<p>Пример сетевого анализа библиотек и их взаимозависимостей представлен на рисунке ниже:</p>
+<p><img src="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/R+Packages+Guide/content_rdoc10.png" class="img-fluid"></p>
+<p>Примеры полезных библиотек:</p>
+<ul>
+<li>обработка и всевозможные манипуляции с данными (<code>tidytverse</code>)</li>
+<li>работа с большими данными (<code>sparklyr</code>)</li>
+<li>глубокое обучение (<code>keras</code>, <code>TensorFlow</code>)</li>
+<li>машинное обучение (<code>H2O</code>)</li>
+<li>визуализация данных (<code>ggplot2</code>)</li>
+<li>создание отчетов, итерактивная графика и обучение (<code>Rmarkdown</code>, <code>shiny</code>).</li>
+</ul>
+<ol start="5" type="1">
+<li><strong>Совместимость с другими языками программирования</strong></li>
+</ol>
+<p>Большинство функций и библиотек написаны на самом языке R. Однако, для сложных вычислительных задач, могут использоваться и другие языки, такие как C, C++, FORTRAN. Для манипуляций с объектами, возможно использование других языков - .NET, Java, Python. Иными словами, возможности программирования становятся практически безграничными.</p>
+<ol start="6" type="1">
+<li>Создание привлекательных <strong>визуализаций</strong></li>
+</ol>
+<p>В современном мире анализ данных невозможен без качественной визуализации, особенно если его результаты планируется использовать в сфере политики и бизнеса. R является одним из лучших инструментов для создания качественной графики, и такие библиотеки как <code>ggplot2</code>, <code>plotly</code>, <code>ggvis</code> помогут создать очень детализированные и эстетически привлекательные визуализации.</p>
+<p>Для пользователей R, которые только начинают изучение языка, на сайте <a href="https://r-graph-gallery.com" class="uri">https://r-graph-gallery.com</a> создана галерея визуализаций, разбитых по отдельным тематикам. На основе простых и более сложных примеров можно изучить код и адаптировать его под собственные задачи.</p>
+<iframe width="650" height="500" class="border border-primary" title="Галерея визуализаций в R" src="https://r-graph-gallery.com/" data-external="1"></iframe>
+<ol start="7" type="1">
+<li><strong>Интеграция с Hadoop и анализ больших данных</strong></li>
+</ol>
+<p>Если перед вами стоит задача анализа больших данных, то с такими библиотеками как <code>rmr</code>, <code>rhdfs</code>, <code>rhbase</code>, <code>RHIVE</code>, <code>RHIPE</code> и <code>Rhadoop</code> возможно интегрировать R и Hadoop (проект фонда Apache Software Foundation для разработки и выполнения распределённых вычислений для работы с большими данными).</p>
+<p>Возможности по хранению данных Hadoop и вычислительные достоинства R используют многие в качестве оптимального решения для анализа больших данных. Например, компания Форд использует R и Hadoop для обработки данных обратной связи с потребителями, что позволяет им улучшить дизайн и обосновывать бизнес решения.</p>
+<p><img src="https://static.javatpoint.com/tutorial/r/images/r-integration-with-hadoop.png" class="img-fluid"></p>
+<ol start="8" type="1">
+<li>Создание <strong>интерактивных веб-приложений</strong></li>
+</ol>
+<p>С помощью R и библиотеки <code>shiny</code> можно создавать интерактивные приложения, с помощью которых пользователи (ученики, заказчики, журналисты и пр.) могут познакомиться с вашими данными, провести какие-то виды анализа, сделать визуализацию, возможно изучить какие-то закономерности (часто используются как обучающий инструмент). Эти приложения можно хранить на сервере Shiny или в другом доступном месте.</p>
+<p><img src="https://r-graph-gallery.com/img/graph/271-ggplot2-animated-gif-chart-with-gganimate2.gif" class="img-fluid"></p>
+<p>Примеры можно посмотреть в галерее на сайте <code>shiny</code>: (<a href="https://shiny.posit.co/r/gallery/" class="uri">https://shiny.posit.co/r/gallery/</a>):</p>
+<iframe width="650" height="500" class="border border-primary" src="https://shiny.posit.co/r/gallery/" data-external="1"></iframe>
+<ol start="9" type="1">
+<li><strong>Совместимость с другими платформами</strong></li>
+</ol>
+<p>R может работать с любой конфигурацией оборудования и поддерживает различные операционные системы, независимо от окружения выдает предсказуемые и однозначные результаты.</p>
+<ol start="10" type="1">
+<li>Возможность запуска кода <strong>без компилирования</strong> (возможно этот пункт стоило бы поставить на одно из первых мест)</li>
+</ol>
+<p>R относится к <em>интерпретируемым</em> языкам, что означает, что ему не требуется компилятор для того, чтобы программа заработала. Иными словами, все команды, которые мы вводим, сразу же выполняются, без дополнительного компилирования (сборки), как это происходит в других языках, например в C, COBOL, Delphi или Fortran. Другими возможностями, которыми обладают интерпретируемые языки, являются кросс-платформенность (способность работать в разных операционных системах и аппаратных средах), простота тестирования и отладки программ.</p>
+<p><img src="http://itmentor.by/images/articles/kompiliruemye-i-interpretiruemye.jpg" class="img-fluid"></p>
+<p>Например, Если мы создадим несколько строк кода и запустим их, они выполнятся немедленно и мы увидим результат:</p>
+<p><img src="https://raw.githubusercontent.com/domelia/rcourse/main/inst/tutorials/lesson1/images/2.png" class="img-fluid"></p>
+<p>Кроме этих преимуществ есть и много других, о которых мы узнаем в процессе изучения курса.</p>
+<p>К слову сказать, данное пособие также создано с помощью R. При его создании использовались возможности open-source системы публикации научной и технической информациии <strong>Quarto</strong>.</p>
+</section>
+<section id="кое-что-еще-о-разработчиках-r" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Кое-что еще о разработчиках R</h1>
+<p>Кроме основной команды, в сообществе R выделяются талантливые программисты, которые разрабатывают библиотеки, без преувеличения производящие революцию в обработке и анализе данных. Это настоящие гуру, которых очень уважают в исследовательском сообществе, их имена знают все, кто работает в R. Ну, или почти все…</p>
+<p>ТОП-3 по личному и очень субъективному мнению автора, которое основывается на его собственном опыте и может не совпадать с другими оценками, включает следующих разработчиков:</p>
+<ol type="1">
+<li><strong>Хэдли Уикхэм</strong> (Hadley Wickham) - программист из Новой Зеландии, главный научный сотрудник в компании Posit (создана в 2022 году в продолжение и развитие компании RStudio). Без преувеличения самый известнй, очень трудолюбивый и плодотворный разработчик R, автор более 100 (!) библиотек, в том числе таких мегапопулярных как <code>ggplot</code>, <code>dplyr</code>, <code>tidyverse</code>, <code>devtools</code> и других. Этими библиотеками воспользовались более 825 тыс. человек.</li>
+</ol>
+<p><img src="https://github.com/hadley.png" class="img-fluid" width="300"></p>
+<ol start="2" type="1">
+<li><strong>Дирк Эддельбуэттель</strong> (Dirk Eddelbuettel) - канадский ученый в области статистики, программист и исследователь, второй в нашем списке лучших разработчиков библиотек для R. Принял участие в создании более 60 библиотек, наиболее популярными среди которых является <code>Rcpp</code>, позволяющая интегрировать R с другим не менее популярным языком C++, а также <code>RPostgreSQL</code>, предоставляющая интерфейс для работы с системой баз данных PostgreSQL. Работает в Иллинойском университете в Урбане-Шампейне.</li>
+</ol>
+<p><img src="https://stat.illinois.edu/sites/default/files/styles/directory_profile/public/profile-photo/deddel.png.jpg?itok=4R7stKxA" class="img-fluid" width="300"></p>
+<ol start="3" type="1">
+<li><strong>Ихуэй Се</strong> (Yihui Xie) - еще один плодовитый разрботчик, создавший более 40 библиотек, загруженных более 130 тыс. раз. Его большая заслуга в том, что разработал инструменты для создания интерактивных приложений (<code>knitr</code>, <code>rmarkdown</code>, <code>shiny</code> и <code>htmlwidgets</code> - его детища, и мы тоже с ними познакомимся на следующих занятиях). Yihui Xie также поддерживает систему <code>bookdown</code>, которую можно использовать для написания книг и отчетных документов с помощью R Markdown. Инженер-программист компании RStudio.</li>
+</ol>
+<p><img src="https://m.media-amazon.com/images/I/71uZ6+zYknL.jpg" width="300"></p>
+</section>
+<section id="вопросы-для-самопроверки" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Вопросы для самопроверки</h1>
+<p><strong>1. Каким языком является R?</strong></p>
+<div id="radio_WIHWFWQTGC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WIHWFWQTGC" value=""> <span>компилируемым</span></label><label><input type="radio" autocomplete="off" name="radio_WIHWFWQTGC" value=""> <span>процедурным</span></label><label><input type="radio" autocomplete="off" name="radio_WIHWFWQTGC" value="answer"> <span>интерпретируемым</span></label><label><input type="radio" autocomplete="off" name="radio_WIHWFWQTGC" value=""> <span>структурным</span></label>
+</div>
+<p><strong>2. Может ли R быть интегрирована с Hadoop для обработки больших данных?</strong> <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
+<p><strong>3. На основе какого языка создан R?</strong></p>
+<div id="radio_IRXBIQGUKT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IRXBIQGUKT" value=""> <span>Python</span></label><label><input type="radio" autocomplete="off" name="radio_IRXBIQGUKT" value=""> <span>Oracle</span></label><label><input type="radio" autocomplete="off" name="radio_IRXBIQGUKT" value="answer"> <span>S</span></label><label><input type="radio" autocomplete="off" name="radio_IRXBIQGUKT" value=""> <span>Java</span></label>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">В качестве предисловия…</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lesson2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

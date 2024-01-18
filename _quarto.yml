@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: docs
 book:
   title: R в социологических исследованиях
   author: Дарья Омельченко
@@ -32,5 +33,5 @@ format:
     theme: Pulse
     css: include/webex.css
     include-after-body: include/webex.js
-    embed-resources: true
+    embed-resources: false
 editor: visual
