@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R в социологических исследованиях - 4&nbsp; Основы работы с Основы работы в R Markdown</title>
+<title>R в социологических исследованиях - 4&nbsp; Основы работы с R Markdown</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lesson4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с Основы работы в R Markdown</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lesson4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lesson4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с Основы работы в R Markdown</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с Основы работы в R Markdown</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></h1>
 </div>
 
 
@@ -272,8 +272,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="как-это-происходит" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="как-это-происходит"><span class="header-section-number">4.1.2</span> Как это происходит?</h3>
-<p>Вы создаете документ в R Markdown на основе определенной структуры, состоящей из разделов, параграфов, глав и т.д. Части текста оформляются с помощью специального синтаксиса, а текст внутри них снабжается кодом, с помощью которого Вы обрабатыаете данные, создаете модели, визуализируете результаты исследования, ссылаетесь на научные и документационные источники, приводите цитаты, дополняете свой текст иллюстрациями, полученными из внешних ресурсов (например, фото из Интернета или репродукции всемирно известных картин из музеев и т.д.).</p>
-<p>Когда все готово, Вы просто нажимаете кнопку <code>knit</code> (knit по-английски “вязать”), и маркдаун “связывает” отдельные элементы, преврашая их в целостный документ, отформатированный определенным образом: соблюдены размеры страницы, текст оформлен с помощью нужных шрифтов, имеет определенные абзацные и межстрочные отступы, цвет, заголовки, подписи к рисункам и таблицам и т.д.</p>
+<p>Вы создаете документ в R Markdown на основе определенной структуры, состоящей из разделов, параграфов, глав и т.д.</p>
+<p>Части текста оформляются с помощью специального синтаксиса, а текст внутри них снабжается кодом, с помощью которого Вы обрабатыаете данные, создаете модели, визуализируете результаты исследования, ссылаетесь на научные и документационные источники, приводите цитаты, дополняете свой текст иллюстрациями, полученными из внешних ресурсов (например, фото из Интернета или репродукциями всемирно известных картин из музеев, а может быть и собственными фото- и дизайнерскими работами).</p>
+<p>Когда все готово, Вы просто нажимаете кнопку <code>knit</code> (knit по-английски “вязать”), и маркдаун “связывает” отдельные элементы, преврашая их в целостный документ, отформатированный определенным образом:</p>
+<ul>
+<li>соблюдены размеры страницы</li>
+<li>текст оформлен с помощью нужных шрифтов</li>
+<li>имеет отступы, цвет, заголовки, подписи к рисункам и таблицам и т.д.</li>
+</ul>
 <p>Основными достоинствами и стимулами к использованию R Markdown являются следующие:</p>
 <ul>
 <li>это легкий доступный язык форматирования для не-программистов, позволяющий создавать Интернет-страницы и другие документы;</li>
