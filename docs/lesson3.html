@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lesson4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Функции в R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с Основы работы в R Markdown</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -232,24 +232,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#вопросы-для-самопроверки" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#вопросы-для-самопроверки"><span class="header-section-number">3.1.1</span> Вопросы для самопроверки</a></li>
   <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">3.1.2</span> Самостоятельная работа</a></li>
   </ul></li>
-  <li><a href="#структуры-данных" id="toc-структуры-данных" class="nav-link" data-scroll-target="#структуры-данных"><span class="header-section-number">3.2</span> Структуры данных</a></li>
-  <li><a href="#векторы" id="toc-векторы" class="nav-link" data-scroll-target="#векторы"><span class="header-section-number">3.3</span> Векторы</a>
+  <li><a href="#структуры-данных" id="toc-структуры-данных" class="nav-link" data-scroll-target="#структуры-данных"><span class="header-section-number">3.2</span> Структуры данных</a>
   <ul class="collapse">
-  <li><a href="#адресация-и-изменение-элементов-вектора" id="toc-адресация-и-изменение-элементов-вектора" class="nav-link" data-scroll-target="#адресация-и-изменение-элементов-вектора"><span class="header-section-number">3.3.1</span> Адресация и изменение элементов вектора</a></li>
-  <li><a href="#операции-над-векторами" id="toc-операции-над-векторами" class="nav-link" data-scroll-target="#операции-над-векторами"><span class="header-section-number">3.3.2</span> Операции над векторами</a></li>
-  <li><a href="#некторые-полезные-функции-для-работы-с-векторами" id="toc-некторые-полезные-функции-для-работы-с-векторами" class="nav-link" data-scroll-target="#некторые-полезные-функции-для-работы-с-векторами"><span class="header-section-number">3.3.3</span> Некторые полезные функции для работы с векторами</a></li>
+  <li><a href="#векторы" id="toc-векторы" class="nav-link" data-scroll-target="#векторы"><span class="header-section-number">3.2.1</span> Векторы</a></li>
+  <li><a href="#матрицы" id="toc-матрицы" class="nav-link" data-scroll-target="#матрицы"><span class="header-section-number">3.2.2</span> Матрицы</a></li>
+  <li><a href="#массивы" id="toc-массивы" class="nav-link" data-scroll-target="#массивы"><span class="header-section-number">3.2.3</span> Массивы</a></li>
+  <li><a href="#списки-lists" id="toc-списки-lists" class="nav-link" data-scroll-target="#списки-lists"><span class="header-section-number">3.2.4</span> Списки (lists)</a></li>
   </ul></li>
-  <li><a href="#матрицы" id="toc-матрицы" class="nav-link" data-scroll-target="#матрицы"><span class="header-section-number">3.4</span> Матрицы</a>
-  <ul class="collapse">
-  <li><a href="#полезные-функции-и-операции-над-матрицами" id="toc-полезные-функции-и-операции-над-матрицами" class="nav-link" data-scroll-target="#полезные-функции-и-операции-над-матрицами"><span class="header-section-number">3.4.1</span> Полезные функции и операции над матрицами</a></li>
-  </ul></li>
-  <li><a href="#массивы" id="toc-массивы" class="nav-link" data-scroll-target="#массивы"><span class="header-section-number">3.5</span> Массивы</a>
-  <ul class="collapse">
-  <li><a href="#манипуляции-с-элементами-массива" id="toc-манипуляции-с-элементами-массива" class="nav-link" data-scroll-target="#манипуляции-с-элементами-массива"><span class="header-section-number">3.5.1</span> Манипуляции с элементами массива</a></li>
-  </ul></li>
-  <li><a href="#списки-lists" id="toc-списки-lists" class="nav-link" data-scroll-target="#списки-lists"><span class="header-section-number">3.6</span> Списки (lists)</a></li>
-  <li><a href="#таблицы-данных-data-frame" id="toc-таблицы-данных-data-frame" class="nav-link" data-scroll-target="#таблицы-данных-data-frame"><span class="header-section-number">3.7</span> Таблицы данных (data frame)</a></li>
-  <li><a href="#самостоятельная-работа-1" id="toc-самостоятельная-работа-1" class="nav-link" data-scroll-target="#самостоятельная-работа-1"><span class="header-section-number">3.8</span> Самостоятельная работа</a></li>
+  <li><a href="#таблицы-данных-data-frame" id="toc-таблицы-данных-data-frame" class="nav-link" data-scroll-target="#таблицы-данных-data-frame"><span class="header-section-number">3.3</span> Таблицы данных (data frame)</a></li>
+  <li><a href="#самостоятельная-работа-1" id="toc-самостоятельная-работа-1" class="nav-link" data-scroll-target="#самостоятельная-работа-1"><span class="header-section-number">3.4</span> Самостоятельная работа</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/domelia/R-book/edit/main/lesson3.qmd" class="toc-action">Редактировать страницу</a></p></div></div></nav>
     </div>
@@ -511,27 +502,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="вопросы-для-самопроверки" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="вопросы-для-самопроверки"><span class="header-section-number">3.1.1</span> Вопросы для самопроверки</h3>
 <p><strong>1. К какому типу переменных относится число -3,5?</strong></p>
-<div id="radio_BIFBRBSUNS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BIFBRBSUNS" value="answer"> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_BIFBRBSUNS" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_BIFBRBSUNS" value=""> <span>complex</span></label><label><input type="radio" autocomplete="off" name="radio_BIFBRBSUNS" value=""> <span>integer</span></label>
+<div id="radio_DCCODVMPIN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DCCODVMPIN" value="answer"> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_DCCODVMPIN" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_DCCODVMPIN" value=""> <span>complex</span></label><label><input type="radio" autocomplete="off" name="radio_DCCODVMPIN" value=""> <span>integer</span></label>
 </div>
 <p><strong>2. Какой результат получится, если попытаться превратить в число строковую переменную?</strong></p>
-<div id="radio_GOWMJNFWFG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GOWMJNFWFG" value="answer"> <span>NA</span></label><label><input type="radio" autocomplete="off" name="radio_GOWMJNFWFG" value=""> <span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_GOWMJNFWFG" value=""> <span>NAs introduced by coercion</span></label>
+<div id="radio_QFPDUBPNDF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QFPDUBPNDF" value="answer"> <span>NA</span></label><label><input type="radio" autocomplete="off" name="radio_QFPDUBPNDF" value=""> <span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_QFPDUBPNDF" value=""> <span>NAs introduced by coercion</span></label>
 </div>
 <p><strong>3. Какая функция используется для проверки принадлежности переменной к факторному типу?</strong></p>
-<div id="radio_XBLFQGXGBU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XBLFQGXGBU" value="answer"> <span>is.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_XBLFQGXGBU" value=""> <span>as.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_XBLFQGXGBU" value=""> <span>factor()</span></label>
+<div id="radio_ABDVQMHACH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ABDVQMHACH" value="answer"> <span>is.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_ABDVQMHACH" value=""> <span>as.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_ABDVQMHACH" value=""> <span>factor()</span></label>
 </div>
 <p><strong>4. Могут ли логические переменные быть представлены в числовом виде?</strong></p>
-<div id="radio_HFTFWQGTRX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HFTFWQGTRX" value="answer"> <span>Да()</span></label><label><input type="radio" autocomplete="off" name="radio_HFTFWQGTRX" value=""> <span>Нет</span></label><label><input type="radio" autocomplete="off" name="radio_HFTFWQGTRX" value=""> <span>Затрудняюсь ответить</span></label>
+<div id="radio_VQKTOHBQFA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VQKTOHBQFA" value="answer"> <span>Да()</span></label><label><input type="radio" autocomplete="off" name="radio_VQKTOHBQFA" value=""> <span>Нет</span></label><label><input type="radio" autocomplete="off" name="radio_VQKTOHBQFA" value=""> <span>Затрудняюсь ответить</span></label>
 </div>
 </section>
 <section id="самостоятельная-работа" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">3.1.2</span> Самостоятельная работа</h3>
-<p><strong>Упражнение 1</strong>. Создайте переменную gradе, содержащую четыре значения : “low”, “high”, “middle” и “high”. Затем преобразуйте ее в факторную порядковую с тремя уровнями -“low”, “middle” и “high” и проверьте ее класс.</p>
-<p><strong>Упражнение 2</strong>. Создайте переменную a и присвойте ей значения в виде выражения суммы чисел 2,56 и 3,48 (Помните, что в R разделитель запятой - это точка). Проверьте, является ли данная переменная числовой.</p>
-<p><strong>Упражнение 3</strong>. Создайте пустую строковую переменную x. Проверьте, является ли x строковой переменной.</p>
+<p><a href="https://socio-asu.shinyapps.io/Assignment1/" class="btn btn-outline-primary btn" role="button">Самостоятельная работа № 1</a></p>
 </section>
 </section>
 <section id="структуры-данных" class="level2" data-number="3.2">
@@ -540,9 +529,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Основные структуры данных в R это векторы, матрицы, массивы, списки и таблицы данных.</p>
 <p>Рассмотрим их подробнее.</p>
 <p><img src="images/1.png" class="img-fluid"></p>
-</section>
-<section id="векторы" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="векторы"><span class="header-section-number">3.3</span> Векторы</h2>
+<section id="векторы" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="векторы"><span class="header-section-number">3.2.1</span> Векторы</h3>
 <ul>
 <li><strong>Вектор</strong> – одномерный массив проиндексированных (пронумерованных) элементов, набор однотипных элементов (либо числа, либо буквы) без их сочетания. Векторы могут быть такими же, как и типы данных - числовыми, строковыми, логическими и пр.</li>
 </ul>
@@ -657,8 +645,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>empty_log <span class="ot">&lt;-</span> <span class="fu">logical</span>(<span class="dv">1000</span>)    <span class="co"># логический вектор с 1000 элементами</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>PfПопробуйте в RStudio создать эти вектора и посмотреть их. Обратите внимание, какие значения по умолчанию присваиваются в логическом и строковом векторах!</p>
-<section id="адресация-и-изменение-элементов-вектора" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="адресация-и-изменение-элементов-вектора"><span class="header-section-number">3.3.1</span> Адресация и изменение элементов вектора</h3>
+<section id="адресация-и-изменение-элементов-вектора" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="адресация-и-изменение-элементов-вектора"><span class="header-section-number">3.2.1.1</span> Адресация и изменение элементов вектора</h4>
 <p>После того, как вектор создан, как мы можем посмотреть или изменить его элементы. Это сделать достаточно просто:</p>
 <p>Поменять элемент в векторе:</p>
 <div class="cell">
@@ -684,8 +672,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Догадались? Попробуйте теперь запустить этот код и проверить, правы вы или нет:</p>
 </section>
-<section id="операции-над-векторами" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="операции-над-векторами"><span class="header-section-number">3.3.2</span> Операции над векторами</h3>
+<section id="операции-над-векторами" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="операции-над-векторами"><span class="header-section-number">3.2.1.2</span> Операции над векторами</h4>
 <p>С векторами можно производить большое количество действий, которые позволяют те типы данных, которые в них содержатся.</p>
 <p>Проще всего совершать арифметические действия:</p>
 <div class="cell">
@@ -816,8 +804,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="некторые-полезные-функции-для-работы-с-векторами" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="некторые-полезные-функции-для-работы-с-векторами"><span class="header-section-number">3.3.3</span> Некторые полезные функции для работы с векторами</h3>
+<section id="некторые-полезные-функции-для-работы-с-векторами" class="level4" data-number="3.2.1.3">
+<h4 data-number="3.2.1.3" class="anchored" data-anchor-id="некторые-полезные-функции-для-работы-с-векторами"><span class="header-section-number">3.2.1.3</span> Некторые полезные функции для работы с векторами</h4>
 <ul>
 <li>Создать вектор случайных чисел в определенном диапазоне:</li>
 </ul>
@@ -825,8 +813,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">max =</span> <span class="dv">5</span>)</span>
 <span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  0.37394611 -0.01968964  1.68576726 -1.97164187 -1.45070953  0.20306821
- [7]  4.53704767  1.28540693  2.10352419  2.98609719</code></pre>
+<pre><code> [1] -4.35586241  3.59472097  0.05419154  4.17236996  2.35416817  1.27946916
+ [7]  3.84183225  2.70502260 -4.31326377  3.86109744</code></pre>
 </div>
 </div>
 <ul>
@@ -914,8 +902,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Но иногда, когда у нас не вектор, а более сложный объект, функция <code>sapply()</code> и ее родные сестры <code>apply()</code> и <code>lapply()</code>часто очень выручают. Подробнее эти функции будут рассмотрены на следующих занятиях.</p>
 </section>
 </section>
-<section id="матрицы" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="матрицы"><span class="header-section-number">3.4</span> Матрицы</h2>
+<section id="матрицы" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="матрицы"><span class="header-section-number">3.2.2</span> Матрицы</h3>
 <ul>
 <li><strong>Матрица</strong> – двумерная совокупность числовых, логических или текстовых величин. Чтобы создать матрицу, нужно воспользоваться функцией matrix(). Можно думать о матрице как о решетке каких-то числовых величин.</li>
 </ul>
@@ -957,8 +945,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [3,]    7    8    9</code></pre>
 </div>
 </div>
-<section id="полезные-функции-и-операции-над-матрицами" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="полезные-функции-и-операции-над-матрицами"><span class="header-section-number">3.4.1</span> Полезные функции и операции над матрицами</h3>
+<section id="полезные-функции-и-операции-над-матрицами" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="полезные-функции-и-операции-над-матрицами"><span class="header-section-number">3.2.2.1</span> Полезные функции и операции над матрицами</h4>
 <ul>
 <li>Как обратиться к одному из элементов матрицы? В случае с вектором мы задавали один элемент в квадратных скобках, а что теперь? Матрица - двумерный объект, поэтому мы должны теперь в квадратных скобках задать две координаты - номер строки (первое число) и номер колонки (второе число) - через запятую:</li>
 </ul>
@@ -1156,8 +1144,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Задание</strong>. Воспроизведите матрицу А из примера выше и осуществите матричное умножение между матрицей А и транспонированной матрицей А.</p>
 </section>
 </section>
-<section id="массивы" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="массивы"><span class="header-section-number">3.5</span> Массивы</h2>
+<section id="массивы" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="массивы"><span class="header-section-number">3.2.3</span> Массивы</h3>
 <ul>
 <li><strong>Массив (array)</strong> – объект в R, в котором хранится данные, содержащие более двух измерений. Например, если мы создадим массив с параметрами (2, 3, 4), у нас получится 4 прямоугольные матрицы размером 2 на 3. В массивах хранятся данные только одного типа.</li>
 </ul>
@@ -1210,8 +1198,8 @@ ROW2    9   11   14
 ROW3    3   12   15</code></pre>
 </div>
 </div>
-<section id="манипуляции-с-элементами-массива" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="манипуляции-с-элементами-массива"><span class="header-section-number">3.5.1</span> Манипуляции с элементами массива</h3>
+<section id="манипуляции-с-элементами-массива" class="level4" data-number="3.2.3.1">
+<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="манипуляции-с-элементами-массива"><span class="header-section-number">3.2.3.1</span> Манипуляции с элементами массива</h4>
 <p>Так как массив - это по сути совокупность нескольких матриц, то и операции мы с массивами мы можем производить практически такие же.</p>
 <ul>
 <li>Обращение к элементам</li>
@@ -1288,8 +1276,8 @@ ROW3    3   12   15</code></pre>
 </div>
 </section>
 </section>
-<section id="списки-lists" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="списки-lists"><span class="header-section-number">3.6</span> Списки (lists)</h2>
+<section id="списки-lists" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="списки-lists"><span class="header-section-number">3.2.4</span> Списки (lists)</h3>
 <p>Список(list) - сложный объект, в котором могут храниться данные разных типов и структуры, включая вектора, матрицы и т.д.</p>
 <p>Пример:</p>
 <div class="cell">
@@ -1414,8 +1402,9 @@ $color
 </div>
 </div>
 </section>
-<section id="таблицы-данных-data-frame" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="таблицы-данных-data-frame"><span class="header-section-number">3.7</span> Таблицы данных (data frame)</h2>
+</section>
+<section id="таблицы-данных-data-frame" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="таблицы-данных-data-frame"><span class="header-section-number">3.3</span> Таблицы данных (data frame)</h2>
 <p>Для аналитиков данных это самый важный объект, с которым приходится работать чаще всего. Большинство из тех данных, с которыми нам приходится иметь дело, хранятся именно в формате датафрейма.</p>
 <p>Таблица данных (data frame) - может включать данные разного типа, но только по столбцам. Иными словами, в таблице может быть несколько типов данных, но в каждом столбце может быть только один тип.</p>
 <div class="cell">
@@ -1587,22 +1576,9 @@ Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</code></pre>
 </div>
 </div>
 </section>
-<section id="самостоятельная-работа-1" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="самостоятельная-работа-1"><span class="header-section-number">3.8</span> Самостоятельная работа</h2>
-<p><strong>Упражнение 1</strong></p>
-<p>Создайте вектор v, в котором содержатся 10 случайных чисел в диапазоне от -100 до +100.</p>
-<p><strong>Упражнение 2</strong></p>
-<p>Создайте массив двумерный массив a с двумя матрицами 5×5, в которых содержались бы числа от 1 до 25.</p>
-<p><strong>Упражнение 3</strong></p>
-<p>Создайте список l и поместите в него объекты, созданные в упражнениях 1 и 2, в той же очередности. Сколько элементов получилось? Отобразите список.</p>
-<p><strong>Упражнение 4</strong></p>
-<p>Создайте пустой числовой вектор a, содержащий 10 элементов:</p>
-<p><strong>Упражнение 5</strong></p>
-<p>Создайте два вектора - a и b, в первом - числа от 1 до 10, во втором от 11 до 20. Перемножьте два вектора, сохранив результат в третьем векторе c.</p>
-<p><strong>Упражнение 6</strong></p>
-<p>Измените код так, чтобы количество строк стало равным 5, столбцов 2, и заполнение матрицы было бы по умолчанию, то есть по столбцам:</p>
-<p><strong>Упражнение 7</strong></p>
-<p>У вас есть таблица с данными. Добавьте в нее переменную d и запишите в нее переменную c, умноженную на 4.</p>
+<section id="самостоятельная-работа-1" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="самостоятельная-работа-1"><span class="header-section-number">3.4</span> Самостоятельная работа</h2>
+<p><a href="https://socio-asu.shinyapps.io/Assignment2/" class="btn btn-outline-primary btn" role="button">Самостоятельная работа № 1</a></p>
 
 
 </section>
@@ -2055,7 +2031,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./lesson4.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Функции в R</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с Основы работы в R Markdown</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
