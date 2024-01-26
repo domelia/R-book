@@ -12,10 +12,10 @@ book:
   - epub
   chapters:
   - index.qmd
-  - lesson1.qmd
-  - lesson2.qmd
-  - lesson3.qmd
-  - lesson4.qmd
+  - About-R.qmd
+  - Install-R.qmd
+  - Data-types-and-structures.qmd
+  - Intro-to-RMarkdown.qmd
   - lesson5.qmd
   - lesson6.qmd
   - lesson7.qmd
