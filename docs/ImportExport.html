@@ -243,15 +243,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#способ-1.-скопировать-из-excel-и-сохранить-в-r." id="toc-способ-1.-скопировать-из-excel-и-сохранить-в-r." class="nav-link" data-scroll-target="#способ-1.-скопировать-из-excel-и-сохранить-в-r."><span class="header-section-number">6.2</span> Способ 1. Скопировать из Excel и сохранить в R.</a></li>
   <li><a href="#способ-2.-импорт-из-файла-excel." id="toc-способ-2.-импорт-из-файла-excel." class="nav-link" data-scroll-target="#способ-2.-импорт-из-файла-excel."><span class="header-section-number">6.3</span> Способ 2. Импорт из файла Excel.</a></li>
   <li><a href="#экспорт-результатов-в-excel" id="toc-экспорт-результатов-в-excel" class="nav-link" data-scroll-target="#экспорт-результатов-в-excel"><span class="header-section-number">6.4</span> Экспорт результатов в Excel</a></li>
-  <li><a href="#импорт-и-экспорт-файла-в-формате-csv" id="toc-импорт-и-экспорт-файла-в-формате-csv" class="nav-link" data-scroll-target="#импорт-и-экспорт-файла-в-формате-csv"><span class="header-section-number">7</span> Импорт и экспорт файла в формате CSV</a>
+  <li><a href="#импорт-и-экспорт-файла-в-формате-csv" id="toc-импорт-и-экспорт-файла-в-формате-csv" class="nav-link" data-scroll-target="#импорт-и-экспорт-файла-в-формате-csv"><span class="header-section-number">6.5</span> Импорт и экспорт файла в формате CSV</a></li>
+  <li><a href="#импорт-файла-по-url" id="toc-импорт-файла-по-url" class="nav-link" data-scroll-target="#импорт-файла-по-url"><span class="header-section-number">6.6</span> Импорт файла по URL</a>
   <ul class="collapse">
-  <li><a href="#импорт-файла-из-url" id="toc-импорт-файла-из-url" class="nav-link" data-scroll-target="#импорт-файла-из-url"><span class="header-section-number">7.1</span> Импорт файла из URL</a></li>
-  <li><a href="#загрузка-файла-в-рабочую-папку" id="toc-загрузка-файла-в-рабочую-папку" class="nav-link" data-scroll-target="#загрузка-файла-в-рабочую-папку"><span class="header-section-number">7.2</span> Загрузка файла в рабочую папку</a></li>
-  <li><a href="#импорт-по-прямой-ссылке-в-формате-csv" id="toc-импорт-по-прямой-ссылке-в-формате-csv" class="nav-link" data-scroll-target="#импорт-по-прямой-ссылке-в-формате-csv"><span class="header-section-number">7.3</span> Импорт по прямой ссылке в формате csv</a></li>
-  <li><a href="#парсинг-таблиц-из-интернета" id="toc-парсинг-таблиц-из-интернета" class="nav-link" data-scroll-target="#парсинг-таблиц-из-интернета"><span class="header-section-number">7.4</span> Парсинг таблиц из Интернета</a></li>
+  <li><a href="#загрузка-файла-в-рабочую-папку" id="toc-загрузка-файла-в-рабочую-папку" class="nav-link" data-scroll-target="#загрузка-файла-в-рабочую-папку"><span class="header-section-number">6.6.1</span> Загрузка файла в рабочую папку</a></li>
+  <li><a href="#импорт-по-прямой-ссылке-в-формате-csv" id="toc-импорт-по-прямой-ссылке-в-формате-csv" class="nav-link" data-scroll-target="#импорт-по-прямой-ссылке-в-формате-csv"><span class="header-section-number">6.6.2</span> Импорт по прямой ссылке в формате csv</a></li>
+  <li><a href="#парсинг-таблиц-из-интернета" id="toc-парсинг-таблиц-из-интернета" class="nav-link" data-scroll-target="#парсинг-таблиц-из-интернета"><span class="header-section-number">6.6.3</span> Парсинг таблиц из Интернета</a></li>
   </ul></li>
-  <li><a href="#импорт-файла-из-spss-файл-.sav" id="toc-импорт-файла-из-spss-файл-.sav" class="nav-link" data-scroll-target="#импорт-файла-из-spss-файл-.sav"><span class="header-section-number">8</span> Импорт файла из SPSS (файл .sav)</a></li>
-  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">9</span> Самостоятельная работа</a></li>
+  <li><a href="#импорт-файла-из-spss-файл-.sav" id="toc-импорт-файла-из-spss-файл-.sav" class="nav-link" data-scroll-target="#импорт-файла-из-spss-файл-.sav"><span class="header-section-number">6.7</span> Импорт файла из SPSS (файл .sav)</a></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">6.8</span> Самостоятельная работа</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/ImportExport.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
     </div>
@@ -332,8 +332,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(df_excel, <span class="st">"df_excel_new.xlsx"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="импорт-и-экспорт-файла-в-формате-csv" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Импорт и экспорт файла в формате CSV</h1>
+<section id="импорт-и-экспорт-файла-в-формате-csv" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="импорт-и-экспорт-файла-в-формате-csv"><span class="header-section-number">6.5</span> Импорт и экспорт файла в формате CSV</h2>
 <p>CSV (от англ. Comma-Separated Values — значения, разделённые запятыми) — текстовый формат, предназначенный для представления табличных данных. Строка таблицы соответствует строке текста, которая содержит одно или несколько полей, разделенных запятыми, то есть, по сути, это данные, представленные в текстовом формате.</p>
 <p>Статистическая информация часто хранится именно в формате CSV, этому формату уже более 40 лет. Текстовые файлы открываются читаются на любом устройстве и в любой среде без дополнительных инструментов. Из-за своих преимуществ CSV — сверхпопулярный формат обмена данными.</p>
 <p>За импорт таких файлов отвечает библиотека <code>readr</code>, а в ней - функция <code>read_csv2</code> (есть и просто <code>read_csv</code>, но там - разделитель действительно запятая, а в <code>read_csv2</code> - точка с запятой). В чем проблема? Проблема в том, что в России запятая используется в качестве разделителя десятичных разрядов, и когда мы начинаем сохранять в формате <code>csv</code> возникает конфликт. Чтобы его не было, программа вместо запятой использует разделитель - точку с запятой. Это хорошо видно, если посмотреть, как эти данные выглядят в блокноте.</p>
@@ -356,17 +356,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(df_csv, <span class="st">"df_csv_new.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="импорт-файла-из-url" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="импорт-файла-из-url"><span class="header-section-number">7.1</span> Импорт файла из URL</h2>
+</section>
+<section id="импорт-файла-по-url" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="импорт-файла-по-url"><span class="header-section-number">6.6</span> Импорт файла по URL</h2>
 <p>В Интернете хранится огромное количество различных данных, но с точки зрения импорта можно рассмотреть несколько случаев:</p>
 <ul>
 <li>когда нам нужно просто загрузить файл из Интернета и сохранить его в директорию</li>
 <li>когда ссылка является прямой и по ней мы можем загрузить данные определенного формата</li>
 <li>когда у нас есть ссылка на ресурс, в котором содержатся данные вперемешку с текстом, и нам нужно сохранить только табличные данные</li>
 </ul>
-</section>
-<section id="загрузка-файла-в-рабочую-папку" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="загрузка-файла-в-рабочую-папку"><span class="header-section-number">7.2</span> Загрузка файла в рабочую папку</h2>
+<section id="загрузка-файла-в-рабочую-папку" class="level3" data-number="6.6.1">
+<h3 data-number="6.6.1" class="anchored" data-anchor-id="загрузка-файла-в-рабочую-папку"><span class="header-section-number">6.6.1</span> Загрузка файла в рабочую папку</h3>
 <p>Воспользуемся данными, представленными на портале “Открытые данные России” и скачаем оттуда перечень стран и режимов въезда на их территорию.</p>
 <p>Мы будем использовать очень простую фунцию download.file(), в которой мы должны указать два аргумента - ссылку и имя файла, в который мы будем сохранять данные. Заметьте, что формат выгружаемого и сохраняемого файла должны совпадать.</p>
 <div class="cell">
@@ -374,8 +374,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Посмотрите в своей рабочей директории, скачался ли файл, попробуйте его открыть.</p>
 </section>
-<section id="импорт-по-прямой-ссылке-в-формате-csv" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="импорт-по-прямой-ссылке-в-формате-csv"><span class="header-section-number">7.3</span> Импорт по прямой ссылке в формате csv</h2>
+<section id="импорт-по-прямой-ссылке-в-формате-csv" class="level3" data-number="6.6.2">
+<h3 data-number="6.6.2" class="anchored" data-anchor-id="импорт-по-прямой-ссылке-в-формате-csv"><span class="header-section-number">6.6.2</span> Импорт по прямой ссылке в формате csv</h3>
 <p>Здесь тоже нет ничего сложного. Мы уже только что пробовали открывать файлы в формате csv, которые хранятся у нас на компьютере. То же самое происходит с ссылками из Интернета.</p>
 <p>Загрузим данные об исследованиии по науке и разработкам, представленное на портале статистического Информационного центра при правительстве Новой Зеландии:</p>
 <div class="cell">
@@ -384,8 +384,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>RnD<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"https://www.stats.govt.nz/assets/Uploads/Research-and-development-survey/Research-and-development-survey-2022/Download-data/research-and-development-survey-2022.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="парсинг-таблиц-из-интернета" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="парсинг-таблиц-из-интернета"><span class="header-section-number">7.4</span> Парсинг таблиц из Интернета</h2>
+<section id="парсинг-таблиц-из-интернета" class="level3" data-number="6.6.3">
+<h3 data-number="6.6.3" class="anchored" data-anchor-id="парсинг-таблиц-из-интернета"><span class="header-section-number">6.6.3</span> Парсинг таблиц из Интернета</h3>
 <p>Пожалуй, это самое интересное.</p>
 <p>Предположим, мы читаем статью в Википедии, и нам понравились данные, которые там приводятся. Конечно, мы можем скопировать эти данные с помощью мышки, но зачем? Ведь у нас есть R. К тому же результаты такого копирования часто оставляют желать лучшего.</p>
 <p>Например, возьмем страницу в Википедии, посвященную международному индексу счастья.</p>
@@ -412,14 +412,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="импорт-файла-из-spss-файл-.sav" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Импорт файла из SPSS (файл .sav)</h1>
+<section id="импорт-файла-из-spss-файл-.sav" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="импорт-файла-из-spss-файл-.sav"><span class="header-section-number">6.7</span> Импорт файла из SPSS (файл .sav)</h2>
 <p>Это наш любимый формат, поскольку мы с вами специалисты по социологическим исследованиям, любим SPSS и хотели бы соединить возможности этого пакета с возможностями R.</p>
 <p>Чтобы загрузить в R файл в формате <code>.sav</code>, мы должны:</p>
 <ul>
-<li>во-первых, <a href="https://github.com/domelia/R-book/blob/main/files/%D0%91%D0%B0%D0%B7%D0%B0_%D0%9A%D0%BB%D0%B8%D0%BC%D0%A0%D0%B8%D1%81%D0%BA_2023.sav">загрузить файл</a>. Это результаты недавнего исследования кафедры об изменениях климата в высокогорных районах Алтая.</li>
+<li><p>во-первых, <a href="https://github.com/domelia/R-book/blob/main/files/%D0%91%D0%B0%D0%B7%D0%B0_%D0%9A%D0%BB%D0%B8%D0%BC%D0%A0%D0%B8%D1%81%D0%BA_2023.sav">загрузить файл</a>. Это результаты недавнего исследования кафедры об изменениях климата в высокогорных районах Алтая.</p></li>
+<li><p>во-вторых, нам нужно загрузить библиотеку <code>haven</code>, с помощью которой мы можем импортировать данных из формата программы SPSS в R.</p></li>
 </ul>
-<p>Во-вторых, нам нужно загрузить библиотеку <code>haven</code>, с помощью которой мы можем импортировать данных из формата программы SPSS в R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -429,8 +429,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Итак, наши данные теперь сохранены в датафрейме с именем <code>df</code>. Мы видим, что в нем есть 202 переменных и 913 наблюдений.</p>
 </section>
-<section id="самостоятельная-работа" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Самостоятельная работа</h1>
+<section id="самостоятельная-работа" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">6.8</span> Самостоятельная работа</h2>
 <p>Упражнение 1. Используя <a href="https://data.gov.ru/">портал Открытых данных России</a>, найти интересующие Вас данные в разных форматах - excel, csv. Загрузить данные по ссылке, внести в них изменения (создать новую переменную, что-то поменять, используя R) и сохранить новый файл в аналогичном формате.</p>
 <p>Упражнение 2. С официального сайта Алтайского края скачать Указ Губернатора о присвоении звания ветерана труда и загрузить его в рабочую папку.</p>
 <p>Упражнение 3. С официального сайта Алтайского края, из раздела, посвященного национальной политике, скачать список национально-культурных организаций и сохранить его в формате excel.</p>
