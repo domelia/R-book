@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R в социологических исследованиях - 5&nbsp; Основы функционального программирования</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ImportExport.html" rel="next">
+<link href="./Intro-to-RMarkdown.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Functions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R в социологических исследованиях</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/domelia/R-book/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+    <a href="./R-в-социологических-исследованиях.epub" title="Download ePub" class="quarto-navigation-tool px-1" aria-label="Download ePub"><i class="bi bi-journal"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">В качестве предисловия…</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./About-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Install-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-types-and-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Типы и структуры данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro-to-RMarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Functions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImportExport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TidyverseTransformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Статистические гипотезы и критерии</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Регрессионный анализ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Моделировние структурными уравнениями в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#понятие-функции-и-ее-основные-элементы" id="toc-понятие-функции-и-ее-основные-элементы" class="nav-link active" data-scroll-target="#понятие-функции-и-ее-основные-элементы"><span class="header-section-number">5.1</span> Понятие функции и ее основные элементы</a></li>
+  <li><a href="#встроенные-функции" id="toc-встроенные-функции" class="nav-link" data-scroll-target="#встроенные-функции"><span class="header-section-number">5.2</span> Встроенные функции</a></li>
+  <li><a href="#функции-apply-lapply-sapply-tapply" id="toc-функции-apply-lapply-sapply-tapply" class="nav-link" data-scroll-target="#функции-apply-lapply-sapply-tapply"><span class="header-section-number">5.3</span> Функции apply(), lapply(), sapply(), tapply()</a>
+  <ul class="collapse">
+  <li><a href="#apply" id="toc-apply" class="nav-link" data-scroll-target="#apply"><span class="header-section-number">5.3.1</span> apply()</a></li>
+  <li><a href="#lapply" id="toc-lapply" class="nav-link" data-scroll-target="#lapply"><span class="header-section-number">5.3.2</span> lapply()</a></li>
+  <li><a href="#sapply" id="toc-sapply" class="nav-link" data-scroll-target="#sapply"><span class="header-section-number">5.3.3</span> sapply()</a></li>
+  <li><a href="#tapply" id="toc-tapply" class="nav-link" data-scroll-target="#tapply"><span class="header-section-number">5.3.4</span> tapply()</a></li>
+  </ul></li>
+  <li><a href="#пользовательские-функции" id="toc-пользовательские-функции" class="nav-link" data-scroll-target="#пользовательские-функции"><span class="header-section-number">5.4</span> Пользовательские функции</a>
+  <ul class="collapse">
+  <li><a href="#пример-простой-функции" id="toc-пример-простой-функции" class="nav-link" data-scroll-target="#пример-простой-функции"><span class="header-section-number">5.4.1</span> Пример простой функции</a></li>
+  <li><a href="#вызов-функции-без-аргумента" id="toc-вызов-функции-без-аргумента" class="nav-link" data-scroll-target="#вызов-функции-без-аргумента"><span class="header-section-number">5.4.2</span> Вызов функции без аргумента</a></li>
+  <li><a href="#создание-функции-с-аргументами-различающимися-по-позиции-и-именам" id="toc-создание-функции-с-аргументами-различающимися-по-позиции-и-именам" class="nav-link" data-scroll-target="#создание-функции-с-аргументами-различающимися-по-позиции-и-именам"><span class="header-section-number">5.4.3</span> Создание функции с аргументами, различающимися по позиции и именам</a></li>
+  <li><a href="#создание-функции-с-аргументами-по-умолчанию" id="toc-создание-функции-с-аргументами-по-умолчанию" class="nav-link" data-scroll-target="#создание-функции-с-аргументами-по-умолчанию"><span class="header-section-number">5.4.4</span> Создание функции с аргументами по умолчанию</a></li>
+  <li><a href="#ленивая-lazy-обработка-аргументов-функции" id="toc-ленивая-lazy-обработка-аргументов-функции" class="nav-link" data-scroll-target="#ленивая-lazy-обработка-аргументов-функции"><span class="header-section-number">5.4.5</span> “Ленивая” (Lazy) обработка аргументов функции</a></li>
+  </ul></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">5.5</span> Самостоятельная работа</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/Functions.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Кроме того, что R является интерпретируемым языком, это еще и язык функционального программирования (ФП). Это означает, что R содержит множество инструментов для создания и манипулирования функциями. Более того, функции могут быть рассмотрены как <a href="https://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8_%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%B3%D0%BE_%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B0"><em>объекты первого класса</em></a>, то есть мы можем делать с функциями то же самое, что и с векторами: присваивать их переменным, сохранять их как списки, передавать в качестве аргументов другим функциям, создавать функции внутри функций и даже возвращать их в качестве результата.</p>
+<p>Зачем нам, социологам, уметь разбираться и писать собственные функции? Это важно по нескольким причинам. Во-первых, знание о том, как функции устроены, поможет нам использовать R более осознанно, с четким пониманием того, что происходит, когда мы запускаем ту или иную команду. Поначалу может казаться, что писать свои функции это нечто запредельное, что-то доступное только программистам или специалистам с техническим образованием. Но по мере того, как вы будете овладевать языком, писать больше кода и проводить анализ на R, вы поймете, что собственные, пусть и не очень сложные функции, могут помочь автоматизировать некоторые рутинные задачи (например, по перекодировке или чистке данных, создани. однотипных объектов, таких как таблицы или графики) и, в конечном итоге, сделают вашу работу в R быстрой и эффективной.</p>
+<p>Так, что же такое функция? Давайте разбираться.</p>
+<section id="понятие-функции-и-ее-основные-элементы" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="понятие-функции-и-ее-основные-элементы"><span class="header-section-number">5.1</span> Понятие функции и ее основные элементы</h2>
+<p>Функция представляет собой набор утверждений, организованных вместе для выполнения определенной задачи.</p>
+<p>Это часть программного кода, имеющий определенное имя, который может быть вызван сам по себе или в других частях программы.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>В R имеется множество встроенных функций, и огромное количество дополнительных функций можно найти в различных библиотеках. Каждый пользователь может создавать свои собственные функции.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Функция является объектом, и значит интерпретатор R может проверить, насколько хорошо функция выполняется, нужны ли функции какие-то аргументы для выполнения и есть ли у программы достаточно информации, чтобы все сделать так, как описано в функции.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>В свою очередь функция выполняет задачу и выдает (возвращает, return) какие-то результаты, которые могут быть сохранены в дальнейшем как отдельные объекты.</p>
+</div>
+</div>
+</div>
+<p><strong>Формула функции</strong></p>
+<p>В R функция создается очень просто - с помощью ключевого слова <code>function</code>. Базовый синтаксис у функции следующий:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>function_name <span class="ot">&lt;-</span> <span class="cf">function</span>(arg_1, arg_2, ...) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   Function body </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Компоненты функции</strong></p>
+<p>У функции есть несколько частей</p>
+<div class="alert alert-info" role="alert">
+<p><strong>Function Name (имя функции)</strong> − тут все просто - это имя функции, которое хранится в окружении и обозначает конкретный объект (то есть саму функцию). Зная имя функции, ее можно вызвать в любое время и вставить в любую часть программного кода.</p>
+</div>
+<div class="alert alert-danger" role="alert">
+<p><strong>Arguments (аргументы)</strong> − это те элементы, параметры, значения, которые вводятся в функцию, чтобы она работала. Аргументы не являются обзательными, функция может иногда работать и без них, либо они могут быть указаны по умолчанию.</p>
+</div>
+<div class="alert alert-success" role="alert">
+<p><strong>Function Body (тело функции)</strong> − пожалуй, самая главная часть функции, содержащая утверждения, определяющие то, что именно делает данная функция.</p>
+</div>
+<div class="alert alert-warning" role="alert">
+<p><strong>Return Value (возвращаемое значение)</strong> − возвращаемое значение - это результат обработки последнего выражения в теле функции, то есть ее конечный результат. Если в функции заложено множество действий - то это последнее действие.</p>
+</div>
+</section>
+<section id="встроенные-функции" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="встроенные-функции"><span class="header-section-number">5.2</span> Встроенные функции</h2>
+<p>Можно привести огромное количество базовых функций, таких как <code>seq()</code>, <code>mean()</code>, <code>max()</code>, <code>sum(x)</code>, <code>paste(...)</code> и т. д. Они вызываются напрямую при написании программы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Создать последовательность чисел от 32 до 44</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">32</span>,<span class="dv">44</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Найти среднее чисел от 25 до 82.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">82</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Найти сумму чисел от 41 до 68.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">41</span><span class="sc">:</span><span class="dv">68</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="функции-apply-lapply-sapply-tapply" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="функции-apply-lapply-sapply-tapply"><span class="header-section-number">5.3</span> Функции apply(), lapply(), sapply(), tapply()</h2>
+<p>Семейство функций <code>apply()</code> позволяет производить различные преобразования с отдельными элементами векторов, матриц и датафреймов. Такие действия в процессе анализа данных приходится проводить довольно часто. Например, нам может потребоваться сдвинуть значения переменных на какую либо константу, или провести трансформации, необходимые для нормализации данных.</p>
+<section id="apply" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="apply"><span class="header-section-number">5.3.1</span> apply()</h3>
+<p>Общая формула для функции <code>apply()</code>:</p>
+<p><code>apply(data, MARGIN, FUN)</code>,</p>
+<p>Где:</p>
+<ul>
+<li><code>data</code>: массив или матрица</li>
+<li><code>MARGIN</code>: данный аргумент принимает значения 1 или 2</li>
+<li><code>MARGIN=1</code>: манипуляции проводятся со строками</li>
+<li><code>MARGIN=2</code>: манипуляции проводятся со столбцами</li>
+<li><code>MARGIN=c(1,2)</code>: манипуляции проводятся со строками и столбцами одновременно</li>
+<li><code>FUN</code>: функция, которую необходимо применить, например, рассчитать среднее <code>mean()</code>, медиану <code>median()</code>, сумму <code>sum()</code>, минимум <code>min()</code>, максимум <code>max()</code> и др. Также можно применить пользовательские функции.</li>
+</ul>
+<p>Простой пример применения данной функции - суммировать данные по столбцам (запустите код ниже и посмотрите на результат в последней строке):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">nrow=</span><span class="dv">5</span>, <span class="at">ncol=</span><span class="dv">6</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>m1</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>a_m1 <span class="ot">&lt;-</span> <span class="fu">apply</span>(m1, <span class="dv">2</span>, sum)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>a_m1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>: попробуйте изменить код так, чтобы сумма считалась не по столбцу, а по строке.</p>
+</section>
+<section id="lapply" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="lapply"><span class="header-section-number">5.3.2</span> lapply()</h3>
+<p>Функция <code>lapply()</code> полезна для осуществления операций над списками и возвращает список объектов такой же длины. При этом каждый объект является результатом применения функции к элементу исходного списка. Эта функция может применяться к спискам, векторам или датафрейму, но на выходе - всегда список.</p>
+<p>Общая формула:</p>
+<p><code>lapply(data, FUN)</code></p>
+<p>Аргументы:</p>
+<ul>
+<li><code>data</code>: вектор или другой объект</li>
+<li><code>FUN</code>: функцию, которую мы собираемся применять к каждому объекту x.</li>
+</ul>
+<p><code>l</code> в функции <code>lapply()</code> обозначает <code>list</code> (список). Различия между <code>lapply()</code> и <code>apply()</code> заключаются именно в формате вывода.</p>
+<p>функции <code>lapply()</code> не требуется аргумент MARGIN.</p>
+<p>Приведем примеры. Допустим, у нас есть список, в котором содержатся два элемента - вектор A и датафрейм B. Предположим, что нам нужно посчитать сумму по каждому элементу списка (отдельно у вектора и у датафрейма).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">5</span>),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">B =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$A
+[1] 8 9 7 5
+
+$B
+  x y
+1 1 5
+2 2 1
+3 3 0
+4 4 2
+5 5 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(a, sum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$A
+[1] 29
+
+$B
+[1] 26</code></pre>
+</div>
+</div>
+<p>Еще один пример - со строковыми данными. Поменяем названия фильмов с большой буквы на маленькую.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>movies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SPYDERMAN"</span>,<span class="st">"BATMAN"</span>,<span class="st">"VERTIGO"</span>,<span class="st">"CHINATOWN"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>movies_lower <span class="ot">&lt;-</span><span class="fu">lapply</span>(movies, tolower)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>movies</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SPYDERMAN" "BATMAN"    "VERTIGO"   "CHINATOWN"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>movies_lower</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "spyderman"
+
+[[2]]
+[1] "batman"
+
+[[3]]
+[1] "vertigo"
+
+[[4]]
+[1] "chinatown"</code></pre>
+</div>
+</div>
+<p>Чтобы значения из списка опять стали вектором, нужно применить функцию <code>unlist()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(movies_lower)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "spyderman" "batman"    "vertigo"   "chinatown"</code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon><strong>Самостоятельное задание</strong>: создайте список из двух датафреймов, в каждом из которых содержалось бы по две переменных с 5 значениями. Затем примените функцию <code>lapply()</code> для того, чтобы поcчитать максимальные значения в каждом датафрейме (функция <code>max()</code>).</p>
+</section>
+<section id="sapply" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="sapply"><span class="header-section-number">5.3.3</span> sapply()</h3>
+<p>Функция <code>sapply()</code> используются со списками, векторами или датафреймами и на выходе дают вектор или матрицу. Функция полезна для операций над списками, она работает почти так же, как и <code>lapply()</code>, только возвращает вектор.</p>
+<p>Приведем пример с известным набором <code>cars</code>, в котором содержится информация о скорости и тормозном пути машин 1920-х гг.</p>
+<p>Применим функцию <code>sapply()</code>, чтобы посчитать минимальные значения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(cars, min)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>speed  dist 
+    4     2 </code></pre>
+</div>
+</div>
+<p>Сравним с <code>lapply()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(cars, min)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$speed
+[1] 4
+
+$dist
+[1] 2</code></pre>
+</div>
+</div>
+</section>
+<section id="tapply" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="tapply"><span class="header-section-number">5.3.4</span> tapply()</h3>
+<p>Функции <code>tapply()</code> рассчитывает какой-либо показатель (среднее, моду, медиану, минимум, максимум и т.д.) или применяет пользовательскую функцию к каждому элементу вектора в зависимости от уровней факторной переменной. Очень полезная функция, позволяющая отобрать значения и применить функцию именно к ним (провести анализ по группам).</p>
+<p>Общая формула:</p>
+<p><code>tapply(data, INDEX, FUN = NULL, ...)</code></p>
+<p>Аргументы:</p>
+<ul>
+<li><code>data</code>: данные, которые мы хотим агрегировать с помощью <code>tapply</code></li>
+<li><code>INDEX</code>: список факторов (группирующих переменных)</li>
+<li><code>FUN</code>: функция, которую нужно применить к каждому элементу x</li>
+<li><code>...</code>: другие аргументы, которые мы можем передать функции.</li>
+</ul>
+<p>В процессе анализа данных очень часто возникает необходимость подсчета каких-либо показателей, например, посчитать средние значения в группах наблюдений, образованных на основе каких-либо характеристик. Примеры: проанализировать средний уровень доходов в зависимости от региона, страны, социального статуса и т.д.</p>
+<p>Чтобы понять, как это работает, давайе воспользумся датасетом <code>iris</code>, встроенным в базовый R, содержащий измерения 4 параметров (ширина и длина лепестков и чашелистников) у 50 цветков ирисов, принадлежащих к трем различным видам - setosa, versicolor и virginica:</p>
+<p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRScUmZqCyTspdxKSXGiS_BJKZdp9M059v-7eLoA2fs&amp;s.png" class="img-fluid"></p>
+<p>Это хорошо известный в сфере машинного обучения набор данных, который в используется, например, для иллюстрации того, как можно разработать модели, позволяющие предсказать принадлежность к одному из классов.</p>
+<p>Мы можем использовать функцию <code>tapply()</code>, чтобы посчитать медианные значения ширины чашелистника для каждого вида:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(iris<span class="sc">$</span>Sepal.Width, iris<span class="sc">$</span>Species, median)<span class="co"># знак $ позволяет обратиться к отдельной переменной в наборе данных, Sepal.Width - переменная, хранящая значения ширины чашелистника, Species - переменная принадлежности к виду.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    setosa versicolor  virginica 
+       3.4        2.8        3.0 </code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>: попробуйте применить функцию <code>tapply()</code> к другим переменным набора - <code>Sepal.Length</code>, <code>Petal.Width</code>, <code>Petal.Length</code>, заменив медиану на максимальное значение (функция <code>max()</code>).</p>
+</section>
+</section>
+<section id="пользовательские-функции" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="пользовательские-функции"><span class="header-section-number">5.4</span> Пользовательские функции</h2>
+<p>Кроме встроенных или находящихся в загруженных библиотеках мы легко можем создавать свои собственные функции. Они могут быть достаточно специфическими и использоваться для решения различных задач. Если какое-то однотипное действие выполняется множетсво раз, стоит подумать о создании функции, которая может автоматизировать этот процесс. Однажды созданная функция может потом использоваться наравне со встроенными.</p>
+<p>Рассмотрим некоторые особенности создания и использования пользовательских функций.</p>
+<section id="пример-простой-функции" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="пример-простой-функции"><span class="header-section-number">5.4.1</span> Пример простой функции</h3>
+<p>Предположим, нам нужна функция, которая бы возводила в квадрат какое-то число:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>square<span class="ot">&lt;-</span> <span class="cf">function</span>(a) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(a<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>}   </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Пробуем вызвать эту функцию, задав в качестве аргумента цифру 6.</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">square</span>(<span class="dv">6</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36</code></pre>
+</div>
+</div>
+<p>Давайте посмотрим на то, как устроена эта функция.</p>
+<ul>
+<li>Первая строка:</li>
+</ul>
+<p><code>square&lt;- function(a) {</code></p>
+<p>Мы даем функции имя - <strong>square</strong> - оно должно нам подсказывать, что функция имеет дело с квадратами))) Впрочем, имя может быть любым, например, <strong>my_function</strong>.</p>
+<p>Далее следует оператор присваивания <code>&lt;-</code> и ключевое слово <code>function</code>, за которым в скобках указывается какой-то аргумент, с которым будут далее происходить какие-то трансформации.</p>
+<p>Мы видим, что в нашей функции аргумент один - <code>a</code>.</p>
+<p>Заканчивается строка открывающейся фигурной скобкой.</p>
+<p>Далее следует <strong>тело функции</strong>.</p>
+<ul>
+<li>Вторая строка:</li>
+</ul>
+<p><code>return(a^2)</code></p>
+<p>Поскольку функция простая, мы сразу получаем <strong>return value</strong> - возвращаемое значение.</p>
+<p>Обратите внимание, что в конце функции обязательно ставится закрывающая фигурная скобка.</p>
+</section>
+<section id="вызов-функции-без-аргумента" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="вызов-функции-без-аргумента"><span class="header-section-number">5.4.2</span> Вызов функции без аргумента</h3>
+<p>Рассмотрим еще один пример:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем функцию без аргумента</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>seq_squared5 <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  seq<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(seq<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}   </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Запускаем функцию</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">seq_squared5</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16 25</code></pre>
+</div>
+</div>
+<p>Что изменилось? Изменилось то, в первой функции мы указывали аргумент, а во второй все вычисления сразу “зашиты” в нашу функцию и она может выполнять только одно дело - формировать последовательность от 1 до 5 и возводить каждое число в квадрат.</p>
+</section>
+<section id="создание-функции-с-аргументами-различающимися-по-позиции-и-именам" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="создание-функции-с-аргументами-различающимися-по-позиции-и-именам"><span class="header-section-number">5.4.3</span> Создание функции с аргументами, различающимися по позиции и именам</h3>
+<p>Аргументы функции могут предоставляться в той же последовательности, в которой они написаны в функции, без указания имен, или в другой последовательности, но с обязательным указанием имени.</p>
+<p>Рассмотрим пример функции, в которой есть три аргумента и которая выполняет следующие действия: первые два аргумента перемножаются, а затем к произведению прибавляется третий аргумент.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем функцию с аргументами.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>function3 <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b,c) {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>   result <span class="ot">&lt;-</span> a <span class="sc">*</span> b <span class="sc">+</span> c</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(result)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Вызываем функцию, перечисляя аргументы по порядку.</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">function3</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">11</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вызываем фунцию, называя аргументы поименно.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">function3</span>(<span class="at">a =</span> <span class="dv">11</span>, <span class="at">b =</span> <span class="dv">5</span>, <span class="at">c =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 58</code></pre>
+</div>
+</div>
+<p>Попробуйте поменять аргументы местами и посмотреть, как будет вести себя функция.</p>
+</section>
+<section id="создание-функции-с-аргументами-по-умолчанию" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="создание-функции-с-аргументами-по-умолчанию"><span class="header-section-number">5.4.4</span> Создание функции с аргументами по умолчанию</h3>
+<p>Мы можем определить значение аргумента функции в ходе ее определения и запустить функцию без дополнительного назначения аргументов. В этом случае мы получим некоторый результат по умолчанию. Но мы можем изменить эти исходные значения, и получить новый результат.</p>
+<p>Простой пример такой функции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем новую функцию с аргументами.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>function4 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">a =</span> <span class="dv">3</span>, <span class="at">b =</span> <span class="dv">6</span>) {</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>   result <span class="ot">&lt;-</span> a <span class="sc">*</span> b</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(result)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Запускаем функцию без аргументов в скобках.</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">function4</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вызываем функцию с новыми значениями аргументов.</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">function4</span>(<span class="dv">9</span>,<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+</div>
+</section>
+<section id="ленивая-lazy-обработка-аргументов-функции" class="level3" data-number="5.4.5">
+<h3 data-number="5.4.5" class="anchored" data-anchor-id="ленивая-lazy-обработка-аргументов-функции"><span class="header-section-number">5.4.5</span> “Ленивая” (Lazy) обработка аргументов функции</h3>
+<p>Аргументы в функции обрабатываются “лениво” (да-да, в жаргоне программистов есть именно такие выражения - “ленивая функция”, “ленивая загрузка”, “ленивая обработка”), что означает, что эти аргументы вызываются и обрабатываются только в определенный момент времени, когда это требует функция.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Создаем функцию с двумя аргументами.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(a<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(a)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">print</span>(b)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Пробуем применить функцию только с одним аргументом.</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">6</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Функция требует два аргумента, но мы предоставили только один, и поскольку имен мы не указывали, по умлочанию наша функция определила этот аргумент как первый, то есть аргумент a. До определенного момента все было “ок”, поскольку аргумент b не был нужен, но как только дело дошло до строчки print(b) - обнаружилось, что аргумент b отсутствует, и появилась ошибка.</p>
+</section>
+</section>
+<section id="самостоятельная-работа" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">5.5</span> Самостоятельная работа</h2>
+<p><strong>Упражнение 1</strong> Создайте функцию, которая будет возвращать сумму двух чисел. Назовите функцию <code>mysum</code>.</p>
+<p><strong>Упражнение 2</strong> Создайте функцию, проверяющую принадлежность числа некоторому вектору. Если число в векторе содержится, функция должна вернуть <code>TRUE</code>.</p>
+<p><strong>Упражнение 3</strong> Создайте функцию, на входе которой будет даваться датафрейм, а на выходе - наименование каждой переменной и тип (класс) данных, которые в них содержатся. Например, переменная1 числовая.</p>
+<p><strong>Упражнение 4</strong> Создать функцию, аргументами которой являются вектор и число. На выходе функция должна показывать, сколько раз число встречается в данном векторе.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Intro-to-RMarkdown.html" class="pagination-link  aria-label=" &lt;span="" работы="" с="" r="" markdown&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ImportExport.html" class="pagination-link" aria-label="<span class='chapter-number'>6</span>&nbsp; <span class='chapter-title'>Импорт и экспорт данных</span>">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book/edit/main/Functions.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div></div></footer></body></html>

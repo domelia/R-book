@@ -1,0 +1,345 @@
+---
+title: Tidyverse и трансформация данных
+---
+
+В рамках данного занятия мы будем работать с библиотекой [tidyverse](https://www.tidyverse.org/), объединяющей возможности нескольких других библиотек и воплощающей общую философию, дизайн и грамматику обработки и анализа данных, разработанную RStudio: ![](https://hbctraining.github.io/Intro-to-R/img/tidyverse_website.png)
+
+Основные библиотеки семейства tidyverse:
+
+-   **ggplot2** - библиотека для создания разнообразных визуализаций на основе пользовательских данных и заданных настроек.
+-   **dplyr** - библиотека для основных трансформаций данных (отбор, фильтрация, группировка, создание новых переменных, описательный анализ).
+-   **tidyr** - набор функций для подготовки данных к анализу (транспонирование, переструктурированые данных).
+-   **readr** работа с данными прямоугольного формата, представленными в формате csv, tsv или fwf.
+-   **tibble** - специальная библиотека для работы с датафреймами.
+-   **stringr** - набор функций для работы со строковыми переменными.
+-   **forcats** - библиотека для работы с факторными (категориальными - номинальными и порядковыми) перемннными.
+
+::: callout-tip
+## Tidyverse - все нужные библиотеки в одном месте!
+
+На предыдущем занятии мы осуществляли импорт и экспорт данных, используя некоторые библиотеки, входящие во вселенную `Tidyverse`. Загружая библиотеку Tidyverse, мы автоматически загружаем все остальные, и потребность в загрузке отдельных библиотек отпадает.
+:::
+
+## Прямоугольные и непрямоугольные таблицы, а также tidy и messy данные
+
+Данные могут быть представлены в различных формах, но на самом базовом уровне их можно представить в виде двух типов структур: данные представленные в виде прямоугольных таблиц и непрямоугольных данных.
+
+Прямоугольные данные имеют форму прямоугольника (действительно!), то есть каждое значение соответствует какой-то строке и столбцу. Большинство датафреймов содержат как раз прямоугольные данные.
+
+Соответственно непрямоугольные данные не могут так легко распределяться по строкам и столбцам, они, как правило, представляют собой совокупность различных структур данных, в которых между отдельными элементами имеется какое-то сходство. Обычно непрямоугольные данные хранятся в списках.
+
+**Tidy** по-английски означает "чистый, аккуратный, опрятный". По отношению к данным выражение - tidy data - "чистые, правильным образом представленные данные" противопоставляется "messy data" - "грязным данным", представленным в виде, не совсем пригодном или удобном для анализа.
+
+`Tidy data` - это когда данные имеют так называемый "длинный формат" - каждый столбец представляет собой отдельную переменную, а строка - наблюдение или случай.
+
+![](https://www.researchgate.net/publication/338569186/figure/fig1/AS:847073150775297@1578969385585/The-wide-versus-tidy-data-format-for-time-dependent-data-In-the-wide-spreadsheet-like.png){width="400"}
+
+Задача сегодняшнего занятия будет заключаться в изучении функций, которые используются для трансформации данных - их чистки, фильтрации, вычислении новых переменных и описательных статистик.
+
+В основном мы будем работать с одной из библиотек семейства `tidyverse` - `dplyr`
+
+![](data:image/png;base64,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),
+
+Эта библиотека является одной из лучших для разнообразных трансформаций данных, потребность в которых возникает постоянно в процессе анализа.
+
+## Фильтрация строк filter()
+
+Рассмотрим основные функции библиотеки на примере набора данных `flights` из библиотеки -- `nycflights13`, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу `?flights`.
+
+```{r eval=FALSE, message=FALSE}
+install.packages("nycflights13")
+```
+
+```{r message=FALSE}
+library(tidyverse)
+library(nycflights13)
+```
+
+В наборе данных `flights` содержится следующая информация о переменных:
+
+-   year (год), month (месяц), day (день) - дата вылета
+-   dep_time - время вылета
+-   arr_time - время прилета
+-   sched_dep_time, sched_arr_time - время вылета и прилета по расписанию.
+-   dep_delay, arr_delay - задержка вылета и прилета в минутах. Отрицательные значения означают досрочные вылеты / прилеты.
+-   carrier - перевозчик
+-   flight - номер рейса
+-   tailnum - номер самолета
+-   origin, dest - место отправления, место назначения
+-   air_time - время полета в минутах
+-   distance - расстояние в милях
+-   hour, minute - часов, минут - время отлета, разбитое по часам и минутам
+-   time_hour - дата и время полета по расписанию в формате даты.
+
+Давайте сначала просто посмотрим на эти данные:
+
+```{r}
+head(flights)
+```
+
+Функция `filter()` позволяет отобрать наблюдения, основываясь на значениях. Первый аргумент - имя датафрейма (массива, базы данных), второй и последующие аргументы - выражения, позволяющие отфильтровать данные. Например, мы хотим отобрать все полеты, которые произошли 1 января:
+
+```{r}
+filter(flights, month == 1, day == 1)
+```
+
+Когда мы запускаем эту строку с кодом, `dplyr` выполняет фильтрующую операцию и выводит новый датафрейм. Однако, стоит учитывать, что исходные данные не меняются, и если нам необходимо сохранить эти изменения как отдельный объект, нам нужно использовать оператор присваивания, \<-, и задать новое имя:
+
+```{r}
+jan1 <- filter(flights, month == 1, day == 1)
+```
+
+R либо выводит на экран результаты либо сохраняет их в новую переменную (объект). Если мы хотим одновременно создать новую базу данных, сохранить в нее результаты фильтрации и вывести результат на экран, нужно код заключить в скобки:
+
+```{r}
+(dec25 <- filter(flights, month == 12, day == 25))
+```
+
+## Логические операторы
+
+Очень часто функция `filter()` сопровождается логическими операторами ("и", "или" и др.). В этом случае, результат каждого выражения должен быть истинным, для того, чтобы строки были отобраны в новый набор.
+
+::: callout-tip
+##Запомним основные операторы:
+
+**&** это “и”
+
+**\|** это “или”
+
+**!** “не равно”
+:::
+
+Графически различия между операторами можно представить следующим образом:
+
+![](https://d33wubrfki0l68.cloudfront.net/01f4b6d39d2be8269740a3ad7946faa79f7243cf/8369a/diagrams/transform-logical.png)
+
+Например, давайте отфильтруем данные так, чтобы у нас отображались два месяца - ноябрь и декабрь.
+
+```{r}
+filter(flights, month == 11 | month == 12)
+```
+
+Для некоторого упрощения кода полезно будет запомнить ["законы де Моргана"](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%D1%8B_%D0%B4%D0%B5_%D0%9C%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0):
+
+!(x & y) это то же самое, что и !x \| !y,
+
+а !(x \| y) равносильно !x & !y.
+
+Например, если нам нужно отобрать полеты, которые задерживались (по прилетам и отлетам) не более чем на два часа, мы могли бы пойти двумя путями:
+
+```{r}
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+# Или (результат идентичный)
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+```
+
+{{< iconify arcticons writer size=42px >}} **Самостоятельное задание**:
+
+1.  Отберите полеты, прилет которых (arr_delay) задерживался на 2 или более часа.
+2.  Вылетали в Хьюстон (IAH или HOU)
+3.  Совершались в летние месяцы.
+
+```{r}
+# Вставьте ваш код здесь
+```
+
+## Упорядочение строк с функцией arrange()
+
+Функция `arrange()` работает практически идентично с `filter()`, однако, вместо отбора строк она меняет их порядок. На входе функция берет датафрейм и наименования столбцов, по которым нужно сделать сортировку.Если таких столбцов несколько, каждая дополнительная колонка может быть использована для сортировки значений по уже отсортированным значениям предыдущего столбца.
+
+Например, отсортируем полеты по дате (сначала по году, потом по месяцу и дню):
+
+```{r}
+arrange(flights, year, month, day)
+```
+
+Если нам нужно отсортировать что-то по убыванию, то функция `desc()` поможет нам перегруппировать значения в столбце:
+
+```{r}
+arrange(flights, desc(dep_delay))
+```
+
+\*\* ! Пропущенные значения (NA) - всегда располагаются в конце списка, независимо от направления сортировки\*\*:
+
+```{r}
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+arrange(df, desc(x))
+```
+
+{{< iconify arcticons writer size=42px >}} **Самостоятельное задание**:
+
+1.  Отсортируйте полеты, чтобы найти те, что имеют наибольшие значения задержки, независимо от того, что задержали - вылет или прилет. Найдите также полеты, которые вылетели раньше.
+2.  Найдите самые короткие (быстрые) полеты.
+
+```{r}
+#Вставьте Ваш код здесь:
+```
+
+## Отбор переменных с функцией select()
+
+Достаточно часто (почти всегда) нам для анализа не нужен весь наш набор данных, а только ограниченный набор переменных, с которыми мы работаем в какой-то момент времени. Удобно и полезно отобрать эти переменные и работать только с ними, особенно - если данных очень много, и количество переменных исчисляется сотнями или тысячами. Функция `select()` позволяет быстро отобрать переменные по их именам:
+
+```{r}
+select(flights, year, month, day)
+```
+
+```{r}
+
+select(flights, year:day) # если переменные идут подряд, не обязательно перечислять все, можно воспользоваться оператором :
+```
+
+```{r}
+select(flights, -(year:day))# знак минуса используется для того, чтобы, наоборот, исключить какие-то переменные
+```
+
+Есть еще несколько полезных функций, которые идут в паре с select() и делают жизнь проще:
+
+starts_with("abc"): имена переменных начинаются на “abc”.
+
+ends_with("xyz"): имена переменных заканчиваются на “xyz”.
+
+contains("ijk"): имя переменной содержит “ijk”.
+
+Иногда, в процессе обработки нам требуется переименовать переменную другим способом. Для этой цели подходит функция `rename`:
+
+```{r}
+rename(flights, tail_num = tailnum)
+```
+
+## Самостоятельное задание:
+
+1.  Использовать все возможные способы для того, чтобы отобрать переменные dep_time, dep_delay, arr_time и arr_delay.
+2.  Что случится, если Вы включите одну и ту же переменную несколько раз в запрос функции select()?
+
+```{r}
+# Напишите Ваш код или комментарии здесь.
+```
+
+## Создаем новую переменную с функцией mutate()
+
+Да, сейчас явно что-то будет про мутации)))
+
+Помимо того, что в процессе анализа нам приходится что-то постоянно отбирать (например, только жителей сел или городов, какой-то регион исследования, лиц определенного возраста и пола), частенько приходится вычислять новые переменные на основе старых - высчитывать возраст, средний доход, количество детей и т. д.
+
+В этом нам может помочь функция `mutate()`.
+
+Важно: новые переменные могут быть созданы только на основе тех, которые уже есть в вашем наборе.
+
+Пример: создадим новый набор `flights_sml`, куда отберем переменные даты полета, расстояние и переменные, оканчивающиеся на "delay". Затем, содадим две новых переменных: - скорость (speed) - количество минут, которые самолет смог догнать при задержке рейса (как разность между задержкой вылета и прилета) (gain).
+
+```{r}
+flights_sml <- select(flights,
+  year:day,
+  ends_with("delay"),
+  distance,
+  air_time
+)
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+```
+
+Отметим, что мы можем "не отходя от кассы" использовать новые переменные в последующих расчетах для создания других переменных. Например, давайте создадим переменную gain (см. пример выше), но и посчитаем время полета в часах и среднее количество минут, которое нагонял самолет каждый час:
+
+```{r}
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+## Самостоятельное задание:
+
+1.  Сравните air_time и arr_time - dep_time. Что мы можем увидеть? Какие выводы сделать?
+2.  Сравните dep_time, sched_dep_time и dep_delay. Как эти переменные связаны друг с другом?
+
+## Анализ по группам с функциями `summarise()` и `group_by()`
+
+Последняя функция, которую мы изучим в рамках данного урока, `summarise()`. Как следует из названия, ее предназначение - рассчитывать какие-то новые значения на основе разнообразных функций - арифметических, статистических и др. Например, посчитаем среднее количество минут задержки вылета:
+
+```{r}
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))#na.rm = TRUE - данный аргумент удаляет из анализа все пропущенные значения (na - not avaliable, rm - remove), в противном случае вычисление среднего не возможно.
+```
+
+Функция `summarise()` часто идет в паре с другой функцией - `group_by()`, позволяющей провести анализ в отдельных подгруппах. Соответственно, когда мы применяем функции dplyr к сгруппированным данным, они автоматически рассчитываются для каждой подгруппы по отдельности. Например, мы можем применить код из примера выше, но предварительно сгруппировать данные по месяцам. Получится следующее:
+
+```{r}
+#| colab: {base_uri: 'https://localhost:8080/', height: 475}
+flights %>%
+group_by(month) %>%
+summarise(delay = mean(dep_delay, na.rm = TRUE))
+```
+
+|                               |
+|-------------------------------|
+| Стоп! Что за новый знак %\>%? |
+
+Это оператор, который позволяет сократить код и написать его по типу "матрешки". По-английски это называется "pipe-operator", здесь явная аналогия с телескопическими трубами, которые собираются вместе путем нехитрой сборки. Так и наши различные функции dplyr следуют друг за другом уже без лиших аргументов и дублирования информации о наборе данных, лишних скобок и знаков \$, с помощью которых мы вводим имя переменной из набора. Код становится более читаемым и быстрым.
+
+Графически это можно представить вот так:
+
+![](https://i0.wp.com/www.rforecology.com/pipes_image0.png?w=584&ssl=1)
+
+Приведем еще один пример: в наборе по полетам проведем группировку по месту назначения и посчитаем общее количество полетов, среднее расстояние и среднюю задержку рейсов в минутах, а также отфильтруем дни, в которых было более 20 полетов. И все это - в нескольких строчках кода:
+
+```{r}
+#| colab: {base_uri: 'https://localhost:8080/', height: 1000}
+delays <- flights %>%
+  group_by(dest) %>%
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>%
+  filter(count > 20, dest != "HNL")
+delays
+```
+
+Другие полезные функции: - median() - медиана - sd() - стандартное отклонение - min() - минимум - max() - максимум - first() - первое значение - nth() - значение определенного порядка (2, 3 и т.д.) - last() - последнее - n() - количество, размер группы - n_distinct() - количество уникальных значений
+
+Например:
+
+```{r}
+#| colab: {base_uri: 'https://localhost:8080/', height: 1000}
+flights %>%
+na.omit() %>% #na.omit() - опускает пропущенные значения
+group_by(year, month, day) %>%
+  summarise(
+    first_dep = first(dep_time),
+    last_dep = last(dep_time)
+  )
+```
+
+Еще пример: сгруппируем полеты по месту назначения и посчитаем уникальных перевозчиков, отсортировав нашу таблицу по месту назначения.
+
+```{r}
+flights %>%
+na.omit() %>%
+group_by(dest) %>%
+  summarise(carriers = n_distinct(carrier)) %>%
+  arrange(desc(carriers))
+```
+
+## Сочетание нескольких трансформаций (mutate, filter, summarise)
+
+Группировка обычно сопутствует функции summarise(),но ее также можно сочетать с mutate() и filter():
+
+Например, мы хотим найти наиболее популярные направления:
+
+```{r}
+popular_dests <- flights %>%
+  group_by(dest) %>%
+  filter(n() > 365)
+popular_dests
+```
+
+## Самостоятельная работа
+
+Для каждого направления посчитайте общее количество минут задержки рейсов.
+
+```{r}
+# Напишите свой код здесь.
+```

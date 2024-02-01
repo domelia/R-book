@@ -16,9 +16,9 @@ book:
   - Install-R.qmd
   - Data-types-and-structures.qmd
   - Intro-to-RMarkdown.qmd
-  - lesson5.qmd
-  - lesson6.qmd
-  - lesson7.qmd
+  - Functions.qmd
+  - ImportExport.qmd
+  - TidyverseTransformations.qmd
   - lesson8.qmd
   - lesson9.qmd
   - lesson10.qmd

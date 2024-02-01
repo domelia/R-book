@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R в социологических исследованиях - 7&nbsp; Tidyverse и трансформация данных</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lesson8.html" rel="next">
+<link href="./ImportExport.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./TidyverseTransformations.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R в социологических исследованиях</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/domelia/R-book/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+    <a href="./R-в-социологических-исследованиях.epub" title="Download ePub" class="quarto-navigation-tool px-1" aria-label="Download ePub"><i class="bi bi-journal"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">В качестве предисловия…</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./About-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Install-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-types-and-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Типы и структуры данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro-to-RMarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImportExport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TidyverseTransformations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Статистические гипотезы и критерии</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Регрессионный анализ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Моделировние структурными уравнениями в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#прямоугольные-и-непрямоугольные-таблицы-а-также-tidy-и-messy-данные" id="toc-прямоугольные-и-непрямоугольные-таблицы-а-также-tidy-и-messy-данные" class="nav-link active" data-scroll-target="#прямоугольные-и-непрямоугольные-таблицы-а-также-tidy-и-messy-данные"><span class="header-section-number">7.1</span> Прямоугольные и непрямоугольные таблицы, а также tidy и messy данные</a></li>
+  <li><a href="#фильтрация-строк-filter" id="toc-фильтрация-строк-filter" class="nav-link" data-scroll-target="#фильтрация-строк-filter"><span class="header-section-number">7.2</span> Фильтрация строк filter()</a></li>
+  <li><a href="#логические-операторы" id="toc-логические-операторы" class="nav-link" data-scroll-target="#логические-операторы"><span class="header-section-number">7.3</span> Логические операторы</a></li>
+  <li><a href="#упорядочение-строк-с-функцией-arrange" id="toc-упорядочение-строк-с-функцией-arrange" class="nav-link" data-scroll-target="#упорядочение-строк-с-функцией-arrange"><span class="header-section-number">7.4</span> Упорядочение строк с функцией arrange()</a></li>
+  <li><a href="#отбор-переменных-с-функцией-select" id="toc-отбор-переменных-с-функцией-select" class="nav-link" data-scroll-target="#отбор-переменных-с-функцией-select"><span class="header-section-number">7.5</span> Отбор переменных с функцией select()</a></li>
+  <li><a href="#самостоятельное-задание" id="toc-самостоятельное-задание" class="nav-link" data-scroll-target="#самостоятельное-задание"><span class="header-section-number">7.6</span> Самостоятельное задание:</a></li>
+  <li><a href="#создаем-новую-переменную-с-функцией-mutate" id="toc-создаем-новую-переменную-с-функцией-mutate" class="nav-link" data-scroll-target="#создаем-новую-переменную-с-функцией-mutate"><span class="header-section-number">7.7</span> Создаем новую переменную с функцией mutate()</a></li>
+  <li><a href="#самостоятельное-задание-1" id="toc-самостоятельное-задание-1" class="nav-link" data-scroll-target="#самостоятельное-задание-1"><span class="header-section-number">7.8</span> Самостоятельное задание:</a></li>
+  <li><a href="#анализ-по-группам-с-функциями-summarise-и-group_by" id="toc-анализ-по-группам-с-функциями-summarise-и-group_by" class="nav-link" data-scroll-target="#анализ-по-группам-с-функциями-summarise-и-group_by"><span class="header-section-number">7.9</span> Анализ по группам с функциями <code>summarise()</code> и <code>group_by()</code></a></li>
+  <li><a href="#сочетание-нескольких-трансформаций-mutate-filter-summarise" id="toc-сочетание-нескольких-трансформаций-mutate-filter-summarise" class="nav-link" data-scroll-target="#сочетание-нескольких-трансформаций-mutate-filter-summarise"><span class="header-section-number">7.10</span> Сочетание нескольких трансформаций (mutate, filter, summarise)</a></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">7.11</span> Самостоятельная работа</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/TidyverseTransformations.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>В рамках данного занятия мы будем работать с библиотекой <a href="https://www.tidyverse.org/">tidyverse</a>, объединяющей возможности нескольких других библиотек и воплощающей общую философию, дизайн и грамматику обработки и анализа данных, разработанную RStudio: <img src="https://hbctraining.github.io/Intro-to-R/img/tidyverse_website.png" class="img-fluid"></p>
+<p>Основные библиотеки семейства tidyverse:</p>
+<ul>
+<li><strong>ggplot2</strong> - библиотека для создания разнообразных визуализаций на основе пользовательских данных и заданных настроек.</li>
+<li><strong>dplyr</strong> - библиотека для основных трансформаций данных (отбор, фильтрация, группировка, создание новых переменных, описательный анализ).</li>
+<li><strong>tidyr</strong> - набор функций для подготовки данных к анализу (транспонирование, переструктурированые данных).</li>
+<li><strong>readr</strong> работа с данными прямоугольного формата, представленными в формате csv, tsv или fwf.</li>
+<li><strong>tibble</strong> - специальная библиотека для работы с датафреймами.</li>
+<li><strong>stringr</strong> - набор функций для работы со строковыми переменными.</li>
+<li><strong>forcats</strong> - библиотека для работы с факторными (категориальными - номинальными и порядковыми) перемннными.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tidyverse - все нужные библиотеки в одном месте!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>На предыдущем занятии мы осуществляли импорт и экспорт данных, используя некоторые библиотеки, входящие во вселенную <code>Tidyverse</code>. Загружая библиотеку Tidyverse, мы автоматически загружаем все остальные, и потребность в загрузке отдельных библиотек отпадает.</p>
+</div>
+</div>
+<section id="прямоугольные-и-непрямоугольные-таблицы-а-также-tidy-и-messy-данные" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="прямоугольные-и-непрямоугольные-таблицы-а-также-tidy-и-messy-данные"><span class="header-section-number">7.1</span> Прямоугольные и непрямоугольные таблицы, а также tidy и messy данные</h2>
+<p>Данные могут быть представлены в различных формах, но на самом базовом уровне их можно представить в виде двух типов структур: данные представленные в виде прямоугольных таблиц и непрямоугольных данных.</p>
+<p>Прямоугольные данные имеют форму прямоугольника (действительно!), то есть каждое значение соответствует какой-то строке и столбцу. Большинство датафреймов содержат как раз прямоугольные данные.</p>
+<p>Соответственно непрямоугольные данные не могут так легко распределяться по строкам и столбцам, они, как правило, представляют собой совокупность различных структур данных, в которых между отдельными элементами имеется какое-то сходство. Обычно непрямоугольные данные хранятся в списках.</p>
+<p><strong>Tidy</strong> по-английски означает “чистый, аккуратный, опрятный”. По отношению к данным выражение - tidy data - “чистые, правильным образом представленные данные” противопоставляется “messy data” - “грязным данным”, представленным в виде, не совсем пригодном или удобном для анализа.</p>
+<p><code>Tidy data</code> - это когда данные имеют так называемый “длинный формат” - каждый столбец представляет собой отдельную переменную, а строка - наблюдение или случай.</p>
+<p><img src="https://www.researchgate.net/publication/338569186/figure/fig1/AS:847073150775297@1578969385585/The-wide-versus-tidy-data-format-for-time-dependent-data-In-the-wide-spreadsheet-like.png" class="img-fluid" width="400"></p>
+<p>Задача сегодняшнего занятия будет заключаться в изучении функций, которые используются для трансформации данных - их чистки, фильтрации, вычислении новых переменных и описательных статистик.</p>
+<p>В основном мы будем работать с одной из библиотек семейства <code>tidyverse</code> - <code>dplyr</code></p>
+<p><img src="data:image/png;base64,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" class="img-fluid">,</p>
+<p>Эта библиотека является одной из лучших для разнообразных трансформаций данных, потребность в которых возникает постоянно в процессе анализа.</p>
+</section>
+<section id="фильтрация-строк-filter" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="фильтрация-строк-filter"><span class="header-section-number">7.2</span> Фильтрация строк filter()</h2>
+<p>Рассмотрим основные функции библиотеки на примере набора данных <code>flights</code> из библиотеки – <code>nycflights13</code>, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу <code>?flights</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"nycflights13"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В наборе данных <code>flights</code> содержится следующая информация о переменных:</p>
+<ul>
+<li>year (год), month (месяц), day (день) - дата вылета</li>
+<li>dep_time - время вылета</li>
+<li>arr_time - время прилета</li>
+<li>sched_dep_time, sched_arr_time - время вылета и прилета по расписанию.</li>
+<li>dep_delay, arr_delay - задержка вылета и прилета в минутах. Отрицательные значения означают досрочные вылеты / прилеты.</li>
+<li>carrier - перевозчик</li>
+<li>flight - номер рейса</li>
+<li>tailnum - номер самолета</li>
+<li>origin, dest - место отправления, место назначения</li>
+<li>air_time - время полета в минутах</li>
+<li>distance - расстояние в милях</li>
+<li>hour, minute - часов, минут - время отлета, разбитое по часам и минутам</li>
+<li>time_hour - дата и время полета по расписанию в формате даты.</li>
+</ul>
+<p>Давайте сначала просто посмотрим на эти данные:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(flights)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+   year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+  &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+1  2013     1     1      517            515         2      830            819
+2  2013     1     1      533            529         4      850            830
+3  2013     1     1      542            540         2      923            850
+4  2013     1     1      544            545        -1     1004           1022
+5  2013     1     1      554            600        -6      812            837
+6  2013     1     1      554            558        -4      740            728
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Функция <code>filter()</code> позволяет отобрать наблюдения, основываясь на значениях. Первый аргумент - имя датафрейма (массива, базы данных), второй и последующие аргументы - выражения, позволяющие отфильтровать данные. Например, мы хотим отобрать все полеты, которые произошли 1 января:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 842 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 832 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Когда мы запускаем эту строку с кодом, <code>dplyr</code> выполняет фильтрующую операцию и выводит новый датафрейм. Однако, стоит учитывать, что исходные данные не меняются, и если нам необходимо сохранить эти изменения как отдельный объект, нам нужно использовать оператор присваивания, &lt;-, и задать новое имя:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>jan1 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>R либо выводит на экран результаты либо сохраняет их в новую переменную (объект). Если мы хотим одновременно создать новую базу данных, сохранить в нее результаты фильтрации и вывести результат на экран, нужно код заключить в скобки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(dec25 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">12</span>, day <span class="sc">==</span> <span class="dv">25</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 719 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013    12    25      456            500        -4      649            651
+ 2  2013    12    25      524            515         9      805            814
+ 3  2013    12    25      542            540         2      832            850
+ 4  2013    12    25      546            550        -4     1022           1027
+ 5  2013    12    25      556            600        -4      730            745
+ 6  2013    12    25      557            600        -3      743            752
+ 7  2013    12    25      557            600        -3      818            831
+ 8  2013    12    25      559            600        -1      855            856
+ 9  2013    12    25      559            600        -1      849            855
+10  2013    12    25      600            600         0      850            846
+# ℹ 709 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="логические-операторы" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="логические-операторы"><span class="header-section-number">7.3</span> Логические операторы</h2>
+<p>Очень часто функция <code>filter()</code> сопровождается логическими операторами (“и”, “или” и др.). В этом случае, результат каждого выражения должен быть истинным, для того, чтобы строки были отобраны в новый набор.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>##Запомним основные операторы:</p>
+<p><strong>&amp;</strong> это “и”</p>
+<p><strong>|</strong> это “или”</p>
+<p><strong>!</strong> “не равно”</p>
+</div>
+</div>
+<p>Графически различия между операторами можно представить следующим образом:</p>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/01f4b6d39d2be8269740a3ad7946faa79f7243cf/8369a/diagrams/transform-logical.png" class="img-fluid"></p>
+<p>Например, давайте отфильтруем данные так, чтобы у нас отображались два месяца - ноябрь и декабрь.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">11</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">12</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 55,403 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013    11     1        5           2359         6      352            345
+ 2  2013    11     1       35           2250       105      123           2356
+ 3  2013    11     1      455            500        -5      641            651
+ 4  2013    11     1      539            545        -6      856            827
+ 5  2013    11     1      542            545        -3      831            855
+ 6  2013    11     1      549            600       -11      912            923
+ 7  2013    11     1      550            600       -10      705            659
+ 8  2013    11     1      554            600        -6      659            701
+ 9  2013    11     1      554            600        -6      826            827
+10  2013    11     1      554            600        -6      749            751
+# ℹ 55,393 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Для некоторого упрощения кода полезно будет запомнить <a href="https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD%D1%8B_%D0%B4%D0%B5_%D0%9C%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B0">“законы де Моргана”</a>:</p>
+<p>!(x &amp; y) это то же самое, что и !x | !y,</p>
+<p>а !(x | y) равносильно !x &amp; !y.</p>
+<p>Например, если нам нужно отобрать полеты, которые задерживались (по прилетам и отлетам) не более чем на два часа, мы могли бы пойти двумя путями:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, <span class="sc">!</span>(arr_delay <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">|</span> dep_delay <span class="sc">&gt;</span> <span class="dv">120</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 316,050 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 316,040 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Или (результат идентичный)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, arr_delay <span class="sc">&lt;=</span> <span class="dv">120</span>, dep_delay <span class="sc">&lt;=</span> <span class="dv">120</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 316,050 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 316,040 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>:</p>
+<ol type="1">
+<li>Отберите полеты, прилет которых (arr_delay) задерживался на 2 или более часа.</li>
+<li>Вылетали в Хьюстон (IAH или HOU)</li>
+<li>Совершались в летние месяцы.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вставьте ваш код здесь</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="упорядочение-строк-с-функцией-arrange" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="упорядочение-строк-с-функцией-arrange"><span class="header-section-number">7.4</span> Упорядочение строк с функцией arrange()</h2>
+<p>Функция <code>arrange()</code> работает практически идентично с <code>filter()</code>, однако, вместо отбора строк она меняет их порядок. На входе функция берет датафрейм и наименования столбцов, по которым нужно сделать сортировку.Если таких столбцов несколько, каждая дополнительная колонка может быть использована для сортировки значений по уже отсортированным значениям предыдущего столбца.</p>
+<p>Например, отсортируем полеты по дате (сначала по году, потом по месяцу и дню):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, year, month, day)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 336,766 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Если нам нужно отсортировать что-то по убыванию, то функция <code>desc()</code> поможет нам перегруппировать значения в столбце:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     9      641            900      1301     1242           1530
+ 2  2013     6    15     1432           1935      1137     1607           2120
+ 3  2013     1    10     1121           1635      1126     1239           1810
+ 4  2013     9    20     1139           1845      1014     1457           2210
+ 5  2013     7    22      845           1600      1005     1044           1815
+ 6  2013     4    10     1100           1900       960     1342           2211
+ 7  2013     3    17     2321            810       911      135           1020
+ 8  2013     6    27      959           1900       899     1236           2226
+ 9  2013     7    22     2257            759       898      121           1026
+10  2013    12     5      756           1700       896     1058           2020
+# ℹ 336,766 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>** ! Пропущенные значения (NA) - всегда располагаются в конце списка, независимо от направления сортировки**:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="cn">NA</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+      x
+  &lt;dbl&gt;
+1     2
+2     5
+3    NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, <span class="fu">desc</span>(x))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 1
+      x
+  &lt;dbl&gt;
+1     5
+2     2
+3    NA</code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>:</p>
+<ol type="1">
+<li>Отсортируйте полеты, чтобы найти те, что имеют наибольшие значения задержки, независимо от того, что задержали - вылет или прилет. Найдите также полеты, которые вылетели раньше.</li>
+<li>Найдите самые короткие (быстрые) полеты.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Вставьте Ваш код здесь:</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="отбор-переменных-с-функцией-select" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="отбор-переменных-с-функцией-select"><span class="header-section-number">7.5</span> Отбор переменных с функцией select()</h2>
+<p>Достаточно часто (почти всегда) нам для анализа не нужен весь наш набор данных, а только ограниченный набор переменных, с которыми мы работаем в какой-то момент времени. Удобно и полезно отобрать эти переменные и работать только с ними, особенно - если данных очень много, и количество переменных исчисляется сотнями или тысячами. Функция <code>select()</code> позволяет быстро отобрать переменные по их именам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year, month, day)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 3
+    year month   day
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year<span class="sc">:</span>day) <span class="co"># если переменные идут подряд, не обязательно перечислять все, можно воспользоваться оператором :</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 3
+    year month   day
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>(year<span class="sc">:</span>day))<span class="co"># знак минуса используется для того, чтобы, наоборот, исключить какие-то переменные</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 16
+   dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
+      &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
+ 1      517            515         2      830            819        11 UA     
+ 2      533            529         4      850            830        20 UA     
+ 3      542            540         2      923            850        33 AA     
+ 4      544            545        -1     1004           1022       -18 B6     
+ 5      554            600        -6      812            837       -25 DL     
+ 6      554            558        -4      740            728        12 UA     
+ 7      555            600        -5      913            854        19 B6     
+ 8      557            600        -3      709            723       -14 EV     
+ 9      557            600        -3      838            846        -8 B6     
+10      558            600        -2      753            745         8 AA     
+# ℹ 336,766 more rows
+# ℹ 9 more variables: flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
+#   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+<p>Есть еще несколько полезных функций, которые идут в паре с select() и делают жизнь проще:</p>
+<p>starts_with(“abc”): имена переменных начинаются на “abc”.</p>
+<p>ends_with(“xyz”): имена переменных заканчиваются на “xyz”.</p>
+<p>contains(“ijk”): имя переменной содержит “ijk”.</p>
+<p>Иногда, в процессе обработки нам требуется переименовать переменную другим способом. Для этой цели подходит функция <code>rename</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(flights, <span class="at">tail_num =</span> tailnum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 336,766 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tail_num &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельное-задание" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="самостоятельное-задание"><span class="header-section-number">7.6</span> Самостоятельное задание:</h2>
+<ol type="1">
+<li>Использовать все возможные способы для того, чтобы отобрать переменные dep_time, dep_delay, arr_time и arr_delay.</li>
+<li>Что случится, если Вы включите одну и ту же переменную несколько раз в запрос функции select()?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Напишите Ваш код или комментарии здесь.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="создаем-новую-переменную-с-функцией-mutate" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="создаем-новую-переменную-с-функцией-mutate"><span class="header-section-number">7.7</span> Создаем новую переменную с функцией mutate()</h2>
+<p>Да, сейчас явно что-то будет про мутации)))</p>
+<p>Помимо того, что в процессе анализа нам приходится что-то постоянно отбирать (например, только жителей сел или городов, какой-то регион исследования, лиц определенного возраста и пола), частенько приходится вычислять новые переменные на основе старых - высчитывать возраст, средний доход, количество детей и т. д.</p>
+<p>В этом нам может помочь функция <code>mutate()</code>.</p>
+<p>Важно: новые переменные могут быть созданы только на основе тех, которые уже есть в вашем наборе.</p>
+<p>Пример: создадим новый набор <code>flights_sml</code>, куда отберем переменные даты полета, расстояние и переменные, оканчивающиеся на “delay”. Затем, содадим две новых переменных: - скорость (speed) - количество минут, которые самолет смог догнать при задержке рейса (как разность между задержкой вылета и прилета) (gain).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>flights_sml <span class="ot">&lt;-</span> <span class="fu">select</span>(flights,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  year<span class="sc">:</span>day,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ends_with</span>(<span class="st">"delay"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  distance,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  air_time</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights_sml,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 9
+    year month   day dep_delay arr_delay distance air_time  gain speed
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  2013     1     1         2        11     1400      227    -9  370.
+ 2  2013     1     1         4        20     1416      227   -16  374.
+ 3  2013     1     1         2        33     1089      160   -31  408.
+ 4  2013     1     1        -1       -18     1576      183    17  517.
+ 5  2013     1     1        -6       -25      762      116    19  394.
+ 6  2013     1     1        -4        12      719      150   -16  288.
+ 7  2013     1     1        -5        19     1065      158   -24  404.
+ 8  2013     1     1        -3       -14      229       53    11  259.
+ 9  2013     1     1        -3        -8      944      140     5  405.
+10  2013     1     1        -2         8      733      138   -10  319.
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p>Отметим, что мы можем “не отходя от кассы” использовать новые переменные в последующих расчетах для создания других переменных. Например, давайте создадим переменную gain (см. пример выше), но и посчитаем время полета в часах и среднее количество минут, которое нагонял самолет каждый час:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights_sml,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gain_per_hour =</span> gain <span class="sc">/</span> hours</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 10
+    year month   day dep_delay arr_delay distance air_time  gain hours
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  2013     1     1         2        11     1400      227    -9 3.78 
+ 2  2013     1     1         4        20     1416      227   -16 3.78 
+ 3  2013     1     1         2        33     1089      160   -31 2.67 
+ 4  2013     1     1        -1       -18     1576      183    17 3.05 
+ 5  2013     1     1        -6       -25      762      116    19 1.93 
+ 6  2013     1     1        -4        12      719      150   -16 2.5  
+ 7  2013     1     1        -5        19     1065      158   -24 2.63 
+ 8  2013     1     1        -3       -14      229       53    11 0.883
+ 9  2013     1     1        -3        -8      944      140     5 2.33 
+10  2013     1     1        -2         8      733      138   -10 2.3  
+# ℹ 336,766 more rows
+# ℹ 1 more variable: gain_per_hour &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельное-задание-1" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="самостоятельное-задание-1"><span class="header-section-number">7.8</span> Самостоятельное задание:</h2>
+<ol type="1">
+<li>Сравните air_time и arr_time - dep_time. Что мы можем увидеть? Какие выводы сделать?</li>
+<li>Сравните dep_time, sched_dep_time и dep_delay. Как эти переменные связаны друг с другом?</li>
+</ol>
+</section>
+<section id="анализ-по-группам-с-функциями-summarise-и-group_by" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="анализ-по-группам-с-функциями-summarise-и-group_by"><span class="header-section-number">7.9</span> Анализ по группам с функциями <code>summarise()</code> и <code>group_by()</code></h2>
+<p>Последняя функция, которую мы изучим в рамках данного урока, <code>summarise()</code>. Как следует из названия, ее предназначение - рассчитывать какие-то новые значения на основе разнообразных функций - арифметических, статистических и др. Например, посчитаем среднее количество минут задержки вылета:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="co">#na.rm = TRUE - данный аргумент удаляет из анализа все пропущенные значения (na - not avaliable, rm - remove), в противном случае вычисление среднего не возможно.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  delay
+  &lt;dbl&gt;
+1  12.6</code></pre>
+</div>
+</div>
+<p>Функция <code>summarise()</code> часто идет в паре с другой функцией - <code>group_by()</code>, позволяющей провести анализ в отдельных подгруппах. Соответственно, когда мы применяем функции dplyr к сгруппированным данным, они автоматически рассчитываются для каждой подгруппы по отдельности. Например, мы можем применить код из примера выше, но предварительно сгруппировать данные по месяцам. Получится следующее:</p>
+<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:475}">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 2
+   month delay
+   &lt;int&gt; &lt;dbl&gt;
+ 1     1 10.0 
+ 2     2 10.8 
+ 3     3 13.2 
+ 4     4 13.9 
+ 5     5 13.0 
+ 6     6 20.8 
+ 7     7 21.7 
+ 8     8 12.6 
+ 9     9  6.72
+10    10  6.24
+11    11  5.44
+12    12 16.6 </code></pre>
+</div>
+</div>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td>Стоп! Что за новый знак %&gt;%?</td>
+</tr>
+</tbody>
+</table>
+<p>Это оператор, который позволяет сократить код и написать его по типу “матрешки”. По-английски это называется “pipe-operator”, здесь явная аналогия с телескопическими трубами, которые собираются вместе путем нехитрой сборки. Так и наши различные функции dplyr следуют друг за другом уже без лиших аргументов и дублирования информации о наборе данных, лишних скобок и знаков $, с помощью которых мы вводим имя переменной из набора. Код становится более читаемым и быстрым.</p>
+<p>Графически это можно представить вот так:</p>
+<p><img src="https://i0.wp.com/www.rforecology.com/pipes_image0.png?w=584&amp;ssl=1" class="img-fluid"></p>
+<p>Приведем еще один пример: в наборе по полетам проведем группировку по месту назначения и посчитаем общее количество полетов, среднее расстояние и среднюю задержку рейсов в минутах, а также отфильтруем дни, в которых было более 20 полетов. И все это - в нескольких строчках кода:</p>
+<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>delays <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">20</span>, dest <span class="sc">!=</span> <span class="st">"HNL"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>delays</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 4
+   dest  count  dist delay
+   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 ABQ     254 1826   4.38
+ 2 ACK     265  199   4.85
+ 3 ALB     439  143  14.4 
+ 4 ATL   17215  757. 11.3 
+ 5 AUS    2439 1514.  6.02
+ 6 AVL     275  584.  8.00
+ 7 BDL     443  116   7.05
+ 8 BGR     375  378   8.03
+ 9 BHM     297  866. 16.9 
+10 BNA    6333  758. 11.8 
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+<p>Другие полезные функции: - median() - медиана - sd() - стандартное отклонение - min() - минимум - max() - максимум - first() - первое значение - nth() - значение определенного порядка (2, 3 и т.д.) - last() - последнее - n() - количество, размер группы - n_distinct() - количество уникальных значений</p>
+<p>Например:</p>
+<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="co">#na.omit() - опускает пропущенные значения</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">first_dep =</span> <span class="fu">first</span>(dep_time),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">last_dep =</span> <span class="fu">last</span>(dep_time)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'year', 'month'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 365 × 5
+# Groups:   year, month [12]
+    year month   day first_dep last_dep
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt;    &lt;int&gt;
+ 1  2013     1     1       517     2356
+ 2  2013     1     2        42     2354
+ 3  2013     1     3        32     2349
+ 4  2013     1     4        25     2358
+ 5  2013     1     5        14     2357
+ 6  2013     1     6        16     2355
+ 7  2013     1     7        49     2359
+ 8  2013     1     8       454     2351
+ 9  2013     1     9         2     2252
+10  2013     1    10         3     2320
+# ℹ 355 more rows</code></pre>
+</div>
+</div>
+<p>Еще пример: сгруппируем полеты по месту назначения и посчитаем уникальных перевозчиков, отсортировав нашу таблицу по месту назначения.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">carriers =</span> <span class="fu">n_distinct</span>(carrier)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(carriers))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 104 × 2
+   dest  carriers
+   &lt;chr&gt;    &lt;int&gt;
+ 1 ATL          7
+ 2 BOS          7
+ 3 CLT          7
+ 4 ORD          7
+ 5 TPA          7
+ 6 AUS          6
+ 7 DCA          6
+ 8 DTW          6
+ 9 IAD          6
+10 MSP          6
+# ℹ 94 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="сочетание-нескольких-трансформаций-mutate-filter-summarise" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="сочетание-нескольких-трансформаций-mutate-filter-summarise"><span class="header-section-number">7.10</span> Сочетание нескольких трансформаций (mutate, filter, summarise)</h2>
+<p>Группировка обычно сопутствует функции summarise(),но ее также можно сочетать с mutate() и filter():</p>
+<p>Например, мы хотим найти наиболее популярные направления:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>popular_dests <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">365</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>popular_dests</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 332,577 × 19
+# Groups:   dest [77]
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     1     1      517            515         2      830            819
+ 2  2013     1     1      533            529         4      850            830
+ 3  2013     1     1      542            540         2      923            850
+ 4  2013     1     1      544            545        -1     1004           1022
+ 5  2013     1     1      554            600        -6      812            837
+ 6  2013     1     1      554            558        -4      740            728
+ 7  2013     1     1      555            600        -5      913            854
+ 8  2013     1     1      557            600        -3      709            723
+ 9  2013     1     1      557            600        -3      838            846
+10  2013     1     1      558            600        -2      753            745
+# ℹ 332,567 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">7.11</span> Самостоятельная работа</h2>
+<p>Для каждого направления посчитайте общее количество минут задержки рейсов.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Напишите свой код здесь.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ImportExport.html" class="pagination-link  aria-label=" &lt;span="" и="" экспорт="" данных&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lesson8.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Анализ одномерных распределений разного типа</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book/edit/main/TidyverseTransformations.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div></div></footer></body></html>

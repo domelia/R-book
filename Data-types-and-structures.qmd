@@ -933,4 +933,4 @@ summary(mtcars)
 
 ## Самостоятельная работа
 
-[Самостоятельная работа №2 ](https://socio-asu.shinyapps.io/Assignment2/){.btn .btn-outline-primary .btn role="button"}2
+[Самостоятельная работа №2](https://socio-asu.shinyapps.io/Assignment2/){.btn .btn-outline-primary .btn role="button"}2
