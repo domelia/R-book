@@ -17,7 +17,7 @@ Session - Set Working Directory - To Source File Location
 :::
 
 
-![](http://www.sthda.com/sthda/RDoc/images/read-excel-files.png)
+![](images/ImportExport/read-excel-files.png)
 
 Импортировать данные из файла Excel можно несколькими способами.
 
