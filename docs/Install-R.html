@@ -465,18 +465,13 @@ RStudio online
 <section id="section" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="section"><span class="header-section-number">2.3.4</span> ?</h3>
 <p>В R имеется очень много сопроводительной документации, доступной по каждой функции и библиотеке, где объясняются особенности работы с ними, приводятся примеры и дается теоретическое обоснование. Чтобы обратиться к этой вспомогательной документации достаточно набрать имя функции, перед которой нужно поставить знак вопроса:</p>
-<div class="cell" data-exercise="true">
-<div class="cell-output cell-output-stderr">
-<pre><code>запускаю httpd сервер помощи... готово</code></pre>
-</div>
-</div>
 <p>Лучше всего эту команду попробовать в RStudio. Давайте сделаем это!</p>
 </section>
 <section id="section-1" class="level3" data-number="2.3.5">
 <h3 data-number="2.3.5" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.3.5</span> ??</h3>
 <p>Если вдруг вы забыли как точно называется та или иная функция или хотите посмотреть общие материалы по теме, то можно использовать <code>??</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>??print</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>??print</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -500,7 +495,7 @@ RStudio online
 <li>Напишите код, выполняющий простые арифметические действия. Наберите на клавиатуре любое математическое выражение, например, <code>1+1</code>. Чтобы выполнить данную команду, нажмите сочетание клавиш <code>Ctrl + Enter</code> или кнопку <code>Run</code>, которая находится в правом углу меню. Команда выполняется автоматически, сразу же.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -556,7 +551,7 @@ RStudio online
 </div>
 <p>Если мы что-то делаем неправильно, в консоли появится сообщение об ошибке:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">1</span><span class="sc">+</span>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">1</span><span class="sc">+</span>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -575,7 +570,7 @@ RStudio online
 <li>Напишите код, отображающий текстовое сообщение:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Привет, Алтайский государственный университет!"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Привет, Алтайский государственный университет!"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Привет, Алтайский государственный университет!"</code></pre>
 </div>
@@ -620,19 +615,19 @@ RStudio online
 <p>Не все библиотеки доступны на CRAN, так как эта процедура достаточно сложная и строгая, предполагает несколько проверок (кода, сопроводительной документации). Достаточно частая практика, когда библиотека еще не подана для регистрации на CRAN, разработчики помещают ее на GitHub, откуда ее можно скачать и использовать по назначению. Это позволяет разработчикам получить обратную связь, устранять возможные ошибки, улучшать код.</p>
 <p>Чтобы установить нужную библиотеку из GitHub, нам понадобится функция <code>install_github()</code>, в которой мы должны указать имя разработчика и название библиотеки. Однако, чтобы выполнить эту функцию, нужна дополнительная библиотека <code>devtools</code>. Установить ее можно через CRAN с помощью описанного выше способа. А уже затем, загрузив ее, установить нужную нам библиотеку (получается сложновато, зато мы сразу научимся нужным действиям, потом мы доведем их до автоматизма):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (devtools)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"DeveloperName/PackageName"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (devtools)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"DeveloperName/PackageName"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="вопросы-для-самопроверки" class="level3" data-number="2.4.3">
 <h3 data-number="2.4.3" class="anchored" data-anchor-id="вопросы-для-самопроверки"><span class="header-section-number">2.4.3</span> Вопросы для самопроверки</h3>
 <p><strong>1. Какой код нужно написать, чтобы подключить для использования уже установленную библиотеку <code>tidyverse</code>?</strong></p>
-<div id="radio_KSPHNBWPWV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KSPHNBWPWV" value="answer"> <span>library(tidyverse)</span></label><label><input type="radio" autocomplete="off" name="radio_KSPHNBWPWV" value=""> <span>install(tidyverse)</span></label><label><input type="radio" autocomplete="off" name="radio_KSPHNBWPWV" value=""> <span>package(tidyverse)</span></label>
+<div id="radio_RNUUAZTDMN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RNUUAZTDMN" value="answer"> <span>library(tidyverse)</span></label><label><input type="radio" autocomplete="off" name="radio_RNUUAZTDMN" value=""> <span>install(tidyverse)</span></label><label><input type="radio" autocomplete="off" name="radio_RNUUAZTDMN" value=""> <span>package(tidyverse)</span></label>
 </div>
 <p><strong>2. Библиотека, используемая для установки пакетов с github</strong>:</p>
-<div id="radio_JZRELGEIJF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JZRELGEIJF" value="answer"> <span>devtools</span></label><label><input type="radio" autocomplete="off" name="radio_JZRELGEIJF" value=""> <span>dplyr</span></label><label><input type="radio" autocomplete="off" name="radio_JZRELGEIJF" value=""> <span>tidyverse</span></label>
+<div id="radio_ZOSIUDIXUF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZOSIUDIXUF" value="answer"> <span>devtools</span></label><label><input type="radio" autocomplete="off" name="radio_ZOSIUDIXUF" value=""> <span>dplyr</span></label><label><input type="radio" autocomplete="off" name="radio_ZOSIUDIXUF" value=""> <span>tidyverse</span></label>
 </div>
 
 

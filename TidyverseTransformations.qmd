@@ -34,21 +34,26 @@ title: Tidyverse и трансформация данных
 
 ![](https://www.researchgate.net/publication/338569186/figure/fig1/AS:847073150775297@1578969385585/The-wide-versus-tidy-data-format-for-time-dependent-data-In-the-wide-spreadsheet-like.png){width="400"}
 
-Задача сегодняшнего занятия будет заключаться в изучении функций, которые используются для трансформации данных - их чистки, фильтрации, вычислении новых переменных и описательных статистик.
+Как из «грязных» данных сделать чистые? Как привести набор данных к виду, пригодному для дальнейшего анализа, отобрать нужные переменные, преобразовать их в формат, который нужен для решения аналитической задачи?
 
-В основном мы будем работать с одной из библиотек семейства `tidyverse` - `dplyr`
+В рамках данного раздела будут рассмотрены функции, которые используются для трансформации данных - их чистки, фильтрации, вычисления новых переменных и описательных статистик, а также перевода набора данных из «широкого» в «длинный» и обратно.
 
-![](data:image/png;base64,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),
+В основном мы будем работать с двумя библиотеками семейства `tidyverse` - `dplyr` и `tidyr`.
 
-Эта библиотека является одной из лучших для разнообразных трансформаций данных, потребность в которых возникает постоянно в процессе анализа.
+![](https://dplyr.tidyverse.org/logo.png), ![](https://tidyr.tidyverse.org/logo.png)
 
-## Фильтрация строк filter()
+Эти библиотеки является одними из лучших для разнообразных трансформаций данных, потребность в которых возникает постоянно в процессе анализа.
 
-Рассмотрим основные функции библиотеки на примере набора данных `flights` из библиотеки -- `nycflights13`, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу `?flights`.
+Рассмотрим основные функции библиотек на примере набора данных `flights` из библиотеки - `nycflights13`, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу `?flights`.
+
+## Фильтрация строк - filter()
+
+Установим библиотеки:
 
 ```{r eval=FALSE, message=FALSE}
-install.packages("nycflights13")
+install.packages(c("nycflights13", "tidyverse"))
 ```
+Теперь загрузим их в наше рабочее пространство:
 
 ```{r message=FALSE}
 library(tidyverse)
@@ -123,7 +128,7 @@ filter(flights, month == 11 | month == 12)
 
 !(x & y) это то же самое, что и !x \| !y,
 
-а !(x \| y) равносильно !x & !y.
+!(x \| y) равносильно !x & !y.
 
 Например, если нам нужно отобрать полеты, которые задерживались (по прилетам и отлетам) не более чем на два часа, мы могли бы пойти двумя путями:
 
@@ -135,31 +140,27 @@ filter(flights, arr_delay <= 120, dep_delay <= 120)
 
 {{< iconify arcticons writer size=42px >}} **Самостоятельное задание**:
 
-1.  Отберите полеты, прилет которых (arr_delay) задерживался на 2 или более часа.
-2.  Вылетали в Хьюстон (IAH или HOU)
-3.  Совершались в летние месяцы.
-
-```{r}
-# Вставьте ваш код здесь
-```
+1.  Создайте набор данных `arr_depay_over120`, в который отберите рейсы, прилет которых (arr_delay) задерживался на 2 или более часа.
+2.  Выгрузите данные о рейсах в аэропорты Хьюстона -  George Bush Intercontinental (IAH) или аэропорт William P Hobby (HOU) (по переменной `dest`) и сохраните их под именем `IAH_OR_HOU`.
+3.  Отберите из таблицы все полеты, которые совершались в летние месяцы, и сохраните их под именем `summer_flights`.
 
 ## Упорядочение строк с функцией arrange()
 
 Функция `arrange()` работает практически идентично с `filter()`, однако, вместо отбора строк она меняет их порядок. На входе функция берет датафрейм и наименования столбцов, по которым нужно сделать сортировку.Если таких столбцов несколько, каждая дополнительная колонка может быть использована для сортировки значений по уже отсортированным значениям предыдущего столбца.
 
-Например, отсортируем полеты по дате (сначала по году, потом по месяцу и дню):
+Например, отсортируем полеты по дате (сначала по месяцу, потом по дню):
 
 ```{r}
-arrange(flights, year, month, day)
+arrange(flights, month, day)
 ```
 
-Если нам нужно отсортировать что-то по убыванию, то функция `desc()` поможет нам перегруппировать значения в столбце:
+Если нам нужно отсортировать что-то по убыванию, то функция `desc()` поможет нам перегруппировать значения в столбце. Например, отсортируем по убыванию значения задержки отлета:
 
 ```{r}
 arrange(flights, desc(dep_delay))
 ```
 
-\*\* ! Пропущенные значения (NA) - всегда располагаются в конце списка, независимо от направления сортировки\*\*:
+\*\* ! Пропущенные значения (NA) - всегда располагаются в конце списка, независимо от направления сортировки\*\*. Давайте воспроизведем это свойство на примере, содержащем небольшое количество строк:
 
 ```{r}
 df <- tibble(x = c(5, 2, NA))
@@ -169,16 +170,13 @@ arrange(df, desc(x))
 
 {{< iconify arcticons writer size=42px >}} **Самостоятельное задание**:
 
-1.  Отсортируйте полеты, чтобы найти те, что имеют наибольшие значения задержки, независимо от того, что задержали - вылет или прилет. Найдите также полеты, которые вылетели раньше.
-2.  Найдите самые короткие (быстрые) полеты.
+1.  Отсортируйте полеты, чтобы найти те, что имеют наибольшие значения вылета. Найдите также полеты, которые вылетели раньше (вспоминаем функцию `tail()`).
+2.  Найдите самые короткие (быстрые) полеты по переменной `air_time`.
 
-```{r}
-#Вставьте Ваш код здесь:
-```
 
 ## Отбор переменных с функцией select()
 
-Достаточно часто (почти всегда) нам для анализа не нужен весь наш набор данных, а только ограниченный набор переменных, с которыми мы работаем в какой-то момент времени. Удобно и полезно отобрать эти переменные и работать только с ними, особенно - если данных очень много, и количество переменных исчисляется сотнями или тысячами. Функция `select()` позволяет быстро отобрать переменные по их именам:
+Достаточно часто нам для анализа не нужен весь наш набор данных, а только ограниченный набор переменных, с которыми мы работаем в какой-то момент времени. Удобно и полезно отобрать эти переменные и работать только с ними, особенно - если данных очень много, и количество переменных исчисляется сотнями или тысячами. Функция `select()` позволяет быстро отобрать переменные по их именам:
 
 ```{r}
 select(flights, year, month, day)
@@ -195,11 +193,11 @@ select(flights, -(year:day))# знак минуса используется д�
 
 Есть еще несколько полезных функций, которые идут в паре с select() и делают жизнь проще:
 
-starts_with("abc"): имена переменных начинаются на “abc”.
+`starts_with("abc")`: имена переменных начинаются на “abc”.
 
-ends_with("xyz"): имена переменных заканчиваются на “xyz”.
+`ends_with("xyz")`: имена переменных заканчиваются на “xyz”.
 
-contains("ijk"): имя переменной содержит “ijk”.
+`contains("ijk")`: имя переменной содержит “ijk”.
 
 Иногда, в процессе обработки нам требуется переименовать переменную другим способом. Для этой цели подходит функция `rename`:
 
@@ -207,14 +205,11 @@ contains("ijk"): имя переменной содержит “ijk”.
 rename(flights, tail_num = tailnum)
 ```
 
-## Самостоятельное задание:
+{{< iconify arcticons writer size=42px >}} **Самостоятельное задание**:
 
 1.  Использовать все возможные способы для того, чтобы отобрать переменные dep_time, dep_delay, arr_time и arr_delay.
 2.  Что случится, если Вы включите одну и ту же переменную несколько раз в запрос функции select()?
 
-```{r}
-# Напишите Ваш код или комментарии здесь.
-```
 
 ## Создаем новую переменную с функцией mutate()
 
