@@ -16,7 +16,6 @@ title: "Импорт и экспорт данных"
 Session - Set Working Directory - To Source File Location
 :::
 
-
 ![](images/ImportExport/read-excel-files.png)
 
 Импортировать данные из файла Excel можно несколькими способами.

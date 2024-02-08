@@ -202,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lesson8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span></a>
+  <a href="./Base_ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Основы визуализации в ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -489,7 +489,7 @@ $dist
 <li><code>...</code>: другие аргументы, которые мы можем передать функции.</li>
 </ul>
 <p>В процессе анализа данных очень часто возникает необходимость подсчета каких-либо показателей, например, посчитать средние значения в группах наблюдений, образованных на основе каких-либо характеристик. Примеры: проанализировать средний уровень доходов в зависимости от региона, страны, социального статуса и т.д.</p>
-<p>Чтобы понять, как это работает, давайе воспользумся датасетом <code>iris</code>, встроенным в базовый R, содержащий измерения 4 параметров (ширина и длина лепестков и чашелистников) у 50 цветков ирисов, принадлежащих к трем различным видам - setosa, versicolor и virginica:</p>
+<p>Чтобы понять, как это работает, давайте воспользумся датасетом <code>iris</code>, встроенным в базовый R, содержащий измерения 4 параметров (ширина и длина лепестков и чашелистников) у 150 цветков ирисов, принадлежащих к трем различным видам (по 50 каждого вида) - iris setosa (ирис щетинистый, iris versicolor (ирис разноцветный) и iris virginica (ирис виргинский):</p>
 <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRScUmZqCyTspdxKSXGiS_BJKZdp9M059v-7eLoA2fs&amp;s.png" class="img-fluid"></p>
 <p>Это хорошо известный в сфере машинного обучения набор данных, который в используется, например, для иллюстрации того, как можно разработать модели, позволяющие предсказать принадлежность к одному из классов.</p>
 <p>Мы можем использовать функцию <code>tapply()</code>, чтобы посчитать медианные значения ширины чашелистника для каждого вида:</p>

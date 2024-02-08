@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lesson8.html" rel="next">
+<link href="./Base_ggplot2.html" rel="next">
 <link href="./ImportExport.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -202,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lesson8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span></a>
+  <a href="./Base_ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Основы визуализации в ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -246,10 +246,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#упорядочение-строк-с-функцией-arrange" id="toc-упорядочение-строк-с-функцией-arrange" class="nav-link" data-scroll-target="#упорядочение-строк-с-функцией-arrange"><span class="header-section-number">7.4</span> Упорядочение строк с функцией arrange()</a></li>
   <li><a href="#отбор-переменных-с-функцией-select" id="toc-отбор-переменных-с-функцией-select" class="nav-link" data-scroll-target="#отбор-переменных-с-функцией-select"><span class="header-section-number">7.5</span> Отбор переменных с функцией select()</a></li>
   <li><a href="#создаем-новую-переменную-с-функцией-mutate" id="toc-создаем-новую-переменную-с-функцией-mutate" class="nav-link" data-scroll-target="#создаем-новую-переменную-с-функцией-mutate"><span class="header-section-number">7.6</span> Создаем новую переменную с функцией mutate()</a></li>
-  <li><a href="#самостоятельное-задание" id="toc-самостоятельное-задание" class="nav-link" data-scroll-target="#самостоятельное-задание"><span class="header-section-number">7.7</span> Самостоятельное задание:</a></li>
-  <li><a href="#анализ-по-группам-с-функциями-summarise-и-group_by" id="toc-анализ-по-группам-с-функциями-summarise-и-group_by" class="nav-link" data-scroll-target="#анализ-по-группам-с-функциями-summarise-и-group_by"><span class="header-section-number">7.8</span> Анализ по группам с функциями <code>summarise()</code> и <code>group_by()</code></a></li>
+  <li><a href="#изменения-в-нескольких-переменных-mutate-across" id="toc-изменения-в-нескольких-переменных-mutate-across" class="nav-link" data-scroll-target="#изменения-в-нескольких-переменных-mutate-across"><span class="header-section-number">7.7</span> Изменения в нескольких переменных: mutate + across</a></li>
+  <li><a href="#вычисление-основных-статистик-с-функцией-summarise-и-group_by" id="toc-вычисление-основных-статистик-с-функцией-summarise-и-group_by" class="nav-link" data-scroll-target="#вычисление-основных-статистик-с-функцией-summarise-и-group_by"><span class="header-section-number">7.8</span> Вычисление основных статистик с функцией <code>summarise()</code> и <code>group_by()</code></a></li>
   <li><a href="#сочетание-нескольких-трансформаций-mutate-filter-summarise" id="toc-сочетание-нескольких-трансформаций-mutate-filter-summarise" class="nav-link" data-scroll-target="#сочетание-нескольких-трансформаций-mutate-filter-summarise"><span class="header-section-number">7.9</span> Сочетание нескольких трансформаций (mutate, filter, summarise)</a></li>
-  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">7.10</span> Самостоятельная работа</a></li>
+  <li><a href="#создание-новых-переменных-из-старых-по-условиям-if_else-и-case_when" id="toc-создание-новых-переменных-из-старых-по-условиям-if_else-и-case_when" class="nav-link" data-scroll-target="#создание-новых-переменных-из-старых-по-условиям-if_else-и-case_when"><span class="header-section-number">7.10</span> Создание новых переменных из старых по условиям: <code>if_else()</code> и <code>case_when()</code></a>
+  <ul class="collapse">
+  <li><a href="#if_else" id="toc-if_else" class="nav-link" data-scroll-target="#if_else"><span class="header-section-number">7.10.1</span> if_else()</a></li>
+  <li><a href="#case_when" id="toc-case_when" class="nav-link" data-scroll-target="#case_when"><span class="header-section-number">7.10.2</span> <code>case_when()</code></a></li>
+  </ul></li>
+  <li><a href="#между-широким-и-длинным-форматом" id="toc-между-широким-и-длинным-форматом" class="nav-link" data-scroll-target="#между-широким-и-длинным-форматом"><span class="header-section-number">7.11</span> Между «широким» и «длинным» форматом</a>
+  <ul class="collapse">
+  <li><a href="#случай-1.-из-широкого-в-длинное" id="toc-случай-1.-из-широкого-в-длинное" class="nav-link" data-scroll-target="#случай-1.-из-широкого-в-длинное"><span class="header-section-number">7.11.1</span> Случай 1. Из «широкого» в «длинное»</a></li>
+  <li><a href="#случай-2-из-длинного-в-широкий-формат" id="toc-случай-2-из-длинного-в-широкий-формат" class="nav-link" data-scroll-target="#случай-2-из-длинного-в-широкий-формат"><span class="header-section-number">7.11.2</span> Случай 2: из «длинного» в «широкий» формат</a></li>
+  </ul></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">7.12</span> Самостоятельная работа</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/TidyverseTransformations.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
     </div>
@@ -307,16 +317,16 @@ Tidyverse - все нужные библиотеки в одном месте!
 <p><strong>Tidy</strong> по-английски означает “чистый, аккуратный, опрятный”. По отношению к данным выражение - tidy data - “чистые, правильным образом представленные данные” противопоставляется “messy data” - “грязным данным”, представленным в виде, не совсем пригодном или удобном для анализа.</p>
 <p><code>Tidy data</code> - это когда данные имеют так называемый “длинный формат” - каждый столбец представляет собой отдельную переменную, а строка - наблюдение или случай.</p>
 <p><img src="https://www.researchgate.net/publication/338569186/figure/fig1/AS:847073150775297@1578969385585/The-wide-versus-tidy-data-format-for-time-dependent-data-In-the-wide-spreadsheet-like.png" class="img-fluid" width="400"></p>
-<p>Как из «грязных» данных сделать чистые? Как привести набор данных к виду, пригодному для дальнейшего анализа, отобрать нужные переменные, преобразовать их в формат, который нужен для решения аналитической задачи?</p>
+<p>Как из «грязных» данных сделать «чистые»? Как привести набор данных к виду, пригодному для дальнейшего анализа, отобрать нужные переменные, преобразовать их в формат, который нужен для решения аналитической задачи?</p>
 <p>В рамках данного раздела будут рассмотрены функции, которые используются для трансформации данных - их чистки, фильтрации, вычисления новых переменных и описательных статистик, а также перевода набора данных из «широкого» в «длинный» и обратно.</p>
 <p>В основном мы будем работать с двумя библиотеками семейства <code>tidyverse</code> - <code>dplyr</code> и <code>tidyr</code>.</p>
 <p><img src="https://dplyr.tidyverse.org/logo.png" class="img-fluid">, <img src="https://tidyr.tidyverse.org/logo.png" class="img-fluid"></p>
 <p>Эти библиотеки является одними из лучших для разнообразных трансформаций данных, потребность в которых возникает постоянно в процессе анализа.</p>
-<p>Рассмотрим основные функции библиотек на примере набора данных <code>flights</code> из библиотеки - <code>nycflights13</code>, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу <code>?flights</code>.</p>
+<p>Рассмотрим основные функции на примере набора данных <code>flights</code> из библиотеки - <code>nycflights13</code>, в котором содержится информация о 336 776 полетах, совершенных из аэропорта Нью-Йорка в 2013 году. Данные предоставлены Бюро по статистике США, справку по ним можно найти по запросу <code>?flights</code>.</p>
 </section>
 <section id="фильтрация-строк---filter" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="фильтрация-строк---filter"><span class="header-section-number">7.2</span> Фильтрация строк - filter()</h2>
-<p>Установим библиотеки:</p>
+<p>Прежде, чем начать, установим библиотеки:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"nycflights13"</span>, <span class="st">"tidyverse"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -423,7 +433,7 @@ Tidyverse - все нужные библиотеки в одном месте!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>##Запомним основные операторы:</p>
+<p><strong>Запомним основные операторы</strong></p>
 <p><strong>&amp;</strong> это “и”</p>
 <p><strong>|</strong> это “или”</p>
 <p><strong>!</strong> “не равно”</p>
@@ -683,10 +693,10 @@ Tidyverse - все нужные библиотеки в одном месте!
 <section id="создаем-новую-переменную-с-функцией-mutate" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="создаем-новую-переменную-с-функцией-mutate"><span class="header-section-number">7.6</span> Создаем новую переменную с функцией mutate()</h2>
 <p>Да, сейчас явно что-то будет про мутации)))</p>
-<p>Помимо того, что в процессе анализа нам приходится что-то постоянно отбирать (например, только жителей сел или городов, какой-то регион исследования, лиц определенного возраста и пола), частенько приходится вычислять новые переменные на основе старых - высчитывать возраст, средний доход, количество детей и т. д.</p>
+<p>Помимо того, что в процессе анализа нам приходится что-то постоянно отбирать (например, только жителей сел или городов, какой-то регион исследования, лиц определенного возраста и пола), часто приходится вычислять новые переменные на основе старых - высчитывать возраст, средний доход, количество детей и т. д.</p>
 <p>В этом нам может помочь функция <code>mutate()</code>.</p>
 <p>Важно: новые переменные могут быть созданы только на основе тех, которые уже есть в вашем наборе.</p>
-<p>Пример: создадим новый набор <code>flights_sml</code>, куда отберем переменные даты полета, расстояние и переменные, оканчивающиеся на “delay”. Затем, содадим две новых переменных: - скорость (speed) - количество минут, которые самолет смог догнать при задержке рейса (как разность между задержкой вылета и прилета) (gain).</p>
+<p>Пример: создадим новый набор <code>flights_sml</code>, куда отберем даты полета, расстояние и переменные, оканчивающиеся на “delay”. Затем, содадим две новых переменных: - скорость (speed) - количество минут, которые самолет смог догнать при задержке рейса (как разность между задержкой вылета и прилета) (gain).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>flights_sml <span class="ot">&lt;-</span> <span class="fu">select</span>(flights,</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  year<span class="sc">:</span>day,</span>
@@ -740,126 +750,767 @@ Tidyverse - все нужные библиотеки в одном месте!
 # ℹ 1 more variable: gain_per_hour &lt;dbl&gt;</code></pre>
 </div>
 </div>
-</section>
-<section id="самостоятельное-задание" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="самостоятельное-задание"><span class="header-section-number">7.7</span> Самостоятельное задание:</h2>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>:</p>
 <ol type="1">
-<li>Сравните air_time и arr_time - dep_time. Что мы можем увидеть? Какие выводы сделать?</li>
-<li>Сравните dep_time, sched_dep_time и dep_delay. Как эти переменные связаны друг с другом?</li>
+<li>Сравните <code>air_time` и `arr_time - dep_time</code>. Что мы можем увидеть? Какие выводы сделать?</li>
+<li>Сравните <code>dep_time</code>, <code>sched_dep_time</code> и <code>dep_delay</code>. Как эти переменные связаны друг с другом?</li>
+<li>На основе уже знакомого нам набора <code>iris</code> создайте новую переменную - <code>sepal_ratio</code>, в которой посчитайте отношение длины чашелистника (<code>Sepal.Length</code>) к его ширине (<code>Sepal.Width</code>) и переменную <code>petal_ratio</code>, в которой посчитайте отношение длины лепестка (<code>Petal.Length</code>) к его ширине (<code>Petal.Width</code>).</li>
 </ol>
 </section>
-<section id="анализ-по-группам-с-функциями-summarise-и-group_by" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="анализ-по-группам-с-функциями-summarise-и-group_by"><span class="header-section-number">7.8</span> Анализ по группам с функциями <code>summarise()</code> и <code>group_by()</code></h2>
-<p>Последняя функция, которую мы изучим в рамках данного урока, <code>summarise()</code>. Как следует из названия, ее предназначение - рассчитывать какие-то новые значения на основе разнообразных функций - арифметических, статистических и др. Например, посчитаем среднее количество минут задержки вылета:</p>
+<section id="изменения-в-нескольких-переменных-mutate-across" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="изменения-в-нескольких-переменных-mutate-across"><span class="header-section-number">7.7</span> Изменения в нескольких переменных: mutate + across</h2>
+<p>Функция <code>mutate()</code> не обязательно означает, что мы будем вычислять новые переменные, вполне возможно мы будем как-то видоизменять те переменные, которые у нас уже есть в наборе данных. Например, мы хотим округлить значение только что полученных нами переменных <code>sepal_ratio</code> <code>petal_ratio</code> (см. самостоятельная работа выше, упражнение 3) до двух знаков после запятой.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="co">#na.rm = TRUE - данный аргумент удаляет из анализа все пропущенные значения (na - not avaliable, rm - remove), в противном случае вычисление среднего не возможно.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(iris, <span class="fu">across</span>(<span class="fu">c</span>(sepal_ratio, petal_ratio), round))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species sepal_ratio
+1            5.1         3.5          1.4         0.2     setosa           1
+2            4.9         3.0          1.4         0.2     setosa           2
+3            4.7         3.2          1.3         0.2     setosa           1
+4            4.6         3.1          1.5         0.2     setosa           1
+5            5.0         3.6          1.4         0.2     setosa           1
+6            5.4         3.9          1.7         0.4     setosa           1
+7            4.6         3.4          1.4         0.3     setosa           1
+8            5.0         3.4          1.5         0.2     setosa           1
+9            4.4         2.9          1.4         0.2     setosa           2
+10           4.9         3.1          1.5         0.1     setosa           2
+11           5.4         3.7          1.5         0.2     setosa           1
+12           4.8         3.4          1.6         0.2     setosa           1
+13           4.8         3.0          1.4         0.1     setosa           2
+14           4.3         3.0          1.1         0.1     setosa           1
+15           5.8         4.0          1.2         0.2     setosa           1
+16           5.7         4.4          1.5         0.4     setosa           1
+17           5.4         3.9          1.3         0.4     setosa           1
+18           5.1         3.5          1.4         0.3     setosa           1
+19           5.7         3.8          1.7         0.3     setosa           2
+20           5.1         3.8          1.5         0.3     setosa           1
+21           5.4         3.4          1.7         0.2     setosa           2
+22           5.1         3.7          1.5         0.4     setosa           1
+23           4.6         3.6          1.0         0.2     setosa           1
+24           5.1         3.3          1.7         0.5     setosa           2
+25           4.8         3.4          1.9         0.2     setosa           1
+26           5.0         3.0          1.6         0.2     setosa           2
+27           5.0         3.4          1.6         0.4     setosa           1
+28           5.2         3.5          1.5         0.2     setosa           1
+29           5.2         3.4          1.4         0.2     setosa           2
+30           4.7         3.2          1.6         0.2     setosa           1
+31           4.8         3.1          1.6         0.2     setosa           2
+32           5.4         3.4          1.5         0.4     setosa           2
+33           5.2         4.1          1.5         0.1     setosa           1
+34           5.5         4.2          1.4         0.2     setosa           1
+35           4.9         3.1          1.5         0.2     setosa           2
+36           5.0         3.2          1.2         0.2     setosa           2
+37           5.5         3.5          1.3         0.2     setosa           2
+38           4.9         3.6          1.4         0.1     setosa           1
+39           4.4         3.0          1.3         0.2     setosa           1
+40           5.1         3.4          1.5         0.2     setosa           2
+41           5.0         3.5          1.3         0.3     setosa           1
+42           4.5         2.3          1.3         0.3     setosa           2
+43           4.4         3.2          1.3         0.2     setosa           1
+44           5.0         3.5          1.6         0.6     setosa           1
+45           5.1         3.8          1.9         0.4     setosa           1
+46           4.8         3.0          1.4         0.3     setosa           2
+47           5.1         3.8          1.6         0.2     setosa           1
+48           4.6         3.2          1.4         0.2     setosa           1
+49           5.3         3.7          1.5         0.2     setosa           1
+50           5.0         3.3          1.4         0.2     setosa           2
+51           7.0         3.2          4.7         1.4 versicolor           2
+52           6.4         3.2          4.5         1.5 versicolor           2
+53           6.9         3.1          4.9         1.5 versicolor           2
+54           5.5         2.3          4.0         1.3 versicolor           2
+55           6.5         2.8          4.6         1.5 versicolor           2
+56           5.7         2.8          4.5         1.3 versicolor           2
+57           6.3         3.3          4.7         1.6 versicolor           2
+58           4.9         2.4          3.3         1.0 versicolor           2
+59           6.6         2.9          4.6         1.3 versicolor           2
+60           5.2         2.7          3.9         1.4 versicolor           2
+61           5.0         2.0          3.5         1.0 versicolor           2
+62           5.9         3.0          4.2         1.5 versicolor           2
+63           6.0         2.2          4.0         1.0 versicolor           3
+64           6.1         2.9          4.7         1.4 versicolor           2
+65           5.6         2.9          3.6         1.3 versicolor           2
+66           6.7         3.1          4.4         1.4 versicolor           2
+67           5.6         3.0          4.5         1.5 versicolor           2
+68           5.8         2.7          4.1         1.0 versicolor           2
+69           6.2         2.2          4.5         1.5 versicolor           3
+70           5.6         2.5          3.9         1.1 versicolor           2
+71           5.9         3.2          4.8         1.8 versicolor           2
+72           6.1         2.8          4.0         1.3 versicolor           2
+73           6.3         2.5          4.9         1.5 versicolor           3
+74           6.1         2.8          4.7         1.2 versicolor           2
+75           6.4         2.9          4.3         1.3 versicolor           2
+76           6.6         3.0          4.4         1.4 versicolor           2
+77           6.8         2.8          4.8         1.4 versicolor           2
+78           6.7         3.0          5.0         1.7 versicolor           2
+79           6.0         2.9          4.5         1.5 versicolor           2
+80           5.7         2.6          3.5         1.0 versicolor           2
+81           5.5         2.4          3.8         1.1 versicolor           2
+82           5.5         2.4          3.7         1.0 versicolor           2
+83           5.8         2.7          3.9         1.2 versicolor           2
+84           6.0         2.7          5.1         1.6 versicolor           2
+85           5.4         3.0          4.5         1.5 versicolor           2
+86           6.0         3.4          4.5         1.6 versicolor           2
+87           6.7         3.1          4.7         1.5 versicolor           2
+88           6.3         2.3          4.4         1.3 versicolor           3
+89           5.6         3.0          4.1         1.3 versicolor           2
+90           5.5         2.5          4.0         1.3 versicolor           2
+91           5.5         2.6          4.4         1.2 versicolor           2
+92           6.1         3.0          4.6         1.4 versicolor           2
+93           5.8         2.6          4.0         1.2 versicolor           2
+94           5.0         2.3          3.3         1.0 versicolor           2
+95           5.6         2.7          4.2         1.3 versicolor           2
+96           5.7         3.0          4.2         1.2 versicolor           2
+97           5.7         2.9          4.2         1.3 versicolor           2
+98           6.2         2.9          4.3         1.3 versicolor           2
+99           5.1         2.5          3.0         1.1 versicolor           2
+100          5.7         2.8          4.1         1.3 versicolor           2
+101          6.3         3.3          6.0         2.5  virginica           2
+102          5.8         2.7          5.1         1.9  virginica           2
+103          7.1         3.0          5.9         2.1  virginica           2
+104          6.3         2.9          5.6         1.8  virginica           2
+105          6.5         3.0          5.8         2.2  virginica           2
+106          7.6         3.0          6.6         2.1  virginica           3
+107          4.9         2.5          4.5         1.7  virginica           2
+108          7.3         2.9          6.3         1.8  virginica           3
+109          6.7         2.5          5.8         1.8  virginica           3
+110          7.2         3.6          6.1         2.5  virginica           2
+111          6.5         3.2          5.1         2.0  virginica           2
+112          6.4         2.7          5.3         1.9  virginica           2
+113          6.8         3.0          5.5         2.1  virginica           2
+114          5.7         2.5          5.0         2.0  virginica           2
+115          5.8         2.8          5.1         2.4  virginica           2
+116          6.4         3.2          5.3         2.3  virginica           2
+117          6.5         3.0          5.5         1.8  virginica           2
+118          7.7         3.8          6.7         2.2  virginica           2
+119          7.7         2.6          6.9         2.3  virginica           3
+120          6.0         2.2          5.0         1.5  virginica           3
+121          6.9         3.2          5.7         2.3  virginica           2
+122          5.6         2.8          4.9         2.0  virginica           2
+123          7.7         2.8          6.7         2.0  virginica           3
+124          6.3         2.7          4.9         1.8  virginica           2
+125          6.7         3.3          5.7         2.1  virginica           2
+126          7.2         3.2          6.0         1.8  virginica           2
+127          6.2         2.8          4.8         1.8  virginica           2
+128          6.1         3.0          4.9         1.8  virginica           2
+129          6.4         2.8          5.6         2.1  virginica           2
+130          7.2         3.0          5.8         1.6  virginica           2
+131          7.4         2.8          6.1         1.9  virginica           3
+132          7.9         3.8          6.4         2.0  virginica           2
+133          6.4         2.8          5.6         2.2  virginica           2
+134          6.3         2.8          5.1         1.5  virginica           2
+135          6.1         2.6          5.6         1.4  virginica           2
+136          7.7         3.0          6.1         2.3  virginica           3
+137          6.3         3.4          5.6         2.4  virginica           2
+138          6.4         3.1          5.5         1.8  virginica           2
+139          6.0         3.0          4.8         1.8  virginica           2
+140          6.9         3.1          5.4         2.1  virginica           2
+141          6.7         3.1          5.6         2.4  virginica           2
+142          6.9         3.1          5.1         2.3  virginica           2
+143          5.8         2.7          5.1         1.9  virginica           2
+144          6.8         3.2          5.9         2.3  virginica           2
+145          6.7         3.3          5.7         2.5  virginica           2
+146          6.7         3.0          5.2         2.3  virginica           2
+147          6.3         2.5          5.0         1.9  virginica           3
+148          6.5         3.0          5.2         2.0  virginica           2
+149          6.2         3.4          5.4         2.3  virginica           2
+150          5.9         3.0          5.1         1.8  virginica           2
+    petal_ratio
+1             7
+2             7
+3             6
+4             8
+5             7
+6             4
+7             5
+8             8
+9             7
+10           15
+11            8
+12            8
+13           14
+14           11
+15            6
+16            4
+17            3
+18            5
+19            6
+20            5
+21            8
+22            4
+23            5
+24            3
+25            9
+26            8
+27            4
+28            8
+29            7
+30            8
+31            8
+32            4
+33           15
+34            7
+35            8
+36            6
+37            6
+38           14
+39            6
+40            8
+41            4
+42            4
+43            6
+44            3
+45            5
+46            5
+47            8
+48            7
+49            8
+50            7
+51            3
+52            3
+53            3
+54            3
+55            3
+56            3
+57            3
+58            3
+59            4
+60            3
+61            4
+62            3
+63            4
+64            3
+65            3
+66            3
+67            3
+68            4
+69            3
+70            4
+71            3
+72            3
+73            3
+74            4
+75            3
+76            3
+77            3
+78            3
+79            3
+80            4
+81            3
+82            4
+83            3
+84            3
+85            3
+86            3
+87            3
+88            3
+89            3
+90            3
+91            4
+92            3
+93            3
+94            3
+95            3
+96            4
+97            3
+98            3
+99            3
+100           3
+101           2
+102           3
+103           3
+104           3
+105           3
+106           3
+107           3
+108           4
+109           3
+110           2
+111           3
+112           3
+113           3
+114           2
+115           2
+116           2
+117           3
+118           3
+119           3
+120           3
+121           2
+122           2
+123           3
+124           3
+125           3
+126           3
+127           3
+128           3
+129           3
+130           4
+131           3
+132           3
+133           3
+134           3
+135           4
+136           3
+137           2
+138           3
+139           3
+140           3
+141           2
+142           2
+143           3
+144           3
+145           2
+146           2
+147           3
+148           3
+149           2
+150           3</code></pre>
+</div>
+</div>
+<p>Мы могли бы написать наш код чуть по-другому:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(sepal_ratio, petal_ratio), round))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species sepal_ratio
+1            5.1         3.5          1.4         0.2     setosa           1
+2            4.9         3.0          1.4         0.2     setosa           2
+3            4.7         3.2          1.3         0.2     setosa           1
+4            4.6         3.1          1.5         0.2     setosa           1
+5            5.0         3.6          1.4         0.2     setosa           1
+6            5.4         3.9          1.7         0.4     setosa           1
+7            4.6         3.4          1.4         0.3     setosa           1
+8            5.0         3.4          1.5         0.2     setosa           1
+9            4.4         2.9          1.4         0.2     setosa           2
+10           4.9         3.1          1.5         0.1     setosa           2
+11           5.4         3.7          1.5         0.2     setosa           1
+12           4.8         3.4          1.6         0.2     setosa           1
+13           4.8         3.0          1.4         0.1     setosa           2
+14           4.3         3.0          1.1         0.1     setosa           1
+15           5.8         4.0          1.2         0.2     setosa           1
+16           5.7         4.4          1.5         0.4     setosa           1
+17           5.4         3.9          1.3         0.4     setosa           1
+18           5.1         3.5          1.4         0.3     setosa           1
+19           5.7         3.8          1.7         0.3     setosa           2
+20           5.1         3.8          1.5         0.3     setosa           1
+21           5.4         3.4          1.7         0.2     setosa           2
+22           5.1         3.7          1.5         0.4     setosa           1
+23           4.6         3.6          1.0         0.2     setosa           1
+24           5.1         3.3          1.7         0.5     setosa           2
+25           4.8         3.4          1.9         0.2     setosa           1
+26           5.0         3.0          1.6         0.2     setosa           2
+27           5.0         3.4          1.6         0.4     setosa           1
+28           5.2         3.5          1.5         0.2     setosa           1
+29           5.2         3.4          1.4         0.2     setosa           2
+30           4.7         3.2          1.6         0.2     setosa           1
+31           4.8         3.1          1.6         0.2     setosa           2
+32           5.4         3.4          1.5         0.4     setosa           2
+33           5.2         4.1          1.5         0.1     setosa           1
+34           5.5         4.2          1.4         0.2     setosa           1
+35           4.9         3.1          1.5         0.2     setosa           2
+36           5.0         3.2          1.2         0.2     setosa           2
+37           5.5         3.5          1.3         0.2     setosa           2
+38           4.9         3.6          1.4         0.1     setosa           1
+39           4.4         3.0          1.3         0.2     setosa           1
+40           5.1         3.4          1.5         0.2     setosa           2
+41           5.0         3.5          1.3         0.3     setosa           1
+42           4.5         2.3          1.3         0.3     setosa           2
+43           4.4         3.2          1.3         0.2     setosa           1
+44           5.0         3.5          1.6         0.6     setosa           1
+45           5.1         3.8          1.9         0.4     setosa           1
+46           4.8         3.0          1.4         0.3     setosa           2
+47           5.1         3.8          1.6         0.2     setosa           1
+48           4.6         3.2          1.4         0.2     setosa           1
+49           5.3         3.7          1.5         0.2     setosa           1
+50           5.0         3.3          1.4         0.2     setosa           2
+51           7.0         3.2          4.7         1.4 versicolor           2
+52           6.4         3.2          4.5         1.5 versicolor           2
+53           6.9         3.1          4.9         1.5 versicolor           2
+54           5.5         2.3          4.0         1.3 versicolor           2
+55           6.5         2.8          4.6         1.5 versicolor           2
+56           5.7         2.8          4.5         1.3 versicolor           2
+57           6.3         3.3          4.7         1.6 versicolor           2
+58           4.9         2.4          3.3         1.0 versicolor           2
+59           6.6         2.9          4.6         1.3 versicolor           2
+60           5.2         2.7          3.9         1.4 versicolor           2
+61           5.0         2.0          3.5         1.0 versicolor           2
+62           5.9         3.0          4.2         1.5 versicolor           2
+63           6.0         2.2          4.0         1.0 versicolor           3
+64           6.1         2.9          4.7         1.4 versicolor           2
+65           5.6         2.9          3.6         1.3 versicolor           2
+66           6.7         3.1          4.4         1.4 versicolor           2
+67           5.6         3.0          4.5         1.5 versicolor           2
+68           5.8         2.7          4.1         1.0 versicolor           2
+69           6.2         2.2          4.5         1.5 versicolor           3
+70           5.6         2.5          3.9         1.1 versicolor           2
+71           5.9         3.2          4.8         1.8 versicolor           2
+72           6.1         2.8          4.0         1.3 versicolor           2
+73           6.3         2.5          4.9         1.5 versicolor           3
+74           6.1         2.8          4.7         1.2 versicolor           2
+75           6.4         2.9          4.3         1.3 versicolor           2
+76           6.6         3.0          4.4         1.4 versicolor           2
+77           6.8         2.8          4.8         1.4 versicolor           2
+78           6.7         3.0          5.0         1.7 versicolor           2
+79           6.0         2.9          4.5         1.5 versicolor           2
+80           5.7         2.6          3.5         1.0 versicolor           2
+81           5.5         2.4          3.8         1.1 versicolor           2
+82           5.5         2.4          3.7         1.0 versicolor           2
+83           5.8         2.7          3.9         1.2 versicolor           2
+84           6.0         2.7          5.1         1.6 versicolor           2
+85           5.4         3.0          4.5         1.5 versicolor           2
+86           6.0         3.4          4.5         1.6 versicolor           2
+87           6.7         3.1          4.7         1.5 versicolor           2
+88           6.3         2.3          4.4         1.3 versicolor           3
+89           5.6         3.0          4.1         1.3 versicolor           2
+90           5.5         2.5          4.0         1.3 versicolor           2
+91           5.5         2.6          4.4         1.2 versicolor           2
+92           6.1         3.0          4.6         1.4 versicolor           2
+93           5.8         2.6          4.0         1.2 versicolor           2
+94           5.0         2.3          3.3         1.0 versicolor           2
+95           5.6         2.7          4.2         1.3 versicolor           2
+96           5.7         3.0          4.2         1.2 versicolor           2
+97           5.7         2.9          4.2         1.3 versicolor           2
+98           6.2         2.9          4.3         1.3 versicolor           2
+99           5.1         2.5          3.0         1.1 versicolor           2
+100          5.7         2.8          4.1         1.3 versicolor           2
+101          6.3         3.3          6.0         2.5  virginica           2
+102          5.8         2.7          5.1         1.9  virginica           2
+103          7.1         3.0          5.9         2.1  virginica           2
+104          6.3         2.9          5.6         1.8  virginica           2
+105          6.5         3.0          5.8         2.2  virginica           2
+106          7.6         3.0          6.6         2.1  virginica           3
+107          4.9         2.5          4.5         1.7  virginica           2
+108          7.3         2.9          6.3         1.8  virginica           3
+109          6.7         2.5          5.8         1.8  virginica           3
+110          7.2         3.6          6.1         2.5  virginica           2
+111          6.5         3.2          5.1         2.0  virginica           2
+112          6.4         2.7          5.3         1.9  virginica           2
+113          6.8         3.0          5.5         2.1  virginica           2
+114          5.7         2.5          5.0         2.0  virginica           2
+115          5.8         2.8          5.1         2.4  virginica           2
+116          6.4         3.2          5.3         2.3  virginica           2
+117          6.5         3.0          5.5         1.8  virginica           2
+118          7.7         3.8          6.7         2.2  virginica           2
+119          7.7         2.6          6.9         2.3  virginica           3
+120          6.0         2.2          5.0         1.5  virginica           3
+121          6.9         3.2          5.7         2.3  virginica           2
+122          5.6         2.8          4.9         2.0  virginica           2
+123          7.7         2.8          6.7         2.0  virginica           3
+124          6.3         2.7          4.9         1.8  virginica           2
+125          6.7         3.3          5.7         2.1  virginica           2
+126          7.2         3.2          6.0         1.8  virginica           2
+127          6.2         2.8          4.8         1.8  virginica           2
+128          6.1         3.0          4.9         1.8  virginica           2
+129          6.4         2.8          5.6         2.1  virginica           2
+130          7.2         3.0          5.8         1.6  virginica           2
+131          7.4         2.8          6.1         1.9  virginica           3
+132          7.9         3.8          6.4         2.0  virginica           2
+133          6.4         2.8          5.6         2.2  virginica           2
+134          6.3         2.8          5.1         1.5  virginica           2
+135          6.1         2.6          5.6         1.4  virginica           2
+136          7.7         3.0          6.1         2.3  virginica           3
+137          6.3         3.4          5.6         2.4  virginica           2
+138          6.4         3.1          5.5         1.8  virginica           2
+139          6.0         3.0          4.8         1.8  virginica           2
+140          6.9         3.1          5.4         2.1  virginica           2
+141          6.7         3.1          5.6         2.4  virginica           2
+142          6.9         3.1          5.1         2.3  virginica           2
+143          5.8         2.7          5.1         1.9  virginica           2
+144          6.8         3.2          5.9         2.3  virginica           2
+145          6.7         3.3          5.7         2.5  virginica           2
+146          6.7         3.0          5.2         2.3  virginica           2
+147          6.3         2.5          5.0         1.9  virginica           3
+148          6.5         3.0          5.2         2.0  virginica           2
+149          6.2         3.4          5.4         2.3  virginica           2
+150          5.9         3.0          5.1         1.8  virginica           2
+    petal_ratio
+1             7
+2             7
+3             6
+4             8
+5             7
+6             4
+7             5
+8             8
+9             7
+10           15
+11            8
+12            8
+13           14
+14           11
+15            6
+16            4
+17            3
+18            5
+19            6
+20            5
+21            8
+22            4
+23            5
+24            3
+25            9
+26            8
+27            4
+28            8
+29            7
+30            8
+31            8
+32            4
+33           15
+34            7
+35            8
+36            6
+37            6
+38           14
+39            6
+40            8
+41            4
+42            4
+43            6
+44            3
+45            5
+46            5
+47            8
+48            7
+49            8
+50            7
+51            3
+52            3
+53            3
+54            3
+55            3
+56            3
+57            3
+58            3
+59            4
+60            3
+61            4
+62            3
+63            4
+64            3
+65            3
+66            3
+67            3
+68            4
+69            3
+70            4
+71            3
+72            3
+73            3
+74            4
+75            3
+76            3
+77            3
+78            3
+79            3
+80            4
+81            3
+82            4
+83            3
+84            3
+85            3
+86            3
+87            3
+88            3
+89            3
+90            3
+91            4
+92            3
+93            3
+94            3
+95            3
+96            4
+97            3
+98            3
+99            3
+100           3
+101           2
+102           3
+103           3
+104           3
+105           3
+106           3
+107           3
+108           4
+109           3
+110           2
+111           3
+112           3
+113           3
+114           2
+115           2
+116           2
+117           3
+118           3
+119           3
+120           3
+121           2
+122           2
+123           3
+124           3
+125           3
+126           3
+127           3
+128           3
+129           3
+130           4
+131           3
+132           3
+133           3
+134           3
+135           4
+136           3
+137           2
+138           3
+139           3
+140           3
+141           2
+142           2
+143           3
+144           3
+145           2
+146           2
+147           3
+148           3
+149           2
+150           3</code></pre>
+</div>
+</div>
+<div class="callout-info">
+<p>Стоп! Что за новый знак %&gt;%?</p>
+<p>Это оператор, который позволяет сократить код и написать его по типу “матрешки”. По-английски это называется “pipe-operator”, здесь явная аналогия с телескопическими трубами, которые как бы вкладываются друг с другом. Так и наши различные функции dplyr следуют друг за другом уже без лиших аргументов и дублирования информации о наборе данных, лишних скобок и знаков $, с помощью которых мы вводим имя переменной из набора. Код становится более читаемым и быстрым.</p>
+</div>
+<p>Графически это можно представить вот так:</p>
+<p><img src="https://i0.wp.com/www.rforecology.com/pipes_image0.png" class="img-fluid"> В <code>dplyr</code> оператор <code>%&gt;%</code> попал из библиотеки <code>magrittr</code>, разработчики которой (Stefan Milton Bache, Hadley Wickham, Lionel Henry) преследовали две основных цели - сократить процесс написания кода и улучить его поддержку.</p>
+<p>Названа библиотека в честь бельгийского художника-сюрреалиста Рене Магритта (1898-1967), который был известен своими остроумными и загадочными работами.</p>
+<p><img src="https://www.marcianocontemporary.com/wp-content/uploads/2022/02/rene-magritte-surrealiste-4094.jpeg" class="img-fluid"> Причем тут трубы, спросите вы? А вот причем. У Магритта есть одна знаменитая картина – «Вероломство образов», которую автор создал в 1929 году, увлекшись исследованием связи в искусстве между словами и образами. На картине изображена курительная трубка, выглядит она очень правдоподобно и нарисована тщательно. Вдоль нижней кромки полотна идет надпись, сделанная крупным каллиграфическим почерком: «Ceci n’est pas une pipe» - «Это не трубка». Картина породила множество интерпретаций, а сам автор по поводу нее сказал следующее: «Разве я написал неправду? Да, на картине нарисована трубка, но разве вы можете раскурить ее? Нет, потому что это всего лишь репрезентация. И если бы я написал “Это - трубка”, то я бы солгал!».</p>
+<p><img src="https://arthive.net/res/media/img/oy800/work/3b9/295282@2x.webp" class="img-fluid"> В общем, разработчики отдали дань творчеству автора, и в языке R появился новый оператор.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Чтобы быстро набрать пайп-оператор нужно одновременно нажать три клавиши:</p>
+<p><strong>Ctrl+Shift+M</strong></p>
+</div>
+</div>
+<p>Начиная с версии R 4.1.0. в базовом R появился свой, «нативный» оператор, почти аналогичный <code>%&gt;%</code>. Выглядит он как <code>|&lt;</code> и “ведет себя” почти всегда так же. Есть некоторые нюансы, однако обсуждать мы их пока не будем. В качестве дополнительного матерала для тех, кто хочет действительно разобраться, отсылаю к статье: https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/</p>
+<p>В настройках RStudio можно указать, какой именно операторв вы хотите использовать, но только один: <img src="https://i.stack.imgur.com/wx9mN.png" class="img-fluid"></p>
+</section>
+<section id="вычисление-основных-статистик-с-функцией-summarise-и-group_by" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="вычисление-основных-статистик-с-функцией-summarise-и-group_by"><span class="header-section-number">7.8</span> Вычисление основных статистик с функцией <code>summarise()</code> и <code>group_by()</code></h2>
+<p>Еще одна функция, которую мы изучим в рамках данного урока, – <code>summarise()</code>. Как следует из названия, ее предназначение - рассчитывать какие-то новые значения на основе разнообразных функций - арифметических, статистических и др. Например, посчитаем среднее количество минут задержки вылета по набору полетов:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">dep_delay_mean =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="co">#na.rm = TRUE - данный аргумент удаляет из анализа все пропущенные значения (na - not avaliable, rm - remove), в противном случае вычисление среднего не возможно.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
-  delay
-  &lt;dbl&gt;
-1  12.6</code></pre>
+  dep_delay_mean
+           &lt;dbl&gt;
+1           12.6</code></pre>
 </div>
 </div>
 <p>Функция <code>summarise()</code> часто идет в паре с другой функцией - <code>group_by()</code>, позволяющей провести анализ в отдельных подгруппах. Соответственно, когда мы применяем функции dplyr к сгруппированным данным, они автоматически рассчитываются для каждой подгруппы по отдельности. Например, мы можем применить код из примера выше, но предварительно сгруппировать данные по месяцам. Получится следующее:</p>
-<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:475}">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">dep_delay_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 2
-   month delay
-   &lt;int&gt; &lt;dbl&gt;
- 1     1 10.0 
- 2     2 10.8 
- 3     3 13.2 
- 4     4 13.9 
- 5     5 13.0 
- 6     6 20.8 
- 7     7 21.7 
- 8     8 12.6 
- 9     9  6.72
-10    10  6.24
-11    11  5.44
-12    12 16.6 </code></pre>
+   month dep_delay_delay
+   &lt;int&gt;           &lt;dbl&gt;
+ 1     1           10.0 
+ 2     2           10.8 
+ 3     3           13.2 
+ 4     4           13.9 
+ 5     5           13.0 
+ 6     6           20.8 
+ 7     7           21.7 
+ 8     8           12.6 
+ 9     9            6.72
+10    10            6.24
+11    11            5.44
+12    12           16.6 </code></pre>
 </div>
 </div>
-<table class="table">
-<tbody>
-<tr class="odd">
-<td>Стоп! Что за новый знак %&gt;%?</td>
-</tr>
-</tbody>
-</table>
-<p>Это оператор, который позволяет сократить код и написать его по типу “матрешки”. По-английски это называется “pipe-operator”, здесь явная аналогия с телескопическими трубами, которые собираются вместе путем нехитрой сборки. Так и наши различные функции dplyr следуют друг за другом уже без лиших аргументов и дублирования информации о наборе данных, лишних скобок и знаков $, с помощью которых мы вводим имя переменной из набора. Код становится более читаемым и быстрым.</p>
-<p>Графически это можно представить вот так:</p>
-<p><img src="https://i0.wp.com/www.rforecology.com/pipes_image0.png?w=584&amp;ssl=1" class="img-fluid"></p>
-<p>Приведем еще один пример: в наборе по полетам проведем группировку по месту назначения и посчитаем общее количество полетов, среднее расстояние и среднюю задержку рейсов в минутах, а также отфильтруем дни, в которых было более 20 полетов. И все это - в нескольких строчках кода:</p>
-<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>delays <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">20</span>, dest <span class="sc">!=</span> <span class="st">"HNL"</span>)</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>delays</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Приведем еще один пример совместного использования функций: проведем группировку по месту назначения и посчитаем общее количество полетов, среднее расстояние и среднюю задержку рейсов в минутах:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>delays <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    Всего <span class="ot">=</span> <span class="fu">n</span>(),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    Сред_расст <span class="ot">=</span> <span class="fu">mean</span>(distance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    Ср_задержка <span class="ot">=</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>delays</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 96 × 4
-   dest  count  dist delay
-   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 ABQ     254 1826   4.38
- 2 ACK     265  199   4.85
- 3 ALB     439  143  14.4 
- 4 ATL   17215  757. 11.3 
- 5 AUS    2439 1514.  6.02
- 6 AVL     275  584.  8.00
- 7 BDL     443  116   7.05
- 8 BGR     375  378   8.03
- 9 BHM     297  866. 16.9 
-10 BNA    6333  758. 11.8 
-# ℹ 86 more rows</code></pre>
+<pre><code># A tibble: 105 × 4
+   dest  Всего Сред_расст Ср_задержка
+   &lt;chr&gt; &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+ 1 ABQ     254      1826         4.38
+ 2 ACK     265       199         4.85
+ 3 ALB     439       143        14.4 
+ 4 ANC       8      3370        -2.5 
+ 5 ATL   17215       757.       11.3 
+ 6 AUS    2439      1514.        6.02
+ 7 AVL     275       584.        8.00
+ 8 BDL     443       116         7.05
+ 9 BGR     375       378         8.03
+10 BHM     297       866.       16.9 
+# ℹ 95 more rows</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Другие полезные функции: - median() - медиана - sd() - стандартное отклонение - min() - минимум - max() - максимум - first() - первое значение - nth() - значение определенного порядка (2, 3 и т.д.) - last() - последнее - n() - количество, размер группы - n_distinct() - количество уникальных значений</p>
-<p>Например:</p>
-<div class="cell" data-colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="co">#na.omit() - опускает пропущенные значения</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(year, month, day) <span class="sc">%&gt;%</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">first_dep =</span> <span class="fu">first</span>(dep_time),</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">last_dep =</span> <span class="fu">last</span>(dep_time)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'year', 'month'. You can override using the
-`.groups` argument.</code></pre>
 </div>
+</div>
+<p>Например:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> <span class="co">#na.omit() - опускает пропущенные значения</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(month) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">first_dep =</span> <span class="fu">first</span>(dep_time),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">last_dep =</span> <span class="fu">last</span>(dep_time)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 365 × 5
-# Groups:   year, month [12]
-    year month   day first_dep last_dep
-   &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;int&gt;    &lt;int&gt;
- 1  2013     1     1       517     2356
- 2  2013     1     2        42     2354
- 3  2013     1     3        32     2349
- 4  2013     1     4        25     2358
- 5  2013     1     5        14     2357
- 6  2013     1     6        16     2355
- 7  2013     1     7        49     2359
- 8  2013     1     8       454     2351
- 9  2013     1     9         2     2252
-10  2013     1    10         3     2320
-# ℹ 355 more rows</code></pre>
+<pre><code># A tibble: 12 × 3
+   month first_dep last_dep
+   &lt;int&gt;     &lt;int&gt;    &lt;int&gt;
+ 1     1       517     2354
+ 2     2       456     2359
+ 3     3         4     2358
+ 4     4       454     2351
+ 5     5         9     2355
+ 6     6         2     2359
+ 7     7         1     2352
+ 8     8        12     2359
+ 9     9         9     2349
+10    10       447     2357
+11    11         5     2354
+12    12        13     2356</code></pre>
 </div>
 </div>
 <p>Еще пример: сгруппируем полеты по месту назначения и посчитаем уникальных перевозчиков, отсортировав нашу таблицу по месту назначения.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">carriers =</span> <span class="fu">n_distinct</span>(carrier)) <span class="sc">%&gt;%</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(carriers))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">carriers =</span> <span class="fu">n_distinct</span>(carrier)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(carriers))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 104 × 2
    dest  carriers
@@ -880,41 +1531,472 @@ Tidyverse - все нужные библиотеки в одном месте!
 </section>
 <section id="сочетание-нескольких-трансформаций-mutate-filter-summarise" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="сочетание-нескольких-трансформаций-mutate-filter-summarise"><span class="header-section-number">7.9</span> Сочетание нескольких трансформаций (mutate, filter, summarise)</h2>
-<p>Группировка обычно сопутствует функции summarise(),но ее также можно сочетать с mutate() и filter():</p>
-<p>Например, мы хотим найти наиболее популярные направления:</p>
+<p>Группировка обычно сопутствует функции <code>summarise()</code>,но ее также можно сочетать с <code>mutate()</code> и <code>filter()</code>:</p>
+<p>Например, мы хотим оставить в наболе данные только по наиболее популярным направлениям, принявшим не менее 5000 полетов за год:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>popular_dests <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">365</span>)</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>popular_dests</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>()<span class="sc">&gt;</span><span class="dv">5000</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 332,577 × 19
-# Groups:   dest [77]
+<pre><code># A tibble: 226,948 × 19
+# Groups:   dest [22]
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
  1  2013     1     1      517            515         2      830            819
  2  2013     1     1      533            529         4      850            830
  3  2013     1     1      542            540         2      923            850
- 4  2013     1     1      544            545        -1     1004           1022
- 5  2013     1     1      554            600        -6      812            837
- 6  2013     1     1      554            558        -4      740            728
- 7  2013     1     1      555            600        -5      913            854
- 8  2013     1     1      557            600        -3      709            723
- 9  2013     1     1      557            600        -3      838            846
-10  2013     1     1      558            600        -2      753            745
-# ℹ 332,567 more rows
+ 4  2013     1     1      554            600        -6      812            837
+ 5  2013     1     1      554            558        -4      740            728
+ 6  2013     1     1      555            600        -5      913            854
+ 7  2013     1     1      557            600        -3      709            723
+ 8  2013     1     1      557            600        -3      838            846
+ 9  2013     1     1      558            600        -2      753            745
+10  2013     1     1      558            600        -2      849            851
+# ℹ 226,938 more rows
 # ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
-</section>
-<section id="самостоятельная-работа" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">7.10</span> Самостоятельная работа</h2>
-<p>Для каждого направления посчитайте общее количество минут задержки рейсов.</p>
+<p>Или, например, нам понадобилось посчитать по каждому направлению среднее количество полетов и сохранить его в переменной <code>mean</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Напишите свой код здесь.</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean=</span><span class="fu">mean</span>(<span class="fu">n</span>()), <span class="at">.keep =</span> <span class="st">"used"</span>) <span class="co">#.keep = "used" - оставляет в наборе только используемые переменные, в противном случае останется весь набор</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 2
+# Groups:   dest [105]
+   dest   mean
+   &lt;chr&gt; &lt;dbl&gt;
+ 1 IAH    7198
+ 2 IAH    7198
+ 3 MIA   11728
+ 4 BQN     896
+ 5 ATL   17215
+ 6 ORD   17283
+ 7 FLL   12055
+ 8 IAD    5700
+ 9 MCO   14082
+10 ORD   17283
+# ℹ 336,766 more rows</code></pre>
 </div>
+</div>
+</section>
+<section id="создание-новых-переменных-из-старых-по-условиям-if_else-и-case_when" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="создание-новых-переменных-из-старых-по-условиям-if_else-и-case_when"><span class="header-section-number">7.10</span> Создание новых переменных из старых по условиям: <code>if_else()</code> и <code>case_when()</code></h2>
+<p>Такого рода перекодировки в исследовательской практике встречаются очень часто, когда мы хотим объединить некоторые значения в группы или заменить на другие значения. В решении этой задачи нам помогут две полезные функции: <code>if_else()</code>и <code>case_when()</code>.</p>
+<section id="if_else" class="level3" data-number="7.10.1">
+<h3 data-number="7.10.1" class="anchored" data-anchor-id="if_else"><span class="header-section-number">7.10.1</span> if_else()</h3>
+<p>Эта функция позволяет нам перекодировать значения, совпадающие или несовпадающие с некоторым условием, и одновременно обрабатывать отсутствующие значения. Для того, чтобы корректно применить эту функцию, нам нужно знать, какое значение в наших данных будет условно «истинным, корректным», какое «ложным, неправильным», и какое значение будут принимать пропущенные значения.</p>
+<p>Общая формула для этой функции выглядит так:</p>
+<p><code>if_else(condition, true, false, missing = NULL)</code></p>
+<p>В аргументах функции задается следующее: <code>condition</code> - условие, которое мы проверяем <code>true</code> - значение, которое присваиваем, если условие выполняется <code>false</code>- значение, которое присваиваем, если условие не выполняется.</p>
+<p>Приведем простой пример: Создадим вектор <code>x</code>, содержащий значения от -10 до +10, а затем все положительные значения заменим на 555:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">555</span>, x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -10  -9  -8  -7  -6  -5  -4  -3  -2  -1   0 555 555 555 555 555 555 555 555
+[20] 555 555</code></pre>
+</div>
+</div>
+<p>Конструкция <code>if_else()</code> очень часто используется вместе с <code>mutate()</code>для того, чтобы создать новые переменные.</p>
+<p>Давайте создадим по набору <code>iris</code> новую переменную - <code>sepal_group</code>, которую перекодируем следующим образом: если значение <code>Sepal.Length</code> равно превышает среднее значение по всем наблюдениям - 1, если меньше - 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sepal_group =</span> <span class="fu">if_else</span>(Sepal.Length <span class="sc">&gt;=</span> <span class="fu">mean</span>(Sepal.Length), <span class="dv">1</span>, <span class="dv">0</span>), <span class="at">.keep =</span> <span class="st">"used"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length sepal_group
+1            5.1           0
+2            4.9           0
+3            4.7           0
+4            4.6           0
+5            5.0           0
+6            5.4           0
+7            4.6           0
+8            5.0           0
+9            4.4           0
+10           4.9           0
+11           5.4           0
+12           4.8           0
+13           4.8           0
+14           4.3           0
+15           5.8           0
+16           5.7           0
+17           5.4           0
+18           5.1           0
+19           5.7           0
+20           5.1           0
+21           5.4           0
+22           5.1           0
+23           4.6           0
+24           5.1           0
+25           4.8           0
+26           5.0           0
+27           5.0           0
+28           5.2           0
+29           5.2           0
+30           4.7           0
+31           4.8           0
+32           5.4           0
+33           5.2           0
+34           5.5           0
+35           4.9           0
+36           5.0           0
+37           5.5           0
+38           4.9           0
+39           4.4           0
+40           5.1           0
+41           5.0           0
+42           4.5           0
+43           4.4           0
+44           5.0           0
+45           5.1           0
+46           4.8           0
+47           5.1           0
+48           4.6           0
+49           5.3           0
+50           5.0           0
+51           7.0           1
+52           6.4           1
+53           6.9           1
+54           5.5           0
+55           6.5           1
+56           5.7           0
+57           6.3           1
+58           4.9           0
+59           6.6           1
+60           5.2           0
+61           5.0           0
+62           5.9           1
+63           6.0           1
+64           6.1           1
+65           5.6           0
+66           6.7           1
+67           5.6           0
+68           5.8           0
+69           6.2           1
+70           5.6           0
+71           5.9           1
+72           6.1           1
+73           6.3           1
+74           6.1           1
+75           6.4           1
+76           6.6           1
+77           6.8           1
+78           6.7           1
+79           6.0           1
+80           5.7           0
+81           5.5           0
+82           5.5           0
+83           5.8           0
+84           6.0           1
+85           5.4           0
+86           6.0           1
+87           6.7           1
+88           6.3           1
+89           5.6           0
+90           5.5           0
+91           5.5           0
+92           6.1           1
+93           5.8           0
+94           5.0           0
+95           5.6           0
+96           5.7           0
+97           5.7           0
+98           6.2           1
+99           5.1           0
+100          5.7           0
+101          6.3           1
+102          5.8           0
+103          7.1           1
+104          6.3           1
+105          6.5           1
+106          7.6           1
+107          4.9           0
+108          7.3           1
+109          6.7           1
+110          7.2           1
+111          6.5           1
+112          6.4           1
+113          6.8           1
+114          5.7           0
+115          5.8           0
+116          6.4           1
+117          6.5           1
+118          7.7           1
+119          7.7           1
+120          6.0           1
+121          6.9           1
+122          5.6           0
+123          7.7           1
+124          6.3           1
+125          6.7           1
+126          7.2           1
+127          6.2           1
+128          6.1           1
+129          6.4           1
+130          7.2           1
+131          7.4           1
+132          7.9           1
+133          6.4           1
+134          6.3           1
+135          6.1           1
+136          7.7           1
+137          6.3           1
+138          6.4           1
+139          6.0           1
+140          6.9           1
+141          6.7           1
+142          6.9           1
+143          5.8           0
+144          6.8           1
+145          6.7           1
+146          6.7           1
+147          6.3           1
+148          6.5           1
+149          6.2           1
+150          5.9           1</code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>:</p>
+<p>1.Создайте аналогичным образом переменную <code>petal_group</code>. 2. Перекодируйте переменную <code>petal_group</code> с помощью <code>if_else()</code> так, чтобы 1 стало “Больше среднего”, а 0 - “Меньше среднего”.</p>
+</section>
+<section id="case_when" class="level3" data-number="7.10.2">
+<h3 data-number="7.10.2" class="anchored" data-anchor-id="case_when"><span class="header-section-number">7.10.2</span> <code>case_when()</code></h3>
+<p>Когда условий несколько, можно использовать вложенные конструкции <code>if_else()</code>, но это не очень удобно. Вместо это лучше использовать специальную функцию <code>case_when()</code>, которая как раз предназначена для таких случаев.</p>
+<p>Допустим, нам нужно перекодировать полеты из набора <code>flights</code> в зависимости от расстояния (<code>dist</code>)и создать переменную <code>dist_group</code>, в которой бы все полеты были бы распределены по четырем категориям: “менее 500 миль”, “от 500 до 1000 миль”, “от 1000 до 1500 миль” и “свыше 1500 миль”. Получается, что нам нужно сверить множество условий, и, значит, это работа для <code>case_when ()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dist_group=</span>  <span class="fu">case_when</span>(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  distance <span class="sc">&lt;</span> <span class="dv">500</span> <span class="sc">~</span> <span class="st">"менее 500 миль"</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">between</span>(distance, <span class="dv">501</span>, <span class="dv">1000</span>) <span class="sc">~</span> <span class="st">"от 500 до 1000 миль"</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">between</span>(distance, <span class="dv">1001</span>, <span class="dv">1500</span>) <span class="sc">~</span> <span class="st">"от 1000 до 1500 миль"</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  distance <span class="sc">&gt;</span> <span class="dv">1500</span> <span class="sc">~</span> <span class="st">"свыше 1500 миль"</span>), <span class="at">.keep=</span><span class="st">"used"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 2
+   distance dist_group          
+      &lt;dbl&gt; &lt;chr&gt;               
+ 1     1400 от 1000 до 1500 миль
+ 2     1416 от 1000 до 1500 миль
+ 3     1089 от 1000 до 1500 миль
+ 4     1576 свыше 1500 миль     
+ 5      762 от 500 до 1000 миль 
+ 6      719 от 500 до 1000 миль 
+ 7     1065 от 1000 до 1500 миль
+ 8      229 менее 500 миль      
+ 9      944 от 500 до 1000 миль 
+10      733 от 500 до 1000 миль 
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>:</p>
+<ol type="1">
+<li>По набору <code>iris</code> создайте переменную sepal4cats, в которой бы содержались следующие значение о длине чашелистника: “Меньше 5,0”, “от 5,1 до 5.8”, “от 5.9 до 6.4” и “свыше 6.5”.</li>
+<li>Посчитайте количество ирисов в каждой группе.</li>
+</ol>
+</section>
+</section>
+<section id="между-широким-и-длинным-форматом" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="между-широким-и-длинным-форматом"><span class="header-section-number">7.11</span> Между «широким» и «длинным» форматом</h2>
+<p>Последнее, чем мы займемся в рамках данной темы, будет преобразование из «широкого» в «длинный» формат и обратно.</p>
+<section id="случай-1.-из-широкого-в-длинное" class="level3" data-number="7.11.1">
+<h3 data-number="7.11.1" class="anchored" data-anchor-id="случай-1.-из-широкого-в-длинное"><span class="header-section-number">7.11.1</span> Случай 1. Из «широкого» в «длинное»</h3>
+<p>Иногда случается так, что данные представлены в виде двумерной таблицы, уже подготовленной для описания, но такие данные не очень подходят для дальнейшего анализа.</p>
+<p>Например, давайте посмотрим на таблицу взаимосвязей между уровнем дохода и религиозной принадлежностью:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>relig_income</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 11
+   religion `&lt;$10k` `$10-20k` `$20-30k` `$30-40k` `$40-50k` `$50-75k` `$75-100k`
+   &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Agnostic      27        34        60        81        76       137        122
+ 2 Atheist       12        27        37        52        35        70         73
+ 3 Buddhist      27        21        30        34        33        58         62
+ 4 Catholic     418       617       732       670       638      1116        949
+ 5 Don’t k…      15        14        15        11        10        35         21
+ 6 Evangel…     575       869      1064       982       881      1486        949
+ 7 Hindu          1         9         7         9        11        34         47
+ 8 Histori…     228       244       236       238       197       223        131
+ 9 Jehovah…      20        27        24        24        21        30         15
+10 Jewish        19        19        25        25        30        95         69
+11 Mainlin…     289       495       619       655       651      1107        939
+12 Mormon        29        40        48        51        56       112         85
+13 Muslim         6         7         9        10         9        23         16
+14 Orthodox      13        17        23        32        32        47         38
+15 Other C…       9         7        11        13        13        14         18
+16 Other F…      20        33        40        46        49        63         46
+17 Other W…       5         2         3         4         2         7          3
+18 Unaffil…     217       299       374       365       341       528        407
+# ℹ 3 more variables: `$100-150k` &lt;dbl&gt;, `&gt;150k` &lt;dbl&gt;,
+#   `Don't know/refused` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Функция <code>pivot_longer()</code> приведет данные в более удобоваримый вид:</p>
+<p>Комментарии: - <code>cols</code>- на основе каких переменных мы “переворачиваем” данные - <code>names_to</code> - как будет называться новая переменная (или переменные, если их несколько) - <code>values_to</code>- как будет называться переменная, содержащая частоту</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>relig_income <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">!</span>religion, </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"income"</span>, </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"count"</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 180 × 3
+   religion income             count
+   &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
+ 1 Agnostic &lt;$10k                 27
+ 2 Agnostic $10-20k               34
+ 3 Agnostic $20-30k               60
+ 4 Agnostic $30-40k               81
+ 5 Agnostic $40-50k               76
+ 6 Agnostic $50-75k              137
+ 7 Agnostic $75-100k             122
+ 8 Agnostic $100-150k            109
+ 9 Agnostic &gt;150k                 84
+10 Agnostic Don't know/refused    96
+# ℹ 170 more rows</code></pre>
+</div>
+</div>
+<p>Давайте посмотрим на еще один вариант:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>billboard</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 79
+   artist     track date.entered   wk1   wk2   wk3   wk4   wk5   wk6   wk7   wk8
+   &lt;chr&gt;      &lt;chr&gt; &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac      Baby… 2000-02-26      87    82    72    77    87    94    99    NA
+ 2 2Ge+her    The … 2000-09-02      91    87    92    NA    NA    NA    NA    NA
+ 3 3 Doors D… Kryp… 2000-04-08      81    70    68    67    66    57    54    53
+ 4 3 Doors D… Loser 2000-10-21      76    76    72    69    67    65    55    59
+ 5 504 Boyz   Wobb… 2000-04-15      57    34    25    17    17    31    36    49
+ 6 98^0       Give… 2000-08-19      51    39    34    26    26    19     2     2
+ 7 A*Teens    Danc… 2000-07-08      97    97    96    95   100    NA    NA    NA
+ 8 Aaliyah    I Do… 2000-01-29      84    62    51    41    38    35    35    38
+ 9 Aaliyah    Try … 2000-03-18      59    53    38    28    21    18    16    14
+10 Adams, Yo… Open… 2000-08-26      76    76    74    69    68    67    61    58
+# ℹ 307 more rows
+# ℹ 68 more variables: wk9 &lt;dbl&gt;, wk10 &lt;dbl&gt;, wk11 &lt;dbl&gt;, wk12 &lt;dbl&gt;,
+#   wk13 &lt;dbl&gt;, wk14 &lt;dbl&gt;, wk15 &lt;dbl&gt;, wk16 &lt;dbl&gt;, wk17 &lt;dbl&gt;, wk18 &lt;dbl&gt;,
+#   wk19 &lt;dbl&gt;, wk20 &lt;dbl&gt;, wk21 &lt;dbl&gt;, wk22 &lt;dbl&gt;, wk23 &lt;dbl&gt;, wk24 &lt;dbl&gt;,
+#   wk25 &lt;dbl&gt;, wk26 &lt;dbl&gt;, wk27 &lt;dbl&gt;, wk28 &lt;dbl&gt;, wk29 &lt;dbl&gt;, wk30 &lt;dbl&gt;,
+#   wk31 &lt;dbl&gt;, wk32 &lt;dbl&gt;, wk33 &lt;dbl&gt;, wk34 &lt;dbl&gt;, wk35 &lt;dbl&gt;, wk36 &lt;dbl&gt;,
+#   wk37 &lt;dbl&gt;, wk38 &lt;dbl&gt;, wk39 &lt;dbl&gt;, wk40 &lt;dbl&gt;, wk41 &lt;dbl&gt;, wk42 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Это данные о песнях их ротации по радиостанциям и о занимаемой позиции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>billboard <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"week"</span>, </span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rank"</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,307 × 5
+   artist  track                   date.entered week   rank
+   &lt;chr&gt;   &lt;chr&gt;                   &lt;date&gt;       &lt;chr&gt; &lt;dbl&gt;
+ 1 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk1      87
+ 2 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk2      82
+ 3 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk3      72
+ 4 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk4      77
+ 5 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk5      87
+ 6 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk6      94
+ 7 2 Pac   Baby Don't Cry (Keep... 2000-02-26   wk7      99
+ 8 2Ge+her The Hardest Part Of ... 2000-09-02   wk1      91
+ 9 2Ge+her The Hardest Part Of ... 2000-09-02   wk2      87
+10 2Ge+her The Hardest Part Of ... 2000-09-02   wk3      92
+# ℹ 5,297 more rows</code></pre>
+</div>
+</div>
+<p>Нам возможно было бы интересно, сколько недель какой-либо трек продержался в чарте, но для этого нужно превратить неделю из строковой переменной в числовую. Это можно сделать следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>billboard <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"week"</span>, </span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_transform =</span> readr<span class="sc">::</span>parse_number,</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rank"</span>,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5,307 × 5
+   artist  track                   date.entered  week  rank
+   &lt;chr&gt;   &lt;chr&gt;                   &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac   Baby Don't Cry (Keep... 2000-02-26       1    87
+ 2 2 Pac   Baby Don't Cry (Keep... 2000-02-26       2    82
+ 3 2 Pac   Baby Don't Cry (Keep... 2000-02-26       3    72
+ 4 2 Pac   Baby Don't Cry (Keep... 2000-02-26       4    77
+ 5 2 Pac   Baby Don't Cry (Keep... 2000-02-26       5    87
+ 6 2 Pac   Baby Don't Cry (Keep... 2000-02-26       6    94
+ 7 2 Pac   Baby Don't Cry (Keep... 2000-02-26       7    99
+ 8 2Ge+her The Hardest Part Of ... 2000-09-02       1    91
+ 9 2Ge+her The Hardest Part Of ... 2000-09-02       2    87
+10 2Ge+her The Hardest Part Of ... 2000-09-02       3    92
+# ℹ 5,297 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="случай-2-из-длинного-в-широкий-формат" class="level3" data-number="7.11.2">
+<h3 data-number="7.11.2" class="anchored" data-anchor-id="случай-2-из-длинного-в-широкий-формат"><span class="header-section-number">7.11.2</span> Случай 2: из «длинного» в «широкий» формат</h3>
+<p>Функция <code>pivot_wider()</code> является противоположной <code>pivot_longer()</code>: она расширяет набор данных за счет создания новых столбцов и сокращения количества строк. Например, это может быть полезно для написания отчетов или создания презентаций.</p>
+<p>Чтобы посмотреть на эту функцию в действии, давайте создадим “длинные” данные из <a href="https://allisonhorst.github.io/palmerpenguins/">набора о пингвинах</a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>penguins_long <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span>  </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span>  </span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">contains</span>(<span class="st">"_"</span>),</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"part"</span>, <span class="st">"measure"</span> , <span class="st">"unit"</span>),</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>penguins_long</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,368 × 9
+   species island    sex     year sample part    measure unit   value
+   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt;
+ 1 Adelie  Torgersen male    2007      1 bill    length  mm      39.1
+ 2 Adelie  Torgersen male    2007      1 bill    depth   mm      18.7
+ 3 Adelie  Torgersen male    2007      1 flipper length  mm     181  
+ 4 Adelie  Torgersen male    2007      1 body    mass    g     3750  
+ 5 Adelie  Torgersen female  2007      2 bill    length  mm      39.5
+ 6 Adelie  Torgersen female  2007      2 bill    depth   mm      17.4
+ 7 Adelie  Torgersen female  2007      2 flipper length  mm     186  
+ 8 Adelie  Torgersen female  2007      2 body    mass    g     3800  
+ 9 Adelie  Torgersen female  2007      3 bill    length  mm      40.3
+10 Adelie  Torgersen female  2007      3 bill    depth   mm      18  
+# ℹ 1,358 more rows</code></pre>
+</div>
+</div>
+<p>А теперь превратим их в широкий формат:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>penguins_long <span class="sc">|&gt;</span> </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="fu">c</span>(<span class="st">"part"</span>, <span class="st">"measure"</span>, <span class="st">"unit"</span>),</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> value)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 9
+   species island    sex     year sample bill_length_mm bill_depth_mm
+   &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;  &lt;int&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1 Adelie  Torgersen male    2007      1           39.1          18.7
+ 2 Adelie  Torgersen female  2007      2           39.5          17.4
+ 3 Adelie  Torgersen female  2007      3           40.3          18  
+ 4 Adelie  Torgersen female  2007      5           36.7          19.3
+ 5 Adelie  Torgersen male    2007      6           39.3          20.6
+ 6 Adelie  Torgersen female  2007      7           38.9          17.8
+ 7 Adelie  Torgersen male    2007      8           39.2          19.6
+ 8 Adelie  Torgersen &lt;NA&gt;    2007      9           34.1          18.1
+ 9 Adelie  Torgersen &lt;NA&gt;    2007     10           42            20.2
+10 Adelie  Torgersen &lt;NA&gt;    2007     11           37.8          17.1
+# ℹ 332 more rows
+# ℹ 2 more variables: flipper_length_mm &lt;dbl&gt;, body_mass_g &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="самостоятельная-работа" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">7.12</span> Самостоятельная работа</h2>
+<p>Для каждого направления по набору <code>flights</code> посчитайте общее количество минут задержки рейсов.</p>
 
 
 </section>
@@ -1520,8 +2602,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lesson8.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Анализ одномерных распределений разного типа</span>">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Анализ одномерных распределений разного типа</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Base_ggplot2.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Основы визуализации в ggplot2</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Основы визуализации в ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
