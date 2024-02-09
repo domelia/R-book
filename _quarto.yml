@@ -34,4 +34,5 @@ format:
     css: include/webex.css
     include-after-body: include/webex.js
     embed-resources: false
+    code-overflow: wrap
 editor: visual
