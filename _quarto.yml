@@ -20,7 +20,7 @@ book:
   - ImportExport.qmd
   - TidyverseTransformations.qmd
   - Base_ggplot2.qmd
-  - lesson9.qmd
+  - ExploratoryDataAnalysis.qmd
   - lesson10.qmd
   - lesson12.qmd
   - lesson13.qmd
