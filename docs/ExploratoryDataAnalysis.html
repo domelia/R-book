@@ -285,7 +285,7 @@ window.Quarto = {
   <li><a href="#создание-таблиц-по-нескольким-переменным-возможности-библиотек-gtsummary-и-flextable" id="toc-создание-таблиц-по-нескольким-переменным-возможности-библиотек-gtsummary-и-flextable" class="nav-link" data-scroll-target="#создание-таблиц-по-нескольким-переменным-возможности-библиотек-gtsummary-и-flextable"><span class="header-section-number">9.3.2</span> Создание таблиц по нескольким переменным: возможности библиотек <code>gtsummary</code> и <code>flextable</code></a></li>
   <li><a href="#пример-анализа-вопроса-с-множественными-ответами" id="toc-пример-анализа-вопроса-с-множественными-ответами" class="nav-link" data-scroll-target="#пример-анализа-вопроса-с-множественными-ответами"><span class="header-section-number">9.3.3</span> Пример анализа вопроса с множественными ответами</a></li>
   <li><a href="#таблица-сопряженности-с-множественными-ответами" id="toc-таблица-сопряженности-с-множественными-ответами" class="nav-link" data-scroll-target="#таблица-сопряженности-с-множественными-ответами"><span class="header-section-number">9.3.4</span> Таблица сопряженности с множественными ответами</a></li>
-  <li><a href="#графики-для-категориальных-переменных" id="toc-графики-для-категориальных-переменных" class="nav-link" data-scroll-target="#графики-для-категориальных-переменных"><span class="header-section-number">9.3.5</span> графики для категориальных переменных</a></li>
+  <li><a href="#графики-для-категориальных-переменных" id="toc-графики-для-категориальных-переменных" class="nav-link" data-scroll-target="#графики-для-категориальных-переменных"><span class="header-section-number">9.3.5</span> Графики для категориальных переменных</a></li>
   </ul></li>
   <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">9.4</span> Самостоятельная работа</a></li>
   </ul>
@@ -725,7 +725,12 @@ attr(,"display_width")
 </section>
 <section id="статистические-тесты-для-выявления-аномалий" class="level4" data-number="9.2.3.2">
 <h4 data-number="9.2.3.2" class="anchored" data-anchor-id="статистические-тесты-для-выявления-аномалий"><span class="header-section-number">9.2.3.2</span> Статистические тесты для выявления аномалий</h4>
-<p>Кроме графических методов и механического отбора, нетипичные наблюдения можно выявлять и с помощью специальных тестов, например, таких как: - Тест Груббса - Тест Диксона - Тест Роснера</p>
+<p>Кроме графических методов и механического отбора, нетипичные наблюдения можно выявлять и с помощью специальных тестов, например, таких как:</p>
+<ul>
+<li>Тест Груббса</li>
+<li>Тест Диксона</li>
+<li>Тест Роснера</li>
+</ul>
 <p>Эти три статистических теста являются частью более формальных техник нахождения выбросов, так как они основаны на вычислении тестовой статистики, которая сопоставляется с табличными критическими значениями, основанными на объеме выборки и определяемого доверительного уровня).</p>
 <section id="grubbss-test" class="level5" data-number="9.2.3.2.1">
 <h5 data-number="9.2.3.2.1" class="anchored" data-anchor-id="grubbss-test"><span class="header-section-number">9.2.3.2.1</span> Grubbs’s test</h5>
@@ -1102,6 +1107,57 @@ Region
 4 Монголия             0     100  </code></pre>
 </div>
 </div>
+<p>Еще нам постоянно мешает это единственное наблюдение из Монголии. Давайте его уберем и пересчитаем все заново.</p>
+<p>Для начала отфильтруем переменную <code>Region</code> так, чтобы в нее входили все регионы, кроме Монголии:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Присоединяю пакет: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Следующий объект скрыт от 'package:kableExtra':
+
+    group_rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Следующие объекты скрыты от 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Следующие объекты скрыты от 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Region<span class="sc">!=</span><span class="st">"Монголия"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Попробуем сделать простую таблицу:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>Region, df<span class="sc">$</span>V1)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  
+                   Мужской Женский
+  Алтайский край        72     198
+  Республика Алтай     169     268
+  Республика Тыва       47     143
+  Монголия               0       0</code></pre>
+</div>
+</div>
+<p>Как видим, наблюдение мы удалили, но метка (уровень факторной переменной) осталась, и нам нужно его убрать. Сделать это можно с помощью функции <code>droplevels</code>. Удалим уровень и сделаем новую таблицу</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Region<span class="ot">&lt;-</span><span class="fu">droplevels</span>(df<span class="sc">$</span>Region)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>sjmisc<span class="sc">::</span><span class="fu">flat_table</span>(df, Region, V1, <span class="at">margin =</span> <span class="st">"row"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 V1 Мужской Женский
+Region                             
+Алтайский край        26.67   73.33
+Республика Алтай      38.67   61.33
+Республика Тыва       24.74   75.26</code></pre>
+</div>
+</div>
+<p>Все получилось!</p>
 <p>Между тем, очевидно, что для хорошей статьи (диссертации, отчета об исследовании) описания результатов частотного анализа недостаточно, требуется представлять результаты комплексно, сразу по нескольким переменным, часто с учетом группировки, и приводить доказательства значимости имеющихся различий на основе применения статистических методов.</p>
 </section>
 <section id="создание-таблиц-по-нескольким-переменным-возможности-библиотек-gtsummary-и-flextable" class="level3" data-number="9.3.2">
@@ -1110,38 +1166,38 @@ Region
 <li><strong>flextable</strong> – чудо-библиотека от Дэвида Гоэля - француза и сотрудника ArData, созданная специально для работы с таблицами и улучшения их отображения в различных форматах, в частности в Word и Power Point</li>
 <li><strong>gtsummary</strong> – библиотека для создания эффектных таблиц с описательными статистиками для научных публикаций</li>
 </ul>
-<p>Предположим, что для нашей будущей статьи, которую мы готовим по результатам исследования, мы хотим создать большую таблицу, содержащую распределения сразу по нескольким переменным, описывающим все важные демографические и социальные характеристики, такие как пол, возраст по группам, социальный статус, в том числе - с учетом региональных различий. Желательно также посчитать, являются ли эти различия значимыми, используя для этого критерий хи-квадрат Пирсона.</p>
-<p>Библиотека <code>gtsummary</code> была создана специально для того, чтобы быстро создавать гибкие с точки зрения форматирования таблицы с описательными статистиками и результатами регрессионного анализа, оформленные по стандартам для научных публикациий.</p>
+<p>Предположим, что для нашей будущей статьи, которую мы готовим по результатам исследования, мы хотим создать большую таблицу, содержащую распределения сразу по нескольким переменным, описывающим все важные демографические и социальные характеристики, такие как пол, возраст по группам, социальный статус, в том числе - с учетом региональных различий. Желательно также посчитать, являются ли эти различия значимыми, используя для этого критерий <span class="math inline">\(\chi^2\)</span> Пирсона.</p>
+<p>Библиотека <code>gtsummary</code> была создана специально для того, чтобы быстро создавать гибкие с точки зрения форматирования таблицы с описательными статистиками и результатами регрессионного анализа, оформленные по стандартам для научных публикаций.</p>
 <p>Настоятельно рекомендуется посетить сайт проекта и подробно ознакомиться с возможностями данной библиотеки. https://www.danieldsjoberg.com/gtsummary/index.html</p>
 <p>Для начала создадим общую таблицу, где в строках будут располагаться данные по возрасту, полу, региону проживания, социальному статусу, а также наличию гражданства другой страны.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtsummary") - убрать решетку и запустить строку</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="co">#вспоминаем урок по dplyr</span></span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>table<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Region, V1, age_cats3, V10, V6)  <span class="co">#отберем нужные переменные в отдельный сет и сохраним его под именем table</span></span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a><span class="co"># создадим таблицу</span></span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>table <span class="sc">%&gt;%</span> </span>
-<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">missing=</span><span class="st">"no"</span>) <span class="co">#функция tbl_summary позволяет создать комплексные таблицы</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtsummary") - убрать решетку и запустить строку</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co">#вспоминаем урок по dplyr</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>table<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Region, V1, age_cats3, V10, V6)  <span class="co">#отберем нужные переменные в отдельный сет и сохраним его под именем table</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="co"># создадим таблицу</span></span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>table <span class="sc">%&gt;%</span> </span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">missing=</span><span class="st">"no"</span>) <span class="co">#функция tbl_summary позволяет создать комплексные таблицы</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="hdpjvzuldx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hdpjvzuldx table {
+<div id="icovyratev" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#icovyratev table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hdpjvzuldx thead, #hdpjvzuldx tbody, #hdpjvzuldx tfoot, #hdpjvzuldx tr, #hdpjvzuldx td, #hdpjvzuldx th {
+#icovyratev thead, #icovyratev tbody, #icovyratev tfoot, #icovyratev tr, #icovyratev td, #icovyratev th {
   border-style: none;
 }
 
-#hdpjvzuldx p {
+#icovyratev p {
   margin: 0;
   padding: 0;
 }
 
-#hdpjvzuldx .gt_table {
+#icovyratev .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1167,12 +1223,12 @@ Region
   border-left-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_caption {
+#icovyratev .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hdpjvzuldx .gt_title {
+#icovyratev .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1184,7 +1240,7 @@ Region
   border-bottom-width: 0;
 }
 
-#hdpjvzuldx .gt_subtitle {
+#icovyratev .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1196,7 +1252,7 @@ Region
   border-top-width: 0;
 }
 
-#hdpjvzuldx .gt_heading {
+#icovyratev .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1208,13 +1264,13 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_bottom_border {
+#icovyratev .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_col_headings {
+#icovyratev .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1229,7 +1285,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_col_heading {
+#icovyratev .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1249,7 +1305,7 @@ Region
   overflow-x: hidden;
 }
 
-#hdpjvzuldx .gt_column_spanner_outer {
+#icovyratev .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1261,15 +1317,15 @@ Region
   padding-right: 4px;
 }
 
-#hdpjvzuldx .gt_column_spanner_outer:first-child {
+#icovyratev .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hdpjvzuldx .gt_column_spanner_outer:last-child {
+#icovyratev .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hdpjvzuldx .gt_column_spanner {
+#icovyratev .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1281,11 +1337,11 @@ Region
   width: 100%;
 }
 
-#hdpjvzuldx .gt_spanner_row {
+#icovyratev .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hdpjvzuldx .gt_group_heading {
+#icovyratev .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1311,7 +1367,7 @@ Region
   text-align: left;
 }
 
-#hdpjvzuldx .gt_empty_group_heading {
+#icovyratev .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1326,15 +1382,15 @@ Region
   vertical-align: middle;
 }
 
-#hdpjvzuldx .gt_from_md > :first-child {
+#icovyratev .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hdpjvzuldx .gt_from_md > :last-child {
+#icovyratev .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hdpjvzuldx .gt_row {
+#icovyratev .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1353,7 +1409,7 @@ Region
   overflow-x: hidden;
 }
 
-#hdpjvzuldx .gt_stub {
+#icovyratev .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1366,7 +1422,7 @@ Region
   padding-right: 5px;
 }
 
-#hdpjvzuldx .gt_stub_row_group {
+#icovyratev .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1380,15 +1436,15 @@ Region
   vertical-align: top;
 }
 
-#hdpjvzuldx .gt_row_group_first td {
+#icovyratev .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hdpjvzuldx .gt_row_group_first th {
+#icovyratev .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hdpjvzuldx .gt_summary_row {
+#icovyratev .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1398,16 +1454,16 @@ Region
   padding-right: 5px;
 }
 
-#hdpjvzuldx .gt_first_summary_row {
+#icovyratev .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_first_summary_row.thick {
+#icovyratev .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hdpjvzuldx .gt_last_summary_row {
+#icovyratev .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1417,7 +1473,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_grand_summary_row {
+#icovyratev .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1427,7 +1483,7 @@ Region
   padding-right: 5px;
 }
 
-#hdpjvzuldx .gt_first_grand_summary_row {
+#icovyratev .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1437,7 +1493,7 @@ Region
   border-top-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_last_grand_summary_row_top {
+#icovyratev .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1447,11 +1503,11 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_striped {
+#icovyratev .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hdpjvzuldx .gt_table_body {
+#icovyratev .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1460,7 +1516,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_footnotes {
+#icovyratev .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1474,7 +1530,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_footnote {
+#icovyratev .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1483,7 +1539,7 @@ Region
   padding-right: 5px;
 }
 
-#hdpjvzuldx .gt_sourcenotes {
+#icovyratev .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1497,7 +1553,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#hdpjvzuldx .gt_sourcenote {
+#icovyratev .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1505,63 +1561,63 @@ Region
   padding-right: 5px;
 }
 
-#hdpjvzuldx .gt_left {
+#icovyratev .gt_left {
   text-align: left;
 }
 
-#hdpjvzuldx .gt_center {
+#icovyratev .gt_center {
   text-align: center;
 }
 
-#hdpjvzuldx .gt_right {
+#icovyratev .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hdpjvzuldx .gt_font_normal {
+#icovyratev .gt_font_normal {
   font-weight: normal;
 }
 
-#hdpjvzuldx .gt_font_bold {
+#icovyratev .gt_font_bold {
   font-weight: bold;
 }
 
-#hdpjvzuldx .gt_font_italic {
+#icovyratev .gt_font_italic {
   font-style: italic;
 }
 
-#hdpjvzuldx .gt_super {
+#icovyratev .gt_super {
   font-size: 65%;
 }
 
-#hdpjvzuldx .gt_footnote_marks {
+#icovyratev .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hdpjvzuldx .gt_asterisk {
+#icovyratev .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hdpjvzuldx .gt_indent_1 {
+#icovyratev .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hdpjvzuldx .gt_indent_2 {
+#icovyratev .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hdpjvzuldx .gt_indent_3 {
+#icovyratev .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hdpjvzuldx .gt_indent_4 {
+#icovyratev .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hdpjvzuldx .gt_indent_5 {
+#icovyratev .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1574,12 +1630,12 @@ Region
 <thead>
 <tr class="header gt_col_headings">
 <th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="<strong>N = 913</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 913</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+<th id="<strong>N = 912</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 912</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">Регион</td>
+<td class="gt_row gt_left" headers="label">Region</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
@@ -1596,95 +1652,91 @@ Region
 <td class="gt_row gt_center" headers="stat_0">192 (21%)</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Монголия</td>
-<td class="gt_row gt_center" headers="stat_0">1 (0.1%)</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">Пол</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Мужской</td>
 <td class="gt_row gt_center" headers="stat_0">288 (32%)</td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Женский</td>
-<td class="gt_row gt_center" headers="stat_0">610 (68%)</td>
-</tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Женский</td>
+<td class="gt_row gt_center" headers="stat_0">609 (68%)</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="label">Возраст</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;До 30 лет</td>
 <td class="gt_row gt_center" headers="stat_0">160 (18%)</td>
 </tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;31-49 лет</td>
-<td class="gt_row gt_center" headers="stat_0">424 (48%)</td>
-</tr>
 <tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;31-49 лет</td>
+<td class="gt_row gt_center" headers="stat_0">423 (48%)</td>
+</tr>
+<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;50 лет и старше</td>
 <td class="gt_row gt_center" headers="stat_0">303 (34%)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="label">Каков уровень материального достатка Вашей семьи?</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем очень бедно, фактически голодаем, денег иногда не хватает даже на питание, имевшиеся ранее накопления кончились</td>
-<td class="gt_row gt_center" headers="stat_0">13 (1.4%)</td>
-</tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем очень бедно, фактически голодаем, денег иногда не хватает даже на питание, имевшиеся ранее накопления кончились</td>
+<td class="gt_row gt_center" headers="stat_0">13 (1.5%)</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем бедно, денег хватает только на скромное питание, оплату коммунальных услуг,</td>
 <td class="gt_row gt_center" headers="stat_0">51 (5.7%)</td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем средне, денег хватает на питание, недорогую одежду, крайне необходимые вещи и оплату коммунальных услуг,</td>
-<td class="gt_row gt_center" headers="stat_0">621 (69%)</td>
-</tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем средне, денег хватает на питание, недорогую одежду, крайне необходимые вещи и оплату коммунальных услуг,</td>
+<td class="gt_row gt_center" headers="stat_0">620 (69%)</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем достаточно обеспеченно, (есть денежные накопления и возможность покупать практически все необходимое для жизни)</td>
 <td class="gt_row gt_center" headers="stat_0">198 (22%)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Очень хорошо, богато (не отказываем себе ни в чем, денежные накопления постоянно прирастают)</td>
 <td class="gt_row gt_center" headers="stat_0">14 (1.6%)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="label">Какой у Вас САМЫЙ ВЫСОКИЙ уровень образования, по которому Вы получили аттестат, свидетельство, диплом?</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Основное общее образование (9 классов) или меньше</td>
 <td class="gt_row gt_center" headers="stat_0">52 (5.8%)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Среднее (полное) общее образование</td>
 <td class="gt_row gt_center" headers="stat_0">162 (18%)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Начальное или среднее профессиональное образование</td>
 <td class="gt_row gt_center" headers="stat_0">294 (33%)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Высшее образование (диплом специалиста, бакалавра или магистра)</td>
 <td class="gt_row gt_center" headers="stat_0">382 (42%)</td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Аспирантура, ординатура, ученая степень кандидата или доктора наук</td>
-<td class="gt_row gt_center" headers="stat_0">10 (1.1%)</td>
-</tr>
 <tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Аспирантура, ординатура, ученая степень кандидата или доктора наук</td>
+<td class="gt_row gt_center" headers="stat_0">9 (1.0%)</td>
+</tr>
+<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Другое</td>
 <td class="gt_row gt_center" headers="stat_0">1 (0.1%)</td>
 </tr>
 </tbody><tfoot class="gt_footnotes">
-<tr class="even">
+<tr class="odd">
 <td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
 </tr>
 </tfoot>
@@ -1696,31 +1748,31 @@ Region
 </div>
 <p>В принципе, очень неплохо. Добавим группировку по региону и поменяем заголовок у переменных с “Characteristic” на “Характеристику”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>table <span class="sc">%&gt;%</span> </span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by=</span>Region, <span class="at">missing=</span><span class="st">"no"</span>) <span class="sc">%&gt;%</span><span class="co">#by=V004 - так мы обозначаем группирующую переменную</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="co">#функция, позволяющая изменить заголовок</span></span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">update =</span> <span class="fu">list</span>(</span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>      label <span class="sc">~</span> <span class="st">"Характеристика"</span> <span class="co">#</span></span>
-<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>table <span class="sc">%&gt;%</span> </span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by=</span>Region, <span class="at">missing=</span><span class="st">"no"</span>) <span class="sc">%&gt;%</span><span class="co">#by=V004 - так мы обозначаем группирующую переменную</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="co">#функция, позволяющая изменить заголовок</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">update =</span> <span class="fu">list</span>(</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>      label <span class="sc">~</span> <span class="st">"Характеристика"</span> <span class="co">#</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="yrfqeunwzc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yrfqeunwzc table {
+<div id="crlekoctib" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#crlekoctib table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yrfqeunwzc thead, #yrfqeunwzc tbody, #yrfqeunwzc tfoot, #yrfqeunwzc tr, #yrfqeunwzc td, #yrfqeunwzc th {
+#crlekoctib thead, #crlekoctib tbody, #crlekoctib tfoot, #crlekoctib tr, #crlekoctib td, #crlekoctib th {
   border-style: none;
 }
 
-#yrfqeunwzc p {
+#crlekoctib p {
   margin: 0;
   padding: 0;
 }
 
-#yrfqeunwzc .gt_table {
+#crlekoctib .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1746,12 +1798,12 @@ Region
   border-left-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_caption {
+#crlekoctib .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yrfqeunwzc .gt_title {
+#crlekoctib .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1763,7 +1815,7 @@ Region
   border-bottom-width: 0;
 }
 
-#yrfqeunwzc .gt_subtitle {
+#crlekoctib .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1775,7 +1827,7 @@ Region
   border-top-width: 0;
 }
 
-#yrfqeunwzc .gt_heading {
+#crlekoctib .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1787,13 +1839,13 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_bottom_border {
+#crlekoctib .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_col_headings {
+#crlekoctib .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1808,7 +1860,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_col_heading {
+#crlekoctib .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1828,7 +1880,7 @@ Region
   overflow-x: hidden;
 }
 
-#yrfqeunwzc .gt_column_spanner_outer {
+#crlekoctib .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1840,15 +1892,15 @@ Region
   padding-right: 4px;
 }
 
-#yrfqeunwzc .gt_column_spanner_outer:first-child {
+#crlekoctib .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yrfqeunwzc .gt_column_spanner_outer:last-child {
+#crlekoctib .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yrfqeunwzc .gt_column_spanner {
+#crlekoctib .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1860,11 +1912,11 @@ Region
   width: 100%;
 }
 
-#yrfqeunwzc .gt_spanner_row {
+#crlekoctib .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yrfqeunwzc .gt_group_heading {
+#crlekoctib .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1890,7 +1942,7 @@ Region
   text-align: left;
 }
 
-#yrfqeunwzc .gt_empty_group_heading {
+#crlekoctib .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1905,15 +1957,15 @@ Region
   vertical-align: middle;
 }
 
-#yrfqeunwzc .gt_from_md > :first-child {
+#crlekoctib .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yrfqeunwzc .gt_from_md > :last-child {
+#crlekoctib .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yrfqeunwzc .gt_row {
+#crlekoctib .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1932,7 +1984,7 @@ Region
   overflow-x: hidden;
 }
 
-#yrfqeunwzc .gt_stub {
+#crlekoctib .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1945,7 +1997,7 @@ Region
   padding-right: 5px;
 }
 
-#yrfqeunwzc .gt_stub_row_group {
+#crlekoctib .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1959,15 +2011,15 @@ Region
   vertical-align: top;
 }
 
-#yrfqeunwzc .gt_row_group_first td {
+#crlekoctib .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yrfqeunwzc .gt_row_group_first th {
+#crlekoctib .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yrfqeunwzc .gt_summary_row {
+#crlekoctib .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1977,16 +2029,16 @@ Region
   padding-right: 5px;
 }
 
-#yrfqeunwzc .gt_first_summary_row {
+#crlekoctib .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_first_summary_row.thick {
+#crlekoctib .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yrfqeunwzc .gt_last_summary_row {
+#crlekoctib .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1996,7 +2048,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_grand_summary_row {
+#crlekoctib .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2006,7 +2058,7 @@ Region
   padding-right: 5px;
 }
 
-#yrfqeunwzc .gt_first_grand_summary_row {
+#crlekoctib .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2016,7 +2068,7 @@ Region
   border-top-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_last_grand_summary_row_top {
+#crlekoctib .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2026,11 +2078,11 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_striped {
+#crlekoctib .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yrfqeunwzc .gt_table_body {
+#crlekoctib .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2039,7 +2091,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_footnotes {
+#crlekoctib .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2053,7 +2105,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_footnote {
+#crlekoctib .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2062,7 +2114,7 @@ Region
   padding-right: 5px;
 }
 
-#yrfqeunwzc .gt_sourcenotes {
+#crlekoctib .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2076,7 +2128,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#yrfqeunwzc .gt_sourcenote {
+#crlekoctib .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2084,74 +2136,73 @@ Region
   padding-right: 5px;
 }
 
-#yrfqeunwzc .gt_left {
+#crlekoctib .gt_left {
   text-align: left;
 }
 
-#yrfqeunwzc .gt_center {
+#crlekoctib .gt_center {
   text-align: center;
 }
 
-#yrfqeunwzc .gt_right {
+#crlekoctib .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yrfqeunwzc .gt_font_normal {
+#crlekoctib .gt_font_normal {
   font-weight: normal;
 }
 
-#yrfqeunwzc .gt_font_bold {
+#crlekoctib .gt_font_bold {
   font-weight: bold;
 }
 
-#yrfqeunwzc .gt_font_italic {
+#crlekoctib .gt_font_italic {
   font-style: italic;
 }
 
-#yrfqeunwzc .gt_super {
+#crlekoctib .gt_super {
   font-size: 65%;
 }
 
-#yrfqeunwzc .gt_footnote_marks {
+#crlekoctib .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yrfqeunwzc .gt_asterisk {
+#crlekoctib .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yrfqeunwzc .gt_indent_1 {
+#crlekoctib .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yrfqeunwzc .gt_indent_2 {
+#crlekoctib .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yrfqeunwzc .gt_indent_3 {
+#crlekoctib .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yrfqeunwzc .gt_indent_4 {
+#crlekoctib .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yrfqeunwzc .gt_indent_5 {
+#crlekoctib .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header gt_col_headings">
@@ -2159,7 +2210,6 @@ Region
 <th id="<strong>Алтайский край</strong>, N = 274<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Алтайский край</strong>, N = 274<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
 <th id="<strong>Республика Алтай</strong>, N = 446<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Республика Алтай</strong>, N = 446<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
 <th id="<strong>Республика Тыва</strong>, N = 192<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Республика Тыва</strong>, N = 192<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
-<th id="<strong>Монголия</strong>, N = 1<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Монголия</strong>, N = 1<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -2171,22 +2221,18 @@ Region
 </td>
 <td class="gt_row gt_center" headers="stat_3"><br>
 </td>
-<td class="gt_row gt_center" headers="stat_4"><br>
-</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Мужской</td>
 <td class="gt_row gt_center" headers="stat_1">72 (27%)</td>
 <td class="gt_row gt_center" headers="stat_2">169 (39%)</td>
 <td class="gt_row gt_center" headers="stat_3">47 (25%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Женский</td>
 <td class="gt_row gt_center" headers="stat_1">198 (73%)</td>
 <td class="gt_row gt_center" headers="stat_2">268 (61%)</td>
 <td class="gt_row gt_center" headers="stat_3">143 (75%)</td>
-<td class="gt_row gt_center" headers="stat_4">1 (100%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Возраст</td>
@@ -2196,29 +2242,24 @@ Region
 </td>
 <td class="gt_row gt_center" headers="stat_3"><br>
 </td>
-<td class="gt_row gt_center" headers="stat_4"><br>
-</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;До 30 лет</td>
 <td class="gt_row gt_center" headers="stat_1">35 (13%)</td>
 <td class="gt_row gt_center" headers="stat_2">75 (17%)</td>
 <td class="gt_row gt_center" headers="stat_3">50 (27%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;31-49 лет</td>
 <td class="gt_row gt_center" headers="stat_1">114 (43%)</td>
 <td class="gt_row gt_center" headers="stat_2">215 (49%)</td>
 <td class="gt_row gt_center" headers="stat_3">94 (51%)</td>
-<td class="gt_row gt_center" headers="stat_4">1 (100%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;50 лет и старше</td>
 <td class="gt_row gt_center" headers="stat_1">115 (44%)</td>
 <td class="gt_row gt_center" headers="stat_2">147 (34%)</td>
 <td class="gt_row gt_center" headers="stat_3">41 (22%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Каков уровень материального достатка Вашей семьи?</td>
@@ -2228,43 +2269,36 @@ Region
 </td>
 <td class="gt_row gt_center" headers="stat_3"><br>
 </td>
-<td class="gt_row gt_center" headers="stat_4"><br>
-</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем очень бедно, фактически голодаем, денег иногда не хватает даже на питание, имевшиеся ранее накопления кончились</td>
 <td class="gt_row gt_center" headers="stat_1">4 (1.5%)</td>
 <td class="gt_row gt_center" headers="stat_2">7 (1.6%)</td>
 <td class="gt_row gt_center" headers="stat_3">2 (1.1%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем бедно, денег хватает только на скромное питание, оплату коммунальных услуг,</td>
 <td class="gt_row gt_center" headers="stat_1">10 (3.7%)</td>
 <td class="gt_row gt_center" headers="stat_2">34 (7.8%)</td>
 <td class="gt_row gt_center" headers="stat_3">7 (3.7%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем средне, денег хватает на питание, недорогую одежду, крайне необходимые вещи и оплату коммунальных услуг,</td>
 <td class="gt_row gt_center" headers="stat_1">193 (71%)</td>
 <td class="gt_row gt_center" headers="stat_2">304 (70%)</td>
 <td class="gt_row gt_center" headers="stat_3">123 (65%)</td>
-<td class="gt_row gt_center" headers="stat_4">1 (100%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Живем достаточно обеспеченно, (есть денежные накопления и возможность покупать практически все необходимое для жизни)</td>
 <td class="gt_row gt_center" headers="stat_1">57 (21%)</td>
 <td class="gt_row gt_center" headers="stat_2">86 (20%)</td>
 <td class="gt_row gt_center" headers="stat_3">55 (29%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Очень хорошо, богато (не отказываем себе ни в чем, денежные накопления постоянно прирастают)</td>
 <td class="gt_row gt_center" headers="stat_1">6 (2.2%)</td>
 <td class="gt_row gt_center" headers="stat_2">5 (1.1%)</td>
 <td class="gt_row gt_center" headers="stat_3">3 (1.6%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Какой у Вас САМЫЙ ВЫСОКИЙ уровень образования, по которому Вы получили аттестат, свидетельство, диплом?</td>
@@ -2274,54 +2308,46 @@ Region
 </td>
 <td class="gt_row gt_center" headers="stat_3"><br>
 </td>
-<td class="gt_row gt_center" headers="stat_4"><br>
-</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Основное общее образование (9 классов) или меньше</td>
 <td class="gt_row gt_center" headers="stat_1">23 (8.4%)</td>
 <td class="gt_row gt_center" headers="stat_2">24 (5.5%)</td>
 <td class="gt_row gt_center" headers="stat_3">5 (2.6%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Среднее (полное) общее образование</td>
 <td class="gt_row gt_center" headers="stat_1">37 (14%)</td>
 <td class="gt_row gt_center" headers="stat_2">85 (19%)</td>
 <td class="gt_row gt_center" headers="stat_3">40 (21%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Начальное или среднее профессиональное образование</td>
 <td class="gt_row gt_center" headers="stat_1">80 (29%)</td>
 <td class="gt_row gt_center" headers="stat_2">173 (40%)</td>
 <td class="gt_row gt_center" headers="stat_3">41 (22%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Высшее образование (диплом специалиста, бакалавра или магистра)</td>
 <td class="gt_row gt_center" headers="stat_1">125 (46%)</td>
 <td class="gt_row gt_center" headers="stat_2">155 (35%)</td>
 <td class="gt_row gt_center" headers="stat_3">102 (54%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Аспирантура, ординатура, ученая степень кандидата или доктора наук</td>
 <td class="gt_row gt_center" headers="stat_1">8 (2.9%)</td>
 <td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
 <td class="gt_row gt_center" headers="stat_3">1 (0.5%)</td>
-<td class="gt_row gt_center" headers="stat_4">1 (100%)</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Другое</td>
 <td class="gt_row gt_center" headers="stat_1">0 (0%)</td>
 <td class="gt_row gt_center" headers="stat_2">0 (0%)</td>
 <td class="gt_row gt_center" headers="stat_3">1 (0.5%)</td>
-<td class="gt_row gt_center" headers="stat_4">0 (0%)</td>
 </tr>
 </tbody><tfoot class="gt_footnotes">
 <tr class="odd">
-<td colspan="5" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
 </tr>
 </tfoot>
 
@@ -2333,36 +2359,36 @@ Region
 <p>Прочитать подробнее о функции tbl_summary, ее атрибутах, с подробным разбором примеров и возможностей изменения таблицы: http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html</p>
 <p>Можно сделать и простую двумерную таблицу:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a> table <span class="sc">%&gt;%</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_cross</span>(<span class="at">row =</span> V1, <span class="at">col =</span> age_cats3, <span class="at">percent =</span> <span class="st">"cell"</span>, <span class="at">missing=</span><span class="st">"no"</span>, ) <span class="sc">%&gt;%</span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>(<span class="at">test=</span><span class="st">"chisq.test"</span>) <span class="sc">%&gt;%</span> <span class="co">#добавляем статистику хи-квадрат</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="co">#функция, позволяющая изменить заголовок</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">update =</span> <span class="fu">list</span>(</span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>      label <span class="sc">~</span> <span class="st">"**Характеристика**"</span> <span class="co">#</span></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(<span class="st">"**Взаимосвязь пола и возраста** (N = {N})"</span>) <span class="co">#меняем заголовок на нужный, причем заголовок вставляем количество опрошенных</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a> table <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_cross</span>(<span class="at">row =</span> V1, <span class="at">col =</span> age_cats3, <span class="at">percent =</span> <span class="st">"cell"</span>, <span class="at">missing=</span><span class="st">"no"</span>, ) <span class="sc">%&gt;%</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>(<span class="at">test=</span><span class="st">"chisq.test"</span>) <span class="sc">%&gt;%</span> <span class="co">#добавляем статистику хи-квадрат</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_header</span>(<span class="co">#функция, позволяющая изменить заголовок</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">update =</span> <span class="fu">list</span>(</span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>      label <span class="sc">~</span> <span class="st">"**Характеристика**"</span> <span class="co">#</span></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">modify_caption</span>(<span class="st">"**Взаимосвязь пола и возраста** (N = {N})"</span>) <span class="co">#меняем заголовок на нужный, причем заголовок вставляем количество опрошенных</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>FALSE observations with missing data have been removed.</code></pre>
 </div>
 <div class="cell-output-display">
-<div id="mujunadxuq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mujunadxuq table {
+<div id="blhkipjhsr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#blhkipjhsr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mujunadxuq thead, #mujunadxuq tbody, #mujunadxuq tfoot, #mujunadxuq tr, #mujunadxuq td, #mujunadxuq th {
+#blhkipjhsr thead, #blhkipjhsr tbody, #blhkipjhsr tfoot, #blhkipjhsr tr, #blhkipjhsr td, #blhkipjhsr th {
   border-style: none;
 }
 
-#mujunadxuq p {
+#blhkipjhsr p {
   margin: 0;
   padding: 0;
 }
 
-#mujunadxuq .gt_table {
+#blhkipjhsr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2388,12 +2414,12 @@ Region
   border-left-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_caption {
+#blhkipjhsr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mujunadxuq .gt_title {
+#blhkipjhsr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2405,7 +2431,7 @@ Region
   border-bottom-width: 0;
 }
 
-#mujunadxuq .gt_subtitle {
+#blhkipjhsr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2417,7 +2443,7 @@ Region
   border-top-width: 0;
 }
 
-#mujunadxuq .gt_heading {
+#blhkipjhsr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2429,13 +2455,13 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_bottom_border {
+#blhkipjhsr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_col_headings {
+#blhkipjhsr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2450,7 +2476,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_col_heading {
+#blhkipjhsr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2470,7 +2496,7 @@ Region
   overflow-x: hidden;
 }
 
-#mujunadxuq .gt_column_spanner_outer {
+#blhkipjhsr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2482,15 +2508,15 @@ Region
   padding-right: 4px;
 }
 
-#mujunadxuq .gt_column_spanner_outer:first-child {
+#blhkipjhsr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mujunadxuq .gt_column_spanner_outer:last-child {
+#blhkipjhsr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mujunadxuq .gt_column_spanner {
+#blhkipjhsr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2502,11 +2528,11 @@ Region
   width: 100%;
 }
 
-#mujunadxuq .gt_spanner_row {
+#blhkipjhsr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mujunadxuq .gt_group_heading {
+#blhkipjhsr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2532,7 +2558,7 @@ Region
   text-align: left;
 }
 
-#mujunadxuq .gt_empty_group_heading {
+#blhkipjhsr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2547,15 +2573,15 @@ Region
   vertical-align: middle;
 }
 
-#mujunadxuq .gt_from_md > :first-child {
+#blhkipjhsr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mujunadxuq .gt_from_md > :last-child {
+#blhkipjhsr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mujunadxuq .gt_row {
+#blhkipjhsr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2574,7 +2600,7 @@ Region
   overflow-x: hidden;
 }
 
-#mujunadxuq .gt_stub {
+#blhkipjhsr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2587,7 +2613,7 @@ Region
   padding-right: 5px;
 }
 
-#mujunadxuq .gt_stub_row_group {
+#blhkipjhsr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2601,15 +2627,15 @@ Region
   vertical-align: top;
 }
 
-#mujunadxuq .gt_row_group_first td {
+#blhkipjhsr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mujunadxuq .gt_row_group_first th {
+#blhkipjhsr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mujunadxuq .gt_summary_row {
+#blhkipjhsr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2619,16 +2645,16 @@ Region
   padding-right: 5px;
 }
 
-#mujunadxuq .gt_first_summary_row {
+#blhkipjhsr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_first_summary_row.thick {
+#blhkipjhsr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mujunadxuq .gt_last_summary_row {
+#blhkipjhsr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2638,7 +2664,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_grand_summary_row {
+#blhkipjhsr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2648,7 +2674,7 @@ Region
   padding-right: 5px;
 }
 
-#mujunadxuq .gt_first_grand_summary_row {
+#blhkipjhsr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2658,7 +2684,7 @@ Region
   border-top-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_last_grand_summary_row_top {
+#blhkipjhsr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2668,11 +2694,11 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_striped {
+#blhkipjhsr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mujunadxuq .gt_table_body {
+#blhkipjhsr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2681,7 +2707,7 @@ Region
   border-bottom-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_footnotes {
+#blhkipjhsr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2695,7 +2721,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_footnote {
+#blhkipjhsr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2704,7 +2730,7 @@ Region
   padding-right: 5px;
 }
 
-#mujunadxuq .gt_sourcenotes {
+#blhkipjhsr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2718,7 +2744,7 @@ Region
   border-right-color: #D3D3D3;
 }
 
-#mujunadxuq .gt_sourcenote {
+#blhkipjhsr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2726,69 +2752,69 @@ Region
   padding-right: 5px;
 }
 
-#mujunadxuq .gt_left {
+#blhkipjhsr .gt_left {
   text-align: left;
 }
 
-#mujunadxuq .gt_center {
+#blhkipjhsr .gt_center {
   text-align: center;
 }
 
-#mujunadxuq .gt_right {
+#blhkipjhsr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mujunadxuq .gt_font_normal {
+#blhkipjhsr .gt_font_normal {
   font-weight: normal;
 }
 
-#mujunadxuq .gt_font_bold {
+#blhkipjhsr .gt_font_bold {
   font-weight: bold;
 }
 
-#mujunadxuq .gt_font_italic {
+#blhkipjhsr .gt_font_italic {
   font-style: italic;
 }
 
-#mujunadxuq .gt_super {
+#blhkipjhsr .gt_super {
   font-size: 65%;
 }
 
-#mujunadxuq .gt_footnote_marks {
+#blhkipjhsr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mujunadxuq .gt_asterisk {
+#blhkipjhsr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mujunadxuq .gt_indent_1 {
+#blhkipjhsr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mujunadxuq .gt_indent_2 {
+#blhkipjhsr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mujunadxuq .gt_indent_3 {
+#blhkipjhsr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mujunadxuq .gt_indent_4 {
+#blhkipjhsr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mujunadxuq .gt_indent_5 {
+#blhkipjhsr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 
 <table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<caption><strong>Взаимосвязь пола и возраста</strong> (N = 876)</caption>
+<caption><strong>Взаимосвязь пола и возраста</strong> (N = 875)</caption>
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -2826,7 +2852,7 @@ Region
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Мужской</td>
 <td class="gt_row gt_center" headers="stat_1">53 (6.1%)</td>
-<td class="gt_row gt_center" headers="stat_2">127 (14%)</td>
+<td class="gt_row gt_center" headers="stat_2">127 (15%)</td>
 <td class="gt_row gt_center" headers="stat_3">103 (12%)</td>
 <td class="gt_row gt_center" headers="stat_0">283 (32%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
@@ -2835,18 +2861,18 @@ Region
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Женский</td>
 <td class="gt_row gt_center" headers="stat_1">106 (12%)</td>
-<td class="gt_row gt_center" headers="stat_2">292 (33%)</td>
+<td class="gt_row gt_center" headers="stat_2">291 (33%)</td>
 <td class="gt_row gt_center" headers="stat_3">195 (22%)</td>
-<td class="gt_row gt_center" headers="stat_0">593 (68%)</td>
+<td class="gt_row gt_center" headers="stat_0">592 (68%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">Total</td>
 <td class="gt_row gt_center" headers="stat_1">159 (18%)</td>
-<td class="gt_row gt_center" headers="stat_2">419 (48%)</td>
+<td class="gt_row gt_center" headers="stat_2">418 (48%)</td>
 <td class="gt_row gt_center" headers="stat_3">298 (34%)</td>
-<td class="gt_row gt_center" headers="stat_0">876 (100%)</td>
+<td class="gt_row gt_center" headers="stat_0">875 (100%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -2867,72 +2893,56 @@ Region
 <p>Для выполнения данного задания нам понадобится <code>questionr</code> - библиотека, позволяющая анализировать таблицы с множественными ответами.</p>
 <p>Прежде чем выполнить последующий код, установите пакет questionr на свой комьютер и запустите библиотеку:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("questionr") - убрать решетку и запустить строку</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("questionr") - убрать решетку и запустить строку</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>У нас в анкете был вопрос 9, в котором изучалось, чем владеет домохозяйство. Можно было выбрать несколько вариантов ответа, а также дать собственный вариант ответа - «Другое». Ответы были закодированы дихотомическим способом, выбор кодировался как 1, а его отсутствие - как 0.</p>
 <p>Как в других программах статистической обработки, в R нам потребуется сделать два шага для того, чтобы проанализировать вопрос с множественным выбором: - создать набор данных, в который объединяются отдельные подвопросы; - сделать таблицу, которая может быть как одномерной, так и многомерной.</p>
 <p>Давайте объединим все подвопросы вопроса V9 в один набор и сохраним его под отдельным именем - V9. Воспользуемся знакомыми нам функциями <code>select()</code> - для отбора переменных и <code>contains()</code> - отбора переменных, имена которых содержат определенный паттерн:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>V9<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"V9"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.factor)<span class="co">#дополнительный select нужен, чтобы убрать текстовую переменную «другое»</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>V9<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"V9"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.factor)<span class="co">#дополнительный select нужен, чтобы убрать текстовую переменную «другое»</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Далее, создадим таблицу и сохраним ее в качестве отдельного датафрейма.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>V9tab<span class="ot">&lt;-</span>V9 <span class="sc">%&gt;%</span> </span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.table</span>(<span class="at">true.codes=</span><span class="fu">list</span>(<span class="st">"да"</span>), <span class="at">freq=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>()</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>V9tab</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(questionr)</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>V9tab<span class="ot">&lt;-</span>V9 <span class="sc">%&gt;%</span> </span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.table</span>(<span class="at">true.codes=</span><span class="fu">list</span>(<span class="st">"да"</span>), <span class="at">freq=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Pct=</span><span class="st">`</span><span class="at">%multi</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Pct))</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>V9tab</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        n %multi
-V9_1  135   14.8
-V9_2  498   54.5
-V9_3   26    2.8
-V9_4  327   35.8
-V9_5   70    7.7
-V9_6  312   34.2
-V9_7   96   10.5
-V9_8  224   24.5
-V9_9  160   17.5
-V9_10 181   19.8
-V9_11  22    2.4
-V9_12   4    0.4
-V9_13  82    9.0
-V9_88  45    4.9</code></pre>
+<pre><code>        n  Pct
+V9_2  498 54.6
+V9_4  326 35.7
+V9_6  312 34.2
+V9_8  224 24.6
+V9_10 181 19.8
+V9_9  160 17.5
+V9_1  135 14.8
+V9_7   96 10.5
+V9_13  82  9.0
+V9_5   70  7.7
+V9_88  45  4.9
+V9_3   26  2.9
+V9_11  22  2.4
+V9_12   4  0.4</code></pre>
 </div>
 </div>
 <p>Да, выглядит так себе, но зато все посчитано) сразу.</p>
-<p>Поясним, что <code>true.codes=list("Да")</code> - обозначаем вариант ответа, используемый для подсчета частот и процентов, <code>freq=TRUE</code> - вывод процентов, а не только частот.</p>
-<p><iconify-icon inline="" icon="arcticons:writer" style="font-size: 42px;"></iconify-icon> <strong>Самостоятельное задание</strong>: Создайте аналогичную таблицу, но без частот.</p>
+<p>Поясним, что <code>true.codes=list("да")</code> - обозначаем вариант ответа, используемый для подсчета частот и процентов, <code>freq=TRUE</code> - вывод процентов, а не только частот.</p>
 <p>Как добавить метки вопросов в нашу таблицу? Извлечем метки вопросов по блоку V9 в отдельное место:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjlabelled)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Присоединяю пакет: 'sjlabelled'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Следующий объект скрыт от 'package:dplyr':
-
-    as_label</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Следующий объект скрыт от 'package:ggplot2':
-
-    as_label</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Следующие объекты скрыты от 'package:haven':
-
-    as_factor, read_sas, read_spss, read_stata, write_sas, zap_labels</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>V9labs<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"V9"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.factor) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_label</span>()</span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>V9labs</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sjlabelled)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>V9labs<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"V9"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_if</span>(is.factor) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_label</span>()</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>V9labs</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                                       V9_1 
                                                       "Сад" 
@@ -2966,70 +2976,197 @@ V9_88  45    4.9</code></pre>
 </div>
 <p>Присвоим имена в переменную <code>n</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>V9tab<span class="sc">$</span>n<span class="ot">&lt;-</span>V9labs</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>V9tab<span class="sc">$</span>n<span class="ot">&lt;-</span>V9labs</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>V9tab</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                              n  Pct
+V9_2                                                        Сад 54.6
+V9_4                                                     Огород 35.7
+V9_6                                                     Пасека 34.2
+V9_8                                                  Транспорт 24.6
+V9_10                              Сельскохозяйственная техника 19.8
+V9_9                                       Крупный рогатый скот 17.5
+V9_1                                                      Птицы 14.8
+V9_7                    Козы, овцы, мелкий рогатый скот, свиньи 10.5
+V9_13                                               Конь (кони)  9.0
+V9_5  Покосы, земельные участки для обработки (не приусадебные)  7.7
+V9_88                                            Лесные участки  4.9
+V9_3                                           Рыбное хозяйство  2.9
+V9_11                                                  Пастбище  2.4
+V9_12                                                    Другое  0.4</code></pre>
+</div>
 </div>
 </section>
 <section id="таблица-сопряженности-с-множественными-ответами" class="level3" data-number="9.3.4">
 <h3 data-number="9.3.4" class="anchored" data-anchor-id="таблица-сопряженности-с-множественными-ответами"><span class="header-section-number">9.3.4</span> Таблица сопряженности с множественными ответами</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span><span class="fu">cross.multi.table</span>(V9, df<span class="sc">$</span>Region, <span class="at">true.codes=</span><span class="fu">list</span>(<span class="st">"да"</span>), <span class="at">freq=</span><span class="cn">TRUE</span>)</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span><span class="fu">as_tibble</span>(V9Regiontab)</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="sc">$</span>n<span class="ot">&lt;-</span>V9labs</span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span>V9Regiontab <span class="sc">%&gt;%</span> </span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(n)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span><span class="fu">cross.multi.table</span>(V9, df<span class="sc">$</span>Region, <span class="at">true.codes=</span><span class="fu">list</span>(<span class="st">"да"</span>), <span class="at">freq=</span><span class="cn">TRUE</span>)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span><span class="fu">as_tibble</span>(V9Regiontab)</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="sc">$</span>n<span class="ot">&lt;-</span>V9labs</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>V9Regiontab<span class="ot">&lt;-</span>V9Regiontab <span class="sc">%&gt;%</span> </span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(n)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="графики-для-категориальных-переменных" class="level3" data-number="9.3.5">
-<h3 data-number="9.3.5" class="anchored" data-anchor-id="графики-для-категориальных-переменных"><span class="header-section-number">9.3.5</span> графики для категориальных переменных</h3>
-<p>Круговая диаграмма:</p>
+<h3 data-number="9.3.5" class="anchored" data-anchor-id="графики-для-категориальных-переменных"><span class="header-section-number">9.3.5</span> Графики для категориальных переменных</h3>
+<p>Основными графиками для категориальных переменных являются круговые и столбиковые диаграммы, а также мозаичные и ассоциативные графики, когда в анализе задействовано более двух переменных.</p>
+<p>Давайте создадим такие графики для переменных по возрасту. Красивые минималистичные графики с небольшим количеством кода и исправлений можно создать с помощью библиотеки <code>ggpubr</code> от Alboukadel Kassambara (биолог, автор книг по биоинформатике и биологии рака).</p>
+<p>Создадим одномерную таблицу для возраста и двумерную для взаимосвязи между полом и возрастом.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggpiestats</span>(df, V1, <span class="at">bf.message =</span> <span class="cn">FALSE</span>, <span class="at">legend.title =</span> <span class="st">"Пол"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>age<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sjmisc<span class="sc">::</span><span class="fu">flat_table</span>(df, age_cats3, <span class="at">margin =</span> <span class="st">"cell"</span>, <span class="at">digits =</span> <span class="dv">1</span>))</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>age_sex<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(sjmisc<span class="sc">::</span><span class="fu">flat_table</span>(df, age_cats3, V1, <span class="at">margin =</span> <span class="st">"row"</span>, <span class="at">digits =</span> <span class="dv">1</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Сделаем простую столбиковую диаграмму по возрастным группам, в качестве «изюминки» добавим красивые шрифты.</p>
+<p>Прежде чем сделать сам график, установим шрифты, чтобы потом ими можно было пользоваться постоянно.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"extrafont"</span>)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="fu">font_import</span>()<span class="co">#шрифты устанавливаются сразу все, это может занять некоторое время</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В результате будут импортированы следующие шрифты: <img src="http://gradientdescending.com/plots/fonttable_big.png" class="img-fluid"> После установки шрифты нужно загружать каждую сессию:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">loadfonts</span>(<span class="at">device =</span> <span class="st">"win"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь займемся самим графиком. Разберем его структуру строчка за строчкой: - <code>ggplot(data=age, aes(x=age_cats3, y=Freq)) +</code> - создаем базовый график, где по оси x у нас будут возрастные категории, а по y - проценты - <code>geom_bar(stat="identity", fill="steelblue", width = 0.6)+</code> - добавляем слой для столбиковой диаграммы, <code>stat="identity"</code> - означает, что мы будем использовать данные «как есть», а не агрегировать на основе исходных, <code>fill="steelblue"</code> - задаем цвет, <code>width = 0.6</code> - устанавливаем ширину столбцов чуть меньше обычного, для красоты)) - <code>geom_text(aes(label=scales::number(Freq,accuracy=0.1, decimal.mark = ",")),  family = "Ink Free", vjust=0.5, hjust=-0.5, color="steelblue", size=4)+</code> - тут много всего, эта часть кода отвечает за подписи к столбцам. <code>label=number(Freq,accuracy=0.1, decimal.mark = ","))</code> - устанавливаем подписи в числовом формате, запятую в качестве разделителя и округление до одного знака после запятой, <code>family = "Ink Free", vjust=0.5, hjust=-0.5</code> - задаем шрифт Ink Free, делаем выравнивание, чтобы число было ровно посредине столбца и слегка выходило за его пределы (можно поэкспериментировать с этими настройками), <code>color="steelblue", size=4</code> - эти настройки отвечают за цвет и размер текста - <code>coord_flip()</code> - переворачиваем диаграмму в горизонтальную проекцию - <code>theme_void()</code>- устанавливаем тему, в которой есть только белый фон - <code>expand_limits(y=c(0,50))</code> - раздвигаем границы по оси y, там, где проценты (это неважно, что при повороте диаграмма «ложится на бок» и оси вроде как меняются местами) - <code>theme(axis.text.y = element_text(size = 10, family = "Ink Free")</code> - устанавливаем размер и семейство шрифтов для подписей - категорий возраста - <code>scale_x_discrete(limits=rev)</code> - ну и, напоследок, меняем порядок категорий, от младшей возрастной группы к старшей</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)<span class="co">#нужна для того, чтобы отформатировать подпись</span></span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>age, <span class="fu">aes</span>(<span class="at">x=</span>age_cats3, <span class="at">y=</span>Freq)) <span class="sc">+</span></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">fill=</span><span class="st">"steelblue"</span>, <span class="at">width =</span> <span class="fl">0.6</span>)<span class="sc">+</span></span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">number</span>(Freq,<span class="at">accuracy=</span><span class="fl">0.1</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>)),  <span class="at">family =</span> <span class="st">"Ink Free"</span>, <span class="at">vjust=</span><span class="fl">0.5</span>, <span class="at">hjust=</span><span class="sc">-</span><span class="fl">0.5</span>, <span class="at">color=</span><span class="st">"steelblue"</span>, <span class="at">size=</span><span class="dv">4</span>)<span class="sc">+</span></span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>))<span class="sc">+</span></span>
+<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">family =</span> <span class="st">"Ink Free"</span>))<span class="sc">+</span></span>
+<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits=</span>rev)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Добавим данные по полу. В нашем коде почти ничего не поменялось, за исключением некоторых моментов: - <code>fill=V1</code> - мы добавили в исходный график, чтобы сделать разбивку по полу - в <code>geom_bar(stat="identity", position="dodge", width = 0.6)</code> добавили <code>position="dodge"</code> - чтобы столбцы располагались рядом друг с другом, такой же аргумент добавлен и в <code>geom_text</code> - в конце появилось две новых строки <code>theme(legend.position="bottom")+  theme(legend.title=element_blank())</code>, они нужны для оформления легенды</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggpiestats</span>(df, V1, age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)<span class="co">#нужна для того, чтобы отформатировать подпись</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>age_sex, <span class="fu">aes</span>(<span class="at">x=</span>age_cats3, <span class="at">y=</span>Freq, <span class="at">fill=</span>V1)) <span class="sc">+</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.6</span>)<span class="sc">+</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">number</span>(Freq,<span class="at">accuracy=</span><span class="fl">0.1</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>)),  <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>), <span class="at">hjust=</span><span class="sc">-</span><span class="fl">0.3</span>, <span class="at">family =</span> <span class="st">"Ink Free"</span>, <span class="at">size=</span><span class="dv">4</span>)<span class="sc">+</span></span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()<span class="sc">+</span></span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))<span class="sc">+</span></span>
+<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">family =</span> <span class="st">"Ink Free"</span>))<span class="sc">+</span></span>
+<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits=</span>rev)<span class="sc">+</span></span>
+<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)<span class="sc">+</span></span>
+<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title=</span><span class="fu">element_blank</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>В качестве альтернативы можно создать сгруппированные столбиковые диаграммы в библиотеке <code>ggstatsplot</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggbarstats</span>(df, <span class="at">x =</span> V1, <span class="at">y =</span> age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>создать круговую диаграмму:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> Freq, <span class="at">fill =</span> age_cats3)) <span class="sc">+</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">number</span>(Freq,<span class="at">accuracy=</span><span class="fl">0.1</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>)), <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Возраст"</span>)) <span class="sc">+</span></span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span><span class="co">#эта строка добавляет цветовую палитру</span></span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span> </span>
+<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-68-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Более простым решением является создание круговой диаграммы с помощью функции <code>ggpiestats</code> из библиотеки <code>ggstatsplot</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggpiestats</span>(df, age_cats3, <span class="at">legend.title =</span> <span class="st">"Возраст"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>С помощью этой же функции можно создать серию круговых диаграмм:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggpiestats</span>(df, V1, age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Посмотреть отдельно хи-квадрат:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
 data:  df$V1 and df$age_cats3
-X-squared = 1.5345, df = 2, p-value = 0.4643</code></pre>
+X-squared = 1.4769, df = 2, p-value = 0.4779</code></pre>
 </div>
 </div>
-<p>Столбиковые диаграммы:</p>
+<p>Сделаем график для вопросов с множественными ответами, по вопросу V9. В описаниях вариантов ответов есть длинные формулировки, которые будут не очень хорошо смотреться на графике, поэтому прежде, чем создавать график, давайте уберем все, что написано в скобках, так как это скорее не основная, а уточняющая информация.</p>
+<p>Для этого мы воспользуемся функцией <code>gsub</code>, в которую включим выражение, позволяющее отсечь текст, лежащий после знака <code>(</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(df<span class="sc">$</span>Region), <span class="at">col=</span><span class="st">"steelblue"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>V9tab<span class="sc">$</span>n<span class="ot">&lt;-</span><span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">(.*"</span>, <span class="st">""</span>, V9tab<span class="sc">$</span>n)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Хотя в таблице значения отсортированы, на графике они все равно будут отображаться в том порядке, в котором представлены уровни факторной переменной. Поэтому, чтобы на графике у нас были отображены значения по убыванию (мы же не хотим, чтобы у нас получился хаос из 14 вариантов ответа), нам нужно отсортировать уровни, для чего нам потребуется библиотека <code>forcats</code>.</p>
+<p>И поскольку ширина подписей, несмотря на то, что мы их сократили, будет довольно существенной, мы сделаем самые длинные подписи в две строки, что, в свою очередь, потребует работы с библиотекой <code>stringr</code> (раз это новые для нас библиотеки и мы про них не слышали, нужно их установить).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Присоединяю пакет: 'forcats'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Следующий объект скрыт от 'package:sjlabelled':
+
+    as_factor</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 200%</span></span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>V9tab <span class="sc">%&gt;%</span></span>
+<span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> <span class="fu">fct_reorder</span>(n, Pct)) <span class="sc">%&gt;%</span> <span class="co"># переставим местами уровни</span></span>
+<span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>Pct, <span class="at">fill=</span>n)) <span class="sc">+</span> <span class="co"># создадим типовой график</span></span>
+<span id="cb111-6"><a href="#cb111-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.6</span>)<span class="sc">+</span>  <span class="co"># добавим geom</span></span>
+<span id="cb111-7"><a href="#cb111-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label=</span><span class="fu">number</span>(Pct,<span class="at">accuracy=</span><span class="fl">0.1</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>)), <span class="at">hjust=</span><span class="sc">-</span><span class="fl">0.3</span>, <span class="at">family =</span> <span class="st">"Ink Free"</span>, <span class="at">size=</span><span class="dv">4</span>)<span class="sc">+</span>   <span class="co"># поработаем с подписями данных</span></span>
+<span id="cb111-8"><a href="#cb111-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_limits</span>(<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">80</span>))<span class="sc">+</span><span class="co"># увеличим лимит оси </span></span>
+<span id="cb111-9"><a href="#cb111-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span>  <span class="co"># перевернем график в горизонтальное положение</span></span>
+<span id="cb111-10"><a href="#cb111-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()<span class="sc">+</span>   <span class="co"># добавим минималистичную тему</span></span>
+<span id="cb111-11"><a href="#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">family =</span> <span class="st">"Ink Free"</span>))<span class="sc">+</span>    <span class="co"># установим шрифт для подписей</span></span>
+<span id="cb111-12"><a href="#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>)<span class="sc">+</span>       <span class="co"># уберем легенду</span></span>
+<span id="cb111-13"><a href="#cb111-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">str_wrap</span>(x, <span class="at">width =</span> <span class="dv">30</span>))       <span class="co"># Сделаем длинные подписи в несколько строк</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>ggstatsplot<span class="sc">::</span><span class="fu">ggbarstats</span>(df, <span class="at">x =</span> V1, <span class="at">y =</span> age_cats3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ExploratoryDataAnalysis_files/figure-html/unnamed-chunk-73-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
