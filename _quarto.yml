@@ -21,7 +21,7 @@ book:
   - TidyverseTransformations.qmd
   - Base_ggplot2.qmd
   - ExploratoryDataAnalysis.qmd
-  - lesson10.qmd
+  - Statistical-Inference.qmd
   - lesson12.qmd
   - lesson13.qmd
 lang: ru
