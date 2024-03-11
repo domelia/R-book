@@ -3,13 +3,14 @@ project:
   output-dir: docs
 book:
   title: R в социологических исследованиях
-  author: Дарья Омельченко
+  author:
+  - name: Дарья Омельченко
+    orcid: 0000-0002-2839-5070
+    email: omelchenko@socio.asu.ru
   search: true
   repo-url: https://github.com/domelia/R-book/
   repo-actions: edit
   cover-image: cover.jpg
-  downloads:
-  - epub
   chapters:
   - index.qmd
   - About-R.qmd
