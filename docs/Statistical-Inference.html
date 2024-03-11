@@ -1413,7 +1413,7 @@ P value adjustment method: BH </code></pre>
 <blockquote class="blockquote">
 <p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Пример</strong>: Одной из извечных российских проблем являются дороги. Для повышения безопасности и комфорта дорожного движения созден специальный национальный проект - «Безопасные качественные дороги», постоянно проводятся профилактические мероприятия, направленные на повышение уровня информированности граждан о правилах дорожного движения, ответственности и сознательности, как водителей, так и пешеходов. Допустим, мы хотели бы выяснить, как меняется ситуация на дорогах, происходит ли снижение количества погибших в ДТП за последние пять лет.</p>
 </blockquote>
-<p><a href="https://github.com/domelia/rcourse/blob/main/dtp.xls">Скачать данные</a></p>
+<p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/dtp.xls">Скачать данные</a></p>
 <p>Загрузим данные Росстата о количестве погибших в ДТП на 100 тыс. населения:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
@@ -1628,8 +1628,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p><span class="math display">\[MS_{error}=\frac{SS_{error}}{(n-1)(k-1)}\]</span></p>
 <p>Рассмотрим возможности применения данного метода на следующем примере:</p>
 <blockquote class="blockquote">
-<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon><strong>Пример</strong>: В исследовании изучалось влияние на восприятие алкогольных напитков различной информации. Сравнивались три напитка – вода, вино и пиво. Участники эксперимента смотрели положительные, нейтральные и негативные информационные материалы, а затем оценивали свое отношение к напитку по шкале от -100 до 100. <a href="https://github.com/domelia/rcourse/blob/main/Alcohol_Attitudes.csv">Скачать данные</a></p>
+<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon><strong>Пример</strong>: В исследовании изучалось влияние на восприятие алкогольных напитков различной информации. Сравнивались три напитка – вода, вино и пиво. Участники эксперимента смотрели положительные, нейтральные и негативные информационные материалы, а затем оценивали свое отношение к напитку по шкале от -100 до 100.</p>
 </blockquote>
+<p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/Alcohol_Attitudes.csv">Скачать данные</a></p>
 <div id="fig-beers" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-beers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1785,9 +1786,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </figure>
 </div>
 <p>Является аналогом ANOVA с повторными измерениями и непараметрического дисперсионного анализа для связанных выборок.</p>
-<p>Алгоритм рассета следующий:</p>
+<p>Алгоритм следующий:</p>
 <ul>
-<li>представить данные в виде матрицы $ {x_{ij} }_{n*k}с $<span class="math inline">\(n\)</span> количеством строк и <span class="math inline">\(k\)</span> количеством столбцов</li>
+<li>представить данные в виде матрицы $ {x_{ij} }_{n*k}$ с <span class="math inline">\(n\)</span> количеством строк и <span class="math inline">\(k\)</span> количеством столбцов</li>
 <li>заменить исходные значения на ранги (<span class="math inline">\(r\)</span>) по каждой строке.</li>
 <li>посчитать сумму рангов (<span class="math inline">\(R\)</span>) по каждому столбцу</li>
 <li>подставить значения в формулу:</li>
@@ -1964,15 +1965,13 @@ sample estimates:
 <p>На первый взгляд кажется, что женщины, действительно, воспринимают риски тающих ледников как более серьезные. Но как это доказать?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>V19<span class="ot">&lt;-</span>sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(df<span class="sc">$</span>V19)</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>V19)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Да, представляет Нет, не представляет 
-                 476                  396 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>pr_test<span class="ot">&lt;-</span><span class="fu">prop_test</span>(df, V19 <span class="sc">~</span> V1, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Мужской"</span>, <span class="st">"Женский"</span>))</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>pr_test</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V19=</span><span class="fu">case_when</span>(</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="st">"Да"</span>,</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">2</span><span class="sc">~</span><span class="st">"Нет"</span></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>pr_test<span class="ot">&lt;-</span><span class="fu">prop_test</span>(df, V19 <span class="sc">~</span> V1, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Мужской"</span>, <span class="st">"Женский"</span>))</span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a>pr_test</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   statistic chisq_df     p_value alternative lower_ci upper_ci
@@ -2010,7 +2009,7 @@ sample estimates:
 <p>Запрещается: использовать хи-квадрат для анализа непрерывных абсолютных данных, процентов и долей без предварительной перекодировки!</p>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>V19)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>V19)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -2021,8 +2020,18 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </div>
 <p>Одной из наиболее удачных идей визуализации таблиц сопряженности являются мозаичные диаграммы:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>( <span class="sc">~</span> V19 <span class="sc">+</span> V1, <span class="at">data =</span> df, <span class="at">gp =</span> shading_Friendly, <span class="at">ylab=</span><span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">options</span>(<span class="at">OutDec=</span> <span class="st">","</span>) </span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим базовую таблицу</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>M<span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>V19, df<span class="sc">$</span>V1)</span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co">#подпишем оси</span></span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">dimnames</span>(M)) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Опасны ли тающие ледники?"</span>,<span class="st">"Пол"</span>)</span>
+<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим таблицу с надписями</span></span>
+<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">prop.table</span>(M,<span class="at">margin=</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="co">#обычная мозаичная диаграмма</span></span>
+<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(M, <span class="at">pop =</span> <span class="cn">FALSE</span>, <span class="at">shade =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="co">#добавим значения в ячейках</span></span>
+<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labeling_cells</span>(<span class="at">text =</span> labs, <span class="at">margin =</span> <span class="dv">0</span>)(M)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2031,45 +2040,14 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </div>
 </div>
 </div>
-<p>Еще примеры:</p>
+<p>Еще один вариант - структурный график:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"HairEyeColor"</span>)</span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mplot</span>(</span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assoc</span>(HairEyeColor[,,<span class="at">Sex=</span><span class="st">"Female"</span>], <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">6</span>), <span class="at">shade=</span>T, <span class="at">return_grob=</span>T, <span class="at">main=</span><span class="st">"Female"</span>),</span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assoc</span>(HairEyeColor[,,<span class="at">Sex=</span><span class="st">"Male"</span>],   <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">6</span>), <span class="at">shade=</span>T, <span class="at">return_grob=</span>T, <span class="at">main=</span><span class="st">"Male"</span>)</span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>struct <span class="ot">&lt;-</span> <span class="fu">structable</span>(<span class="sc">~</span> V19 <span class="sc">+</span> V1, <span class="at">data =</span> df)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assoc</span>(struct, <span class="at">data =</span> df, <span class="at">shade=</span>T, <span class="at">labeling_args =</span> <span class="fu">list</span>(<span class="at">set_varnames =</span> <span class="fu">c</span>(<span class="at">V1 =</span> <span class="st">"Пол"</span>, <span class="at">V19=</span><span class="st">"Опасны ли тающие ледники?"</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2092,25 +2070,25 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </ul>
 <p><span class="math display">\[\chi^2=\frac{(b-c)^2}{b+c}\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>Performance <span class="ot">&lt;-</span></span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">794</span>, <span class="dv">86</span>, <span class="dv">150</span>, <span class="dv">570</span>),</span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">"1st Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>),</span>
-<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2nd Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>)))</span>
-<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>Performance</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>Performance <span class="ot">&lt;-</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">794</span>, <span class="dv">86</span>, <span class="dv">150</span>, <span class="dv">570</span>),</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">"1st Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>),</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2nd Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>)))</span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>Performance</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            2nd Survey
 1st Survey   Approve Disapprove
   Approve        794        150
   Disapprove      86        570</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(Performance)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(Performance)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     McNemar's Chi-squared test with continuity correction
 
 data:  Performance
-McNemar's chi-squared = 16.818, df = 1, p-value = 4.115e-05</code></pre>
+McNemar's chi-squared = 16,818, df = 1, p-value = 4,115e-05</code></pre>
 </div>
 </div>
 </section>
@@ -2123,8 +2101,8 @@ McNemar's chi-squared = 16.818, df = 1, p-value = 4.115e-05</code></pre>
 </ol>
 <p>Данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>Провести анализ таблиц сопряженности по исследованию по климату (две таблицы на ваш выбор) с помощью критерия хи-квадрат. Создать мозаичную диаграмму и ассоциативный график.</li>
