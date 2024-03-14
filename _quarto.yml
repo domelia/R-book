@@ -23,7 +23,7 @@ book:
   - Base_ggplot2.qmd
   - ExploratoryDataAnalysis.qmd
   - Statistical-Inference.qmd
-  - lesson12.qmd
+  - PCA.qmd
   - lesson13.qmd
 lang: ru
 comments:

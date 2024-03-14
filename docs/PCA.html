@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R в социологических исследованиях - 11&nbsp; Основы многомерного анализа: снижение размерности</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lesson13.html" rel="next">
+<link href="./Statistical-Inference.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./PCA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R в социологических исследованиях</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/domelia/R-book/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">В качестве предисловия…</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./About-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Install-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-types-and-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Типы и структуры данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro-to-RMarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImportExport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TidyverseTransformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Base_ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Основы визуализации в ggplot2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ExploratoryDataAnalysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разведочный анализ данных в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Statistical-Inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Статистический вывод и тестирование исследовательских гипотез</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PCA.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lesson13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#общие-цели-занятия-и-возможности-библиотекиfactoextra" id="toc-общие-цели-занятия-и-возможности-библиотекиfactoextra" class="nav-link active" data-scroll-target="#общие-цели-занятия-и-возможности-библиотекиfactoextra"><span class="header-section-number">11.1</span> Общие цели занятия и возможности библиотеки<code>factoextra</code></a>
+  <ul class="collapse">
+  <li><a href="#как-сделать-правильный-выбор" id="toc-как-сделать-правильный-выбор" class="nav-link" data-scroll-target="#как-сделать-правильный-выбор"><span class="header-section-number">11.1.1</span> Как сделать правильный выбор?</a></li>
+  <li><a href="#установка-и-загрузка-библиотек" id="toc-установка-и-загрузка-библиотек" class="nav-link" data-scroll-target="#установка-и-загрузка-библиотек"><span class="header-section-number">11.1.2</span> Установка и загрузка библиотек</a></li>
+  </ul></li>
+  <li><a href="#метод-главных-компонент-principal-component-analysis" id="toc-метод-главных-компонент-principal-component-analysis" class="nav-link" data-scroll-target="#метод-главных-компонент-principal-component-analysis"><span class="header-section-number">11.2</span> Метод главных компонент (Principal component analysis)</a>
+  <ul class="collapse">
+  <li><a href="#собственные-значения-и-собственные-вектора" id="toc-собственные-значения-и-собственные-вектора" class="nav-link" data-scroll-target="#собственные-значения-и-собственные-вектора"><span class="header-section-number">11.2.1</span> Собственные значения и собственные вектора</a></li>
+  <li><a href="#сингулярное-разложение" id="toc-сингулярное-разложение" class="nav-link" data-scroll-target="#сингулярное-разложение"><span class="header-section-number">11.2.2</span> Сингулярное разложение</a></li>
+  <li><a href="#стандартизация-данных" id="toc-стандартизация-данных" class="nav-link" data-scroll-target="#стандартизация-данных"><span class="header-section-number">11.2.3</span> Стандартизация данных</a></li>
+  <li><a href="#визуализация-и-интерпретация" id="toc-визуализация-и-интерпретация" class="nav-link" data-scroll-target="#визуализация-и-интерпретация"><span class="header-section-number">11.2.4</span> Визуализация и интерпретация</a></li>
+  <li><a href="#собственные-значения-дисперсия" id="toc-собственные-значения-дисперсия" class="nav-link" data-scroll-target="#собственные-значения-дисперсия"><span class="header-section-number">11.2.5</span> Собственные значения / Дисперсия</a></li>
+  <li><a href="#результаты.-работаем-с-переменными" id="toc-результаты.-работаем-с-переменными" class="nav-link" data-scroll-target="#результаты.-работаем-с-переменными"><span class="header-section-number">11.2.6</span> Результаты. Работаем с переменными</a></li>
+  <li><a href="#корреляционный-круг" id="toc-корреляционный-круг" class="nav-link" data-scroll-target="#корреляционный-круг"><span class="header-section-number">11.2.7</span> Корреляционный круг</a></li>
+  <li><a href="#качество-представленности-переменных" id="toc-качество-представленности-переменных" class="nav-link" data-scroll-target="#качество-представленности-переменных"><span class="header-section-number">11.2.8</span> Качество представленности переменных</a></li>
+  <li><a href="#оценка-вклада-переменной-в-компоненту" id="toc-оценка-вклада-переменной-в-компоненту" class="nav-link" data-scroll-target="#оценка-вклада-переменной-в-компоненту"><span class="header-section-number">11.2.9</span> Оценка вклада переменной в компоненту</a></li>
+  <li><a href="#анализ-по-группам" id="toc-анализ-по-группам" class="nav-link" data-scroll-target="#анализ-по-группам"><span class="header-section-number">11.2.10</span> Анализ по группам</a></li>
+  <li><a href="#описание-отдельных-измерений" id="toc-описание-отдельных-измерений" class="nav-link" data-scroll-target="#описание-отдельных-измерений"><span class="header-section-number">11.2.11</span> Описание отдельных измерений</a></li>
+  <li><a href="#анализ-отдельных-наблюдений" id="toc-анализ-отдельных-наблюдений" class="nav-link" data-scroll-target="#анализ-отдельных-наблюдений"><span class="header-section-number">11.2.12</span> Анализ отдельных наблюдений</a></li>
+  <li><a href="#графики-качества-и-вкладов" id="toc-графики-качества-и-вкладов" class="nav-link" data-scroll-target="#графики-качества-и-вкладов"><span class="header-section-number">11.2.13</span> Графики качества и вкладов</a></li>
+  <li><a href="#анализ-по-группам-1" id="toc-анализ-по-группам-1" class="nav-link" data-scroll-target="#анализ-по-группам-1"><span class="header-section-number">11.2.14</span> Анализ по группам</a></li>
+  <li><a href="#создаем-биплот" id="toc-создаем-биплот" class="nav-link" data-scroll-target="#создаем-биплот"><span class="header-section-number">11.2.15</span> Создаем биплот</a></li>
+  <li><a href="#дополнительные-элементы" id="toc-дополнительные-элементы" class="nav-link" data-scroll-target="#дополнительные-элементы"><span class="header-section-number">11.2.16</span> Дополнительные элементы</a></li>
+  <li><a href="#количественные-переменные" id="toc-количественные-переменные" class="nav-link" data-scroll-target="#количественные-переменные"><span class="header-section-number">11.2.17</span> Количественные переменные</a></li>
+  <li><a href="#данные-по-наблюдениям" id="toc-данные-по-наблюдениям" class="nav-link" data-scroll-target="#данные-по-наблюдениям"><span class="header-section-number">11.2.18</span> Данные по наблюдениям</a></li>
+  <li><a href="#данные-по-качественным-переменным" id="toc-данные-по-качественным-переменным" class="nav-link" data-scroll-target="#данные-по-качественным-переменным"><span class="header-section-number">11.2.19</span> Данные по качественным переменным</a></li>
+  <li><a href="#фильтр-результатов" id="toc-фильтр-результатов" class="nav-link" data-scroll-target="#фильтр-результатов"><span class="header-section-number">11.2.20</span> Фильтр результатов</a></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">11.2.21</span> Самостоятельная работа</a></li>
+  <li><a href="#источники" id="toc-источники" class="nav-link" data-scroll-target="#источники"><span class="header-section-number">11.2.22</span> Источники</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/PCA.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="общие-цели-занятия-и-возможности-библиотекиfactoextra" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="общие-цели-занятия-и-возможности-библиотекиfactoextra"><span class="header-section-number">11.1</span> Общие цели занятия и возможности библиотеки<code>factoextra</code></h2>
+<p><strong>Многомерный анализ данных</strong> представляет собой сложную, но очень интересную задачу, которая часто встречается в деятельности аналитика данных. Задачи анализа взаимосвязей между переменными, их структурирование в виде кластеров, факторов, компонент и представление в визуально интерпретируемом виде часто встречаются, как в фундаментальных, так и прикладных исследованиях.</p>
+<p>Многомерный анализ основан на принципе многомерной статистики, который предполагает наблюдение и анализ более чем одной переменной за один раз. Обычно многомерный анализ используется для решения ситуаций, когда в ходе научного эксперимента выполняются несколько измерений, и взаимосвязь между этими измерениями и их структурами имеет важное значение.</p>
+<p>Многомерный анализ охватывает большой репертуар методов, включая факторный анализ, кластерный анализ, регрессионный анализ, метод главных компонент и другие, поэтому эта обширная тема, в которой мы изучим только некоторые направления анализа.</p>
+<p>Многомерный анализ включает в себя:</p>
+<ul>
+<li>модели, основанные на многомерном нормальном распределении и генерализованные модели, а также распределений</li>
+<li>измерение и анализ взаимосвязей между отдельными переменными</li>
+<li>расчеты вероятностей на многомерных данных</li>
+<li>Изучение структур и паттернов в данных</li>
+</ul>
+<p>Для подобных целей на языке R разработано множество библиотек, но определенными преимуществами обладает одна из них - <code>factoextra</code>. Ее цель заключается в извлечении результатов и визуализации <strong>эксплораторного</strong> многомерного анализа данных, включая:</p>
+<p><strong>Метод главных компонент - Principal Component Analysis (PCA)</strong> - анализирующий количественные (непрерывные) переменные путем сокращения размерности данных без потери важной информации (например, представление множества шкал психологических тестов в виде нескольких компонент или представление множества показателей социально-экономического развития регионов в виде нескольких интегральных показателей).</p>
+<p><strong>Корреспондентский анализ (анализ соответствий) - Correspondence Analysis (CA)</strong>, выступающий расширением метода главных компонент для анализа больших таблиц сопряженности, образуемых на основе двух качественных переменных (категориальных данных)(например, продукты и их характеристики, метод хорошо подходит для вопросов с множественным выбором).</p>
+<p><strong>Множественный корреспондентский анализ, множественный анализ соответствий - Multiple Correspondence Analysis (MCA)</strong>, являющийся адаптацией метода CA к таблице данных, содержащих более двух категориальных переменных (например, взаимосвязь между занятостью, национальностью и полом).</p>
+<p><strong>Множественный факторный анализ - Multiple Factor Analysis (MFA)</strong> - предназначен для работы с данными, где переменные организованы в группы, блоки или наборы (качественных и / или количественных) переменныех. MFA позволяет обнаружить общие структуры, присутствующие во всех или некоторых наборах данных. Выполняется в два этапа. На первом этапе на каждом наборе данных проводится анализ главных компонент, а затем исходные данные в каждом наборе «нормализуются» путем деления каждого элемента на квадратный корень из собственного значения, полученного из МГК на данном наборе. Затем, нормализованные данные объединяются в единую матрицу, над которой проводится общий анализ главных компонент, а индивидуальные наборы данных проектируются на результаты этого анализа, чтобы найти общие зависимости и расхождения <span class="citation" data-cites="abdi2007multiple">(<a href="Statistical-Inference.html#ref-abdi2007multiple" role="doc-biblioref">Abdi, Valentin, и др. 2007</a>)</span></p>
+<p><strong>Иерархический множественный факторный анализ - Hierarchical Multiple Factor Analysis (HMFA)</strong>: расширение метода MFA, подходящий для ситуации, где данные организованы в иерархические структуры.</p>
+<p><strong>Факторный анализ смешанных данных - Factor Analysis of Mixed Data (FAMD)</strong> - особый случай MFA, предназначенный для анализа данных, содержащих как количественные, так и качественные переменные.</p>
+<div class="alert alert-info" role="alert">
+<p><strong>Важно!</strong> Сам анализ проводится с помощью других библиотек, библиотека factoextra используется для извлечения результатов и визуализации.</p>
+</div>
+<p>Существует большое количество пакетов, в которых можно сделать анализ главных компонент, например, <code>FactoMineR</code>, <code>ade4</code>, <code>stats</code>, <code>ca</code>, <code>MASS</code> и <code>ExPosition</code>.</p>
+<p>Результаты будут представлены по-разному, в зависимости от того, какие функции будут использованы. Помочь в интерпретации и визуализации полученных результатов многомерного анализа, например, кластерного анализа или результатов снижения размерности, нам как раз и поможет библиотека <code>factoextra</code>.</p>
+<p>В рамках данного занятия мы будем использовать библиотеку <code>FactoMineR</code> <span class="citation" data-cites="le2008factominer">(<a href="Statistical-Inference.html#ref-le2008factominer" role="doc-biblioref">Lê, Josse, и Husson 2008</a>)</span> для расчетов, а библиотеку <code>factoextra</code> для извлечения и анализа результатов.</p>
+<p>С какими методами может работать библиотека <code>factoextra</code>:</p>
+<p><img src="https://cran.r-project.org/web/packages/factoextra/readme/tools/factoextra-r-package.png" class="img-fluid"></p>
+<section id="как-сделать-правильный-выбор" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="как-сделать-правильный-выбор"><span class="header-section-number">11.1.1</span> Как сделать правильный выбор?</h3>
+<p>Выбор метода для анализа будет зависеть от формата данных и их структуры:</p>
+<p>Так, например, если у нас количественные данные, то нам подойдет метод главных компонент, а если качественные, то в зависимости от их количества - анализ соответствий - простой или множественный.</p>
+<p>В случае, если данные разной природы, то нам лучше обратиться к смешанным методам - иерархическому множественному факторному анализу или факторному анализу для смешанных данных. . <img src="https://cran.r-project.org/web/packages/factoextra/readme/tools/multivariate-analysis-factoextra.png" class="img-fluid"></p>
+</section>
+<section id="установка-и-загрузка-библиотек" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="установка-и-загрузка-библиотек"><span class="header-section-number">11.1.2</span> Установка и загрузка библиотек</h3>
+<p>Устанавливаем библиотеки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"factoextra"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"FactoMineR"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Загружаем:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"factoextra"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: пакет 'factoextra' был собран под R версии 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Загрузка требуемого пакета: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"FactoMineR"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: пакет 'FactoMineR' был собран под R версии 4.3.3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="метод-главных-компонент-principal-component-analysis" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="метод-главных-компонент-principal-component-analysis"><span class="header-section-number">11.2</span> Метод главных компонент (Principal component analysis)</h2>
+<p>Метод главных компонент (PCA) позволяет суммировать и визуализировать информацию, представленную в наборе данных, где некоторые индивиды / наблюдения описываются через большое количество взаимосвязанных друг с другом количественных переменных. Каждая переменная может быть представлена в качестве отдельного измерения. Если переменных больше трех, то визуализация результатов становится затруднительным.</p>
+<p>Метод главных компонент извлекает информацию из многомерной таблицы данных <span class="math inline">\(n \times k\)</span> и представляет ее в виде новых переменных, чье количество меньше количества исходных переменных.</p>
+<p>Это новые переменные и называются <strong>главные компоненты</strong>, они являются линейной комбинацией исходных переменных. Количество главных компонент всегда меньше или равно количеству исходных переменных.</p>
+<p>Информация набора данных соответствует дисперсии переменных, которые в него входят.</p>
+<p>Цель МГК заключается в идентификации главных компонент, описывающих максимум дисперсии переменных. Снижение размерности заключается в определении ведущих направлений (векторов), или главных компонент, показывающих изменение данных.</p>
+<p>Метод МГК предполагает, что эти главные направления описывают большую часть дисперсии, поэтому являются более важными.</p>
+<div id="fig-proj" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://i.stack.imgur.com/Q7HIP.gif" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-proj-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;11.1
+</figcaption>
+</figure>
+</div>
+<p>Другими словами, МГК сокращает размерность данных, путем выделения двух или трех самых важных компонент, которые мы может визуализировать графически и минимальной потерей информации.</p>
+<p>Таким образом, главными задачами метода главных компонент являются:</p>
+<ul>
+<li>выявление скрытой структуры в наборе данных,</li>
+<li>снизить размерность данных, путем удаления статистического шума и избыточных переменных</li>
+<li>идентифицировать взаимосвязанные переменные</li>
+</ul>
+<p>На практике этот метод реализуется двумя возможными подходами:</p>
+<ul>
+<li>путем разложения исходной матрицы взаимосвязей (ковариаций или корреляций) на произведение матриц собственных значений и собственных векторов</li>
+<li>путем сингулярного разложения данной матрицы.</li>
+</ul>
+<section id="собственные-значения-и-собственные-вектора" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="собственные-значения-и-собственные-вектора"><span class="header-section-number">11.2.1</span> Собственные значения и собственные вектора</h3>
+<p>Допустим наши данные представлены в матрице <span class="math inline">\(\mathbf X\)</span> размера <span class="math inline">\(n \times p\)</span>, где <span class="math inline">\(n\)</span> – количество наблюдений, а <span class="math inline">\(p\)</span> – количество признаков. Наши данные должны быть центрированы, то есть в каждом столбце из каждого элемента должно быть вычтено среднее значение, так чтобы среднее значение по каждому признаку равнялось нулю.</p>
+<p>Тогда <span class="math inline">\(p \times p\)</span> матрица ковариаций <span class="math inline">\(\mathbf C\)</span> может быть представлена как:</p>
+<p><span class="math display">\[\mathbf C = \mathbf X^\top \mathbf X/(n-1)\]</span></p>
+<p>Поскольку эта матрица симметричная, она может быть диагонализирована, то есть представлена в виде произведения трех матриц, в результате чего находится соответствующая диагональной матрицы собственных значений:</p>
+<p><span class="math display">\[\mathbf C = \mathbf V \mathbf L \mathbf V^\top,\]</span></p>
+<p>где <span class="math inline">\(\mathbf V\)</span> - это матрица собственных векторов,а <span class="math inline">\(\mathbf L\)</span> - это диагональная матрица, на диагонали которой находятся собственные значения <span class="math inline">\(λ_i\)</span>, упорядоченные по убыванию:</p>
+<p><span class="math display">\[\mathbf L = \begin{bmatrix}
+\lambda_1 &amp;  &amp; &amp; \\
+&amp; \lambda_2 &amp; &amp; \\
+&amp; &amp; \lambda_{...} &amp; \\
+&amp; &amp; &amp; \lambda_p  \\
+\end{bmatrix}\]</span></p>
+<p>Собственные вектора называются <strong>главными осями</strong> или <strong>главными направлениями</strong>.</p>
+<p>Проекции данных на главные оси собственно и называются <strong>главными компонентами</strong>, представляющими собой новые, трансформированные переменные.</p>
+<p>Главная компонента <span class="math inline">\(j\)</span> находится в <span class="math inline">\(j\)</span> столбце матрицы <span class="math inline">\(\mathbf {XV}\)</span>.</p>
+<p>Координаты <span class="math inline">\(i-ой\)</span> точки данных в новом пространстве главных компонент заданы <span class="math inline">\(i-й\)</span> строкой <span class="math inline">\(\mathbf XV\)</span>.</p>
+<p>Для нахождения собственных значений решается характеристическое уравнение:</p>
+<p><span class="math display">\[|\mathbf C-\mathbf \Lambda \mathbf I|\vec{x}=0,\]</span></p>
+<p>предполагающее вычисление детерминанта <span class="math inline">\(|\mathbf C-\mathbf \Lambda \mathbf I|\)</span> и корней уравнения степени <span class="math inline">\(n\)</span>, в результате которого находятся <span class="math inline">\(\lambda_1, \lambda_2, ... \lambda_p\)</span>.</p>
+<p>Далее, путем подстановки собственных значений в исходное уравнение, для каждого <span class="math inline">\(\lambda\)</span> находится собственный вектор.</p>
+<p>Фундаментальным для метода главных компонент является уравнение:</p>
+<p><span class="math display">\[\mathbf C=\mathbf A \mathbf {A}',\]</span></p>
+<p>где <span class="math inline">\(\mathbf A\)</span> – матрица нагрузок, а <span class="math inline">\(\mathbf {A}'\)</span> - транспонированная ей матрица.</p>
+<p>Нагрузки получаются путем умножения собственных векторов на квадрат из собственных значений:</p>
+<p><span class="math display">\[\mathbf A= \mathbf V \sqrt{\mathbf \Lambda}\]</span></p>
+<p>Таким образом, главную компоненту можно представить как линейную комбинацию исходных данных и компонентных нагрузок.</p>
+<p>Пример с первой компонентой:</p>
+<p><span class="math display">\[PC_k = a_{k1}X_1 + a_{k2}X_2 + … + a_{kp}X_p,\]</span></p>
+<p>где a<span class="math inline">\(_ij\)</span> является нагрузкой переменной <span class="math inline">\(x_j\)</span> по компоненте <span class="math inline">\(PC_i\)</span>, <span class="math inline">\(x_j\)</span> – <span class="math inline">\(j-ая\)</span> переменная матрицы признаков <span class="math inline">\(\mathbf X\)</span>.</p>
+</section>
+<section id="сингулярное-разложение" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="сингулярное-разложение"><span class="header-section-number">11.2.2</span> Сингулярное разложение</h3>
+<p>Когда мы осуществляем сингулярное разложение матрицы взаимосвязей, у нас получается несколько иная картина:</p>
+<p><span class="math display">\[\mathbf X = \mathbf U \mathbf S \mathbf V^\top,\]</span></p>
+<p>где <span class="math inline">\(\mathbf U\)</span> - являются унитарной матрицей (столбцы которой называются левыми сингулярными векторами), <span class="math inline">\(\mathbf S\)</span> - диагональная матрица сингулярных значений <span class="math inline">\(s_i\)</span>, а столбцы матрицы <span class="math inline">\(\mathbf V\)</span> называются правыми сингулярными векторами.</p>
+<p>Правые сингулярные вектора – это и есть собственные вектора <span class="math inline">\(A^\top A\)</span>, то есть между методами есть тесная взаимосвязь, и <span class="math inline">\(\lambda_i = s_i^2/(n-1)\)</span>.</p>
+<blockquote class="blockquote">
+<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Пример</strong>: Рассмотрим пример с данными соревнований по десятиборью, в которые входят следующие дисциплины:</p>
+</blockquote>
+<ul>
+<li>“X100m” - юез на 100 метров</li>
+<li>“Long.jump” - прыжки в длину</li>
+<li>“Shot.put” - толкание ядра</li>
+<li>“High.jump” - прыжки в высоту</li>
+<li>“X400m” - бег на 400 метров</li>
+<li>“X110m.hurdle” - бег с препятсвиями</li>
+<li>“Discus” - метание диска</li>
+<li>“Pole.vault” - прыжок с шестом</li>
+<li>“Javeline” - метание копья</li>
+<li>“X1500m” - без на 1500 метров</li>
+</ul>
+<p><img src="https://sportsmatik.com/uploads/matik-sports-corner/matik-know-how/decathlon_1499492047_83444.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(decathlon2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(decathlon2)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X100m Long.jump Shot.put High.jump X400m X110m.hurdle Discus
+SEBRLE    11.04      7.58    14.83      2.07 49.81        14.69  43.75
+CLAY      10.76      7.40    14.26      1.86 49.37        14.05  50.72
+BERNARD   11.02      7.23    14.25      1.92 48.93        14.99  40.87
+YURKOV    11.34      7.09    15.19      2.10 50.42        15.31  46.26
+ZSIVOCZKY 11.13      7.30    13.48      2.01 48.62        14.17  45.67
+McMULLEN  10.83      7.31    13.76      2.13 49.91        14.38  44.41
+          Pole.vault Javeline X1500m Rank Points Competition
+SEBRLE          5.02    63.19  291.7    1   8217    Decastar
+CLAY            4.92    60.15  301.5    2   8122    Decastar
+BERNARD         5.32    62.77  280.1    4   8067    Decastar
+YURKOV          4.72    63.44  276.4    5   8036    Decastar
+ZSIVOCZKY       4.42    55.37  268.0    7   8004    Decastar
+McMULLEN        4.42    56.37  285.1    8   7995    Decastar</code></pre>
+</div>
+</div>
+<p><img src="images/PCA/pic3.png" class="img-fluid"></p>
+<p>Итак, наши данные описывают выполнение атлетами испытаний в двух типах спортивных соревнований (Desctar и OlympicG). Набор содержит информацию о 27 спортсменах и 13 переменных.</p>
+<p><strong>Активные спортсмены</strong> (голубой цвел, строки 1:23) : Данные, которые будут использованы для проведения анализа методом главных компонент. <strong>Дополнительные спортсмены</strong> (синий цвет, строки 24:27) : Координаты по этим спортсменам будут использованы для предсказания параметров с помощью МГК по информации полученной по активным спортсменам / переменным <strong>Активные переменные</strong> (розовый цвет, столбцы 1:10) : переменные, используемые в МГК <strong>Дополнительные переменные</strong>: используются для предсказания, включая:</p>
+<p><strong>Дополнительные количественные переменные</strong> (красные): Столбцы 11 и 12 соответствуют рангу и баллам.</p>
+<p><strong>Дополнительные качественные переменные</strong> (зеленые): данные по соревнованиям (категориальная переменная).</p>
+<p>Начнем с разделения наших данных на активные и дополнительные части:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>decathlon2.active <span class="ot">&lt;-</span> decathlon2[<span class="dv">1</span><span class="sc">:</span><span class="dv">23</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(decathlon2.active[, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>], <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        X100m Long.jump Shot.put High.jump X400m X110m.hurdle
+SEBRLE  11.04      7.58    14.83      2.07 49.81        14.69
+CLAY    10.76      7.40    14.26      1.86 49.37        14.05
+BERNARD 11.02      7.23    14.25      1.92 48.93        14.99
+YURKOV  11.34      7.09    15.19      2.10 50.42        15.31</code></pre>
+</div>
+</div>
+</section>
+<section id="стандартизация-данных" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="стандартизация-данных"><span class="header-section-number">11.2.3</span> Стандартизация данных</h3>
+<p>Когда проводится анализ главных компонент, переменные часто стандартизируются. Эта процедура особенно рекомендуется тогда, когда переменные измеряются в разных единицах (килограммы, сантиметры и пр.).</p>
+<p>Главная цель стандартизации - сделать переменные сопоставимыми. Обычно стандартизация происходит таким образом, чтобы переменная имела 1) стандартное отклонение равным 1, и 2) среднее значение 0.</p>
+<p>Типичная формула для стандартизации:</p>
+<p><span class="math display">\[\frac{x_i−mean(x)}{sd(x)}\]</span></p>
+<p>Где <span class="math inline">\(mean(x)\)</span> это среднее значение, а <span class="math inline">\(sd(x)\)</span> стандартное отклонение (SD).</p>
+<p>Вы уже знакомы с функцией <code>scale()</code>, которая может быть использована для стандартизации.</p>
+<p>Однако, стандартизация может быть осуществлена сразу в процессе анализа (это действие по умолчанию).</p>
+<p>Проведем анализ главных компонент на активных данных по декатлону:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res.pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(decathlon2.active, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>На выходе функции мы получаем следующие результаты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(res.pca)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>**Results for the Principal Component Analysis (PCA)**
+The analysis was performed on 23 individuals, described by 10 variables
+*The results are available in the following objects:
+
+   name               description                          
+1  "$eig"             "eigenvalues"                        
+2  "$var"             "results for the variables"          
+3  "$var$coord"       "coord. for the variables"           
+4  "$var$cor"         "correlations variables - dimensions"
+5  "$var$cos2"        "cos2 for the variables"             
+6  "$var$contrib"     "contributions of the variables"     
+7  "$ind"             "results for the individuals"        
+8  "$ind$coord"       "coord. for the individuals"         
+9  "$ind$cos2"        "cos2 for the individuals"           
+10 "$ind$contrib"     "contributions of the individuals"   
+11 "$call"            "summary statistics"                 
+12 "$call$centre"     "mean of the variables"              
+13 "$call$ecart.type" "standard error of the variables"    
+14 "$call$row.w"      "weights for the individuals"        
+15 "$call$col.w"      "weights for the variables"          </code></pre>
+</div>
+</div>
+</section>
+<section id="визуализация-и-интерпретация" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="визуализация-и-интерпретация"><span class="header-section-number">11.2.4</span> Визуализация и интерпретация</h3>
+<p>Мы будем использовать библиотеку <code>factoextra</code>, чтобы разобраться с результатами анализа.</p>
+<p>Полезные функции:</p>
+<ul>
+<li>get_eigenvalue(res.pca): - извлекает собственные значения / дисперсию главных компонент</li>
+<li>fviz_eig(res.pca): визуализация собственных значений</li>
+<li>get_pca_ind(res.pca), get_pca_var(res.pca) - извлекает результаты для наблюдений и переменных</li>
+<li>fviz_pca_ind(res.pca), fviz_pca_var(res.pca) - визуализирует результаты по наблюдениям и переменным</li>
+<li>fviz_pca_biplot(res.pca) - создает двойной график (биплот) по индивидам и переменным</li>
+</ul>
+</section>
+<section id="собственные-значения-дисперсия" class="level3" data-number="11.2.5">
+<h3 data-number="11.2.5" class="anchored" data-anchor-id="собственные-значения-дисперсия"><span class="header-section-number">11.2.5</span> Собственные значения / Дисперсия</h3>
+<p>Собственные значения показывают, какую долю дисперсии переменных представляет каждая компонента. Собственные значения больше для первых компонент и меньше - для последующих.</p>
+<p>Собственные значения могут быть использованы для определения количества главных компонент, которые достойны рассмотрения.</p>
+<p>Для получения информации о собственных значниях и дисперсии можно использовать следующий код:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>eig.val <span class="ot">&lt;-</span> <span class="fu">get_eigenvalue</span>(res.pca)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>eig.val</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       eigenvalue variance.percent cumulative.variance.percent
+Dim.1   4.1242133        41.242133                    41.24213
+Dim.2   1.8385309        18.385309                    59.62744
+Dim.3   1.2391403        12.391403                    72.01885
+Dim.4   0.8194402         8.194402                    80.21325
+Dim.5   0.7015528         7.015528                    87.22878
+Dim.6   0.4228828         4.228828                    91.45760
+Dim.7   0.3025817         3.025817                    94.48342
+Dim.8   0.2744700         2.744700                    97.22812
+Dim.9   0.1552169         1.552169                    98.78029
+Dim.10  0.1219710         1.219710                   100.00000</code></pre>
+</div>
+</div>
+<p>Сумма всех собственных значений равняется 10, то есть общему количеству переменных.</p>
+<p>Доля дисперсии, объясняемой каждым собственным значением, представлена во второй колонке.</p>
+<p>Например, если 4.124 разделить на 10 получится 0.4124, или около 41.24% изменчивости, объясненной первой компонентой.</p>
+<p>Кумулятивный процент представлен в последнем столбце</p>
+<p>Видим, что четыре первых компоненты объясняют 80% дисперсии.</p>
+<p>Собственные значения могут быть использованы для определения количества компонент: (Kaiser 1961):</p>
+<ul>
+<li>По правилу Кайзера собственное значение &gt; 1 обозначает, что эта главная компонента описывает дисперсию хотя бы одной переменной.</li>
+</ul>
+<p>Мы можем также ограничить число компонент теми, которые описывают какую-то определенную долю дисперсии (например, 70%).</p>
+<p>Единого правила не существует!</p>
+<p>В нашем анализе первые три компоненты объясняют 72% дисперсии, это достаточно приемлемый результат.</p>
+<p>Альтернативный метод заключается в рассмотрении диаграммы рассеяния собственных значений, упорядоченных по убыванию (правило локтя или каменистой осыпи).</p>
+<p>Отбирается количество компонент выше точки, фиксирующей спад собственных значений, которые становятся очень близки друг другу (Jollife 2002, Peres-Neto, Jackson, and Somers (2005)).</p>
+<p>Попробуем сделать такой график:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(res.pca, <span class="at">addlabels =</span> <span class="cn">TRUE</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="результаты.-работаем-с-переменными" class="level3" data-number="11.2.6">
+<h3 data-number="11.2.6" class="anchored" data-anchor-id="результаты.-работаем-с-переменными"><span class="header-section-number">11.2.6</span> Результаты. Работаем с переменными</h3>
+<p>Самый простой способ извлечь информацию о переменных, это воспользоваться функцией <code>get_pca_var()</code>.</p>
+<p>Эта функция предоставляет список матриц, содержащих результаты для активных переменных (координаты, корреляцию между переменными и осями, квадрат косинуса и вклады).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="fu">get_pca_var</span>(res.pca)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>var</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Component Analysis Results for variables
+ ===================================================
+  Name       Description                                    
+1 "$coord"   "Coordinates for the variables"                
+2 "$cor"     "Correlations between variables and dimensions"
+3 "$cos2"    "Cos2 for the variables"                       
+4 "$contrib" "contributions of the variables"               </code></pre>
+</div>
+</div>
+<p>Рассмотрим эти параметры подробнее</p>
+<ul>
+<li>var$coord: координаты, используемые для создания графика (проекции, нагрузки)</li>
+<li>var$cos2: квадрат косинуса - качество представленности переменных в факторном пространстве Рассчитывается как квадрат координат: var.cos2 = var.coord * var.coord.</li>
+<li>var$contrib: вклыды, показывает вклад переменной в главную компоненту (в процентах): contains the contributions (in percentage) of the variables to the principal components. (var.cos2 * 100) / (total cos2 of the component). Чем важнее переменная для этой компоненты, тем выше у нее вклад.</li>
+</ul>
+<p>Мы можем создать графики, основываясь либо на: 1) их качестве (cos2) или 2) на их вкладах в главные компоненты</p>
+<p>Представим результаты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Координаты</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>coord)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cos2: качество анализа</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>cos2)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Вклады в компоненты</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>contrib)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Рассмотрим, как визуализировать результаты анализа по отдельным наблюдениям и переменным и как сделать выводы о взаимосвязах между ними.</p>
+</section>
+<section id="корреляционный-круг" class="level3" data-number="11.2.7">
+<h3 data-number="11.2.7" class="anchored" data-anchor-id="корреляционный-круг"><span class="header-section-number">11.2.7</span> Корреляционный круг</h3>
+<p>Корерляция между переменной и главной компонентой используется в качестве координаты переменной на графике.</p>
+<p>Представление переменных зависит от графика наблюдений6 наблюдения представлены своими проекциями, тогда как переменные - корреляциями (Abdi, Williams 2010).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Координаты переменных</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>coord, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Dim.1       Dim.2      Dim.3      Dim.4      Dim.5
+X100m     -0.8506257 -0.17939806  0.3015564  0.0335732 -0.1944440
+Long.jump  0.7941806  0.28085695 -0.1905465 -0.1153896  0.2331567
+Shot.put   0.7339127  0.08540412  0.5175978  0.1284684 -0.2488129
+High.jump  0.6100840 -0.46521415  0.3300852  0.1445501  0.4027002</code></pre>
+</div>
+</div>
+<p>Представим переменные в виде графика:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">col.var =</span> <span class="st">"black"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Такой график показывает взаимосвязи между всеми переменными. Он может быть интерпретирован следующим образом:</p>
+<p>Переменные с положительной корреляцией сгруппированы вместе. Переменные, имеющие отрицательную корреляцию, находятся на разных сторонах графика (квадрантах). Расстояние между переменными и началом координат показывает качество переменных в факторном пространстве.</p>
+<p>Переменные, расположенные как можно дальше от начала координат, представлены лучше.</p>
+</section>
+<section id="качество-представленности-переменных" class="level3" data-number="11.2.8">
+<h3 data-number="11.2.8" class="anchored" data-anchor-id="качество-представленности-переменных"><span class="header-section-number">11.2.8</span> Качество представленности переменных</h3>
+<p>Качество представленности переменных в факторном пространстве называется <code>cos2</code> (квадрат косинуса, квадрат координаты).</p>
+<p>Их можно «добыть» следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>cos2, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Dim.1       Dim.2      Dim.3      Dim.4      Dim.5
+X100m     0.7235641 0.032183664 0.09093628 0.00112716 0.03780845
+Long.jump 0.6307229 0.078880629 0.03630798 0.01331475 0.05436203
+Shot.put  0.5386279 0.007293864 0.26790749 0.01650412 0.06190783
+High.jump 0.3722025 0.216424207 0.10895622 0.02089474 0.16216747</code></pre>
+</div>
+</div>
+<p>Мы можем визуализировать этот показатель с помощью очень интересного графика из библиотеки <code>corrplot</code> (не забываем устанавливать):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"corrplot"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.92 loaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(var<span class="sc">$</span>cos2, <span class="at">is.corr=</span><span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Можно сделать и столбчатую диаграмму (по первым двум компонентам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cos2</span>(res.pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Отметим, что: - высокие значения cos2 обозначают, что переменная хорошо описывается главной компонентой. В этом случае переменная располагается ближе к окружности на графике. - низкие значения cos2 обозначают, что переменные на очень хорошо представлены полученной компонентной структурой. В этом случае переменная - ближе к центру.</p>
+<p>Сумма всех квадратов косинуса по всем компонентам равна 1 - то есть 100% дисперсии.</p>
+<p>Сделаем цветной график, так, чтобы: - переменные с низкими значениями cos2 будут окрашены в голубой цвет - переменные со средними значениями cos2 будут иметь оранжевый цвет - переменные с высокими значениями cos2 будут иметь красный цвет</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">col.var =</span> <span class="st">"cos2"</span>,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>), </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Можно представить не с помощью цвета, а с помощью прозрачности:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">alpha.var =</span> <span class="st">"cos2"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="оценка-вклада-переменной-в-компоненту" class="level3" data-number="11.2.9">
+<h3 data-number="11.2.9" class="anchored" data-anchor-id="оценка-вклада-переменной-в-компоненту"><span class="header-section-number">11.2.9</span> Оценка вклада переменной в компоненту</h3>
+<p>Вклад переменной оценку дисперсии данной главной компоненты представлен в процентном соотношении.</p>
+<p>Переменные, которые коррелируют и с первой компонентой PC1 (Dim.1) и со второй компонентой (PC2, Dim.2) являются самыми главными в описании измечивости данных в наборе.</p>
+<p>Переменные, которые не коррелируют ни с одной компонентой или коррелируют с последними компонентами не являются важными и могут быть исключены из анализа.</p>
+<p>Посмотрим вклад переменных:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>contrib, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Dim.1      Dim.2     Dim.3     Dim.4     Dim.5
+X100m     17.544293  1.7505098  7.338659 0.1375524  5.389252
+Long.jump 15.293168  4.2904162  2.930094 1.6248594  7.748815
+Shot.put  13.060137  0.3967224 21.620432 2.0140727  8.824401
+High.jump  9.024811 11.7715838  8.792888 2.5498795 23.115504</code></pre>
+</div>
+</div>
+<p>Чем выше вклад, тем больше переменная “вкладывает” в компоненту.</p>
+<p>Воспользуемся функцией <code>corrplot</code>, чтобы это визуализировать:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"corrplot"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(var<span class="sc">$</span>contrib, <span class="at">is.corr=</span><span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Функция <code>fviz_contrib()</code> может быть использована для того, чтобы построить столбчатую диаграмму по данному показателю:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вклад переменных в PC1</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res.pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вклад переменных в PC2</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res.pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">2</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Общий вклад переменных в обе компоненты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res.pca, <span class="at">choice =</span> <span class="st">"var"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">top =</span> <span class="dv">10</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Красная линия показывает некоторый средний вклад. Если бы вклад всех переменных был бы одинаковый, то каждая вносила бы по 1/10 = 10%. Соответственно, переменная, превышающая данный уровень, может считаться более важной, а менее - незначимой.</p>
+<p>Самые важные переменные в нашем анализе - X100m, Long.jump (прыжок в длину) и Pole.vault (прыжок с шестом).</p>
+<p>Вклад переменных может быть визуализирован следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="анализ-по-группам" class="level3" data-number="11.2.10">
+<h3 data-number="11.2.10" class="anchored" data-anchor-id="анализ-по-группам"><span class="header-section-number">11.2.10</span> Анализ по группам</h3>
+<p>Мы можем также провести анализ по отдельным группам и использовать данные о группировке в визулизации.</p>
+<p>Так как у нас нет группирующей переменной, давайте ее создадим.</p>
+<p>Мы разобьем переменные на три кластера, используя метод <code>kmeans</code>, и затем информацию о кластере включим в график в качестве группирующей переменной.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Сначала - кластерный анализ, создаем 3 кластера на основе координат</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>res.km <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(var<span class="sc">$</span>coord, <span class="at">centers =</span> <span class="dv">3</span>, <span class="at">nstart =</span> <span class="dv">25</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>grp <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(res.km<span class="sc">$</span>cluster)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Распределяем переменные по кластерам</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">col.var =</span> grp, </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#0073C2FF"</span>, <span class="st">"#EFC000FF"</span>, <span class="st">"#868686FF"</span>),</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.title =</span> <span class="st">"Cluster"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="описание-отдельных-измерений" class="level3" data-number="11.2.11">
+<h3 data-number="11.2.11" class="anchored" data-anchor-id="описание-отдельных-измерений"><span class="header-section-number">11.2.11</span> Описание отдельных измерений</h3>
+<p>В предыдущем разделе мы проанализировали переменные с позиции их вклада в главные компоненты.</p>
+<p>Возникает вопросы, что же эти компоненты из себя представляют.</p>
+<p>Функция<code>dimdesc()</code> может быть использована для анализа отдельных измерений:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>res.desc <span class="ot">&lt;-</span> <span class="fu">dimdesc</span>(res.pca, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">proba =</span> <span class="fl">0.05</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Описание измерения 1</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>res.desc<span class="sc">$</span>Dim<span class="fl">.1</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Link between the variable and the continuous variables (R-square)
+=================================================================================
+             correlation      p.value
+Long.jump      0.7941806 6.059893e-06
+Discus         0.7432090 4.842563e-05
+Shot.put       0.7339127 6.723102e-05
+High.jump      0.6100840 1.993677e-03
+Javeline       0.4282266 4.149192e-02
+X400m         -0.7016034 1.910387e-04
+X110m.hurdle  -0.7641252 2.195812e-05
+X100m         -0.8506257 2.727129e-07</code></pre>
+</div>
+</div>
+<p>В результатах выше, $quanti означает результаты по количественным переменным, переменные отсортированы по значению p-value.</p>
+</section>
+<section id="анализ-отдельных-наблюдений" class="level3" data-number="11.2.12">
+<h3 data-number="11.2.12" class="anchored" data-anchor-id="анализ-отдельных-наблюдений"><span class="header-section-number">11.2.12</span> Анализ отдельных наблюдений</h3>
+<p>Результаты по отдельным наблюдениям могут быть получены с помощью аналогичной функции <code>get_pca_ind()</code>. Так же, как и <code>get_pca_var()</code>, функция <code>get_pca_ind()</code> позволяет получить список матриц с результатами по наблюдениям (координаты, корреляции с осями, квадрат косинуса и вклады)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ind <span class="ot">&lt;-</span> <span class="fu">get_pca_ind</span>(res.pca)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>ind</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Principal Component Analysis Results for individuals
+ ===================================================
+  Name       Description                       
+1 "$coord"   "Coordinates for the individuals" 
+2 "$cos2"    "Cos2 for the individuals"        
+3 "$contrib" "contributions of the individuals"</code></pre>
+</div>
+</div>
+<p>Посмотрим результаты по отдельным показателям</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Координаты наблюдений</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>coord)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Dim.1      Dim.2      Dim.3       Dim.4       Dim.5
+SEBRLE     0.1955047  1.5890567  0.6424912  0.08389652  1.16829387
+CLAY       0.8078795  2.4748137 -1.3873827  1.29838232 -0.82498206
+BERNARD   -1.3591340  1.6480950  0.2005584 -1.96409420  0.08419345
+YURKOV    -0.8889532 -0.4426067  2.5295843  0.71290837  0.40782264
+ZSIVOCZKY -0.1081216 -2.0688377 -1.3342591 -0.10152796 -0.20145217
+McMULLEN   0.1212195 -1.0139102 -0.8625170  1.34164291  1.62151286</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Качество</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>cos2)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Dim.1      Dim.2       Dim.3       Dim.4        Dim.5
+SEBRLE    0.007530179 0.49747323 0.081325232 0.001386688 0.2689026575
+CLAY      0.048701249 0.45701660 0.143628117 0.125791741 0.0507850580
+BERNARD   0.197199804 0.28996555 0.004294015 0.411819183 0.0007567259
+YURKOV    0.096109800 0.02382571 0.778230322 0.061812637 0.0202279796
+ZSIVOCZKY 0.001574385 0.57641944 0.239754152 0.001388216 0.0054654972
+McMULLEN  0.002175437 0.15219499 0.110137872 0.266486530 0.3892621478</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Вклады</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ind<span class="sc">$</span>contrib)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Dim.1      Dim.2      Dim.3       Dim.4       Dim.5
+SEBRLE    0.04029447  5.9714533  1.4483919  0.03734589  8.45894063
+CLAY      0.68805664 14.4839248  6.7537381  8.94458283  4.21794385
+BERNARD   1.94740183  6.4234107  0.1411345 20.46819433  0.04393073
+YURKOV    0.83308415  0.4632733 22.4517396  2.69663605  1.03075263
+ZSIVOCZKY 0.01232413 10.1217143  6.2464325  0.05469230  0.25151025
+McMULLEN  0.01549089  2.4310854  2.6102794  9.55055888 16.29493304</code></pre>
+</div>
+</div>
+</section>
+<section id="графики-качества-и-вкладов" class="level3" data-number="11.2.13">
+<h3 data-number="11.2.13" class="anchored" data-anchor-id="графики-качества-и-вкладов"><span class="header-section-number">11.2.13</span> Графики качества и вкладов</h3>
+<p>Функция <code>fviz_pca_ind()</code> помогает получить график по наблюдениям (спортсменам):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(res.pca)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Как и в случае с переменными, мы можем раскрасить наблюдения в зависимости от значений cos2:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(res.pca, <span class="at">col.ind =</span> <span class="st">"cos2"</span>, </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping (slow if many points)</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Отметим, что наблюдения с похожими значениями на графике располагаются близко друг к другу.</p>
+<p>Столбчатый график по наблюдениям:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cos2</span>(res.pca, <span class="at">choice =</span> <span class="st">"ind"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Визуализация вклада спортсменов в первые две компоненты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(res.pca, <span class="at">choice =</span> <span class="st">"ind"</span>, <span class="at">axes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="анализ-по-группам-1" class="level3" data-number="11.2.14">
+<h3 data-number="11.2.14" class="anchored" data-anchor-id="анализ-по-группам-1"><span class="header-section-number">11.2.14</span> Анализ по группам</h3>
+<p>Чтобы показать разбивку по группам, давайте воспользуемся известным нам набором по ирисам.</p>
+<p>Переменная вида “Species” будет использована в качестве группирующей переменной:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>iris.pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="at">graph =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Создаем график:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(iris.pca,</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">geom.ind =</span> <span class="st">"point"</span>, <span class="co"># показываем только точки, не метки</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, <span class="co"># группирующая переменная</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, <span class="co"># эллипсы концентрации</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">legend.title =</span> <span class="st">"Группы"</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="создаем-биплот" class="level3" data-number="11.2.15">
+<h3 data-number="11.2.15" class="anchored" data-anchor-id="создаем-биплот"><span class="header-section-number">11.2.15</span> Создаем биплот</h3>
+<p>Это, конечно, самый интересный момент. Чтобы сделать простой биплот по переменным и наблюдениям, можно воспользоваться следующим кодом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(res.pca, <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">"#2E9FDF"</span>, <span class="co"># Цвет переменных</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">"#696969"</span>  <span class="co"># Цвет наблюдений</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Отметим, что такой график целесообразен, если у нас мало переменных и наблюдений, в противном случае он может быть нечитаемым.</p>
+<p>Отметим также, что координаты переменных и наблюдений рассчитываются не в одном пространстве. Иными словами, в биплоте для нас больше важны направления переменных, чем абсолютные значения расстояний на графике.</p>
+<p>Грубо говоря, смысл биплота заключается в следующем:</p>
+<ul>
+<li>наблюдение, которое находится с той же стороны, что и переменная, имеет большие значения именно по данной переменной;</li>
+<li>наблюдение, которое находится с другой стороны от переменной, имеет по ней маленькие значения.</li>
+</ul>
+<p>Сделаем график по ирисам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(iris.pca, </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> iris<span class="sc">$</span>Species, <span class="at">palette =</span> <span class="st">"jco"</span>, </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">addEllipses =</span> <span class="cn">TRUE</span>, <span class="at">label =</span> <span class="st">"var"</span>,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">"black"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">legend.title =</span> <span class="st">"Species"</span>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>В следующем графике мы хотим раскрасить как наблюдения, так и переменные по группам.</p>
+<p>Чтобы разобраться с цветами, мы воспользуемся вспомогательными функциями <code>fill_palette()</code> и <code>color_palette()</code> [ggpubr].</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(iris.pca, </span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Наблюдения по группам</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom.ind =</span> <span class="st">"point"</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">pointshape =</span> <span class="dv">21</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pointsize =</span> <span class="fl">2.5</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill.ind =</span> iris<span class="sc">$</span>Species,</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">"black"</span>,</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Цвет переменных по группам</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"sepal"</span>, <span class="st">"sepal"</span>, <span class="st">"petal"</span>, <span class="st">"petal"</span>)),</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">legend.title =</span> <span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"Species"</span>, <span class="at">color =</span> <span class="st">"Clusters"</span>),</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">repel =</span> <span class="cn">TRUE</span>        <span class="co"># чтобы не было пересечений</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>             )<span class="sc">+</span></span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">fill_palette</span>(<span class="st">"jco"</span>)<span class="sc">+</span>      <span class="co"># цвет для наблюдений</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  ggpubr<span class="sc">::</span><span class="fu">color_palette</span>(<span class="st">"npg"</span>)      <span class="co"># цвет для переменных</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>В следующем графике наблюдения раскрашены по группам, а переменные - по вкладу в главные компоненты (градиентная заливка).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(iris.pca, </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Individuals</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">geom.ind =</span> <span class="st">"point"</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">fill.ind =</span> iris<span class="sc">$</span>Species, <span class="at">col.ind =</span> <span class="st">"black"</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">pointshape =</span> <span class="dv">21</span>, <span class="at">pointsize =</span> <span class="dv">2</span>,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">palette =</span> <span class="st">"jco"</span>,</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Variables</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha.var =</span><span class="st">"contrib"</span>, <span class="at">col.var =</span> <span class="st">"contrib"</span>,</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">gradient.cols =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">legend.title =</span> <span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"Species"</span>, <span class="at">color =</span> <span class="st">"Contrib"</span>,</span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">alpha =</span> <span class="st">"Contrib"</span>)</span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="дополнительные-элементы" class="level3" data-number="11.2.16">
+<h3 data-number="11.2.16" class="anchored" data-anchor-id="дополнительные-элементы"><span class="header-section-number">11.2.16</span> Дополнительные элементы</h3>
+<p>Помните, мы разделили наш набор на две части - активные и дополнительные переменные?</p>
+<p>У нас есть две количественные дополнительные переменные (<code>quanti.sup</code>, колонки 11:12), и одна дополнительная качественная переменная (<code>quali.sup</code>, колонка 13) и четыре дополнительных спортсмена (<code>ind.sup</code>, строки 24:27).</p>
+<p>Дополнительные элементы не используются в основном анализе, а их координаты предсказываются исходя из информации, полученной в результате анализа, полученного на активных данных.</p>
+<p>Как такой анализ может быть проведен?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>res.pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(decathlon2, <span class="at">ind.sup =</span> <span class="dv">24</span><span class="sc">:</span><span class="dv">27</span>, </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">quanti.sup =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">quali.sup =</span> <span class="dv">13</span>, <span class="at">graph=</span><span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="количественные-переменные" class="level3" data-number="11.2.17">
+<h3 data-number="11.2.17" class="anchored" data-anchor-id="количественные-переменные"><span class="header-section-number">11.2.17</span> Количественные переменные</h3>
+<p>Результаты предсказания (координаты, корреляции и квадрат косинуса) для дополнительных переменных:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>res.pca<span class="sc">$</span>quanti.sup</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$coord
+            Dim.1       Dim.2      Dim.3       Dim.4       Dim.5
+Rank   -0.7014777 -0.24519443 -0.1834294  0.05575186 -0.07382647
+Points  0.9637075  0.07768262  0.1580225 -0.16623092 -0.03114711
+
+$cor
+            Dim.1       Dim.2      Dim.3       Dim.4       Dim.5
+Rank   -0.7014777 -0.24519443 -0.1834294  0.05575186 -0.07382647
+Points  0.9637075  0.07768262  0.1580225 -0.16623092 -0.03114711
+
+$cos2
+           Dim.1       Dim.2      Dim.3      Dim.4        Dim.5
+Rank   0.4920710 0.060120310 0.03364635 0.00310827 0.0054503477
+Points 0.9287322 0.006034589 0.02497110 0.02763272 0.0009701427</code></pre>
+</div>
+</div>
+<p>Визуализация переменных (и активных, и дополнительных)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="данные-по-наблюдениям" class="level3" data-number="11.2.18">
+<h3 data-number="11.2.18" class="anchored" data-anchor-id="данные-по-наблюдениям"><span class="header-section-number">11.2.18</span> Данные по наблюдениям</h3>
+<p>Предсказанные результаты по наблюдениям:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>res.pca<span class="sc">$</span>ind.sup</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$coord
+             Dim.1       Dim.2      Dim.3      Dim.4       Dim.5
+KARPOV   0.7947206  0.77951227 -1.6330203  1.7242283 -0.75070396
+WARNERS -0.3864645 -0.12159237 -1.7387332 -0.7063341 -0.03230011
+Nool    -0.5591306  1.97748871 -0.4830358 -2.2784526 -0.25461493
+Drews   -1.1092038  0.01741477 -3.0488182 -1.5343468 -0.32642192
+
+$cos2
+             Dim.1        Dim.2      Dim.3      Dim.4        Dim.5
+KARPOV  0.05104677 4.911173e-02 0.21553730 0.24028620 0.0455487744
+WARNERS 0.02422707 2.398250e-03 0.49039677 0.08092862 0.0001692349
+Nool    0.02897149 3.623868e-01 0.02162236 0.48108780 0.0060077529
+Drews   0.09207094 2.269527e-05 0.69560547 0.17617609 0.0079736753
+
+$dist
+  KARPOV  WARNERS     Nool    Drews 
+3.517470 2.482899 3.284943 3.655527 </code></pre>
+</div>
+</div>
+<p>Визуализация наблюдений (активных и дополнительных). Мы можем представить также качественные переменные (<code>quali.sup</code>), а их координаты можно извлечь через <code>res.pca$quali.supp$coord</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">fviz_pca_ind</span>(res.pca, <span class="at">col.ind.sup =</span> <span class="st">"blue"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">fviz_add</span>(p, res.pca<span class="sc">$</span>quali.sup<span class="sc">$</span>coord, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="данные-по-качественным-переменным" class="level3" data-number="11.2.19">
+<h3 data-number="11.2.19" class="anchored" data-anchor-id="данные-по-качественным-переменным"><span class="header-section-number">11.2.19</span> Данные по качественным переменным</h3>
+<p>Дополнительные качественные переменные могут также быть использованы для группировки. Это может помочь с интерпретацией данных.</p>
+<p>Результаты по качественным переменным:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>res.pca<span class="sc">$</span>quali</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$coord
+             Dim.1      Dim.2       Dim.3      Dim.4      Dim.5
+Decastar -1.343451  0.1218097 -0.03789524  0.1808357  0.1343364
+OlympicG  1.231497 -0.1116589  0.03473730 -0.1657661 -0.1231417
+
+$cos2
+             Dim.1       Dim.2        Dim.3      Dim.4       Dim.5
+Decastar 0.9051233 0.007440939 0.0007201669 0.01639956 0.009050062
+OlympicG 0.9051233 0.007440939 0.0007201669 0.01639956 0.009050062
+
+$v.test
+             Dim.1      Dim.2      Dim.3      Dim.4      Dim.5
+Decastar -2.970766  0.4034256 -0.1528767  0.8971036  0.7202457
+OlympicG  2.970766 -0.4034256  0.1528767 -0.8971036 -0.7202457
+
+$dist
+Decastar OlympicG 
+1.412108 1.294433 
+
+$eta2
+                Dim.1      Dim.2       Dim.3      Dim.4      Dim.5
+Competition 0.4011568 0.00739783 0.001062332 0.03658159 0.02357972</code></pre>
+</div>
+</div>
+<p>Чтобы использовать эту переменную в качестве группирующей, нужно использовать аргумент <code>habillage</code> (по-французски это “одевание”), в который вносится индекс этой переменной.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(res.pca, <span class="at">habillage =</span> <span class="dv">13</span>,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">addEllipses =</span><span class="cn">TRUE</span>, <span class="at">ellipse.type =</span> <span class="st">"confidence"</span>,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">palette =</span> <span class="st">"jco"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="фильтр-результатов" class="level3" data-number="11.2.20">
+<h3 data-number="11.2.20" class="anchored" data-anchor-id="фильтр-результатов"><span class="header-section-number">11.2.20</span> Фильтр результатов</h3>
+<p>Если у нас много наблюдений или переменных, то можно визуализировать только некоторые из них через аргументы <code>select.ind</code> и <code>select.var</code>.</p>
+<p>Можно сделать сортировку по имени, по косинусу или вкладу.</p>
+<p>Примеры:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Отбор переменных с cos2 &gt;= 0.6</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">select.var =</span> <span class="fu">list</span>(<span class="at">cos2 =</span> <span class="fl">0.6</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 5 активных переменных с самым высоким cos2</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">select.var=</span> <span class="fu">list</span>(<span class="at">cos2 =</span> <span class="dv">5</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Отбор по именам</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Long.jump"</span>, <span class="st">"High.jump"</span>, <span class="st">"X100m"</span>))</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(res.pca, <span class="at">select.var =</span> name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-44-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># top 5 самых важных наблюдений и переменных</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(res.pca, <span class="at">select.ind =</span> <span class="fu">list</span>(<span class="at">contrib =</span> <span class="dv">5</span>), </span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">select.var =</span> <span class="fu">list</span>(<span class="at">contrib =</span> <span class="dv">5</span>),</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="PCA_files/figure-html/unnamed-chunk-44-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа" class="level3" data-number="11.2.21">
+<h3 data-number="11.2.21" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">11.2.21</span> Самостоятельная работа</h3>
+<ol type="1">
+<li>Обратиться к набору данных психосемантического исследования по религии (см. файл в приложении)</li>
+<li>Сделать анализ главных компонент. Вывести результаты по собственным значениям и дисперсии (вместе с графиками), по координатам (корреляциям) и вкладам - по дескрипторам и ролям</li>
+<li>Сделать визуализацию - отдельно по дескрипторам, по ролям и биплот.</li>
+</ol>
+</section>
+<section id="источники" class="level3" data-number="11.2.22">
+<h3 data-number="11.2.22" class="anchored" data-anchor-id="источники"><span class="header-section-number">11.2.22</span> Источники</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-abdi2007multiple" class="csl-entry" role="listitem">
+Abdi, Hervé, Dominique Valentin, и др. 2007. <span>«Multiple factor analysis (MFA)»</span>. <em>Encyclopedia of measurement and statistics</em>, 657–63.
+</div>
+<div id="ref-le2008factominer" class="csl-entry" role="listitem">
+Lê, Sébastien, Julie Josse, и François Husson. 2008. <span>«FactoMineR: an R package for multivariate analysis»</span>. <em>Journal of statistical software</em> 25: 1–18.
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Скопировано");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Скопировано");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Statistical-Inference.html" class="pagination-link  aria-label=" &lt;span="" вывод="" и="" тестирование="" исследовательских="" гипотез&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Статистический вывод и тестирование исследовательских гипотез</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lesson13.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Количественный анализ текстовых данных в Quanteda</span>">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book/edit/main/PCA.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div></div></footer></body></html>

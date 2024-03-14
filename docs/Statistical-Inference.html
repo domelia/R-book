@@ -83,7 +83,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lesson12.html" rel="next">
+<link href="./PCA.html" rel="next">
 <link href="./ExploratoryDataAnalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -271,8 +271,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lesson12.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Моделировние структурными уравнениями в R</span></span></a>
+  <a href="./PCA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -1631,16 +1631,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon><strong>Пример</strong>: В исследовании изучалось влияние на восприятие алкогольных напитков различной информации. Сравнивались три напитка – вода, вино и пиво. Участники эксперимента смотрели положительные, нейтральные и негативные информационные материалы, а затем оценивали свое отношение к напитку по шкале от -100 до 100.</p>
 </blockquote>
 <p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/Alcohol_Attitudes.csv">Скачать данные</a></p>
-<div id="fig-beers" class="quarto-layout-panel">
+<div id="fig-beer" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-beers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-beer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <img src="images/StatInf/beer1.png" id="fig-beer1" class="img-fluid figure-img">
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-beer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;10.21: Примерно так могли выглядеть информационные материалы эксперимента
 </figcaption>
 </figure>
@@ -2059,8 +2059,8 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 <section id="тест-макнемара" class="level4" data-number="10.6.2.1">
 <h4 data-number="10.6.2.1" class="anchored" data-anchor-id="тест-макнемара"><span class="header-section-number">10.6.2.1</span> Тест МакНемара</h4>
 <p>Тест Макнемара используется для определения наличия статистически значимой разницы в пропорциях для парных номинальных данных, представленных в таблицах 2 × 2.</p>
-<p>Назван в честь <strong>Куинна Майкла Макнемара</strong> (1900 –1986), американского психолога и статистика, разработавшего критерий в 1947 году.</p>
-<p><img src="images/StatInf/MacNemar.png" class="img-fluid"></p>
+<p>Назван в честь <strong>Куинна Майкла Макнемара</strong> (1900 –1986), американского психолога и статистика, президента Американской психологической ассоциации (1964), разработавшего критерий в 1947 году.</p>
+<p><img src="https://academictree.org/photo/069/cache.689490.Quinn_McNemar.jpg" class="img-fluid"></p>
 <p><strong>Тест МакНемара. Формула и процедура оценки</strong></p>
 <p><img src="images/StatInf/mc_table.png" class="img-fluid"> Нулевая гипотеза о маргинальных частотах: маргинальные вероятности для каждого исхода равны:</p>
 <p><span class="math inline">\(p_a + p_b = p_a + p_c\)</span> и <span class="math inline">\(p_c + p_d = p_b + p_d\)</span>.</p>
@@ -2110,8 +2110,18 @@ McNemar's chi-squared = 16,818, df = 1, p-value = 4,115e-05</code></pre>
 </section>
 <section id="ссылки-на-источники" class="level2" data-number="10.8">
 <h2 data-number="10.8" class="anchored" data-anchor-id="ссылки-на-источники"><span class="header-section-number">10.8</span> Ссылки на источники</h2>
-
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-abdi2007multiple" class="csl-entry" role="listitem">
+Abdi, Hervé, Dominique Valentin, et al. 2007. <span>“Multiple Factor
+Analysis (MFA).”</span> <em>Encyclopedia of Measurement and
+Statistics</em>, 657–63.
+</div>
+<div id="ref-le2008factominer" class="csl-entry" role="listitem">
+Lê, Sébastien, Julie Josse, and François Husson. 2008.
+<span>“FactoMineR: An r Package for Multivariate Analysis.”</span>
+<em>Journal of Statistical Software</em> 25: 1–18.
+</div>
+</div>
 
 
 </section>
@@ -2717,8 +2727,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lesson12.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Моделировние структурными уравнениями в R</span>">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Моделировние структурными уравнениями в R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./PCA.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Основы многомерного анализа: снижение размерности</span>">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
