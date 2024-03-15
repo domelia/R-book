@@ -1,4 +1,7 @@
-# References {.unnumbered}
+---
+title: "Список источников"
+---
+# Список источников {.unnumbered}
 
 ::: {#refs}
 :::

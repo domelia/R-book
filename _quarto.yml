@@ -23,8 +23,8 @@ book:
   - Base_ggplot2.qmd
   - ExploratoryDataAnalysis.qmd
   - Statistical-Inference.qmd
-  - PCA.qmd
-  - lesson13.qmd
+  - PCA_CA.qmd
+  - references.qmd
 lang: ru
 comments:
   hypothesis: true

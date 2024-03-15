@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -83,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./PCA.html" rel="next">
+<link href="./PCA_CA.html" rel="next">
 <link href="./ExploratoryDataAnalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -271,14 +272,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./PCA.html" class="sidebar-item-text sidebar-link">
+  <a href="./PCA_CA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lesson13.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Количественный анализ текстовых данных в Quanteda</span></span></a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
   </div>
 </li>
     </ul>
@@ -312,21 +313,19 @@ window.Quarto = {
   <li><a href="#однофакторный-дисперсионный-анализ" id="toc-однофакторный-дисперсионный-анализ" class="nav-link" data-scroll-target="#однофакторный-дисперсионный-анализ"><span class="header-section-number">10.3.3</span> Однофакторный дисперсионный анализ</a></li>
   <li><a href="#однофакторный-непараметрический-дисперсионный-анализ-краскела-уоллиса" id="toc-однофакторный-непараметрический-дисперсионный-анализ-краскела-уоллиса" class="nav-link" data-scroll-target="#однофакторный-непараметрический-дисперсионный-анализ-краскела-уоллиса"><span class="header-section-number">10.3.4</span> Однофакторный непараметрический дисперсионный анализ Краскела-Уоллиса</a></li>
   </ul></li>
-  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">10.4</span> Самостоятельная работа</a></li>
-  <li><a href="#анализ-зависимых-выборок" id="toc-анализ-зависимых-выборок" class="nav-link" data-scroll-target="#анализ-зависимых-выборок"><span class="header-section-number">10.5</span> Анализ зависимых выборок</a>
+  <li><a href="#анализ-зависимых-выборок" id="toc-анализ-зависимых-выборок" class="nav-link" data-scroll-target="#анализ-зависимых-выборок"><span class="header-section-number">10.4</span> Анализ зависимых выборок</a>
   <ul class="collapse">
-  <li><a href="#t-критерий-для-зависимых-выборок" id="toc-t-критерий-для-зависимых-выборок" class="nav-link" data-scroll-target="#t-критерий-для-зависимых-выборок"><span class="header-section-number">10.5.1</span> t-критерий для зависимых выборок</a></li>
-  <li><a href="#критерий-уилкоксона-для-зависимых-выборок" id="toc-критерий-уилкоксона-для-зависимых-выборок" class="nav-link" data-scroll-target="#критерий-уилкоксона-для-зависимых-выборок"><span class="header-section-number">10.5.2</span> Критерий Уилкоксона для зависимых выборок</a></li>
-  <li><a href="#anova-с-повторными-измерениями" id="toc-anova-с-повторными-измерениями" class="nav-link" data-scroll-target="#anova-с-повторными-измерениями"><span class="header-section-number">10.5.3</span> ANOVA с повторными измерениями</a></li>
-  <li><a href="#критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" id="toc-критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" class="nav-link" data-scroll-target="#критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок"><span class="header-section-number">10.5.4</span> Критерий Фридмана - непараметрический аналог дисперсионного анализа для зависимых выборок</a></li>
+  <li><a href="#t-критерий-для-зависимых-выборок" id="toc-t-критерий-для-зависимых-выборок" class="nav-link" data-scroll-target="#t-критерий-для-зависимых-выборок"><span class="header-section-number">10.4.1</span> t-критерий для зависимых выборок</a></li>
+  <li><a href="#критерий-уилкоксона-для-зависимых-выборок" id="toc-критерий-уилкоксона-для-зависимых-выборок" class="nav-link" data-scroll-target="#критерий-уилкоксона-для-зависимых-выборок"><span class="header-section-number">10.4.2</span> Критерий Уилкоксона для зависимых выборок</a></li>
+  <li><a href="#anova-с-повторными-измерениями" id="toc-anova-с-повторными-измерениями" class="nav-link" data-scroll-target="#anova-с-повторными-измерениями"><span class="header-section-number">10.4.3</span> ANOVA с повторными измерениями</a></li>
+  <li><a href="#критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" id="toc-критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" class="nav-link" data-scroll-target="#критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок"><span class="header-section-number">10.4.4</span> Критерий Фридмана - непараметрический аналог дисперсионного анализа для зависимых выборок</a></li>
   </ul></li>
-  <li><a href="#анализ-качественных-данных" id="toc-анализ-качественных-данных" class="nav-link" data-scroll-target="#анализ-качественных-данных"><span class="header-section-number">10.6</span> Анализ качественных данных</a>
+  <li><a href="#анализ-качественных-данных" id="toc-анализ-качественных-данных" class="nav-link" data-scroll-target="#анализ-качественных-данных"><span class="header-section-number">10.5</span> Анализ качественных данных</a>
   <ul class="collapse">
-  <li><a href="#сравниваем-независимые-группы" id="toc-сравниваем-независимые-группы" class="nav-link" data-scroll-target="#сравниваем-независимые-группы"><span class="header-section-number">10.6.1</span> Сравниваем независимые группы</a></li>
-  <li><a href="#сравнение-зависимых-выборок" id="toc-сравнение-зависимых-выборок" class="nav-link" data-scroll-target="#сравнение-зависимых-выборок"><span class="header-section-number">10.6.2</span> Сравнение зависимых выборок</a></li>
+  <li><a href="#сравниваем-независимые-группы" id="toc-сравниваем-независимые-группы" class="nav-link" data-scroll-target="#сравниваем-независимые-группы"><span class="header-section-number">10.5.1</span> Сравниваем независимые группы</a></li>
+  <li><a href="#сравнение-зависимых-выборок" id="toc-сравнение-зависимых-выборок" class="nav-link" data-scroll-target="#сравнение-зависимых-выборок"><span class="header-section-number">10.5.2</span> Сравнение зависимых выборок</a></li>
   </ul></li>
-  <li><a href="#самостоятельная-работа-1" id="toc-самостоятельная-работа-1" class="nav-link" data-scroll-target="#самостоятельная-работа-1"><span class="header-section-number">10.7</span> Самостоятельная работа</a></li>
-  <li><a href="#ссылки-на-источники" id="toc-ссылки-на-источники" class="nav-link" data-scroll-target="#ссылки-на-источники"><span class="header-section-number">10.8</span> Ссылки на источники</a></li>
+  <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">10.6</span> Самостоятельная работа</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/Statistical-Inference.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
     </div>
@@ -610,7 +609,7 @@ window.Quarto = {
 <p>Формула для расчета z-критерия: <span class="math display">\[z=\frac{\bar{x}-\mu_0}{\sigma \ \sqrt{n}},\]</span></p>
 <p>где: <span class="math inline">\(\bar{x}\)</span> – выборочное среднее <span class="math inline">\(\mu_0\)</span> – гипотетическое среднее, с которым мы сравниваем выборочное среднее <span class="math inline">\(n\)</span> – объем выборки <span class="math inline">\(\sigma\)</span> – гипотетическое стандартное отклонение</p>
 <blockquote class="blockquote">
-<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Пример 1</strong>: Предположим, вы хотите оценить уровень удовлетворенности студентов материально-техническим оснащением на вашем университетском кампусе. Ваша гипотеза состоит в том, что средний уровень удовлетворенности составляет 6.5, что было определено в результате прошлогоднего исследования, и хотите проверить, верно ли это. Вы знаете, что стандартное отклонение оценок составляет 1,4.</p>
+<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Пример</strong>: Предположим, вы хотите оценить уровень удовлетворенности студентов материально-техническим оснащением на вашем университетском кампусе. Ваша гипотеза состоит в том, что средний уровень удовлетворенности составляет 6.5, что было определено в результате прошлогоднего исследования, и хотите проверить, верно ли это. Вы знаете, что стандартное отклонение оценок составляет 1,4.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>Вы случайным образом отобрали 100 студентов и попросили их оценить свой уровень удовлетворенности по шкале от 1 до 10. После сбора данных, вы рассчитали среднюю оценку уровня удовлетворенности студентов, которая оказалась равной 6,8, со стандартным отклонением 1,2.</p>
@@ -849,7 +848,7 @@ alternative hypothesis: true location is not equal to 6.5</code></pre>
 </figure>
 </div>
 <p>Работая с небольшими выборками, Госсет заметил, что распределение средних значений отклонялось от нормального распределения, и, значит, он не мог использовать обычные статистические методы, основанные на нормальном распределении для того, чтобы принимать решения.</p>
-<p>В 1904 году Госсет опубликовал внутренний отчет, в котором математически обосновал свой «закон ошибок» среднего (Law of Error) и возможности его применения для нужд пивоварни. В своей работе он описал, что «чем больше наблюдений, по которым рассчитано среднее значение, тем меньше (вероятная) ошибка». Госсет также отметил, что в сравнении с нормальным распределением, «кривая, представляющая частоту ошибок становится выше и уже по мере того, как объем выборки уменьшается. Управление Гинесса предложило Госсету проконсультироваться с другими специалистами, и так состоялась встреча Госсета с Карлом Пирсоном, под руководством которого в 1908 году в журнале «Биометрика» и появляется знаменитая работа Госсета об оценке ошибки среднего, напсанная под псевдонимом Стьюдент. Госсет не мог публиковаться под своим собственным именем, поскольку речь шла о данных, составляющих коммерческую тайну, а завод Гинесса очень строго относился к своим данным. Поэтому, вероятно, под влиянием названия на блокноте, который он использовал для ведения записей (The Student’s Science Notebook), Госсет выбрал такой псевдоним, который он использовал в 19 из своих 21 научных работ (<span class="citation" data-cites="ziliak2008great">(<a href="Statistical-Inference.html#ref-ziliak2008great" role="doc-biblioref"><strong>ziliak2008great?</strong></a>)</span>).</p>
+<p>В 1904 году Госсет опубликовал внутренний отчет, в котором математически обосновал свой «закон ошибок» среднего (Law of Error) и возможности его применения для нужд пивоварни. В своей работе он описал, что «чем больше наблюдений, по которым рассчитано среднее значение, тем меньше (вероятная) ошибка». Госсет также отметил, что в сравнении с нормальным распределением, «кривая, представляющая частоту ошибок становится выше и уже по мере того, как объем выборки уменьшается. Управление Гинесса предложило Госсету проконсультироваться с другими специалистами, и так состоялась встреча Госсета с Карлом Пирсоном, под руководством которого в 1908 году в журнале «Биометрика» и появляется знаменитая работа Госсета об оценке ошибки среднего, напсанная под псевдонимом Стьюдент. Госсет не мог публиковаться под своим собственным именем, поскольку речь шла о данных, составляющих коммерческую тайну, а завод Гинесса очень строго относился к своим данным. Поэтому, вероятно, под влиянием названия на блокноте, который он использовал для ведения записей (The Student’s Science Notebook), Госсет выбрал такой псевдоним, который он использовал в 19 из своих 21 научных работ (<span class="citation" data-cites="physocStrangeOrigins">Brown</span>).</p>
 <p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Примеры</strong>: сравнение результатов академической успеваемости в двух группах учащихся, доходов у мужчин и женщин, доверия к социальным институтам среди городских и сельских жителей и др.</p>
 <p>Требования:</p>
 <ol type="1">
@@ -1349,16 +1348,8 @@ P value adjustment method: BH </code></pre>
 </div>
 </section>
 </section>
-<section id="самостоятельная-работа" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">10.4</span> Самостоятельная работа</h2>
-<ol type="1">
-<li>Проанализируйте различия в оценках уверенности в нахождении заработка в случае потери актуального места работы (вопрос В21) в зависимости от образовательного уровня респондента (вопрос А6), перекодировав его в две категории - те, кто имеют высшее образование, и кто его не имеет.</li>
-<li>Используя созданную переменную важности соблюдения традиций, проведите анализ по уровню образования (по переменной, созданной в упр.1) и по самооценке материального положения (вопрос А10), создав три категории - «низкие доходы», «средние доходы» и «высокие доходы, обеспеченные граждане». Используйте параметрические методы там, где это уместно, и непараметрические там, где возможно применение только таких методов. Обязательно создайте визуализации к вашим результатам.</li>
-<li>Оформите ваши результаты любым удобным для вас способом и приложите в качестве ответа на задание.</li>
-</ol>
-</section>
-<section id="анализ-зависимых-выборок" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="анализ-зависимых-выборок"><span class="header-section-number">10.5</span> Анализ зависимых выборок</h2>
+<section id="анализ-зависимых-выборок" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="анализ-зависимых-выборок"><span class="header-section-number">10.4</span> Анализ зависимых выборок</h2>
 <p>Напомним, что зависимые (иногда их еще называют связанные, парные) выборки представляют собой данные, в которых каждому наблюдению в одном датасете соответствует другое, связанное с ним наблюдение в другом наборе данных.</p>
 <p>Например, могут сравниваться:</p>
 <ul>
@@ -1378,8 +1369,8 @@ P value adjustment method: BH </code></pre>
 </figcaption>
 </figure>
 </div>
-<section id="t-критерий-для-зависимых-выборок" class="level3" data-number="10.5.1">
-<h3 data-number="10.5.1" class="anchored" data-anchor-id="t-критерий-для-зависимых-выборок"><span class="header-section-number">10.5.1</span> t-критерий для зависимых выборок</h3>
+<section id="t-критерий-для-зависимых-выборок" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="t-критерий-для-зависимых-выборок"><span class="header-section-number">10.4.1</span> t-критерий для зависимых выборок</h3>
 <p>Аналогично ситуациям, рассмотренным выше, t-критерий для зависимых выборок также используется для того, чтобы сравнить средние значения, но при этом предполагается, что группы связаны друг с другом каким-то образом. Чаще всего речь идет об одних и тех же испытуемых (респондентах, наблюдениях), у которых измеряется один и тот же показатель через некоторый промежуток времени. Однако, это могут быть и разные люди (объекты исследования), но выборки все равно проектируются как связанные.</p>
 <div id="fig-ttest" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1465,8 +1456,8 @@ W = 0.989, p-value = 0.6942</code></pre>
 </div>
 <p>Совсем другое дело!</p>
 <p>Существует два способа подсчета t-критерий для зависимых выборок в зависимости от того, как организованы данные. В нашей таблице данные не совсем «чистые», один и тот же показатель указан в двух столбцах, однако такая ситуация встречается довольно часто.</p>
-<section id="метод-1.-разные-столбцы-для-разных-изменений" class="level4" data-number="10.5.1.1">
-<h4 data-number="10.5.1.1" class="anchored" data-anchor-id="метод-1.-разные-столбцы-для-разных-изменений"><span class="header-section-number">10.5.1.1</span> Метод 1. Разные столбцы для разных изменений</h4>
+<section id="метод-1.-разные-столбцы-для-разных-изменений" class="level4" data-number="10.4.1.1">
+<h4 data-number="10.4.1.1" class="anchored" data-anchor-id="метод-1.-разные-столбцы-для-разных-изменений"><span class="header-section-number">10.4.1.1</span> Метод 1. Разные столбцы для разных изменений</h4>
 <p>Функция останется прежней, но к ней добавится аргумент <code>paired = TRUE</code>, который и позволит провести измерения с зависимыми выборками:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dtp2<span class="sc">$</span>dtp2018, dtp2<span class="sc">$</span>dtp2023, <span class="at">paired =</span> <span class="cn">TRUE</span>) </span>
@@ -1487,8 +1478,8 @@ mean difference
 </div>
 <p>Поскольку мы сравниваем 2018 год и 2023, то положительная средняя разница означает, что в среднем количество погибших в ДТП сокращается. Статистика t-критерия (8,67) при количестве степеней свободы 84 указывает на достоверные различия (p&lt;0,001).</p>
 </section>
-<section id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная" class="level4" data-number="10.5.1.2">
-<h4 data-number="10.5.1.2" class="anchored" data-anchor-id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная"><span class="header-section-number">10.5.1.2</span> Метод 2. Один столбец для всех изменений + группирующая переменная</h4>
+<section id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная" class="level4" data-number="10.4.1.2">
+<h4 data-number="10.4.1.2" class="anchored" data-anchor-id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная"><span class="header-section-number">10.4.1.2</span> Метод 2. Один столбец для всех изменений + группирующая переменная</h4>
 <p>Для того, чтобы воспроизвести эту ситуацию, переструктурируем наши данные таким образом, чтобы вся информация о ДТП была в одном столбце, а период, в который собирались статистические данные, - в другом.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
@@ -1548,8 +1539,8 @@ mean difference
 </div>
 </section>
 </section>
-<section id="критерий-уилкоксона-для-зависимых-выборок" class="level3" data-number="10.5.2">
-<h3 data-number="10.5.2" class="anchored" data-anchor-id="критерий-уилкоксона-для-зависимых-выборок"><span class="header-section-number">10.5.2</span> Критерий Уилкоксона для зависимых выборок</h3>
+<section id="критерий-уилкоксона-для-зависимых-выборок" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="критерий-уилкоксона-для-зависимых-выборок"><span class="header-section-number">10.4.2</span> Критерий Уилкоксона для зависимых выборок</h3>
 <p>Если все же проблемы с распределением непреодолимы или данные не являются непрерывными, лучше воспользоваться непараметрическим аналогом для зависимых выборок - критерием знаковых рангов Уилкоксона.</p>
 <p>Выше мы уже разбирали формулу данного критерия, здесь же подчеркнем, что мы будем сравнивать два распределения, соответствующие одной и той же группе респондентов (объектов, наблюдений).</p>
 <div id="fig-Wpaired" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1609,8 +1600,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 </section>
-<section id="anova-с-повторными-измерениями" class="level3" data-number="10.5.3">
-<h3 data-number="10.5.3" class="anchored" data-anchor-id="anova-с-повторными-измерениями"><span class="header-section-number">10.5.3</span> ANOVA с повторными измерениями</h3>
+<section id="anova-с-повторными-измерениями" class="level3" data-number="10.4.3">
+<h3 data-number="10.4.3" class="anchored" data-anchor-id="anova-с-повторными-измерениями"><span class="header-section-number">10.4.3</span> ANOVA с повторными измерениями</h3>
 <p>Дисперсионный анализ с повторными измерениями расширяет идею t-критерия для зависимых выборок на случай, когда количество сравниваемых групп превышает две.</p>
 <p>Вычисления сходны с теми, что мы рассматривали на примере «обычной» однофакторной ANOVA.</p>
 <p>Различия будут заключаться в том, как мы будем подсчитывать среднюю межгрупповую сумму квадратов отклонений, для повторных измерений у в качестве группирующей переменной будет использоваться фактор времени:</p>
@@ -1772,8 +1763,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 </section>
-<section id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" class="level3" data-number="10.5.4">
-<h3 data-number="10.5.4" class="anchored" data-anchor-id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок"><span class="header-section-number">10.5.4</span> Критерий Фридмана - непараметрический аналог дисперсионного анализа для зависимых выборок</h3>
+<section id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" class="level3" data-number="10.4.4">
+<h3 data-number="10.4.4" class="anchored" data-anchor-id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок"><span class="header-section-number">10.4.4</span> Критерий Фридмана - непараметрический аналог дисперсионного анализа для зависимых выборок</h3>
 <p>Тест Фридмана – разработан Милтоном Фридманом, американским экономистом и нобелевским лауреатом.</p>
 <div id="fig-friedman" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1880,14 +1871,14 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </section>
 </section>
-<section id="анализ-качественных-данных" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="анализ-качественных-данных"><span class="header-section-number">10.6</span> Анализ качественных данных</h2>
+<section id="анализ-качественных-данных" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="анализ-качественных-данных"><span class="header-section-number">10.5</span> Анализ качественных данных</h2>
 <p>Рассмотрев случаи, когда зависимая переменная являлась количественной, перейдем к большому классу исследовательских ситуаций, когда мы исследуем взаимосвязи между категориальными показателями.</p>
 <p>К слову, это огромное количество случаев, встречающихся в ходе анализа социологических данных.</p>
-<section id="сравниваем-независимые-группы" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="сравниваем-независимые-группы"><span class="header-section-number">10.6.1</span> Сравниваем независимые группы</h3>
-<section id="одновыборочный-z-критерий-сравниваем-значение-одной-доли-с-теоретическим" class="level4" data-number="10.6.1.1">
-<h4 data-number="10.6.1.1" class="anchored" data-anchor-id="одновыборочный-z-критерий-сравниваем-значение-одной-доли-с-теоретическим"><span class="header-section-number">10.6.1.1</span> Одновыборочный z-критерий: сравниваем значение одной доли с теоретическим</h4>
+<section id="сравниваем-независимые-группы" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="сравниваем-независимые-группы"><span class="header-section-number">10.5.1</span> Сравниваем независимые группы</h3>
+<section id="одновыборочный-z-критерий-сравниваем-значение-одной-доли-с-теоретическим" class="level4" data-number="10.5.1.1">
+<h4 data-number="10.5.1.1" class="anchored" data-anchor-id="одновыборочный-z-критерий-сравниваем-значение-одной-доли-с-теоретическим"><span class="header-section-number">10.5.1.1</span> Одновыборочный z-критерий: сравниваем значение одной доли с теоретическим</h4>
 <p>Проводя социологическое исследование, мы можем быть заинтересованы в том, чтобы сравнить результаты, полученные на нашей выборочной с какими-либо предполагаемыми результатами, выраженными в виде пропорции.</p>
 <blockquote class="blockquote">
 <p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon><strong>Пример</strong>: Мы исследуем оценки жителей одного из городских кварталов относительно того, согласны ли они, чтобы рядом с их домами оборудовали большой парк, с велодорожками и прочими благами цивилизации. В этот же момент времени предполагается благоустройство и других объектов, поэтому городские власти бы выбрать именно этот объект для инвестиций, но только в том случае, если оценки населения будут благоприятны и составят не менее 70%. Проведя опрос среди 500 жителей мы обнаружили, что 370 из них выразили согласие с обустройством парка, тогда как 130 человек по каким-то причинам были против парка. Превышает ли количество жителей допустимый предел?</p>
@@ -1940,8 +1931,8 @@ sample estimates:
 </div>
 </div>
 </section>
-<section id="сравнение-двух-долей-пропорций---z-критерий" class="level4" data-number="10.6.1.2">
-<h4 data-number="10.6.1.2" class="anchored" data-anchor-id="сравнение-двух-долей-пропорций---z-критерий"><span class="header-section-number">10.6.1.2</span> Сравнение двух долей (пропорций) - z-критерий</h4>
+<section id="сравнение-двух-долей-пропорций---z-критерий" class="level4" data-number="10.5.1.2">
+<h4 data-number="10.5.1.2" class="anchored" data-anchor-id="сравнение-двух-долей-пропорций---z-критерий"><span class="header-section-number">10.5.1.2</span> Сравнение двух долей (пропорций) - z-критерий</h4>
 <p>Мы можем распространить наши рассуждения на тот случай, когда нам требуется сравнить две пропорции, в каких-то группах.</p>
 <p>В этом случае критерий несколько преображается:</p>
 <p><span class="math display">\[z = \frac{p_1-p_2}{\sqrt{pq/n_1+pq/n_2}},\]</span> где:</p>
@@ -1980,8 +1971,8 @@ sample estimates:
 </div>
 </div>
 </section>
-<section id="наш-любимый-хи-квадрат" class="level4" data-number="10.6.1.3">
-<h4 data-number="10.6.1.3" class="anchored" data-anchor-id="наш-любимый-хи-квадрат"><span class="header-section-number">10.6.1.3</span> Наш любимый хи-квадрат</h4>
+<section id="наш-любимый-хи-квадрат" class="level4" data-number="10.5.1.3">
+<h4 data-number="10.5.1.3" class="anchored" data-anchor-id="наш-любимый-хи-квадрат"><span class="header-section-number">10.5.1.3</span> Наш любимый хи-квадрат</h4>
 <p>Критерий <span class="math inline">\(\chi^2\)</span> Пирсона – один из самых известных тестов для анализа категориальных данных. Основан на сравнении наблюдаемых и ожидаемых частот.</p>
 <p><span class="math display">\[\chi^2=\sum\frac{(O-E)^2}{E},\]</span></p>
 <p>Где: - <span class="math inline">\(O\)</span> - наблюдаемые значения - <span class="math inline">\(E\)</span> - ожидаемые значения (которые были бы в том случае, если бы никакой взаимосвязи между частотами не было)</p>
@@ -2054,76 +2045,151 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </div>
 </section>
 </section>
-<section id="сравнение-зависимых-выборок" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="сравнение-зависимых-выборок"><span class="header-section-number">10.6.2</span> Сравнение зависимых выборок</h3>
-<section id="тест-макнемара" class="level4" data-number="10.6.2.1">
-<h4 data-number="10.6.2.1" class="anchored" data-anchor-id="тест-макнемара"><span class="header-section-number">10.6.2.1</span> Тест МакНемара</h4>
+<section id="сравнение-зависимых-выборок" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="сравнение-зависимых-выборок"><span class="header-section-number">10.5.2</span> Сравнение зависимых выборок</h3>
+<section id="тест-макнемара" class="level4" data-number="10.5.2.1">
+<h4 data-number="10.5.2.1" class="anchored" data-anchor-id="тест-макнемара"><span class="header-section-number">10.5.2.1</span> Тест МакНемара</h4>
 <p>Тест Макнемара используется для определения наличия статистически значимой разницы в пропорциях для парных номинальных данных, представленных в таблицах 2 × 2.</p>
 <p>Назван в честь <strong>Куинна Майкла Макнемара</strong> (1900 –1986), американского психолога и статистика, президента Американской психологической ассоциации (1964), разработавшего критерий в 1947 году.</p>
 <p><img src="https://academictree.org/photo/069/cache.689490.Quinn_McNemar.jpg" class="img-fluid"></p>
 <p><strong>Тест МакНемара. Формула и процедура оценки</strong></p>
-<p><img src="images/StatInf/mc_table.png" class="img-fluid"> Нулевая гипотеза о маргинальных частотах: маргинальные вероятности для каждого исхода равны:</p>
+<div id="fig-mc_table" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mc_table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/StatInf/mc_table.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mc_table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.23: Типичная таблица для проведения теста МакНемара
+</figcaption>
+</figure>
+</div>
+<p>Тест основывается на нулевой гипотезе (<span class="math inline">\(H_0\)</span>) о маргинальных частотах: маргинальные вероятности для каждого исхода равны:</p>
 <p><span class="math inline">\(p_a + p_b = p_a + p_c\)</span> и <span class="math inline">\(p_c + p_d = p_b + p_d\)</span>.</p>
 <ul>
 <li><span class="math inline">\(H_0: p_b=p_c\)</span></li>
 <li><span class="math inline">\(H_1: p_b\neq p_c\)</span></li>
 </ul>
 <p><span class="math display">\[\chi^2=\frac{(b-c)^2}{b+c}\]</span></p>
+<blockquote class="blockquote">
+<p><iconify-icon inline="" icon="arcticons:anz" style="font-size: 42px;"></iconify-icon> <strong>Пример</strong>: рассмотрим пример из области общественного здравоохранения. В нашем наболе содержатся данные о страховых компаниях и покрытиях страховыми полисами услуг по оказании инфузионной терапии (часто применяется при раковых заболеваниях). Вопрос: меняется ли количество страховщиков, включающих в полис данную услугу?</p>
+</blockquote>
+<p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/dataset-him-2014-2016-subset2.Rdata">Скачать данные</a></p>
+<p>Загрузим данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>Performance <span class="ot">&lt;-</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">794</span>, <span class="dv">86</span>, <span class="dv">150</span>, <span class="dv">570</span>),</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">nrow =</span> <span class="dv">2</span>,</span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="st">"1st Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>),</span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"2nd Survey"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Approve"</span>, <span class="st">"Disapprove"</span>)))</span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>Performance</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            2nd Survey
-1st Survey   Approve Disapprove
-  Approve        794        150
-  Disapprove      86        570</code></pre>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"dataset-him-2014-2016-subset2.Rdata"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(Performance)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Создадим таблицу по данным 2014 и 2016 гг.:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>table_for_McNemar <span class="ot">&lt;-</span><span class="fu">table</span>(data<span class="sc">$</span>X<span class="fl">.2014</span>, data<span class="sc">$</span>X<span class="fl">.2016</span>c)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>table_for_McNemar</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     
+      No  Yes
+  No   22 105
+  Yes  54 145</code></pre>
+</div>
+</div>
+<p>Довольно заметно, что количество страховых компаний, покрывающих своими полисами инфузионную терапию за два года выросло довольно существенно: 105 компаний, которые в 2014 году отказывались от этой опции, в 2016 году включили ее в список услуг. Обратная ситуация встречается в два раза реже: только 54 организации, которые в 2014 году оплачивали стоимость инфузионной терапии по страховке, в 2016 году отказались это делать.</p>
+<p>Проведем тест МакНемара:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(table_for_McNemar)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     McNemar's Chi-squared test with continuity correction
 
-data:  Performance
-McNemar's chi-squared = 16,818, df = 1, p-value = 4,115e-05</code></pre>
+data:  table_for_McNemar
+McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 </div>
 </div>
+<p>Тест показывает наличие значимых отличий.</p>
+</section>
+<section id="тест-кохрана" class="level4" data-number="10.5.2.2">
+<h4 data-number="10.5.2.2" class="anchored" data-anchor-id="тест-кохрана"><span class="header-section-number">10.5.2.2</span> Тест Кохрана</h4>
+<p>Если количество сравниваемых групп больше двух, то используется расширение теста Макнемара - Q-критерий Кохрана.</p>
+<p>Нулевая гипотеза (<span class="math inline">\(H_0\)</span>): доли (пропорции) «успеха» во всех группах равны. Предполагается, что данные организованы в «блоки». «Блоками» могут быть, например, отдельные люди.</p>
+<p><img src="images/StatInf/Qtest.png" class="img-fluid"></p>
+<p>Формула теста:</p>
+<p><img src="images/StatInf/QCohrform.png" class="img-fluid"> где:</p>
+<ul>
+<li><span class="math inline">\(b\)</span> = количество блоков,</li>
+<li><span class="math inline">\(k\)</span> = количество условий,</li>
+<li><span class="math inline">\(X•j\)</span> = сумма по столбцу для условия j,</li>
+<li><span class="math inline">\(Xi•\)</span> = сумма по строке для блока i</li>
+<li><span class="math inline">\(N\)</span> = общая сумма.</li>
+</ul>
+<p>Продолжим работу с предыдущим примером.</p>
+<p>Переведем данные из широкого в длинный формат и отберем данные без :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"c"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"X."</span>), <span class="at">values_to =</span> <span class="st">"outcome"</span>, <span class="at">names_to =</span> <span class="st">"year"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Проведем тест Кохрана:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cochran_qtest</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  .y.         n statistic    df            p method          
+* &lt;chr&gt;   &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;           
+1 outcome   326      33.2     2 0.0000000609 Cochran's Q test</code></pre>
+</div>
+</div>
+<p>Выявлены значимые различия между периодами. Но какие? Как и всегда с множеством групп, необходимы парные сравнения.</p>
+<p>Сделаем сначала общую таблицу по трем периодам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, outcome) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> outcome, <span class="at">values_from =</span> sum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   year [3]
+  year   `No `   Yes
+  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+1 X.2014   127   199
+2 X.2015    69   257
+3 X.2016    76   250</code></pre>
+</div>
+</div>
+<p>Теперь проведем парные сравнения, с помощью теста МакНемара:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise_mcnemar_test</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  group1 group2            p        p.adj p.adj.signif method      
+* &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       
+1 X.2014 X.2015 0.0000000166 0.0000000498 ****         McNemar test
+2 X.2014 X.2016 0.0000733    0.00022      ***          McNemar test
+3 X.2015 X.2016 0.55         1            ns           McNemar test</code></pre>
+</div>
+</div>
+<p>Результаты сравнительного анализа показывают, что наиболее важный скачок произошел в 2015 году, когда количество организаций увеличилось на 58, в последующий год их количество даже сократилось, но это сокращение не является статистически значимым.</p>
 </section>
 </section>
 </section>
-<section id="самостоятельная-работа-1" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="самостоятельная-работа-1"><span class="header-section-number">10.7</span> Самостоятельная работа</h2>
+<section id="самостоятельная-работа" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">10.6</span> Самостоятельная работа</h2>
 <ol type="1">
+<li>Проанализируйте различия в оценках уверенности в нахождении заработка в случае потери актуального места работы (вопрос В21) в зависимости от образовательного уровня респондента (вопрос А6), перекодировав его в две категории - те, кто имеют высшее образование, и кто его не имеет.</li>
+<li>Используя созданную переменную важности соблюдения традиций, проведите анализ по уровню образования (по переменной, созданной в упр.1) и по самооценке материального положения (вопрос А10), создав три категории - «низкие доходы», «средние доходы» и «высокие доходы, обеспеченные граждане». Используйте параметрические методы там, где это уместно, и непараметрические там, где возможно применение только таких методов. Обязательно создайте визуализации к вашим результатам.</li>
+<li>Оформите ваши результаты любым удобным для вас способом и приложите в качестве ответа на задание.</li>
 <li>Провести анализ оценки лиц, придерживающихся определенной диеты, за три промежутка времени, используя параметрический ANOVA и его непараметрический аналог с парными сравнениями. Сделать соответствующие визуализации.</li>
 </ol>
 <p>Данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
-<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="2" type="1">
+<ol start="5" type="1">
 <li>Провести анализ таблиц сопряженности по исследованию по климату (две таблицы на ваш выбор) с помощью критерия хи-квадрат. Создать мозаичную диаграмму и ассоциативный график.</li>
 </ol>
-</section>
-<section id="ссылки-на-источники" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="ссылки-на-источники"><span class="header-section-number">10.8</span> Ссылки на источники</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-abdi2007multiple" class="csl-entry" role="listitem">
-Abdi, Hervé, Dominique Valentin, et al. 2007. <span>“Multiple Factor
-Analysis (MFA).”</span> <em>Encyclopedia of Measurement and
-Statistics</em>, 657–63.
-</div>
-<div id="ref-le2008factominer" class="csl-entry" role="listitem">
-Lê, Sébastien, Julie Josse, and François Husson. 2008.
-<span>“FactoMineR: An r Package for Multivariate Analysis.”</span>
-<em>Journal of Statistical Software</em> 25: 1–18.
-</div>
-</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-physocStrangeOrigins" class="csl-entry" role="listitem">
+Brown, Angus. <span>«<span>T</span>he strange origins of the <span>S</span>tudent’s t-test — physoc.org»</span>. <a href="https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/" class="uri">https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -2727,7 +2793,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./PCA.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Основы многомерного анализа: снижение размерности</span>">
+      <a href="./PCA_CA.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Основы многомерного анализа: снижение размерности</span>">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
