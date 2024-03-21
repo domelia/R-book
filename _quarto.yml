@@ -24,6 +24,7 @@ book:
   - ExploratoryDataAnalysis.qmd
   - Statistical-Inference.qmd
   - PCA_CA.qmd
+  - Regression.qmd
   - references.qmd
 lang: ru
 comments:

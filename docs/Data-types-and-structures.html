@@ -224,8 +224,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
   </div>
 </li>
     </ul>
@@ -515,20 +521,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="вопросы-для-самопроверки" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="вопросы-для-самопроверки"><span class="header-section-number">3.1.1</span> Вопросы для самопроверки</h3>
 <p><strong>1. К какому типу переменных относится число -3,5?</strong></p>
-<div id="radio_WMDFDDDXIJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WMDFDDDXIJ" value="answer"> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_WMDFDDDXIJ" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_WMDFDDDXIJ" value=""> <span>complex</span></label><label><input type="radio" autocomplete="off" name="radio_WMDFDDDXIJ" value=""> <span>integer</span></label>
+<div id="radio_WDBCBBVQPH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WDBCBBVQPH" value="answer"> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_WDBCBBVQPH" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_WDBCBBVQPH" value=""> <span>complex</span></label><label><input type="radio" autocomplete="off" name="radio_WDBCBBVQPH" value=""> <span>integer</span></label>
 </div>
 <p><strong>2. Какой результат получится, если попытаться превратить в число строковую переменную?</strong></p>
-<div id="radio_LSINYETKKY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSINYETKKY" value="answer"> <span>NA</span></label><label><input type="radio" autocomplete="off" name="radio_LSINYETKKY" value=""> <span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_LSINYETKKY" value=""> <span>NAs introduced by coercion</span></label>
+<div id="radio_EJCINSFQVQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EJCINSFQVQ" value="answer"> <span>NA</span></label><label><input type="radio" autocomplete="off" name="radio_EJCINSFQVQ" value=""> <span>TRUE</span></label><label><input type="radio" autocomplete="off" name="radio_EJCINSFQVQ" value=""> <span>NAs introduced by coercion</span></label>
 </div>
 <p><strong>3. Какая функция используется для проверки принадлежности переменной к факторному типу?</strong></p>
-<div id="radio_XNXAWGGMPB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XNXAWGGMPB" value="answer"> <span>is.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_XNXAWGGMPB" value=""> <span>as.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_XNXAWGGMPB" value=""> <span>factor()</span></label>
+<div id="radio_CTRWNSRWUJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CTRWNSRWUJ" value="answer"> <span>is.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_CTRWNSRWUJ" value=""> <span>as.factor()</span></label><label><input type="radio" autocomplete="off" name="radio_CTRWNSRWUJ" value=""> <span>factor()</span></label>
 </div>
 <p><strong>4. Могут ли логические переменные быть представлены в числовом виде?</strong></p>
-<div id="radio_GZHGLWEGMY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GZHGLWEGMY" value="answer"> <span>Да()</span></label><label><input type="radio" autocomplete="off" name="radio_GZHGLWEGMY" value=""> <span>Нет</span></label><label><input type="radio" autocomplete="off" name="radio_GZHGLWEGMY" value=""> <span>Затрудняюсь ответить</span></label>
+<div id="radio_PJBINQBUZX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PJBINQBUZX" value="answer"> <span>Да()</span></label><label><input type="radio" autocomplete="off" name="radio_PJBINQBUZX" value=""> <span>Нет</span></label><label><input type="radio" autocomplete="off" name="radio_PJBINQBUZX" value=""> <span>Затрудняюсь ответить</span></label>
 </div>
 </section>
 <section id="самостоятельная-работа" class="level3" data-number="3.1.2">
@@ -855,8 +861,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">max =</span> <span class="dv">5</span>)</span>
 <span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  1.960258456  1.660021627  0.006599277 -4.142165552 -1.534894656
- [6]  3.147150867  0.213464526 -4.468274617  3.983115917  2.542388164</code></pre>
+<pre><code> [1]  1.0589331 -3.3471727 -0.6089541  4.2276408 -2.5808997 -3.2637522
+ [7] -4.1322429 -2.4506621  3.7909055 -1.3897682</code></pre>
 </div>
 </div>
 <ul>

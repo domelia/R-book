@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./Regression.html" rel="next">
 <link href="./Statistical-Inference.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -274,8 +274,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
   </div>
 </li>
     </ul>
@@ -377,7 +383,7 @@ window.Quarto = {
 <p><strong>Метод главных компонент - Principal Component Analysis (PCA)</strong> - анализирующий количественные (непрерывные) переменные путем сокращения размерности данных без потери важной информации (например, представление множества шкал психологических тестов в виде нескольких компонент или представление множества показателей социально-экономического развития регионов в виде нескольких интегральных показателей).</p>
 <p><strong>Корреспондентский анализ (анализ соответствий) - Correspondence Analysis (CA)</strong>, выступающий расширением метода главных компонент для анализа больших таблиц сопряженности, образуемых на основе двух качественных переменных (категориальных данных)(например, продукты и их характеристики, метод хорошо подходит для вопросов с множественным выбором).</p>
 <p><strong>Множественный корреспондентский анализ, множественный анализ соответствий - Multiple Correspondence Analysis (MCA)</strong>, являющийся адаптацией метода CA к таблице данных, содержащих более двух категориальных переменных (например, взаимосвязь между занятостью, национальностью и полом).</p>
-<p><strong>Множественный факторный анализ - Multiple Factor Analysis (MFA)</strong> - предназначен для работы с данными, где переменные организованы в группы, блоки или наборы (качественных и / или количественных) переменныех. MFA позволяет обнаружить общие структуры, присутствующие во всех или некоторых наборах данных. Выполняется в два этапа. На первом этапе на каждом наборе данных проводится анализ главных компонент, а затем исходные данные в каждом наборе «нормализуются» путем деления каждого элемента на квадратный корень из собственного значения, полученного из МГК на данном наборе. Затем, нормализованные данные объединяются в единую матрицу, над которой проводится общий анализ главных компонент, а индивидуальные наборы данных проектируются на результаты этого анализа, чтобы найти общие зависимости и расхождения <span class="citation" data-cites="abdi2007multiple">(<a href="PCA_CA.html#ref-abdi2007multiple" role="doc-biblioref">Abdi, Valentin, и др. 2007</a>)</span></p>
+<p><strong>Множественный факторный анализ - Multiple Factor Analysis (MFA)</strong> - предназначен для работы с данными, где переменные организованы в группы, блоки или наборы (качественных и / или количественных) переменныех. MFA позволяет обнаружить общие структуры, присутствующие во всех или некоторых наборах данных. Выполняется в два этапа. На первом этапе на каждом наборе данных проводится анализ главных компонент, а затем исходные данные в каждом наборе «нормализуются» путем деления каждого элемента на квадратный корень из собственного значения, полученного из МГК на данном наборе. Затем, нормализованные данные объединяются в единую матрицу, над которой проводится общий анализ главных компонент, а индивидуальные наборы данных проектируются на результаты этого анализа, чтобы найти общие зависимости и расхождения <span class="citation" data-cites="abdi2007multiple">(<a href="#ref-abdi2007multiple" role="doc-biblioref">Abdi, Valentin, и др. 2007</a>)</span></p>
 <p><strong>Иерархический множественный факторный анализ - Hierarchical Multiple Factor Analysis (HMFA)</strong>: расширение метода MFA, подходящий для ситуации, где данные организованы в иерархические структуры.</p>
 <p><strong>Факторный анализ смешанных данных - Factor Analysis of Mixed Data (FAMD)</strong> - особый случай MFA, предназначенный для анализа данных, содержащих как количественные, так и качественные переменные.</p>
 <div class="alert alert-info" role="alert">
@@ -385,7 +391,7 @@ window.Quarto = {
 </div>
 <p>Существует большое количество пакетов, в которых можно сделать анализ главных компонент, например, <code>FactoMineR</code>, <code>ade4</code>, <code>stats</code>, <code>ca</code>, <code>MASS</code> и <code>ExPosition</code>.</p>
 <p>Результаты будут представлены по-разному, в зависимости от того, какие функции будут использованы. Помочь в интерпретации и визуализации полученных результатов многомерного анализа, например, кластерного анализа или результатов снижения размерности, нам как раз и поможет библиотека <code>factoextra</code>.</p>
-<p>В рамках данного занятия мы будем использовать библиотеку <code>FactoMineR</code> <span class="citation" data-cites="le2008factominer">(<a href="PCA_CA.html#ref-le2008factominer" role="doc-biblioref">Lê, Josse, и Husson 2008</a>)</span> для расчетов, а библиотеку <code>factoextra</code> для извлечения и анализа результатов.</p>
+<p>В рамках данного занятия мы будем использовать библиотеку <code>FactoMineR</code> <span class="citation" data-cites="le2008factominer">(<a href="#ref-le2008factominer" role="doc-biblioref">Lê, Josse, и Husson 2008</a>)</span> для расчетов, а библиотеку <code>factoextra</code> для извлечения и анализа результатов.</p>
 <p>С какими методами может работать библиотека <code>factoextra</code>:</p>
 <p><img src="https://cran.r-project.org/web/packages/factoextra/readme/tools/factoextra-r-package.png" class="img-fluid"></p>
 <section id="как-сделать-правильный-выбор" class="level3" data-number="11.1.1">
@@ -677,7 +683,7 @@ Dim.10  0.1219710         1.219710                   100.00000</code></pre>
 <section id="корреляционный-круг" class="level3" data-number="11.2.7">
 <h3 data-number="11.2.7" class="anchored" data-anchor-id="корреляционный-круг"><span class="header-section-number">11.2.7</span> Корреляционный круг</h3>
 <p>Корреляция между переменной и главной компонентой используется в качестве координаты переменной на графике.</p>
-<p>Представление переменных зависит от графика наблюдений, наблюдения представлены своими проекциями, тогда как переменные - корреляциями <span class="citation" data-cites="abdi2010principal">(<a href="PCA_CA.html#ref-abdi2010principal" role="doc-biblioref">Abdi и Williams 2010</a>)</span>.</p>
+<p>Представление переменных зависит от графика наблюдений, наблюдения представлены своими проекциями, тогда как переменные - корреляциями <span class="citation" data-cites="abdi2010principal">(<a href="#ref-abdi2010principal" role="doc-biblioref">Abdi и Williams 2010</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Координаты переменных</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(var<span class="sc">$</span>coord, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1946,23 +1952,13 @@ Dim.2 0.006449158         11.19531                   100.00000</code></pre>
 <h2 data-number="11.5" class="anchored" data-anchor-id="источники"><span class="header-section-number">11.5</span> Источники</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-abdi2007multiple" class="csl-entry" role="listitem">
-Abdi, Hervé, Dominique Valentin, et al. 2007. <span>“Multiple Factor
-Analysis (MFA).”</span> <em>Encyclopedia of Measurement and
-Statistics</em>, 657–63.
+Abdi, Hervé, Dominique Valentin, и др. 2007. <span>«Multiple factor analysis (MFA)»</span>. <em>Encyclopedia of measurement and statistics</em>, 657–63.
 </div>
 <div id="ref-abdi2010principal" class="csl-entry" role="listitem">
-Abdi, Hervé, and Lynne J Williams. 2010. <span>“Principal Component
-Analysis.”</span> <em>Wiley Interdisciplinary Reviews: Computational
-Statistics</em> 2 (4): 433–59.
-</div>
-<div id="ref-physocStrangeOrigins" class="csl-entry" role="listitem">
-Brown, Angus. <span>“<span>T</span>he Strange Origins of the
-<span>S</span>tudent’s t-Test — Physoc.org.”</span> <a href="https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/" class="uri">https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/</a>.
+Abdi, Hervé, и Lynne J Williams. 2010. <span>«Principal component analysis»</span>. <em>Wiley interdisciplinary reviews: computational statistics</em> 2 (4): 433–59.
 </div>
 <div id="ref-le2008factominer" class="csl-entry" role="listitem">
-Lê, Sébastien, Julie Josse, and François Husson. 2008.
-<span>“FactoMineR: An r Package for Multivariate Analysis.”</span>
-<em>Journal of Statistical Software</em> 25: 1–18.
+Lê, Sébastien, Julie Josse, и François Husson. 2008. <span>«FactoMineR: an R package for multivariate analysis»</span>. <em>Journal of statistical software</em> 25: 1–18.
 </div>
 </div>
 
@@ -2570,8 +2566,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Список источников</span>">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Список источников</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Regression.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Регрессионный анализ в R</span>">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
