@@ -278,7 +278,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#загрузка-данных" id="toc-загрузка-данных" class="nav-link" data-scroll-target="#загрузка-данных"><span class="header-section-number">12.1.1</span> Загрузка данных</a></li>
   <li><a href="#предварительная-визуализация-данных" id="toc-предварительная-визуализация-данных" class="nav-link" data-scroll-target="#предварительная-визуализация-данных"><span class="header-section-number">12.1.2</span> Предварительная визуализация данных</a></li>
-  <li><a href="#проставя-линейная-регрессия-и-функция-lm" id="toc-проставя-линейная-регрессия-и-функция-lm" class="nav-link" data-scroll-target="#проставя-линейная-регрессия-и-функция-lm"><span class="header-section-number">12.1.3</span> Проставя линейная регрессия и функция lm()</a></li>
+  <li><a href="#простая-линейная-регрессия-и-функция-lm" id="toc-простая-линейная-регрессия-и-функция-lm" class="nav-link" data-scroll-target="#простая-линейная-регрессия-и-функция-lm"><span class="header-section-number">12.1.3</span> Простая линейная регрессия и функция lm()</a></li>
   <li><a href="#множественная-регрессия" id="toc-множественная-регрессия" class="nav-link" data-scroll-target="#множественная-регрессия"><span class="header-section-number">12.1.4</span> Множественная регрессия</a></li>
   <li><a href="#линейная-регрессия-с-категориальными-предикторами" id="toc-линейная-регрессия-с-категориальными-предикторами" class="nav-link" data-scroll-target="#линейная-регрессия-с-категориальными-предикторами"><span class="header-section-number">12.1.5</span> Линейная регрессия с категориальными предикторами</a></li>
   </ul></li>
@@ -340,7 +340,8 @@ window.Quarto = {
 <section id="загрузка-данных" class="level3" data-number="12.1.1">
 <h3 data-number="12.1.1" class="anchored" data-anchor-id="загрузка-данных"><span class="header-section-number">12.1.1</span> Загрузка данных</h3>
 <p>В качестве практического примера мы будем использовать учебный набор данных о взаимосвязи между объемами продаж и затратами на рекламу. Это небольшой набор, который поможет понять основные идеи метода и его различные реализации.</p>
-<p>Как всегда, мы начинаем с загрузки данных. Данные будут доступны в приложении к занятию.</p>
+<p>Как всегда, мы начинаем с загрузки данных.</p>
+<p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/Advertising.csv">Скачать данные</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Advertising <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">"Advertising.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -365,7 +366,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Самостоятельная работа</strong>: сделайте аналогичные графики для других переменных.</p>
-<p>Чтобы сделать все графики сразу, можно воспользоваться функцией `pairs().</p>
+<p>Чтобы сделать все графики сразу, можно воспользоваться функцией <code>pairs()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(Advertising)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -391,8 +392,8 @@ window.Quarto = {
 </div>
 <p>Мы видим, что есть явный рост продаж по мере увеличения рекламы на радио и телевидении, тогда как связь с рекламой в газетах не так очевидна.</p>
 </section>
-<section id="проставя-линейная-регрессия-и-функция-lm" class="level3" data-number="12.1.3">
-<h3 data-number="12.1.3" class="anchored" data-anchor-id="проставя-линейная-регрессия-и-функция-lm"><span class="header-section-number">12.1.3</span> Проставя линейная регрессия и функция lm()</h3>
+<section id="простая-линейная-регрессия-и-функция-lm" class="level3" data-number="12.1.3">
+<h3 data-number="12.1.3" class="anchored" data-anchor-id="простая-линейная-регрессия-и-функция-lm"><span class="header-section-number">12.1.3</span> Простая линейная регрессия и функция lm()</h3>
 <p>Давайте построим простую линейную модель для продаж, в которой в качестве предиктора будут выступать затраты на телевизионную рекламу.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="ot">=</span> <span class="fu">lm</span>(Sales <span class="sc">~</span> TV, <span class="at">data =</span> Advertising)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -561,9 +562,9 @@ F-statistic: 312.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Обратимся к оставшейся части вывода.</p>
 <p>Основной мерой, показывающей, насколько хорошо регрессионная модель объясняет данные, является коэффициент детерминации - <span class="math inline">\(R^2\)</span>. Для того, чтобы найти <span class="math inline">\(R^2\)</span>, нужны следующие промежуточные вычисления о некоторых компонентах дисперсии зависимой переменной:</p>
 <ul>
-<li>сумме квадратов остатков (RSS)</li>
-<li>общей сумме квадратов отклонений от среднего (TSS)</li>
-<li>сумме квадратов отклонений, объясненной моделью (ESS)</li>
+<li>сумме квадратов остатков (<span class="math inline">\(RSS\)</span>)</li>
+<li>общей сумме квадратов отклонений от среднего (<span class="math inline">\(TSS\)</span>)</li>
+<li>сумме квадратов отклонений, объясненной моделью (<span class="math inline">\(ESS\)</span>)</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>TSS <span class="ot">&lt;-</span> <span class="fu">sum</span>((Advertising<span class="sc">$</span>Sales <span class="sc">-</span> y_bar)<span class="sc">^</span><span class="dv">2</span>)</span>
@@ -584,7 +585,7 @@ F-statistic: 312.1 on 1 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Таким образом, 61,2% дисперсии зависимой переменной объясняется регрессионной моделью.</p>
 <p>Несмотря на то, что показатель <span class="math inline">\(R^2\)</span> является довольно информативным, у него есть один существенный недостаток: он имеет свойство неоправданно возрастать, при включении дополнительных переменных в анализ, даже если они не оказывают существенного влияния на зависимую переменную. Иными словами, чем более комплексной будет модель, тем выше будет <span class="math inline">\(R^2\)</span>, что не очень хорошо.</p>
-<p>Поэтому вместо обычного <span class="math inline">\(R^2\)</span> в качестве более точной оценки качества модели используется скорректированный показатель - <code>adjusted $R^2$</code>. Проблему множественных предикторов этот показатель решает, путем внесения «наказаний» (пенальти) за включение в модель дополнительных переменных. Чтобы найти скорректированный <span class="math inline">\(R^2\)</span> используется формула:</p>
+<p>Поэтому вместо обычного <span class="math inline">\(R^2\)</span> в качестве более точной оценки качества модели используется скорректированный показатель - <code>adjusted</code><span class="math inline">\(R^2\)</span>. Проблему множественных предикторов этот показатель решает, путем внесения «наказаний» (пенальти) за включение в модель дополнительных переменных. Чтобы найти скорректированный <span class="math inline">\(R^2\)</span> используется формула:</p>
 <p><span class="math display">\[1-\frac{(1-R^{2})(n-1)}{n-k-1},\]</span></p>
 <p>где <span class="math inline">\(k\)</span> - количество предикторов в модели, не считая интерцепта (A).</p>
 <div class="cell">
@@ -706,7 +707,7 @@ mod_3: lm(formula = Sales ~ Newspaper, data = Advertising)
 </div>
 </div>
 <p>Результаты показывают, что значимыми являются только коэффициенты для радио- и телерекламы, тогда как реклама в газетах не является значимым фактором, определяющим продажи.</p>
-<p>Скорректированный коэффициент детерминации (Adjusted R-squared), показывает, что эта модель гораздо лучше, чем любая модель с одним предиктором, и объясняет 89,6% дисперсии.</p>
+<p>Скорректированный коэффициент детерминации (<code>Adjusted R-squared</code>), показывает, что эта модель гораздо лучше, чем любая модель с одним предиктором, и объясняет 89,6% дисперсии.</p>
 <p>Дополнительно, в целях сравнения, давайте создадим более простую модель, без газет.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mod_5 <span class="ot">=</span> <span class="fu">lm</span>(Sales <span class="sc">~</span> TV <span class="sc">+</span> Radio, <span class="at">data =</span> Advertising)</span>
@@ -860,7 +861,7 @@ Model 2: Sales ~ TV + Radio
 <li><code>cooks.distance()</code> рассчитывает важность каждого наблюдения</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ddf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">residuals=</span><span class="fu">residuals</span>(mod_1), <span class="at">rstandard=</span><span class="fu">rstandard</span>(mod_1), <span class="at">rstudent=</span><span class="fu">rstudent</span>(mod_1), <span class="at">leverage=</span><span class="fu">hatvalues</span>(mod_1), <span class="at">cookd=</span><span class="fu">cooks.distance</span>(mod_1))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ddf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">residuals=</span><span class="fu">residuals</span>(mod_5), <span class="at">rstandard=</span><span class="fu">rstandard</span>(mod_5), <span class="at">rstudent=</span><span class="fu">rstudent</span>(mod_5), <span class="at">leverage=</span><span class="fu">hatvalues</span>(mod_5), <span class="at">cookd=</span><span class="fu">cooks.distance</span>(mod_5))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Как мы можем это использовать?</p>
 <p>Например, мы можем отобрать наблюдения, чьи стандартизированные остатки отклоняются более, чем на 2 стандартных отклонения в обе стороны:</p>
@@ -868,16 +869,14 @@ Model 2: Sales ~ TV + Radio
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(ddf, <span class="fu">abs</span>(rstandard) <span class="sc">&gt;</span> <span class="dv">2</span> <span class="sc">|</span> <span class="fu">abs</span>(rstudent) <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    residuals rstandard  rstudent    leverage      cookd
-26  -7.529976 -2.327287 -2.353820 0.014151068 0.03887305
-36  -8.051495 -2.494703 -2.528450 0.019069546 0.06049366
-56   7.212369  2.220896  2.243400 0.006833355 0.01696830
-59   6.746683  2.078480  2.096219 0.007771316 0.01691782
-129  7.195085  2.217613  2.239999 0.008658707 0.02147689
-132 -6.939311 -2.145129 -2.165011 0.014518008 0.03389496
-148  6.806495  2.100649  2.119084 0.011303617 0.02522502
-176  6.804511  2.105573  2.124165 0.016496285 0.03718098
-179 -8.385982 -2.594894 -2.633499 0.016460901 0.05634703</code></pre>
+<pre><code>    residuals rstandard  rstudent   leverage      cookd
+6   -5.312084 -3.215600 -3.295069 0.03465182 0.12372141
+26  -3.608021 -2.172231 -2.193135 0.02410291 0.03884690
+36  -4.192801 -2.530272 -2.565881 0.02870293 0.06306486
+79  -3.489203 -2.096437 -2.114833 0.02013318 0.03010147
+127 -3.990963 -2.403633 -2.433473 0.02479191 0.04895846
+131 -8.797700 -5.303997 -5.714235 0.02678270 0.25806539
+179 -4.213844 -2.541689 -2.577850 0.02772290 0.06140056</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -888,36 +887,36 @@ Model 2: Sales ~ TV + Radio
 <p><span class="math display">\[\bar{h}=\frac{\sum_{i=1}^{n}h_{ii}}{n}=\frac{p}{n}\]</span></p>
 <p>Иными словами, если:</p>
 <p><span class="math display">\[h_{ii} &gt;3\left( \dfrac{p}{n}\right),\]</span></p>
-<p>то мы должны обратить внимание на это наблюдение. Сумма всех значений левериджа равняется количеству параметров модели: 2 - три предиктора + интерцепт (константа).</p>
+<p>то мы должны обратить внимание на это наблюдение. Сумма всех значений левериджа равняется количеству параметров модели: 3 - два предиктора + интерцепт (константа).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>hatmax <span class="ot">=</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">/</span><span class="dv">200</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(ddf, leverage<span class="sc">&gt;</span>hatmax)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>hat_max <span class="ot">=</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">3</span><span class="sc">/</span><span class="dv">200</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(ddf, leverage<span class="sc">&gt;</span>hat_max)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] residuals rstandard rstudent  leverage  cookd    
 &lt;0 строк&gt; (или 'row.names' нулевой длины)</code></pre>
 </div>
 </div>
-<p>Что мы видим? Например, наблюдение 17 имеет самый большой леверидж, но очень маленькое влияние по расстоянию Кука, аналогичная ситуация наблюдается и с 102 и 166 наблюдениями (последнее, например, примечательно большими затратами на телерекламу при скромных продажах).</p>
-<p>Мы можем отсортировать наблюдения по расстоянию Кука, чтобы понять, какие наблюдения являются наиболее влиятельными:</p>
+<p>Что мы видим? Мы видим, что по модели 5 у нас нет таких наблюдений, чей леверидж превышал бы максимально возможное значение.</p>
+<p>Мы также можем отсортировать наблюдения по расстоянию Кука, чтобы понять, какие наблюдения являются наиболее влиятельными:</p>
 <p><span class="math display">\[D_i=\frac{(y_i-\hat{y}_i)^2}{(k+1) \times MSE}\left[ \frac{h_{ii}}{(1-h_{ii})^2}\right],\]</span></p>
 <p>где <span class="math inline">\(MSE\)</span> - среднеквадратическая ошибка регрессии, а <span class="math inline">\(h_{ii}\)</span> - значения левериджа.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(ddf, <span class="fu">desc</span>(cookd))[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    residuals rstandard  rstudent   leverage      cookd
-36  -8.051495 -2.494703 -2.528450 0.01906955 0.06049366
-179 -8.385982 -2.594894 -2.633499 0.01646090 0.05634703
-26  -7.529976 -2.327287 -2.353820 0.01415107 0.03887305
-176  6.804511  2.105573  2.124165 0.01649629 0.03718098
-132 -6.939311 -2.145129 -2.165011 0.01451801 0.03389496
-131 -5.465869 -1.694022 -1.702119 0.01960039 0.02868598</code></pre>
+131 -8.797700 -5.303997 -5.714235 0.02678270 0.25806539
+6   -5.312084 -3.215600 -3.295069 0.03465182 0.12372141
+36  -4.192801 -2.530272 -2.565881 0.02870293 0.06306486
+179 -4.213844 -2.541689 -2.577850 0.02772290 0.06140056
+127 -3.990963 -2.403633 -2.433473 0.02479191 0.04895846
+26  -3.608021 -2.172231 -2.193135 0.02410291 0.03884690</code></pre>
 </div>
 </div>
-<p>Рекомендуется исключать из анализа наблюдения, расстояние Кука для которых превышает 1.</p>
+<p>Рекомендуется исключать из анализа наблюдения, расстояние Кука для которых превышает 1. В нашем анализе таких нет, но вот наблюдения 131 и 6 являются все-таки подозрительными, как имеющие наиболее расстояние Кука и самые большие остатки.</p>
 <p>Аналогичную информацию можно получить с помощью специальных графиков:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_1)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_5)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -967,31 +966,29 @@ Model 2: Sales ~ TV + Radio
 </div>
 </div>
 </div>
-<p>Что дальше? Мы выяснили, что некоторые наблюдения являются нетипичными, что может приводить к искаженным вычислениям. Согласно рекомендациям авторитетных источников, лучше удалять наблюдения, расстояния Кука для которых превышают 1, у нас в наборе таких нет. Но мы можем попробовать удалить переменные, которые вызвали наибольшее количество вопросов, и сравнить результаты.</p>
+<p>Что дальше? Мы выяснили, что некоторые наблюдения являются нетипичными, что может приводить к искаженным вычислениям. Но мы можем попробовать удалить переменные, которые вызвали наибольшее количество вопросов, и сравнить результаты.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>Advertising2<span class="ot">&lt;-</span>Advertising[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">131</span>),]</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>mod_2 <span class="ot">=</span> <span class="fu">lm</span>(Sales <span class="sc">~</span> TV <span class="sc">+</span> Radio <span class="sc">+</span> Newspaper, <span class="at">data =</span> Advertising2)</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>mtable<span class="ot">&lt;-</span><span class="fu">mtable</span>(mod_1, mod_2)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>mod_6 <span class="ot">=</span> <span class="fu">lm</span>(Sales <span class="sc">~</span> TV <span class="sc">+</span> Radio, <span class="at">data =</span> Advertising2)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>mtable<span class="ot">&lt;-</span><span class="fu">mtable</span>(mod_5, mod_6)</span>
 <span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>mtable</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Calls:
-mod_1: lm(formula = Sales ~ TV, data = Advertising)
-mod_2: lm(formula = Sales ~ TV + Radio + Newspaper, data = Advertising2)
+mod_5: lm(formula = Sales ~ TV + Radio, data = Advertising)
+mod_6: lm(formula = Sales ~ TV + Radio, data = Advertising2)
 
 =======================================
-                 mod_1       mod_2     
+                 mod_5       mod_6     
 ---------------------------------------
-  (Intercept)    7.033***    3.087***  
-                (0.458)     (0.281)    
-  TV             0.048***    0.044***  
-                (0.003)     (0.001)    
-  Radio                      0.196***  
-                            (0.008)    
-  Newspaper                 -0.002     
-                            (0.005)    
+  (Intercept)    2.921***    3.052***  
+                (0.294)     (0.265)    
+  TV             0.046***    0.044***  
+                (0.001)     (0.001)    
+  Radio          0.188***    0.195***  
+                (0.008)     (0.007)    
 ---------------------------------------
-  R-squared      0.612       0.915     
+  R-squared      0.897       0.915     
   N            200         198         
 =======================================
   Significance: *** = p &lt; 0.001;   
@@ -1003,7 +1000,7 @@ mod_2: lm(formula = Sales ~ TV + Radio + Newspaper, data = Advertising2)
 </section>
 <section id="мультиколлинеарность" class="level4" data-number="12.1.4.4">
 <h4 data-number="12.1.4.4" class="anchored" data-anchor-id="мультиколлинеарность"><span class="header-section-number">12.1.4.4</span> Мультиколлинеарность</h4>
-<p>Еще один сложный термин))) Что такое мультиколлинеарность? Мультиколлинеарность случается тогда, когда один предиктор может предсказывать другой. Иными словами, мы хотели бы, чтобы предикторы хорошо предсказывали поведение зависимой переменной, но не друг друга, и если такое случается, то это и называется мультиколлинеарностью.Хотя слишком высокая мультиколлинеарность является редкостью, проверка на нее является одной из стандартных процедур регрессионного анализа. Отметим, что проблема мультиколлинеарности является важной, когда мы исследуем важность предикторов, пытаемся на основе интерпретации коэффициентов регрессии обнаружить значимые закономерности (например, доказать, что повышение уровня образования может привести к значительному увеличению доходов или что по мере развития ассоциаций между гражданами увеличивается уровень институционального доверия). Если же первостепенной задачей моделирования является предсказание (как бывает во многих задачах машинного обучения), то проблема мультиколлинеарности не является релевантной, и ее можно проигнорировать.</p>
+<p>Еще один сложный термин))) Что такое мультиколлинеарность? Мультиколлинеарность случается тогда, когда один предиктор может предсказывать другой. Иными словами, мы хотели бы, чтобы предикторы хорошо предсказывали поведение зависимой переменной, но не друг друга, и если такое случается, то это и называется мультиколлинеарностью. Хотя слишком высокая мультиколлинеарность является редкостью, проверка на нее является одной из стандартных процедур регрессионного анализа. Отметим, что проблема мультиколлинеарности является важной, когда мы исследуем важность предикторов, пытаемся на основе интерпретации коэффициентов регрессии обнаружить значимые закономерности (например, доказать, что повышение уровня образования может привести к значительному увеличению доходов или что по мере развития ассоциаций между гражданами увеличивается уровень институционального доверия). Если же первостепенной задачей моделирования является предсказание (как бывает во многих задачах машинного обучения), то проблема мультиколлинеарности не является релевантной, и ее можно проигнорировать.</p>
 <p>Как мы можем проверить, если в нашей модели чрезмерная мультиколлинеарность?</p>
 <p>Самый простой способ - посмотреть на коэффициенты корреляции между предикторами:</p>
 <div class="cell">
@@ -1017,12 +1014,12 @@ Radio     0.05480866 1.00000000 0.35410375
 Newspaper 0.05664787 0.35410375 1.00000000</code></pre>
 </div>
 </div>
-<p>Наши независимые переменные связаны друг с другом довольно слабо. Специальной мерой, позволяющей проверить мультиколлинеарность, является <span class="math inline">\(VIF - variance inflation factor\)</span>, показывающая увеличение в дисперсии коэффициентов после включения дополнительной переменной:</p>
+<p>Наши независимые переменные связаны друг с другом довольно слабо. Специальной мерой, позволяющей проверить мультиколлинеарность, является <span class="math inline">\(VIF\)</span>- variance inflation factor, показывающая увеличение в дисперсии коэффициентов после включения дополнительной переменной:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod_2)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod_6)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       TV     Radio Newspaper 
- 1.008207  1.144016  1.141657 </code></pre>
+<pre><code>      TV    Radio 
+1.006511 1.006511 </code></pre>
 </div>
 </div>
 <p>VIF &lt; 3 обозначает слабую корреляцию между переменными (идеальные условия). Чаще всего в литературе приводится пороговое значение <span class="math inline">\(VIF=5\)</span>, и только переменные <span class="math inline">\(VIF&lt;5\)</span> должны быть включены в модель.</p>
@@ -1052,7 +1049,7 @@ Newspaper 0.05664787 0.35410375 1.00000000</code></pre>
 <section id="категориальные-переменные-с-двумя-уровнями" class="level4" data-number="12.1.5.1">
 <h4 data-number="12.1.5.1" class="anchored" data-anchor-id="категориальные-переменные-с-двумя-уровнями"><span class="header-section-number">12.1.5.1</span> Категориальные переменные с двумя уровнями</h4>
 <p>Вспомним, что в регрессионном уравнении для того, чтобы предсказать переменную <span class="math inline">\(y\)</span> на основе независимой переменной <span class="math inline">\(x\)</span>, нужно суммировать все основные компоненты:</p>
-<p><span class="math display">\[y = b0 + b1*x\]</span></p>
+<p><span class="math display">\[y = b_0 + b_1*x\]</span></p>
 <p>При этом:</p>
 <ul>
 <li><span class="math inline">\(b_0\)</span> и <span class="math inline">\(b_1\)</span> являются регрессионными коэффициентами, представляющими константу (интерцепт) и угол наклона регрессионной прямой (<code>slope</code>).</li>
@@ -1071,8 +1068,8 @@ Newspaper 0.05664787 0.35410375 1.00000000</code></pre>
 </ul>
 <p>Создадим модель:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>mod_6  <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex, <span class="at">data =</span> Salaries)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_6)<span class="sc">$</span>coef</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>mod_7  <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex, <span class="at">data =</span> Salaries)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_7)<span class="sc">$</span>coef</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Estimate Std. Error   t value     Pr(&gt;|t|)
 (Intercept) 101002.41   4809.386 21.001103 2.683482e-66
@@ -1097,12 +1094,12 @@ Male      1</code></pre>
 </div>
 <p>После перекодировки результаты регрессионного анализа будут следующими:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>mod_7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex, <span class="at">data =</span> Salaries)</span>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>mod_8 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> sex, <span class="at">data =</span> Salaries)</span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_7)<span class="sc">$</span>coef</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             Estimate Std. Error   t value      Pr(&gt;|t|)
-(Intercept) 115090.42   1587.378 72.503463 2.459122e-230
-sexFemale   -14088.01   5064.579 -2.781674  5.667107e-03</code></pre>
+<pre><code>             Estimate Std. Error   t value     Pr(&gt;|t|)
+(Intercept) 101002.41   4809.386 21.001103 2.683482e-66
+sexMale      14088.01   5064.579  2.781674 5.667107e-03</code></pre>
 </div>
 </div>
 <p>Поскольку мы теперь сравниваем зарплату женщин с зарплатой мужчин, коэффициент переменной <code>sexFemale</code> негативный, что означает более низкий уровень зарплат у женщин, по сравнению с мужчинами.</p>
@@ -1138,9 +1135,9 @@ sexFemale   -14088.01   5064.579 -2.781674  5.667107e-03</code></pre>
 </div>
 <p>Создадим модель, в которой мы будем предсказывать зарплату от всех других переменных в наборе (знак плюс означает, что мы будем рассматривать только главные эффекты, без интеракций):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>mod_8<span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.service <span class="sc">+</span> rank <span class="sc">+</span> discipline <span class="sc">+</span> sex,</span>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>mod_9<span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.service <span class="sc">+</span> rank <span class="sc">+</span> discipline <span class="sc">+</span> sex,</span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> Salaries)</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod_8)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(mod_9)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Anova Table (Type II tests)
 
@@ -1158,7 +1155,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>После того, как мы приняли во внимание другие переменные (стаж - yrs.service, должность - rank, область знаний - discipline), стало понятно, что фактор пола уже не имеет значения и не вносит вклада в вариабельность заработной платы. Значимыми становятся должность и область знания.</p>
 <p>Чтобы вывести более подробные результаты анализа, лучше воспользоваться функцией <code>summary()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_8)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_9)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1189,8 +1186,13 @@ F-statistic: 63.41 on 5 and 391 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="интеракции" class="level4" data-number="12.1.5.3">
 <h4 data-number="12.1.5.3" class="anchored" data-anchor-id="интеракции"><span class="header-section-number">12.1.5.3</span> Интеракции</h4>
-<p>Интеракции происходят тогда, когда эффект одного из предикторов зависит от другой переменной в модели. Чтобы продемонстрировать эффект интеракции, рассмотрим взаимосвязь между должностью и областью знаний в примере про зарплату преподавателей:</p>
-<p><span class="math display">\[y_i=\beta_0 + \beta_1*(rank) + \beta_2*(discipline) + \beta_3*(rank*discipline) + \beta_4*(yrs.service) + \beta_5*(sex) + \varepsilon_i\]</span></p>
+<p>Интеракции происходят тогда, когда эффект одного из предикторов зависит от другой переменной в модели.</p>
+<p>Чтобы продемонстрировать эффект интеракции, рассмотрим взаимосвязь между должностью и областью знаний в примере про зарплату преподавателей:</p>
+<p><span class="math display">\[
+\begin{split}
+y_i &amp;=\beta_0 + \beta_1*(rank) + \beta_2*(discipline) + \beta_3*(rank*discipline) +\\ &amp; \beta_4*(yrs.service) + \beta_5*(sex) + \varepsilon_i
+\end{split}
+\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>mod_9 <span class="ot">&lt;-</span> <span class="fu">lm</span>(salary <span class="sc">~</span> yrs.service <span class="sc">+</span> sex <span class="sc">+</span> rank <span class="sc">*</span> discipline, <span class="at">data =</span> Salaries)</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_9)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
