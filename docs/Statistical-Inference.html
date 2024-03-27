@@ -1810,8 +1810,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Значение коэффициента <span class="math inline">\(W\)</span> может принимать значения от 0 (отсутствие взаимосвязи между оценками и уровням измерений) до 1 (тесная взаимосвязь).</p>
 <p>Интерпретация коэффициента аналогична <span class="math inline">\(d\)</span> Коэна:</p>
 <ul>
-<li>0.1 - &lt; 0.3 (маленький эффект)</li>
-<li>0.3 - &lt; 0.5 (средний эффект)</li>
+<li><p>0.1 - &lt; 0.3 (маленький эффект)</p></li>
+<li><p>0.3 - &lt; 0.5 (средний эффект)</p></li>
 <li><blockquote class="blockquote">
 <p>= 0.5 (большой эффект).</p>
 </blockquote></li>
@@ -2037,7 +2037,7 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </div>
 </div>
 </div>
-<p>Еще один вариант - структурный график:</p>
+<p>Еще один вариант - ассоциативный (структурный) график:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>struct <span class="ot">&lt;-</span> <span class="fu">structable</span>(<span class="sc">~</span> V19 <span class="sc">+</span> V1, <span class="at">data =</span> df)</span>
 <span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assoc</span>(struct, <span class="at">data =</span> df, <span class="at">shade=</span>T, <span class="at">labeling_args =</span> <span class="fu">list</span>(<span class="at">set_varnames =</span> <span class="fu">c</span>(<span class="at">V1 =</span> <span class="st">"Пол"</span>, <span class="at">V19=</span><span class="st">"Опасны ли тающие ледники?"</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2178,7 +2178,6 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 <ol type="1">
 <li>Проанализируйте различия в оценках уверенности в нахождении заработка в случае потери актуального места работы (вопрос В21) в зависимости от образовательного уровня респондента (вопрос А6), перекодировав его в две категории - те, кто имеют высшее образование, и кто его не имеет.</li>
 <li>Используя созданную переменную важности соблюдения традиций, проведите анализ по уровню образования (по переменной, созданной в упр.1) и по самооценке материального положения (вопрос А10), создав три категории - «низкие доходы», «средние доходы» и «высокие доходы, обеспеченные граждане». Используйте параметрические методы там, где это уместно, и непараметрические там, где возможно применение только таких методов. Обязательно создайте визуализации к вашим результатам.</li>
-<li>Оформите ваши результаты любым удобным для вас способом и приложите в качестве ответа на задание.</li>
 <li>Провести анализ оценки лиц, придерживающихся определенной диеты, за три промежутка времени, используя параметрический ANOVA и его непараметрический аналог с парными сравнениями. Сделать соответствующие визуализации.</li>
 </ol>
 <p>Данные:</p>
@@ -2186,12 +2185,13 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ol start="5" type="1">
-<li>Провести анализ таблиц сопряженности по исследованию по климату (две таблицы на ваш выбор) с помощью критерия хи-квадрат. Создать мозаичную диаграмму и ассоциативный график.</li>
+<ol start="4" type="1">
+<li><p>Провести анализ таблиц сопряженности по исследованию по климату (две таблицы на ваш выбор) с помощью критерия хи-квадрат. Создать мозаичную диаграмму и ассоциативный график.</p></li>
+<li><p>Оформите ваши результаты любым удобным для вас способом и приложите в качестве ответа на задание.</p></li>
 </ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-physocStrangeOrigins" class="csl-entry" role="listitem">
 Brown, Angus. <span>«<span>T</span>he strange origins of the <span>S</span>tudent’s t-test — physoc.org»</span>. <a href="https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/" class="uri">https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/</a>.
 </div>
