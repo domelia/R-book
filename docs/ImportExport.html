@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Давайте попробуем создать новую переменную, куда посчитаем среднее количество перехавших за год в период с 2010 по 2021 гг.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_excel<span class="sc">$</span>Среднее<span class="ot">&lt;-</span><span class="fu">sapply</span>(df_excel[,<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>], mean)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_excel<span class="sc">$</span>Среднее<span class="ot">&lt;-</span><span class="fu">apply</span>(df_excel[,<span class="dv">2</span><span class="sc">:</span><span class="dv">13</span>],<span class="dv">1</span>, mean)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>У нас появился новый столбец в конце таблицы.</p>
 <p>Теперь эту новую таблицу нужно сохранить в новый файл. Для этого нам понадобится библиотека <code>xlsx</code>, а в ней - функция <code>write.xlxs()</code>.</p>
@@ -375,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Воспользуемся данными, представленными на портале “Открытые данные России” и скачаем оттуда перечень стран и режимов въезда на их территорию.</p>
 <p>Мы будем использовать очень простую фунцию download.file(), в которой мы должны указать два аргумента - ссылку и имя файла, в который мы будем сохранять данные. Заметьте, что формат выгружаемого и сохраняемого файла должны совпадать.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://data.gov.ru/sites/default/files/1_28_1.csv"</span>, <span class="st">"countries.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://www.isras.ru/files/File/Bank/010%2080055.pdf"</span>, <span class="st">"anketa.pdf"</span>, <span class="at">mode=</span><span class="st">"wb"</span>)<span class="co">#</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Посмотрите в своей рабочей директории, скачался ли файл, попробуйте его открыть.</p>
 </section>

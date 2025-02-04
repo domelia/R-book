@@ -62,8 +62,7 @@ df_excel<-read_excel("ProgResCompatriots.xlsx", sheet=1)
 
 ```{r eval=FALSE}
 library(dplyr)
-df_excel$Среднее<-sapply(df_excel[,2:13], mean)
-
+df_excel$Среднее<-apply(df_excel[,2:13],1, mean)
 ```
 
 У нас появился новый столбец в конце таблицы.
@@ -131,7 +130,7 @@ write.csv2(df_csv, "df_csv_new.csv")
 Мы будем использовать очень простую фунцию download.file(), в которой мы должны указать два аргумента - ссылку и имя файла, в который мы будем сохранять данные. Заметьте, что формат выгружаемого и сохраняемого файла должны совпадать.
 
 ```{r eval=FALSE}
-download.file("https://data.gov.ru/sites/default/files/1_28_1.csv", "countries.csv")
+download.file("https://www.isras.ru/files/File/Bank/010%2080055.pdf", "anketa.pdf", mode="wb")#
 ```
 
 Посмотрите в своей рабочей директории, скачался ли файл, попробуйте его открыть.
