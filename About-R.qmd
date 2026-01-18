@@ -1,5 +1,10 @@
 ---
 title: "Основные сведения об R"
+extensions:
+  - errbufferoverfl/quarto-progress-bar
+format:
+  html:
+    progress-bar: true
 ---
 
 ```{r setup, include=FALSE}
@@ -97,6 +102,7 @@ R был создан профессорами **Россом Айхэка** и 
 ```{=html}
 <iframe width="650" height="500" class="border border-primary" title="Галерея визуализаций в R" src="https://r-graph-gallery.com/" data-external="1"></iframe>
 ```
+
 7.  **Интеграция с Hadoop и анализ больших данных**
 
 Если перед вами стоит задача анализа больших данных, то с такими библиотеками как `rmr`, `rhdfs`, `rhbase`, `RHIVE`, `RHIPE` и `Rhadoop` возможно интегрировать R и Hadoop (проект фонда Apache Software Foundation для разработки и выполнения распределённых вычислений для работы с большими данными).
@@ -116,6 +122,7 @@ R был создан профессорами **Россом Айхэка** и 
 ```{=html}
 <iframe width="650" height="500"class="border border-primary" src="https://shiny.posit.co/r/gallery/"data-external="1"></iframe>
 ```
+
 9.  **Совместимость с другими платформами**
 
 R может работать с любой конфигурацией оборудования и поддерживает различные операционные системы, независимо от окружения выдает предсказуемые и однозначные результаты.
