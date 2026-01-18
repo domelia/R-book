@@ -1,0 +1,140 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1093/comjnl/27.2.97",
+            "ISSN": "0010-4620",
+            "URL": "https://doi.org/10.1093/comjnl/27.2.97",
+            "author": [
+                {
+                    "family": "Knuth",
+                    "given": "Donald E."
+                }
+            ],
+            "container-title": "Comput. J.",
+            "id": "knuth84",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1984,
+                        5
+                    ]
+                ]
+            },
+            "page": "97-111",
+            "publisher": "Oxford University Press, Inc.",
+            "publisher-place": "USA",
+            "title": "Literate programming",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "author": [
+                {
+                    "family": "Abdi",
+                    "given": "Hervé"
+                },
+                {
+                    "family": "Valentin",
+                    "given": "Dominique"
+                },
+                {
+                    "literal": "others"
+                }
+            ],
+            "container-title": "Encyclopedia of measurement and statistics",
+            "id": "abdi2007multiple",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "page": "657-663",
+            "publisher": "Citeseer",
+            "title": "Multiple factor analysis (MFA)",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Lê",
+                    "given": "Sébastien"
+                },
+                {
+                    "family": "Josse",
+                    "given": "Julie"
+                },
+                {
+                    "family": "Husson",
+                    "given": "François"
+                }
+            ],
+            "container-title": "Journal of statistical software",
+            "id": "le2008factominer",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008
+                    ]
+                ]
+            },
+            "page": "1-18",
+            "title": "FactoMineR: An r package for multivariate analysis",
+            "title-short": "FactoMineR",
+            "type": "article-journal",
+            "volume": "25"
+        },
+        {
+            "author": [
+                {
+                    "family": "Abdi",
+                    "given": "Hervé"
+                },
+                {
+                    "family": "Williams",
+                    "given": "Lynne J"
+                }
+            ],
+            "container-title": "Wiley interdisciplinary reviews: computational statistics",
+            "id": "abdi2010principal",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2010
+                    ]
+                ]
+            },
+            "page": "433-459",
+            "publisher": "Wiley Online Library",
+            "title": "Principal component analysis",
+            "type": "article-journal",
+            "volume": "2"
+        },
+        {
+            "author": [
+                {
+                    "family": "Brown",
+                    "given": "Angus"
+                }
+            ],
+            "id": "physocStrangeOrigins",
+            "issued": {
+                "date-parts": [
+                    [
+                        0
+                    ]
+                ]
+            },
+            "note": "[Accessed 15-03-2024]",
+            "publisher": "https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/",
+            "title": "The strange origins of the Student’s t-test — physoc.org",
+            "type": ""
+        }
+    ],
+    "project_biblios": [
+        "references.bib"
+    ]
+}

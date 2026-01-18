@@ -1,0 +1,63 @@
+library("factoextra")
+library(FactoMineR)
+data(decathlon2)
+head(decathlon2)
+
+decathlon2.active <- decathlon2[1:23, 1:10]
+head(decathlon2.active[, 1:6], 4)
+res.pca <- PCA(decathlon2.active, graph = TRUE)
+print(res.pca)
+var <- get_pca_var(res.pca)
+var
+
+# Координаты
+var$cor
+# Cos2: качество анализа
+head(var$cos2)
+# Вклады в компоненты
+head(var$contrib)
+
+fviz_pca_var(res.pca, col.var = "black")
+library("corrplot")
+corrplot(var$cos2, is.corr=FALSE)
+
+fviz_pca_var(res.pca, col.var = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE # Avoid text overlapping
+)
+
+fviz_pca_biplot(res.pca, repel = TRUE,
+                col.var = "#2E9FDF", # Цвет переменных
+                col.ind = "#696969"  # Цвет наблюдений
+)
+
+data(housetasks)
+housetasks
+
+library("FactoMineR")
+res.ca <- CA(housetasks, graph = FALSE)
+row <- get_ca_row(res.ca)
+row
+# Координаты
+row$coord
+
+library(haven)
+library(dplyr)
+library(questionr)
+df<-read_sav("База_КлимРиск_2023.sav")
+
+V14<-df %>% 
+  select(contains("V14"))
+
+table_V14_region<-cross.multi.table(V14, df$Region, true.codes=list("да"), freq=FALSE)
+
+table_V14_region<-table_V14_region[1:10, 1:3]
+colnames(table_V14_region)<-c("АК", "РА", "РТ")
+rownames(table_V14_region)<-c("Перепад.темп", "Аном.холод", "Оттеп.", "Гололед", "Снегопад", "Лавины", "Пасм.дни", "Реч.лед", "Зажоры", "Ветра, метели")
+
+res.ca <- CA(table_V14_region, graph = FALSE)
+
+row <- get_ca_row(res.ca)
+row
+
+row$cos2

@@ -1,0 +1,44 @@
+{
+  "ImportExport.qmd": {
+    "ImportExport.html": "942ba75c"
+  },
+  "index.qmd": {
+    "index.html": "01def724"
+  },
+  "About-R.qmd": {
+    "About-R.html": "ac948fcb"
+  },
+  "Install-R.qmd": {
+    "Install-R.html": "af32e90a"
+  },
+  "Data-types-and-structures.qmd": {
+    "Data-types-and-structures.html": "16633e82"
+  },
+  "Intro-to-RMarkdown.qmd": {
+    "Intro-to-RMarkdown.html": "21724ad5"
+  },
+  "Functions.qmd": {
+    "Functions.html": "02fdc4ac"
+  },
+  "TidyverseTransformations.qmd": {
+    "TidyverseTransformations.html": "0369d076"
+  },
+  "Base_ggplot2.qmd": {
+    "Base_ggplot2.html": "110818cb"
+  },
+  "ExploratoryDataAnalysis.qmd": {
+    "ExploratoryDataAnalysis.html": "65bca7dc"
+  },
+  "Statistical-Inference.qmd": {
+    "Statistical-Inference.html": "dce3cc09"
+  },
+  "PCA_CA.qmd": {
+    "PCA_CA.html": "3d7c7b3c"
+  },
+  "Regression.qmd": {
+    "Regression.html": "d552e90b"
+  },
+  "references.qmd": {
+    "references.html": "cdcb1c6a"
+  }
+}
