@@ -254,16 +254,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#начало-работы-с-r-и-rstudio" id="toc-начало-работы-с-r-и-rstudio" class="nav-link" data-scroll-target="#начало-работы-с-r-и-rstudio"><span class="header-section-number">2.3</span> Начало работы с R и RStudio</a>
   <ul class="collapse">
   <li><a href="#первые-простые-действия-в-r" id="toc-первые-простые-действия-в-r" class="nav-link" data-scroll-target="#первые-простые-действия-в-r"><span class="header-section-number">2.3.1</span> Первые простые действия в R</a></li>
-  <li><a href="#команды-r" id="toc-команды-r" class="nav-link" data-scroll-target="#команды-r"><span class="header-section-number">2.3.2</span> Команды R</a></li>
-  <li><a href="#полезные-подсказки-shortcuts" id="toc-полезные-подсказки-shortcuts" class="nav-link" data-scroll-target="#полезные-подсказки-shortcuts"><span class="header-section-number">2.3.3</span> Полезные подсказки (shortcuts)</a></li>
-  <li><a href="#пустые-строки" id="toc-пустые-строки" class="nav-link" data-scroll-target="#пустые-строки"><span class="header-section-number">2.3.4</span> Пустые строки</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.3.5</span> ?</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.3.6</span> ??</a></li>
-  <li><a href="#какие-операторы-используются-для-математических-действий" id="toc-какие-операторы-используются-для-математических-действий" class="nav-link" data-scroll-target="#какие-операторы-используются-для-математических-действий"><span class="header-section-number">2.3.7</span> Какие операторы используются для математических действий?</a></li>
-  <li><a href="#о-пользе-ошибок" id="toc-о-пользе-ошибок" class="nav-link" data-scroll-target="#о-пользе-ошибок"><span class="header-section-number">2.3.8</span> О пользе ошибок</a></li>
-  <li><a href="#работа-с-пакетами" id="toc-работа-с-пакетами" class="nav-link" data-scroll-target="#работа-с-пакетами"><span class="header-section-number">2.3.9</span> Работа с пакетами</a></li>
-  <li><a href="#как-установить-пакет-с-помощью-cran" id="toc-как-установить-пакет-с-помощью-cran" class="nav-link" data-scroll-target="#как-установить-пакет-с-помощью-cran"><span class="header-section-number">2.3.10</span> Как установить пакет с помощью CRAN</a></li>
-  <li><a href="#как-установить-библиотеку-из-github" id="toc-как-установить-библиотеку-из-github" class="nav-link" data-scroll-target="#как-установить-библиотеку-из-github"><span class="header-section-number">2.3.11</span> Как установить библиотеку из Github</a></li>
   </ul></li>
   <li><a href="#самостоятельная-работа" id="toc-самостоятельная-работа" class="nav-link" data-scroll-target="#самостоятельная-работа"><span class="header-section-number">2.4</span> Самостоятельная работа</a></li>
   </ul>
@@ -372,10 +362,22 @@ RStudio online
 <p>Все естественные языки содержат некоторые правила, описывающие то, как язык должен быть использован, и позволяющие носителям языка понимать друг друга без проблем.</p>
 <p>В языках программирования, и в R, в частности, тоже есть такие правила, которые нужно соблюдать для того, чтобы компьютер понял, что от него требуется. В обычном языке правила иногда меняются или не соблюдаются, что не мешает людям понимать друг друга. С R, однако такой номер не пройдет. Правила являются фиксированными, и требуется их неукоснительное соблюдение, чтобы не возникало ошибок.</p>
 <p>Рассмотрим некоторые, самые базовые правила.</p>
-</section>
-<section id="команды-r" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="команды-r"><span class="header-section-number">2.3.2</span> Команды R</h3>
+<section id="команды-r" class="level4" data-number="2.3.1.1">
+<h4 data-number="2.3.1.1" class="anchored" data-anchor-id="команды-r"><span class="header-section-number">2.3.1.1</span> Команды R</h4>
 <p>Как большинство других языков программирования, R состоит из совокупности команд, формирующих последовательность инструкций, которые выполняет компьютер. Можно условно рассматривать такие команды в качестве глаголов, которые обозначают какие-то действия, которые выполняет R для получения определенного результата.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Код набирается либо в консоли, либо в файле скрипта. В консоли его можно запустить, нажав клавишу <code>Enter</code>, в скрипте - нажав на кнопку Run в меню или с помощью сочетания клавиш <code>Ctrl+Enter</code>.</p>
+</div>
+</div>
 <p>Например:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Привет, мир!"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,13 +436,13 @@ RStudio online
 </div>
 </div>
 </section>
-<section id="полезные-подсказки-shortcuts" class="level3" data-number="2.3.3">
-<h3 data-number="2.3.3" class="anchored" data-anchor-id="полезные-подсказки-shortcuts"><span class="header-section-number">2.3.3</span> Полезные подсказки (shortcuts)</h3>
+<section id="полезные-подсказки-shortcuts" class="level4" data-number="2.3.1.2">
+<h4 data-number="2.3.1.2" class="anchored" data-anchor-id="полезные-подсказки-shortcuts"><span class="header-section-number">2.3.1.2</span> Полезные подсказки (shortcuts)</h4>
 <p>В R создано много удобных вещей, для того, чтобы написание кода было более приятным. Например, если выделить слово и нажать на знак кавычек, они поставятся сразу с двух сторон, то же происходит и со скобками.</p>
 <p>Еще одной удобной подсказкой является клавиша <code>tab</code>, которая работает с функциями и переменными. Начав набирать какую-то команду или переменную, можно нажать клавишу <code>tab</code> и выбрать из списка подходящий вариант, что экономит большое количество времени и позволяет избежать ошибок.</p>
 </section>
-<section id="пустые-строки" class="level3" data-number="2.3.4">
-<h3 data-number="2.3.4" class="anchored" data-anchor-id="пустые-строки"><span class="header-section-number">2.3.4</span> Пустые строки</h3>
+<section id="пустые-строки" class="level4" data-number="2.3.1.3">
+<h4 data-number="2.3.1.3" class="anchored" data-anchor-id="пустые-строки"><span class="header-section-number">2.3.1.3</span> Пустые строки</h4>
 <p>Пустые линии R игнорирует, но они позволяют организовать код и сделать его более читаемым:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Какое небо голубое!"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -455,33 +457,8 @@ RStudio online
 </div>
 </div>
 </section>
-<section id="section" class="level3" data-number="2.3.5">
-<h3 data-number="2.3.5" class="anchored" data-anchor-id="section"><span class="header-section-number">2.3.5</span> ?</h3>
-<p>В R имеется очень много сопроводительной документации, доступной по каждой функции и библиотеке, где объясняются особенности работы с ними, приводятся примеры и дается теоретическое обоснование. Чтобы обратиться к этой вспомогательной документации достаточно набрать имя функции, перед которой нужно поставить знак вопроса:</p>
-<p>Лучше всего эту команду попробовать в RStudio. Давайте сделаем это!</p>
-</section>
-<section id="section-1" class="level3" data-number="2.3.6">
-<h3 data-number="2.3.6" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.3.6</span> ??</h3>
-<p>Если вдруг вы забыли как точно называется та или иная функция или хотите посмотреть общие материалы по теме, то можно использовать <code>??</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>??print</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Уведомление
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Хотите узнать больше о синтаксисе R? Попробуйте набрать ?Syntax в консоли R и нажать на Enter.</p>
-</div>
-</div>
-</section>
-<section id="какие-операторы-используются-для-математических-действий" class="level3" data-number="2.3.7">
-<h3 data-number="2.3.7" class="anchored" data-anchor-id="какие-операторы-используются-для-математических-действий"><span class="header-section-number">2.3.7</span> Какие операторы используются для математических действий?</h3>
+<section id="математические-операторы" class="level4" data-number="2.3.1.4">
+<h4 data-number="2.3.1.4" class="anchored" data-anchor-id="математические-операторы"><span class="header-section-number">2.3.1.4</span> Математические операторы</h4>
 <p>Довольно часто в процессе обработки данных возникает необходимость вычисления новых переменных, при этом могут потребоваться дополнительные операторы для совершения математических действий. Со сложением и вычитанием все довольно сложно, но что еще?</p>
 <p>В таблице ниже представлены основные операторы с примерами их использования:</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -534,15 +511,40 @@ RStudio online
 </div>
 <p>Если мы что-то делаем неправильно, в консоли появится сообщение об ошибке:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">1</span><span class="sc">+</span>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="dv">1</span><span class="sc">+</span>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="о-пользе-ошибок" class="level3" data-number="2.3.8">
-<h3 data-number="2.3.8" class="anchored" data-anchor-id="о-пользе-ошибок"><span class="header-section-number">2.3.8</span> О пользе ошибок</h3>
+<section id="section" class="level4" data-number="2.3.1.5">
+<h4 data-number="2.3.1.5" class="anchored" data-anchor-id="section"><span class="header-section-number">2.3.1.5</span> ?</h4>
+<p>В R имеется очень много сопроводительной документации, доступной по каждой функции и библиотеке, где объясняются особенности работы с ними, приводятся примеры и дается теоретическое обоснование. Чтобы обратиться к этой вспомогательной документации достаточно набрать имя функции, перед которой нужно поставить знак вопроса:</p>
+<p>Лучше всего эту команду попробовать в RStudio. Давайте сделаем это!</p>
+</section>
+<section id="section-1" class="level4" data-number="2.3.1.6">
+<h4 data-number="2.3.1.6" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.3.1.6</span> ??</h4>
+<p>Если вдруг вы забыли как точно называется та или иная функция или хотите посмотреть общие материалы по теме, то можно использовать <code>??</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>??print</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Хотите узнать больше о синтаксисе R? Попробуйте набрать ?Syntax в консоли R и нажать на Enter.</p>
+</div>
+</div>
+</section>
+<section id="о-пользе-ошибок" class="level4" data-number="2.3.1.7">
+<h4 data-number="2.3.1.7" class="anchored" data-anchor-id="о-пользе-ошибок"><span class="header-section-number">2.3.1.7</span> О пользе ошибок</h4>
 <p>Ошибок и предупреждающих сообщений бояться не надо, напротив, в таких сообщениях практически всегда находится ответ на вопрос, почему такая ошибка возникла, а часто - и возможное решение проблемы. :::</p>
 </section>
-<section id="работа-с-пакетами" class="level3" data-number="2.3.9">
-<h3 data-number="2.3.9" class="anchored" data-anchor-id="работа-с-пакетами"><span class="header-section-number">2.3.9</span> Работа с пакетами</h3>
+<section id="работа-с-пакетами" class="level4" data-number="2.3.1.8">
+<h4 data-number="2.3.1.8" class="anchored" data-anchor-id="работа-с-пакетами"><span class="header-section-number">2.3.1.8</span> Работа с пакетами</h4>
 <p>Мы уже выяснили, что базовый язык R в настоящее время используется наряду с многочисленными функциями и пакетами, разрабатываемыми коллективами ученых и разработчиками из разных стран мира, включая Россию.</p>
 <p>Устанавливать новые пакеты нам придется практически на каждом занятии, поэтому лучше научиться делать это сразу.</p>
 <p>Пакеты хранятся в основном в двух местах:</p>
@@ -550,16 +552,15 @@ RStudio online
 <li><a href="https://cran.r-project.org/">CRAN</a></li>
 <li><a href="https://github.com/">Github</a> - нечто вроде социальной сети для программистов, где все друг друга знают, создают совместные проекты и делятся кодом.</li>
 </ul>
-</section>
-<section id="как-установить-пакет-с-помощью-cran" class="level3" data-number="2.3.10">
-<h3 data-number="2.3.10" class="anchored" data-anchor-id="как-установить-пакет-с-помощью-cran"><span class="header-section-number">2.3.10</span> Как установить пакет с помощью CRAN</h3>
+<section id="как-установить-пакет-с-помощью-cran" class="level5" data-number="2.3.1.8.1">
+<h5 data-number="2.3.1.8.1" class="anchored" data-anchor-id="как-установить-пакет-с-помощью-cran"><span class="header-section-number">2.3.1.8.1</span> Как установить пакет с помощью CRAN</h5>
 <p>Чтобы скачать и установить нужную библиотеку с помощью CRAN, проще всего воспользоваться меню RStudio. Нужно выбрать пункт меню <strong>Tools</strong> - <strong>Install Packages:</strong></p>
 <p><img src="images\InstallR\install.png" class="img-fluid"></p>
 <p>Затем в окне <strong>Packages</strong> необходимо ввести имя нужной библиотеки, например, <code>dplyr</code> и нажать на кнопку <strong>Install</strong>. По умолчанию будет стоять “галочка” - Install Dependencies (установить зависимости) - убирать ее не надо, так как это позволить установить не только саму библиотеку, но и другие библиотеки, от которых она зависит и к которым обращается в ходе выполнения функций. В противном случае, могут возникать ошибки, а оно нам надо?</p>
 <p><img src="images\InstallR\install2.png" class="img-fluid"></p>
 </section>
-<section id="как-установить-библиотеку-из-github" class="level3" data-number="2.3.11">
-<h3 data-number="2.3.11" class="anchored" data-anchor-id="как-установить-библиотеку-из-github"><span class="header-section-number">2.3.11</span> Как установить библиотеку из Github</h3>
+<section id="как-установить-библиотеку-из-github" class="level5" data-number="2.3.1.8.2">
+<h5 data-number="2.3.1.8.2" class="anchored" data-anchor-id="как-установить-библиотеку-из-github"><span class="header-section-number">2.3.1.8.2</span> Как установить библиотеку из Github</h5>
 <p>Не все библиотеки доступны на CRAN, так как эта процедура достаточно сложная и строгая, предполагает несколько проверок (кода, сопроводительной документации). Достаточно частая практика, когда библиотека еще не подана для регистрации на CRAN, разработчики помещают ее на GitHub, откуда ее можно скачать и использовать по назначению. Это позволяет разработчикам получить обратную связь, устранять возможные ошибки, улучшать код.</p>
 <p>Чтобы установить нужную библиотеку из GitHub, нам понадобится функция <code>install_github()</code>, в которой мы должны указать имя разработчика и название библиотеки. Однако, чтобы выполнить эту функцию, нужен дополнительный пакет <code>devtools</code>. Установить ее можно через CRAN с помощью описанного выше способа или через код <code>install.packages("devtools")</code>:</p>
 <div class="cell">
@@ -569,14 +570,21 @@ RStudio online
 </div>
 </section>
 </section>
+</section>
+</section>
 <section id="самостоятельная-работа" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="самостоятельная-работа"><span class="header-section-number">2.4</span> Самостоятельная работа</h2>
 <p>Все самостоятельные работы «зашиты» в отдельный пакет - <code>r4ssr</code>, созданный специально для курса «R в социологических исследованиях».</p>
 <p>Поскольку его код расположен на GitHub, воспользуемся следующим кодом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"domelia/R2026"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"domelia/r4ssr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Для получения первого опыта нужно будет выполнить работу <code>Assignment0</code>.</p>
+<p>Кроме пакета с примерами работ, нужно также установить пакет Для получения первого опыта нужно будет выполнить работу <code>Assignment0</code>.</p>
+<p>Для запуска интерактивной среды запустить следующий код:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"Assignment0"</span>, <span class="at">package=</span><span class="st">"r4ssr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Откроется браузер, необходимо представиться, выполнить задания и сохранить ответы в формате html.</p>
 
 
 </section>
