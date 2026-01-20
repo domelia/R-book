@@ -15,8 +15,7 @@ book:
   repo-actions: edit
   page-footer:
     left: |
-      R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ)
-      Çetinkaya-Rundel, and Garrett Grolemund.
+      R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ).
     right: |
       Эта книга написана с помощью <a href="https://quarto.org/">Quarto</a>.
   cover-image: cover.jpg
