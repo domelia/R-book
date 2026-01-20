@@ -841,7 +841,7 @@ ols_step_forward_p(model, 0.1, hierarchical = TRUE)
 > {{< iconify arcticons anz size=42px >}} **Пример**: В качестве примера, мы будем рассматривать данные о приеме в высшие учебные заведения. В частности, нас будет интересовать, как результаты выпускных экзаменов GRE (Graduate Record Exam scores) и средние оценки GPA (grade point average), а также престиж учебного заведения связаня с допуском в высшее учебное заведение. Зависимой является переменная admit/don’t admit, которая уже закодирована в формате 0-1.
 
 ```{r}
-data <- read.csv("https://stats.idre.ucla.edu/stat/data/binary.csv")
+data <- read.csv("univ_prestige.csv")
 head(data)
 
 ```

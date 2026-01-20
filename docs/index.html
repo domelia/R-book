@@ -8,7 +8,7 @@
 
 <meta name="author" content="Дарья Омельченко">
 
-<title>R в социологических исследованиях</title>
+<title>R в социологических исследованиях (2-е издание)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">В качестве предисловия…</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Предисловие</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -103,9 +103,9 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R в социологических исследованиях</a> 
+      <a href="./">R в социологических исследованиях (2-е издание)</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/domelia/R-book/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/domelia/R-book-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">В качестве предисловия…</span></a>
+ <span class="menu-text">Предисловие</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,29 +210,36 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#в-качестве-предисловия" id="toc-в-качестве-предисловия" class="nav-link active" data-scroll-target="#в-качестве-предисловия">В качестве предисловия…</a></li>
+  <li><a href="#предисловие" id="toc-предисловие" class="nav-link active" data-scroll-target="#предисловие">Предисловие</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R в социологических исследованиях</h1>
+<h1 class="title">R в социологических исследованиях (2-е издание)</h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Автор</div>
+  <div class="quarto-title-meta-heading">принадлежность</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author"><a href="https://www.asu.ru/persons/484/">Дарья Омельченко</a> <a href="mailto:omelchenko@socio.asu.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2839-5070" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Институт гуманитарных наук, Алтайский государственный университет
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Автор</div>
-    <div class="quarto-title-meta-contents">
-             <p>Дарья Омельченко <a href="mailto:omelchenko@socio.asu.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2839-5070" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
-          </div>
-  </div>
-    
+      
   
     
   </div>
@@ -243,29 +250,37 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="в-качестве-предисловия" class="level1 unnumbered">
-<h1 class="unnumbered">В качестве предисловия…</h1><p><img src="cover.jpg" title="R в социологических исследованиях" class="quarto-cover-image img-fluid"></p>
-<p>Это электронное пособие создано для магистрантов, обучающихся по направлению 39.04.01 «Социология», программа «Цифровые методы анализа и визуализации данных», и содержит обучающие материалы по дисциплине «Анализ данных в R», однако, возможно, оно будет интересно всем, кто хотел бы начать использовать R в качестве аналитического инструмента и выйти за рамки классических пакетов анализа и обработки данных, таких, например, как SPSS.</p>
-<p>Цель курса, равно как и настоящего издания, состоит в том, чтобы познакомить слушателей с основами языка, ключевыми командами, функциями и библиотеками, которые могут быть полезными в процессе организации, сбора данных и анализа результатов социологических исследований, и особенно - представления и распространения результатов.</p>
+<section id="предисловие" class="level1 unnumbered">
+<h1 class="unnumbered">Предисловие</h1><p><img src="cover.jpg" title="R в социологических исследованиях (2-е издание)" class="quarto-cover-image img-fluid"></p>
+<p>Перед Вами второе издание учебного электронного пособия «R в социологических исследованиях». Изначально оно предназначалось для магистрантов, обучающихся по направлению 39.04.01 «Социология» по программе «Цифровые методы анализа и визуализации данных», и его структура, распределение по темам, содержание и характер самостоятельных работ соответствовали дисциплине «Анализ данных в R». Между тем, пособие будет полезно не только магистрантам данной программы, но и широкому кругу лиц, занимающихся социологическими исследованиями, стремящихся расширить свой профессиональный арсенал методами обработки данных на языке R.</p>
+<p>Первое издание по-прежнему в силе, оно доступно по <a href="https://domelia.github.io/R-book/">ссылке</a>. В виду того, что пакеты и сам язык довольно активно обновляются, часть кода там может работать некорректно, и приводить не к тем ожидаемым результатам, что стоит учитывать в процессе использования.</p>
+<p>Необходимость в обновлении пособия связана как с эволюцией и появлениием новых версий языка R (на момент написания доступна версия 4.5.2), обновлением пакетов и функций. Меняется и авторский подход к преподаванию: на смену максимальному погружению в аналитический контекст, стремлению предоставить исчерпывающую информацию о возможных версиях выполнения одной и той же задачи, существующих пакетах, расширениях и функциях, приходит понимание необходимости более глубокого закрепления материала, формирования у читателей культуры кодинга как необходимого профессионального навыка. С этой целью было создано дополнение к пособию, содержащее интерактивные обучающие материалы по каждой практической теме, предназначенные для отработки навыков использования R для решения рутинных задач, связанных с созданием переменных и более сложных структур данных, выполнением базовых трансформаций, выполнения отдельных процедур анализа.</p>
+<p>Интерактивные задания хранятся в формате:</p>
+<ul>
+<li><a href="https://github.com/domelia/r4ssr">Репозитория</a>, находящегося в открытом доступе для тех, кто хочет научиться создавать аналогичные «тьюториалы» с помощью пакета <code>learnr</code>, а может быть покритиковать и поправить автора, предложить изменения (чему она будет весьма рада).</li>
+<li>Одноименного пакета <code>r4ssr</code>, в который, собственно, и «упакованы» самостоятельные работы. Каждая работа развертывается в отдельный сайт с возможностью выполнения кода, получения подсказок, проверки решения. О том как пользоваться пакетом, будет сказано и показано ниже.</li>
+</ul>
+<p>Цель курса, равно как и прошлого издания, состоит в том, чтобы познакомить читателей с основами языка, ключевыми командами, функциями и пакетами, которые могут быть полезными в процессе организации, сбора данных и анализа результатов социологических исследований, и особенно - в части представления и распространения результатов.</p>
 <p>Хотя R это язык программирования, мы в ходе освоения курса мы практически не будем использовать его в этом качестве, наша основная задача - стать уверенными пользователями R и использовать его для решения профессиональных социологических и учебных задач.</p>
 <p>Чему мы научимся:</p>
 <ul>
-<li><p>Работать с различными структурами данных, испортировать и экспортировать данные в различных форматах;</p></li>
-<li><p>Создавать несложные функции и понимать документацию к библиотекам;</p></li>
-<li><p>Модифицировать данные для исследовательских задач - создавать новые переменные, разъединять и соединять массивы;</p></li>
-<li><p>Анализировать результаты количественных социологических исследований и проверять статистические гипотезы, как простые, так и сложные, применять многомерные методы анализа;</p></li>
-<li><p>Создавать визуализации на основе результатов исследования, создавать интерактивные отчеты и простые приложения, демонстрирующие возможности R в распространении научных публикаций.</p></li>
+<li>Работать с различными структурами данных, импортировать и экспортировать данные в различных форматах;</li>
+<li>Создавать пользовательские функции и понимать документацию к пакетам;</li>
+<li>Модифицировать данные для исследовательских задач - создавать новые переменные, разъединять и соединять массивы;</li>
+<li>Анализировать результаты количественных социологических исследований и проверять статистические гипотезы, как простые, так и сложные, применять многомерные методы анализа;</li>
+<li>Создавать визуализации на основе результатов исследования, создавать интерактивные отчеты и простые приложения, демонстрирующие возможности R в распространении научных публикаций.</li>
 </ul>
-<p>Что осталось за кадром?</p>
+<p>В качестве дополнительного эффекта, своего рода «экстерналией», не связанной напрямую с задачами освоения R, автор считает рассмотрение основ статистического анализа, в том числе вопросов, касающихся выдвижения, подтверждения и опровержения статистических гипотез, корректного использования методов для их проверки.</p>
+<p>Что по прежнему остается за кадром?</p>
 <ul>
-<li><p>Мы не будем учиться создавать библиотеки и писать сложные функции;</p></li>
-<li><p>Мы не сможем в полной мере охватить все методы анализа;</p></li>
-<li><p>Вряд ли получится разобрать все инструменты для визуализации;</p></li>
-<li><p>За пределами нашего внимания останутся и возможности R по созданию сайтов, блогов и книг.</p></li>
+<li>Мы не будем учиться создавать библиотеки и писать сложные функции;</li>
+<li>Мы не сможем в полной мере охватить все методы анализа;</li>
+<li>Вряд ли получится разобрать все инструменты для визуализации;</li>
+<li>За пределами нашего внимания останутся и возможности R по созданию сайтов, блогов и книг.</li>
 </ul>
 <p>Однако, и того, что запланировано, представляется хватит, для того, чтобы полюбить R и стать частью сообщества исследователей, использующих R в своей повседневной жизни для решения рутинных задач и поиска инновационных решений.</p>
-<p>Мы начинаем!</p>
-<p>Данное пособие находится на этапе разработки и все тексты можно рассматривать только как предварительный «драфт».</p>
+<p>Автор выражает благодарность своим коллегам - преподавателям кафедры социальной и молодежной политики Института гуманитарных наук Алтайского государственного университета, участвовавшим в апробации и рецензировании материалов пособия, за ценные замечания и уточнения, моральную поддержку в ходе создания пособия. Особенные слова признательности - всем студентам, магистрантам, аспирантам, для которых это пособие стало первым шагом на пути к R.</p>
+<p>Работа над пособием велась параллельно с обновлением обучающего курса, что стало возможным благодаря <a href="https://fondpotanin.ru/activity/stipendialnaya-programma-vladimira-potanina/">стипендиальной программе Фонда Владимира Потанина</a>, предоставившего автору грант по проекту «Редизайн курса “Анализ данных в R” для магистрантов направления “Социология”».</p>
 
 
 </section>
@@ -1113,8 +1128,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ) Çetinkaya-Rundel, and Garrett Grolemund.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Эта книга написана с помощью <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div></div></footer></body></html>
+</body></html>

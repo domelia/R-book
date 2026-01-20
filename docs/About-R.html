@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Основные сведения об R – R в социологических исследованиях</title>
+<title>1&nbsp; Основные сведения об R – R в социологических исследованиях (2-е издание)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,9 +103,9 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R в социологических исследованиях</a> 
+      <a href="./">R в социологических исследованиях (2-е издание)</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/domelia/R-book/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/domelia/R-book-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -119,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">В качестве предисловия…</span></a>
+ <span class="menu-text">Предисловие</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,13 +210,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#что-такое-r" id="toc-что-такое-r" class="nav-link active" data-scroll-target="#что-такое-r"><span class="header-section-number">1.1</span> Что такое R?</a></li>
-  <li><a href="#немного-истории" id="toc-немного-истории" class="nav-link" data-scroll-target="#немного-истории"><span class="header-section-number">1.2</span> Немного истории</a></li>
-  <li><a href="#каковы-преимущества-r" id="toc-каковы-преимущества-r" class="nav-link" data-scroll-target="#каковы-преимущества-r"><span class="header-section-number">1.3</span> Каковы преимущества R?</a></li>
-  <li><a href="#кое-что-еще-о-разработчиках-r" id="toc-кое-что-еще-о-разработчиках-r" class="nav-link" data-scroll-target="#кое-что-еще-о-разработчиках-r"><span class="header-section-number">2</span> Кое-что еще о разработчиках R</a></li>
-  <li><a href="#вопросы-для-самопроверки" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#вопросы-для-самопроверки"><span class="header-section-number">3</span> Вопросы для самопроверки</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link active" data-scroll-target="#r"><span class="header-section-number">1.1</span> R?</a></li>
+  <li><a href="#кто-и-как-использует-r" id="toc-кто-и-как-использует-r" class="nav-link" data-scroll-target="#кто-и-как-использует-r"><span class="header-section-number">1.2</span> Кто и как использует R?</a></li>
+  <li><a href="#немного-истории" id="toc-немного-истории" class="nav-link" data-scroll-target="#немного-истории"><span class="header-section-number">1.3</span> Немного истории</a></li>
+  <li><a href="#каковы-преимущества-r" id="toc-каковы-преимущества-r" class="nav-link" data-scroll-target="#каковы-преимущества-r"><span class="header-section-number">1.4</span> Каковы преимущества R?</a></li>
+  <li><a href="#вопросы-для-самопроверки" id="toc-вопросы-для-самопроверки" class="nav-link" data-scroll-target="#вопросы-для-самопроверки"><span class="header-section-number">2</span> Вопросы для самопроверки</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book/edit/main/About-R.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/About-R.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -240,29 +240,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="что-такое-r" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="что-такое-r"><span class="header-section-number">1.1</span> Что такое R?</h2>
+<section id="r" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="r"><span class="header-section-number">1.1</span> R?</h2>
 <p>R – это язык программирования и свободная программная среда для статистической обработки и визуализации данных.</p>
-<p>Несмотря на наличие огромного количества языков и различных программ для статистической обработки данных, R в течение двух десятилетий остается популярным языком и средой обработки и анализа данных для специалистов из разных областей знания.</p>
-<p>Позиции языка R как средства разработки среди других языков программирования довольно высоки. Так, по данным индекса Tiobe за 2022 год, R занимал12-е место в мире, и хотя в 2024 году его авторитет заметно упал (23-е место), его используют миллионы аналитиков и разработчиков по всему миру:</p>
-<p><img src="https://raw.githubusercontent.com/domelia/rcourse/main/inst/tutorials/lesson1/images/tiobe.png" class="img-fluid"></p>
-<p>Прежде всего, это язык, который используют ученые, специалисты, работающие в различных отраслях экономики, менеджеры для анализа реальных данных и разработки научно обоснованных систем принятия решений, поэтому место в общем рейтинге не так высоко. Если посмотреть сферы использования, то на первом месте - академическая среда, на втором - сфера здравоохранения, на третьем - правительственные учреждения.</p>
-<p><img src="https://cdn.stackoverflow.co/images/jo7n4k8s/production/4304a6e40e6cb86c9905d6ef22e68fea550c82d6-675x675.png" class="img-fluid"></p>
-<p>R используют банки и маркетинговые агентства, технические компании и информационные корпорации для разных целей - от обработки данных до прогнозирования и представления интерактивной инфографики.</p>
-<p>Вот только небольшой список тех компаний, которые используют R в своей деятельности.</p>
-<p><img src="https://gilesd-j.com/wp-content/uploads/2019/01/4-companies-using-R.jpg" class="img-fluid"></p>
+<p>Несмотря на наличие огромного количества языков и различных программ для статистической обработки данных, R остается популярным языком и средой обработки и анализа данных для специалистов из разных областей знания.</p>
+<p>Позиции языка R постоянно меняются как вся сфера IT-технологий. Одним из инструментов, позволяющих отслеживать интерес к этому языку, является индекс TIOBE Programming Community Он обновляется ежемесячно и отражает спрос на языки на основе количества поисковых запросов в популярных поисковиках, таких как Google, Bing и другие. Индекс помогает оценивать тренды в программировании, хотя не измеряет напрямую количество кода или инженеров. Так, по данным индекса Tiobe за 2022 год, R занимал 12-е место в мире, в 2024 году его авторитет заметно упал (18-е место), но в декабре 2025 года R снова попал в ТОП-10. Так как статистический анализ и необходимость визуализации больших объемов данных стало очень важным, R вернул свою популярность.</p>
+<p><a href="https://www.tiobe.com/tiobe-index/r/">Здесь</a> можно увидеть, как менялось значение индекса в течение разных периодов времени.</p>
 </section>
-<section id="немного-истории" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="немного-истории"><span class="header-section-number">1.2</span> Немного истории</h2>
+<section id="кто-и-как-использует-r" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="кто-и-как-использует-r"><span class="header-section-number">1.2</span> Кто и как использует R?</h2>
+<p>Прежде всего, это язык, который используют ученые, специалисты, работающие в различных отраслях экономики, менеджеры для анализа реальных данных и разработки научно обоснованных систем принятия решений, поэтому место в общем рейтинге не так высоко. Если посмотреть сферы использования, то на первом месте - академическая среда, на втором - сфера здравоохранения, на третьем - правительственные учреждения (<span class="citation" data-cites="Article">(<a href="PCA_CA.html#ref-Article" role="doc-biblioref"><strong>Article?</strong></a>)</span>).</p>
+<p>R используют банки и маркетинговые агентства, технические компании и информационные корпорации для разных целей - от обработки данных до прогнозирования и представления интерактивной инфографики.</p>
+</section>
+<section id="немного-истории" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="немного-истории"><span class="header-section-number">1.3</span> Немного истории</h2>
 <p>R был создан профессорами <strong>Россом Айхэка</strong> и <strong>Робертом Джентельменом</strong> (Ross Ihaka и Robert Gentleman) в 1992 году, сначала как язык программирования для обучения студентов статистике в университете Окленда (Новая Зеландия). Авторы вдохновлялись при создании языком S, используемым в лаборатории Bell, и ради шутки назвали язык R - по первым буквам собственных имен.</p>
 <p>В июне 1995 года статистик <strong>Мартин Махлер</strong> убедил Айхэку и Джентельмена опубликовать R как язык со свободным исходным кодом под публичной лицензией GNU. Первая официальная версия была выпущена 29 февраля 2000 года.</p>
 <p>Чуть ранее, в 1997 году <strong>Куртом Хорником</strong> и <strong>Фрицем Лейшем</strong> была основана Сеть для архивирования кода R (CRAN, The Comprehensive R Archive Network), цель которой заключалась в хранении исходного кода, выполняемых файлов, документации и библиотек, создаваемых пользователями. На момент декабря 2022 года CRAN имел 103 зеркальных сервера и 18 976 библиотек.</p>
 <p>Команда разработчиков (R Core Team) также была основана в 1997 году для дальнейшего развития языка. Сейчас в ней состоят ведующие разработчики, статистики, специалисты по компьютерным наукам, всего более 20 человек. В апреле 2003 года для развития проекта была создана некоммерческая организация R Foundation. Цель фонда заключается в предоставлении технической поддержки и коммуникации с создателями R, хранении и управлении технической документацией и интеллектуальной собственностью.</p>
-<p>Подробнее об истории создания R можно узнать из таймлайна: <img src="https://www.researchgate.net/publication/360246719/figure/fig1/AS:1160745526005760@1653754707412/Timeline-of-R-history-with-selected-milestones.png" class="img-fluid"></p>
+<p>Подробнее об истории создания R можно узнать из таймлайна:</p>
+<p><img src="images/AboutR/timelineR.png" class="img-fluid"></p>
 <p>Создатели R (Питер Далгаард - датский ученый, один из членов R Core Team): <img src="https://rss.onlinelibrary.wiley.com/cms/asset/25d367ff-1eb8-48d4-b457-f767bd7ec036/sign1169-gra-0004-m.jpg" class="img-fluid"></p>
 </section>
-<section id="каковы-преимущества-r" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="каковы-преимущества-r"><span class="header-section-number">1.3</span> Каковы преимущества R?</h2>
+<section id="каковы-преимущества-r" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="каковы-преимущества-r"><span class="header-section-number">1.4</span> Каковы преимущества R?</h2>
 <p>Их довольно много:</p>
 <ol type="1">
 <li>Возможности для <strong>статистической обработки</strong>, от простых функций до сложных моделей.</li>
@@ -290,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>Самые авторитетные хранятся в CRAN (Comprehensive R Archive Network), их более 10 тысяч, однако, чтобы попасть туда, необходимо, чтобы документация и код соответствовали определенным требованиям, что требует времени. До того момента, когда библиотека загружена на CRAN, она, как правило, хранится в открытом доступе, например, на <a href="https://github.com/search?q=R">github</a>, где каждый желающий может принять участие в ее тестировании и доработке.</p>
 <p>Пример сетевого анализа библиотек и их взаимозависимостей представлен на рисунке ниже:</p>
-<p><img src="https://s3.amazonaws.com/assets.datacamp.com/blog_assets/R+Packages+Guide/content_rdoc10.png" class="img-fluid"></p>
+<p><img src="images/AboutR/network.png" class="img-fluid"></p>
 <p>Примеры полезных библиотек:</p>
 <ul>
 <li>обработка и всевозможные манипуляции с данными (<code>tidytverse</code>)</li>
@@ -309,20 +310,15 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>В современном мире анализ данных невозможен без качественной визуализации, особенно если его результаты планируется использовать в сфере политики и бизнеса. R является одним из лучших инструментов для создания качественной графики, и такие библиотеки как <code>ggplot2</code>, <code>plotly</code>, <code>ggvis</code> помогут создать очень детализированные и эстетически привлекательные визуализации.</p>
 <p>Для пользователей R, которые только начинают изучение языка, на сайте <a href="https://r-graph-gallery.com" class="uri">https://r-graph-gallery.com</a> создана галерея визуализаций, разбитых по отдельным тематикам. На основе простых и более сложных примеров можно изучить код и адаптировать его под собственные задачи.</p>
-<iframe width="650" height="500" class="border border-primary" title="Галерея визуализаций в R" src="https://r-graph-gallery.com/" data-external="1"></iframe>
 <ol start="7" type="1">
 <li><strong>Интеграция с Hadoop и анализ больших данных</strong></li>
 </ol>
 <p>Если перед вами стоит задача анализа больших данных, то с такими библиотеками как <code>rmr</code>, <code>rhdfs</code>, <code>rhbase</code>, <code>RHIVE</code>, <code>RHIPE</code> и <code>Rhadoop</code> возможно интегрировать R и Hadoop (проект фонда Apache Software Foundation для разработки и выполнения распределённых вычислений для работы с большими данными).</p>
-<p>Возможности по хранению данных Hadoop и вычислительные достоинства R используют многие в качестве оптимального решения для анализа больших данных. Например, компания Форд использует R и Hadoop для обработки данных обратной связи с потребителями, что позволяет им улучшить дизайн и обосновывать бизнес решения.</p>
-<p><img src="https://static.javatpoint.com/tutorial/r/images/r-integration-with-hadoop.png" class="img-fluid"></p>
+<p>Возможности по хранению данных <code>Hadoop</code> и вычислительные достоинства R используют многие в качестве оптимального решения для анализа больших данных. Например, компания Форд использует <code>R</code> и <code>Hadoop</code> для обработки данных обратной связи с потребителями, что позволяет им улучшить дизайн и обосновывать бизнес решения.</p>
 <ol start="8" type="1">
 <li>Создание <strong>интерактивных веб-приложений</strong></li>
 </ol>
-<p>С помощью R и библиотеки <code>shiny</code> можно создавать интерактивные приложения, с помощью которых пользователи (ученики, заказчики, журналисты и пр.) могут познакомиться с вашими данными, провести какие-то виды анализа, сделать визуализацию, возможно изучить какие-то закономерности (часто используются как обучающий инструмент). Эти приложения можно хранить на сервере Shiny или в другом доступном месте.</p>
-<p><img src="https://r-graph-gallery.com/img/graph/271-ggplot2-animated-gif-chart-with-gganimate2.gif" class="img-fluid"></p>
-<p>Примеры можно посмотреть в галерее на сайте <code>shiny</code>: (<a href="https://shiny.posit.co/r/gallery/" class="uri">https://shiny.posit.co/r/gallery/</a>):</p>
-<iframe width="650" height="500" class="border border-primary" src="https://shiny.posit.co/r/gallery/" data-external="1"></iframe>
+<p>С помощью R и библиотеки <code>shiny</code> можно создавать интерактивные приложения, с помощью которых пользователи (ученики, заказчики, журналисты и пр.) могут познакомиться с вашими данными, провести какие-то виды анализа, сделать визуализацию, возможно изучить какие-то закономерности (часто используются как обучающий инструмент). Примеры можно посмотреть в галерее на сайте, посвященном <code>shiny</code>: (<a href="https://shiny.posit.co/r/gallery/" class="uri">https://shiny.posit.co/r/gallery/</a>).</p>
 <ol start="9" type="1">
 <li><strong>Совместимость с другими платформами</strong></li>
 </ol>
@@ -331,40 +327,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Возможность запуска кода <strong>без компилирования</strong> (возможно этот пункт стоило бы поставить на одно из первых мест)</li>
 </ol>
 <p>R относится к <em>интерпретируемым</em> языкам, что означает, что ему не требуется компилятор для того, чтобы программа заработала. Иными словами, все команды, которые мы вводим, сразу же выполняются, без дополнительного компилирования (сборки), как это происходит в других языках, например в C, COBOL, Delphi или Fortran. Другими возможностями, которыми обладают интерпретируемые языки, являются кросс-платформенность (способность работать в разных операционных системах и аппаратных средах), простота тестирования и отладки программ.</p>
-<p><img src="http://itmentor.by/images/articles/kompiliruemye-i-interpretiruemye.jpg" class="img-fluid"></p>
+<p><img src="images/AboutR/comparison.png" class="img-fluid"></p>
 <p>Например, Если мы создадим несколько строк кода и запустим их, они выполнятся немедленно и мы увидим результат:</p>
-<p><img src="https://raw.githubusercontent.com/domelia/rcourse/main/inst/tutorials/lesson1/images/2.png" class="img-fluid"></p>
+<p><img src="images/AboutR/calculator.png" class="img-fluid"></p>
 <p>Кроме этих преимуществ есть и много других, о которых мы узнаем в процессе изучения курса.</p>
-<p>К слову сказать, данное пособие также создано с помощью R. При его создании использовались возможности open-source системы публикации научной и технической информациии <strong>Quarto</strong>.</p>
+<p>К слову сказать, данное пособие также создано с помощью R. При его создании использовались возможности open-source системы публикации научной и технической информациии <a href="https://quarto.org/">Quarto</a>.</p>
 </section>
-<section id="кое-что-еще-о-разработчиках-r" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Кое-что еще о разработчиках R</h1>
-<p>Кроме основной команды, в сообществе R выделяются талантливые программисты, которые разрабатывают библиотеки, без преувеличения производящие революцию в обработке и анализе данных. Это настоящие гуру, которых очень уважают в исследовательском сообществе, их имена знают все, кто работает в R. Ну, или почти все…</p>
-<p>ТОП-3 по личному и очень субъективному мнению автора, которое основывается на его собственном опыте и может не совпадать с другими оценками, включает следующих разработчиков:</p>
-<ol type="1">
-<li><strong>Хэдли Уикхэм</strong> (Hadley Wickham) - программист из Новой Зеландии, главный научный сотрудник в компании Posit (создана в 2022 году в продолжение и развитие компании RStudio). Без преувеличения самый известнй, очень трудолюбивый и плодотворный разработчик R, автор более 100 (!) библиотек, в том числе таких мегапопулярных как <code>ggplot</code>, <code>dplyr</code>, <code>tidyverse</code>, <code>devtools</code> и других. Этими библиотеками воспользовались более 825 тыс. человек.</li>
-</ol>
-<p><img src="https://github.com/hadley.png" class="img-fluid" width="300"></p>
-<ol start="2" type="1">
-<li><strong>Дирк Эддельбуэттель</strong> (Dirk Eddelbuettel) - канадский ученый в области статистики, программист и исследователь, второй в нашем списке лучших разработчиков библиотек для R. Принял участие в создании более 60 библиотек, наиболее популярными среди которых является <code>Rcpp</code>, позволяющая интегрировать R с другим не менее популярным языком C++, а также <code>RPostgreSQL</code>, предоставляющая интерфейс для работы с системой баз данных PostgreSQL. Работает в Иллинойском университете в Урбане-Шампейне.</li>
-</ol>
-<p><img src="https://stat.illinois.edu/sites/default/files/styles/directory_profile/public/profile-photo/deddel.png.jpg?itok=4R7stKxA" class="img-fluid" width="300"></p>
-<ol start="3" type="1">
-<li><strong>Ихуэй Се</strong> (Yihui Xie) - еще один плодовитый разрботчик, создавший более 40 библиотек, загруженных более 130 тыс. раз. Его большая заслуга в том, что разработал инструменты для создания интерактивных приложений (<code>knitr</code>, <code>rmarkdown</code>, <code>shiny</code> и <code>htmlwidgets</code> - его детища, и мы тоже с ними познакомимся на следующих занятиях). Yihui Xie также поддерживает систему <code>bookdown</code>, которую можно использовать для написания книг и отчетных документов с помощью R Markdown. Инженер-программист компании RStudio.</li>
-</ol>
-<p><img src="https://m.media-amazon.com/images/I/71uZ6+zYknL.jpg" width="300"></p>
-</section>
-<section id="вопросы-для-самопроверки" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Вопросы для самопроверки</h1>
-<p><strong>1. Каким языком является R?</strong></p>
-<div id="radio_HYLFLWDKUT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HYLFLWDKUT" value=""> <span>компилируемым</span></label><label><input type="radio" autocomplete="off" name="radio_HYLFLWDKUT" value=""> <span>процедурным</span></label><label><input type="radio" autocomplete="off" name="radio_HYLFLWDKUT" value="answer"> <span>интерпретируемым</span></label><label><input type="radio" autocomplete="off" name="radio_HYLFLWDKUT" value=""> <span>структурным</span></label>
-</div>
-<p><strong>2. Может ли R быть интегрирована с Hadoop для обработки больших данных?</strong> <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
-<p><strong>3. На основе какого языка создан R?</strong></p>
-<div id="radio_RIARDFJLJZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RIARDFJLJZ" value=""> <span>Python</span></label><label><input type="radio" autocomplete="off" name="radio_RIARDFJLJZ" value=""> <span>Oracle</span></label><label><input type="radio" autocomplete="off" name="radio_RIARDFJLJZ" value="answer"> <span>S</span></label><label><input type="radio" autocomplete="off" name="radio_RIARDFJLJZ" value=""> <span>Java</span></label>
-</div>
+<section id="вопросы-для-самопроверки" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Вопросы для самопроверки</h1>
 
 
 </section>
@@ -1204,8 +1174,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="В качестве предисловия...">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">В качестве предисловия…</span>
+      <a href="./index.html" class="pagination-link" aria-label="Предисловие">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Предисловие</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1215,8 +1185,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ) Çetinkaya-Rundel, and Garrett Grolemund.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/About-R.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Эта книга написана с помощью <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book/edit/main/About-R.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div></div></footer></body></html>
+</body></html>

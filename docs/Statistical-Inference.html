@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R в социологических исследованиях - 10&nbsp; Статистический вывод и тестирование исследовательских гипотез</title>
+<title>10&nbsp; Статистический вывод и тестирование исследовательских гипотез – R в социологических исследованиях</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -134,7 +134,7 @@ div.csl-indent {
 <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -173,13 +173,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Statistical-Inference.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Статистический вывод и тестирование исследовательских гипотез</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -365,12 +365,12 @@ window.Quarto = {
 <li>о различии статистических совокупностей (представления о распределении семейных обязанностей различаются у мужчин и женщин),</li>
 <li>о наличии закономерностей (на основе анализа совокупности явлений) об отсутствии случайностей (например, случайности распределения данных в последовательности)</li>
 </ul>
-<p>Результатом статистического вывода является статистическое суждение, например:</p>
+<p>Результатом статистического вывода является статистическое суждение, основывающееся на анализе статистических показателей двух типов:</p>
 <ul>
-<li>точечная оценка (например, среднее значение, факторная нагрузка)</li>
-<li>доверительный интервал (для статистического параметра)</li>
-<li>отвержение гипотезы.</li>
+<li><p>единичной (точечной) оценки (например, среднего значения, факторной нагрузки)</p></li>
+<li><p>интервала (например, доверительного интервала для среднего значения, коэффициента корреляции или другого статистического параметра).</p></li>
 </ul>
+<p>В конечном итоге, принимая во внимание полученные результаты, аналитик принимает решение о принятии или отвержении своей исследовательской гипотезы.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -385,6 +385,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Логика статистического вывода</strong> представляет собой порядок действий аналитика при проведении статистического анализа. В целом, она не зависит от конкретной проблемы и используемых статистических методов, однако, на практике, благодаря большому репертуару статистических инструментов, конечно, имеет свои особенности.</p>
+<p>Типичными являются следующие этапы статистического вывода.</p>
 <p>Этапы:</p>
 <ol type="1">
 <li>Формулировка статистических гипотез (нулевых и альтернативных), позволяющих подтвердить существующую теорию или доказать авторскую.</li>
@@ -406,7 +407,8 @@ window.Quarto = {
 <p>С каждым критерием связана некоторая статистика <span class="math inline">\(S\)</span>, которая измеряет отклонение в наблюдаемом процессе от ситуации, соответствующей <span class="math inline">\(H_0\)</span>.</p>
 </div>
 <p>В силу случайности извлекаемых выборок случайными оказываются и значения статистики <span class="math inline">\(S\)</span>, вычисляемые в соответствии с этими выборками. То есть, если мы много раз будем извлекать выборки из генеральной совокупности, значения статистики будут отличаться, и разница между ними будет носить случайный характер.</p>
- <iframe id="example1" src="https://gallery.shinyapps.io/CLT_mean/" style="border: none; width: 100%; height: 720px" frameborder="0"></iframe>
+<iframe id="example1" src="https://gallery.shinyapps.io/CLT_mean/" style="border: none; width: 100%; height: 720px" frameborder="0">
+</iframe>
 <p>При справедливости проверяемой гипотезы <span class="math inline">\(H_0\)</span> статистика <span class="math inline">\(S\)</span> подчиняется некоторому распределению <span class="math inline">\(g(𝑆│𝐻_0 )\)</span>, например, нормальному распределению, t-распределению, распределению <span class="math inline">\(\chi^2\)</span> и др.</p>
 <p>В этом распределении выделяется <strong>два множества: случайных отклонений и критических значений</strong>. Если статистика попадает в область критических значений – нулевая гипотеза отклоняется, в противном случае – нет.</p>
 <div id="fig-inf" class="quarto-layout-panel">
@@ -427,17 +429,18 @@ window.Quarto = {
 <section id="доверительная-вероятность-и-доверительный-интервал" class="level3" data-number="10.1.2">
 <h3 data-number="10.1.2" class="anchored" data-anchor-id="доверительная-вероятность-и-доверительный-интервал"><span class="header-section-number">10.1.2</span> Доверительная вероятность и доверительный интервал</h3>
 <p>Чтобы отклонить нулевую гипотезу, мы выбираем субъективное суждение относительно <strong>уровня риска</strong>, который мы готовы принять для того, чтобы ошибиться. Этот риск оказывается отраженным в понятиях доверительного интервала и доверительной вероятности.</p>
-<p><strong>Доверительный интервал</strong> (<em>confidence interval</em>, <span class="math inline">\(CI\)</span>)- диапазон, в котором находятся истинные средние значения в генеральной совокупности с определенной доверительной вероятностью.</p>
+<p><strong>Доверительный интервал</strong> (<em>confidence interval</em>, <span class="math inline">\(CI\)</span>) – диапазон, в котором находятся истинные средние значения в генеральной совокупности с определенной доверительной вероятностью.</p>
 <p><strong>Доверительная вероятность</strong> (<em>confidence level</em>, <span class="math inline">\(CL\)</span>) – вероятность того, что доверительный интервал содержит значение оцениваемого параметра.</p>
 <p>Типичные значения доверительной вероятности – 90%, 95% (чаще всего), 99%. Чем больше доверительная вероятность, тем шире (и иногда бесполезнее) интервал.</p>
 <p><strong>Пример</strong>: с 95% вероятностью можно утверждать, что данного мнения о реализации национального проекта придерживаются 48% до 73% жителей региона.</p>
- <iframe id="example1" src="https://rpsychologist.com/d3/ci/" style="border: none; width: 100%; height: 720px" frameborder="0"></iframe>
+<iframe id="example1" src="https://rpsychologist.com/d3/ci/" style="border: none; width: 100%; height: 720px" frameborder="0">
+</iframe>
 </section>
 <section id="ошибки-при-оценке-статистических-гипотез" class="level3" data-number="10.1.3">
 <h3 data-number="10.1.3" class="anchored" data-anchor-id="ошибки-при-оценке-статистических-гипотез"><span class="header-section-number">10.1.3</span> Ошибки при оценке статистических гипотез</h3>
-<p><strong>Ошибка первого рода</strong> – показывает вероятность того, что мы найдем различия там, где их на самом деле нет! <strong>Нездоровые сенсации, большой вред</strong> (Пример: поставили диагноз, а болезни нет, признали виновным, а вины нет)</p>
+<p><strong>Ошибка первого рода</strong> – показывает вероятность того, что мы найдем различия там, где их на самом деле нет! <strong>Нездоровые сенсации, большой вред</strong> (Пример: поставили диагноз, а болезни нет, или человека признали виновным, а вины нет)</p>
 <p>Можем контролировать путем подбора порога значений, ниже которого будем считать, что различий нет, то есть уровня значимости.</p>
-<p>Типичный порог – <span class="math inline">\(\alpha\)</span> = 0,05</p>
+<p>Типичный порог – <span class="math inline">\(\alpha\)</span> = 0,05.</p>
 <p><strong>Ошибка второго рода</strong> – различия есть, но мы их не нашли. <strong>Близорукость, слепота критерия, мы ее не можем контролировать!</strong> Вред небольшой.</p>
 <p>Минимизировать ошибку второго рода можно путем подбора статистического критерия.</p>
 <p>Ошибку первого рода можно совершить, только, если мы отвергли <span class="math inline">\(H_0\)</span>, а ошибку второго рода – если мы приняли <span class="math inline">\(H_0\)</span>. Сразу две ошибки совершить нельзя!</p>
@@ -451,7 +454,7 @@ window.Quarto = {
 <li>при увеличении объема выборки;</li>
 <li>при уменьшении выборочной дисперсии.</li>
 </ul>
-<div id="fig-error" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-error" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/error.png" class="img-fluid figure-img" style="width:60.0%">
@@ -467,7 +470,7 @@ window.Quarto = {
 <p>В случае <strong>одностороннего критерия (one-tailed, one-sided)</strong> полученное значение статистики <span class="math inline">\(S^*\)</span> сравнивают с критическим значением <span class="math inline">\(𝑆_{(1−\alpha)}\)</span> при заданном уровне значимости <span class="math inline">\(\alpha\)</span> или делают вывод на основе «достигнутого уровня значимости» (p-value): вероятности возможного превышения полученного значения статистики при справедливости <span class="math inline">\(H_0\)</span>.</p>
 <p>Односторонний критерий применяется для оценки направленных гипотез, в которых содержатся утверждения «больше (выше)» или «меньше (ниже)».</p>
 <p><strong>Пример</strong>: уровень доверия к некоммерческим организациям у женщин выше, чем у мужчин.</p>
-<div id="fig-one-sided" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-one-sided" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-one-sided-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/one-sided.png" class="img-fluid figure-img" style="width:60.0%">
@@ -480,7 +483,7 @@ window.Quarto = {
 <p>В случае <strong>двустороннего критерия (two-tailed, two-sided)</strong> критическая область состоит из двух частей. И проверяемая гипотеза <span class="math inline">\(H_0\)</span> отклоняется, если <span class="math inline">\(S^∗&gt;𝑆_{(\alpha/2)}\)</span> или <span class="math inline">\(S^∗&lt;S_{1-\alpha /2}\)</span>.</p>
 <p>Двусторонний критерий применяется для оценки ненаправленных гипотез (действуют в обе стороны), в которых содержатся утверждения «отличается» или «не равен».</p>
 <p><strong>Пример</strong>: уровень доверия к некоммерческим организациям у женщин у мужчин различается.</p>
-<div id="fig-two-sided" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-two-sided" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-two-sided-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/two-sided.png" class="img-fluid figure-img" style="width:60.0%">
@@ -496,7 +499,7 @@ window.Quarto = {
 <p>Мощность статистического критерия — это способность критерия обнаружить эффект, в случае если этот эффект действительно существует. С точки зрения статистики, это вероятность справедливого опровержения нулевой гипотезы.</p>
 <p>При проверке любой статистической гипотезы желательно использовать наиболее мощный критерий, который для заданной вероятности <span class="math inline">\(𝛼\)</span> ошибки 1-го рода обеспечивает минимальную вероятность <span class="math inline">\(𝛽\)</span> ошибки 2-го рода относительно любой конкурирующей гипотезы <span class="math inline">\(H_1\)</span>.</p>
 <p>Желательно всегда, если позволяют данные, применять более мощный критерий, так как это позволяет избежать ошибки 2-го рода.</p>
-<div id="fig-power" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-power" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/power.png" class="img-fluid figure-img" style="width:60.0%">
@@ -598,7 +601,7 @@ window.Quarto = {
 <h4 data-number="10.2.1.1" class="anchored" data-anchor-id="z-критерий"><span class="header-section-number">10.2.1.1</span> z-критерий</h4>
 <p>Для того, чтобы корректно использовать z-критерий для тестирования гипотез, необходимо выполнять следующие требования:</p>
 <ul>
-<li>показатель, который мы исследуем, в генеральной совокупности должен иметь нормальное распределение (проверить практически нереально, но мы можем сделать проверку выборочного распределения в качестве «прокси»);</li>
+<li>показатель, который мы исследуем, в генеральной совокупности должен иметь нормальное распределение (оценить на практике практически нереально, но мы можем сделать проверку выборочного распределения в качестве «прокси»);</li>
 <li>наблюдения в выборке должны быть независимыми, а сама выборка - случайной</li>
 <li>мы должны знать стандартное отклонение в генеральной совокупности</li>
 <li>размер выборки должен быть достаточно большим, по меньшей мере <span class="math inline">\(n &gt; 30\)</span>.</li>
@@ -629,7 +632,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-hist-for-z-test" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-hist-for-z-test" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hist-for-z-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-hist-for-z-test-1.png" class="img-fluid figure-img" width="672">
@@ -672,7 +675,7 @@ mean of x
 <p>Визуально это можно представить в виде графика, показывающего, насколько далеко полученное z-значение находится от нулевой отметки, символизирующей отсутствие отличий эмпирического и теоретического средних значений. Поскольку мы использовали ненаправленную гипотезу (средние отличаются, но не понятно, как именно) и двусторонний тест, то и вероятности мы будем считать тоже как бы «в обе стороны». По тесту у нас получилось p-значение = 0,003 (вероятность ошибочно отвергнуть нулевую гипотезу составляет 0.3%) и мы разбиваем его на две части - по 0,0015 (около 0,15%) с каждой стороны.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-plotztest" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-plotztest" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotztest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-plotztest-1.png" class="img-fluid figure-img" width="672">
@@ -687,7 +690,7 @@ mean of x
 <p>Если бы мы ставили гипотезу о том, что получившееся среднее превышает гипотетическую величину (мы предполагали бы, что оценка удовлетворенности выросла), то есть использовали бы <em>направленную</em> гипотезу и, соответственно, односторонний критерий, то результаты были бы следующими:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-plotztest2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-plotztest2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plotztest2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-plotztest2-1.png" class="img-fluid figure-img" width="672">
@@ -768,7 +771,7 @@ mean of x
 <p>Мы получили аналогичные результаты, что нас утверждает в мысли, что мы на правильном пути. Посмотрим, как результаты проверки гипотезы с помощью t-критерия можно представить графически:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-t-test-plot" class="quarto-figure quarto-figure-center quarto-float anchored" width="672">
+<div id="fig-t-test-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t-test-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-t-test-plot-1.png" id="fig-t-test-plot" class="img-fluid figure-img" width="672">
@@ -843,10 +846,10 @@ alternative hypothesis: true location is not equal to 6.5</code></pre>
 <section id="t-критерий" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="t-критерий"><span class="header-section-number">10.3.1</span> t-критерий</h3>
 <p>Т-критерий для независимых выборок (t-тест, t-критерий Стьюдента) предназначен для сравнения средних в двух независимых группах с целью предоставления статистического обоснования того, что и в основной популяции (генеральной совокупности) соответствующие средние так же различаются. Своим именем этот критерий обязан английскому химику и математику <strong>Уильяму Сили Госсету</strong>, работавшему в конце XIX века на пивоварне Гиннесс в Дублине. Владельцы пивоварни поставили перед ученым весьма амбициозную задачу - сохранить репутацию лучших пивоваров и вывести процесс производства пива на новый уровень, что потребовало проведения исследований в области контроля качества. Как известно, производство пива - процесс не только высокотехнологичный, требующий четкости следования процедурам, но и результат случайного стечения обстоятельств, поскольку натуральные продукты, из которых производится пиво - хмель, ячмень, солод, как и другие сельскохозяйственные культуры, имеют большую степень вариабельности вкусовых качеств из-за влияния состава почвы, климата и других факторов. Задача Госсета как подмастерья пивовара заключалась не только в оценке качества этих продуктов, но и том, чтобы сделать это наиболее экономным и точным образом.</p>
-<div id="fig-gosset" class="quarto-figure quarto-figure-center quarto-float anchored" style="&quot;float:left">
+<div id="fig-gosset" class="quarto-float quarto-figure quarto-figure-center anchored" style="float:left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gosset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/William_Sealy_Gosset_Chemist_%26_Statistician_1876_-_1937_Chief_Brewer_Student_%27t%27_test.jpg/800px-William_Sealy_Gosset_Chemist_%26_Statistician_1876_-_1937_Chief_Brewer_Student_%27t%27_test.jpg" class="img-fluid figure-img" style="&quot;float:left">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/William_Sealy_Gosset_Chemist_%26_Statistician_1876_-_1937_Chief_Brewer_Student_%27t%27_test.jpg/800px-William_Sealy_Gosset_Chemist_%26_Statistician_1876_-_1937_Chief_Brewer_Student_%27t%27_test.jpg" class="img-fluid figure-img" style="float:left" width="500">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gosset-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;10.10: Памятная табличка в Дублине, на складе пивоварни Гиннесс
@@ -907,14 +910,14 @@ alternative hypothesis: true location is not equal to 6.5</code></pre>
 <p>Посчитаем новую переменную - среднее значение по переменным B18_1 - B18_5 и сделаем гистограмму:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span>  </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V18_mean=</span><span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">"V18"</span>)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>V18_mean, <span class="at">col=</span><span class="st">"steelblue"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -952,7 +955,7 @@ se         0.02295261</code></pre>
 <p>Так и есть, у нас асимметрия превышает допустимые пределы от +1 до -1 (Hair et al., 2022). Но исключительно в учебных целях мы продолжим.</p>
 <p>Создадим группирующую переменную по возрасту:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_bin=</span><span class="fu">case_when</span>(</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    age<span class="sc">&lt;</span><span class="dv">35</span> <span class="sc">~</span> <span class="st">"До 35 лет"</span>,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    age<span class="sc">&gt;=</span><span class="dv">35</span> <span class="sc">~</span> <span class="st">"Старше 35 лет"</span></span>
@@ -988,16 +991,16 @@ sample estimates:
                    3.314108                    3.492757 </code></pre>
 </div>
 </div>
-<p>Тест показал наличие значимых отличий в оценке важности традиционной деятельности по возрасту (<span class="math inline">\(t_{414,04}=-3,362, p = 0,001\)</span>), указывающий на то, что современная молодежь, проживающая вблизи ледников, в меньшей степени ориентирована на сохранение традиционных ценностей и устоев своего народа.</p>
+<p>Тест показал наличие значимых отличий в оценке важности традиционной деятельности по возрасту (<span class="math inline">\(t_{414,04}=-3,362, p = 0,001\)</span>), указывающих на то, что современная молодежь, проживающая вблизи ледников, в меньшей степени ориентирована на сохранение традиционных ценностей и устоев своего народа.</p>
 <p>Создадим визуализацию к результатам теста:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age_bin)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span>  </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age_bin)) <span class="sc">|&gt;</span>  </span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggboxplot</span>(<span class="at">x =</span> <span class="st">"age_bin"</span>, <span class="at">y =</span> <span class="st">"V18_mean"</span>,</span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"age_bin"</span>, <span class="at">palette =</span> <span class="st">"jco"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"До 35 лет"</span>, <span class="st">"Старше 35 лет"</span>), <span class="at">add =</span> <span class="st">"jitter"</span>, <span class="at">xlab =</span> <span class="st">"Возраст"</span>, )<span class="sc">+</span><span class="fu">stat_compare_means</span>(<span class="at">method =</span> <span class="st">"t.test"</span>, <span class="at">label.y =</span> <span class="fl">4.5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-t-test" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-t-test" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-t-test-1.png" class="img-fluid figure-img" width="672">
@@ -1014,7 +1017,7 @@ sample estimates:
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(df, age_bin, V18_mean, <span class="at">xlab =</span> <span class="st">"Возраст"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-t-test2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-t-test2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t-test2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-t-test2-1.png" class="img-fluid figure-img" width="672">
@@ -1067,7 +1070,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggbetweenstats</span>(df, age_bin, V18_mean, <span class="at">xlab =</span> <span class="st">"Возраст"</span>, <span class="at">type=</span><span class="st">"nonparametric"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-u-test" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-u-test" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-u-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-u-test-1.png" class="img-fluid figure-img" width="672">
@@ -1116,7 +1119,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p><img src="images/StatInf/SS.png" class="img-fluid"></p>
 <p>Основной в дисперсионном анализе является статистика <span class="math inline">\(F\)</span>, показываются соотношение между межгрупповой и внутригрупповой дисперсиями. Если межгрупповая дисперсия существенно выше, чем внутригрупповая, то между изучаемыми группами (уровнями) существуют статистически значимые различия.</p>
 <p><span class="math display">\[F=\frac{MS_b}{MS_w}\]</span></p>
-<div id="fig-anova" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-anova" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-anova-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/r-statistics-2-comparing-groups-means/images/one-way-anova-basics.png" class="img-fluid figure-img">
@@ -1207,7 +1210,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1234,7 +1237,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggviolin</span>(<span class="at">x =</span> <span class="st">"age_cats3"</span>, <span class="at">y =</span> <span class="st">"V18_mean"</span>,</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"age_cats3"</span>, <span class="at">fill =</span> <span class="st">"age_cats3"</span>, <span class="at">add =</span> <span class="st">"boxplot"</span>, <span class="at">add.params =</span> <span class="fu">list</span>(<span class="at">fill =</span> <span class="st">"white"</span>), <span class="at">palette =</span> <span class="st">"jco"</span>,  <span class="at">xlab =</span> <span class="st">"Возраст"</span>, <span class="at">ylab =</span> <span class="st">"Оценка важности сохранения </span><span class="sc">\n</span><span class="st"> традиционных основ жизнедеятельности"</span>, <span class="at">legend.title =</span> <span class="st">"Возрастные группы"</span> )<span class="sc">+</span><span class="fu">stat_compare_means</span>(<span class="at">comparisons =</span> my_comparisons)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-one-way-anova1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-one-way-anova1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-one-way-anova1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-one-way-anova1-1.png" class="img-fluid figure-img" width="672">
@@ -1257,7 +1260,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Возраст"</span></span>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-one-way-anova2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-one-way-anova2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-one-way-anova2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-one-way-anova2-1.png" class="img-fluid figure-img" width="672">
@@ -1340,7 +1343,7 @@ P value adjustment method: BH </code></pre>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Возраст"</span></span>
 <span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-h-test" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-h-test" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-h-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="Statistical-Inference_files/figure-html/fig-h-test-1.png" class="img-fluid figure-img" width="672">
@@ -1365,7 +1368,7 @@ P value adjustment method: BH </code></pre>
 <li>спаренные пары, имеющие сходные характеристики (например, при сравнении результатов различных образовательных программ).</li>
 </ul>
 <p>Для анализа результатов таких исследований требуются особые статистические методы, которые мы будем обсуждать в данном разделе.</p>
-<div id="fig-paired-samples" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-paired-samples" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-paired-samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://www.statology.org/wp-content/uploads/2020/12/pairedData1-300x245.png" class="img-fluid figure-img">
@@ -1378,10 +1381,10 @@ P value adjustment method: BH </code></pre>
 <section id="t-критерий-для-зависимых-выборок" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="t-критерий-для-зависимых-выборок"><span class="header-section-number">10.4.1</span> t-критерий для зависимых выборок</h3>
 <p>Аналогично ситуациям, рассмотренным выше, t-критерий для зависимых выборок также используется для того, чтобы сравнить средние значения, но при этом предполагается, что группы связаны друг с другом каким-то образом. Чаще всего речь идет об одних и тех же испытуемых (респондентах, наблюдениях), у которых измеряется один и тот же показатель через некоторый промежуток времени. Однако, это могут быть и разные люди (объекты исследования), но выборки все равно проектируются как связанные.</p>
-<div id="fig-ttest" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-ttest" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/StatInf/ttest.png" class="img-fluid figure-img">
+<img src="images/StatInf/ttest.png" class="img-fluid figure-img" style="width:50.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ttest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Рисунок&nbsp;10.19: Отличия между различными критериями
@@ -1425,7 +1428,7 @@ P value adjustment method: BH </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1447,7 +1450,7 @@ W = 0.87308, p-value = 4.961e-07</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1461,10 +1464,8 @@ W = 0.989, p-value = 0.6942</code></pre>
 </div>
 </div>
 <p>Совсем другое дело!</p>
-<p>Существует два способа подсчета t-критерий для зависимых выборок в зависимости от того, как организованы данные. В нашей таблице данные не совсем «чистые», один и тот же показатель указан в двух столбцах, однако такая ситуация встречается довольно часто.</p>
-<section id="метод-1.-разные-столбцы-для-разных-изменений" class="level4" data-number="10.4.1.1">
-<h4 data-number="10.4.1.1" class="anchored" data-anchor-id="метод-1.-разные-столбцы-для-разных-изменений"><span class="header-section-number">10.4.1.1</span> Метод 1. Разные столбцы для разных изменений</h4>
-<p>Функция останется прежней, но к ней добавится аргумент <code>paired = TRUE</code>, который и позволит провести измерения с зависимыми выборками:</p>
+<p>В нашей таблице данные не совсем «чистые», один и тот же показатель указан в двух столбцах, однако такая ситуация встречается довольно часто.</p>
+<p>В целом, функция останется прежней, но к ней добавится аргумент <code>paired = TRUE</code>, который и позволит провести измерения с зависимыми выборками:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dtp2<span class="sc">$</span>dtp2018, dtp2<span class="sc">$</span>dtp2023, <span class="at">paired =</span> <span class="cn">TRUE</span>) </span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1483,73 +1484,36 @@ mean difference
 </div>
 </div>
 <p>Поскольку мы сравниваем 2018 год и 2023, то положительная средняя разница означает, что в среднем количество погибших в ДТП сокращается. Статистика t-критерия (8,67) при количестве степеней свободы 84 указывает на достоверные различия (p&lt;0,001).</p>
-</section>
-<section id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная" class="level4" data-number="10.4.1.2">
-<h4 data-number="10.4.1.2" class="anchored" data-anchor-id="метод-2.-один-столбец-для-всех-изменений-группирующая-переменная"><span class="header-section-number">10.4.1.2</span> Метод 2. Один столбец для всех изменений + группирующая переменная</h4>
-<p>Для того, чтобы воспроизвести эту ситуацию, переструктурируем наши данные таким образом, чтобы вся информация о ДТП была в одном столбце, а период, в который собирались статистические данные, - в другом.</p>
+<p>Для того, чтобы визуализировать отличия, переструктурируем наши данные в «длинный формат» таким образом, чтобы вся информация о ДТП была в одном столбце, а период, в который собирались статистические данные, - в другом.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>dtp3<span class="ot">&lt;-</span>dtp2 <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>dtp3<span class="ot">&lt;-</span>dtp2 <span class="sc">|&gt;</span>  </span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span>dtp2018<span class="sc">:</span>dtp2023, </span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="at">names_to=</span><span class="st">"year"</span>,</span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="at">values_to =</span> <span class="st">"dtp_number"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Посчитаем t-критерий вторым способом, через формулу:</p>
+<p>Воспользуемся функцией <code>ggwithinstats</code> из пакета <code>ggstatsplot`, чтобы отобразить различия между периодами:</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dtp_number <span class="sc">~</span> year, <span class="at">data =</span> dtp3, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Paired t-test
-
-data:  dtp_number by year
-t = 8.6723, df = 84, p-value = 2.711e-13
-alternative hypothesis: true mean difference is not equal to 0
-95 percent confidence interval:
- 1.938852 3.092597
-sample estimates:
-mean difference 
-       2.515725 </code></pre>
-</div>
-</div>
-<p>Как и следовало ожидать, результат идентичный.</p>
-<p>Давайте визуализируем это:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggpubr"</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(dtp3, <span class="at">x =</span> <span class="st">"year"</span>, <span class="at">y =</span> <span class="st">"dtp_number"</span>, </span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">"year"</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>),</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"dtp2018"</span>, <span class="st">"dtp2023"</span>),</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">"Количество погибших в ДТП на 100 тыс. населения"</span>, <span class="at">xlab =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dtp3,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year,</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dtp_number</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstatsplot)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dtp3,</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year,</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dtp_number</span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="критерий-уилкоксона-для-зависимых-выборок" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="критерий-уилкоксона-для-зависимых-выборок"><span class="header-section-number">10.4.2</span> Критерий Уилкоксона для зависимых выборок</h3>
 <p>Если все же проблемы с распределением непреодолимы или данные не являются непрерывными, лучше воспользоваться непараметрическим аналогом для зависимых выборок - критерием знаковых рангов Уилкоксона.</p>
 <p>Выше мы уже разбирали формулу данного критерия, здесь же подчеркнем, что мы будем сравнивать два распределения, соответствующие одной и той же группе респондентов (объектов, наблюдений).</p>
-<div id="fig-Wpaired" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-Wpaired" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-Wpaired-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/WPaired.png" class="img-fluid figure-img">
@@ -1561,15 +1525,15 @@ mean difference
 </div>
 <p>Применим тест Уилкоксона для анализа данных о погибших в ДТП. Попробуем воспроизвести все действия вручную:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>rank<span class="ot">&lt;-</span><span class="fu">rank</span>(<span class="fu">abs</span>(dtp2<span class="sc">$</span>d),  <span class="at">ties.method =</span> <span class="st">"average"</span>)<span class="co"># посчитаем ранги</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>sign<span class="ot">&lt;-</span><span class="fu">sign</span>(dtp2<span class="sc">$</span>d)<span class="co">#найдем знак различий</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>signed_ranks<span class="ot">&lt;-</span>dtp2<span class="sc">$</span>rank<span class="sc">*</span>dtp2<span class="sc">$</span>sign<span class="co">#умножим ранги на знак</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>rank<span class="ot">&lt;-</span><span class="fu">rank</span>(<span class="fu">abs</span>(dtp2<span class="sc">$</span>d),  <span class="at">ties.method =</span> <span class="st">"average"</span>)<span class="co"># посчитаем ранги</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>sign<span class="ot">&lt;-</span><span class="fu">sign</span>(dtp2<span class="sc">$</span>d)<span class="co">#найдем знак различий</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>dtp2<span class="sc">$</span>signed_ranks<span class="ot">&lt;-</span>dtp2<span class="sc">$</span>rank<span class="sc">*</span>dtp2<span class="sc">$</span>sign<span class="co">#умножим ранги на знак</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Посчитаем сумму положительных рангов:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>dtp2 <span class="sc">%&gt;%</span> </span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(signed_ranks<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_ranks=</span><span class="fu">sum</span>(signed_ranks))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dtp2 <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(signed_ranks<span class="sc">&gt;</span><span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum_ranks=</span><span class="fu">sum</span>(signed_ranks))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   sum_ranks
@@ -1579,7 +1543,7 @@ mean difference
 </div>
 <p>В R мы можем использовать знакомую уже нам функцию <code>wilcox.test()</code>, но указываем аргумент <code>paired=TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(dtp2<span class="sc">$</span>dtp2018, dtp2<span class="sc">$</span>dtp2023, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(dtp2<span class="sc">$</span>dtp2018, dtp2<span class="sc">$</span>dtp2023, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -1591,16 +1555,16 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 <p>Визуализируем это:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dtp3,</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year,</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dtp_number,</span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"non-parametric"</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> dtp3,</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> year,</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dtp_number,</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"non-parametric"</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1643,53 +1607,39 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </figure>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>alcohol_attitudes<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Alcohol_Attitudes.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>alcohol_attitudes<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"Alcohol_Attitudes.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Наши данные представлены в «широком» формате, переведем их в длинный, оставив только переменные, касающиеся пива:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>alc_long<span class="ot">&lt;-</span>alcohol_attitudes <span class="sc">%&gt;%</span> </span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, <span class="fu">contains</span>(<span class="st">"beer"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">contains</span>(<span class="st">"beer"</span>), <span class="at">names_to =</span> <span class="st">"emotion"</span>, <span class="at">values_to =</span> <span class="st">"score"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>alc_long<span class="ot">&lt;-</span>alcohol_attitudes <span class="sc">|&gt;</span>   </span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, <span class="fu">contains</span>(<span class="st">"beer"</span>)) <span class="sc">|&gt;</span>  </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span><span class="fu">contains</span>(<span class="st">"beer"</span>), <span class="at">names_to =</span> <span class="st">"emotion"</span>, <span class="at">values_to =</span> <span class="st">"score"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Посмотрим описательные статистики по группам:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">%&gt;%</span></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(emotion) <span class="sc">%&gt;%</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_summary_stats</span>(score, <span class="at">type =</span> <span class="st">"mean_sd"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">|&gt;</span> </span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(emotion) <span class="sc">|&gt;</span> </span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>(), <span class="at">mean=</span><span class="fu">mean</span>(score), <span class="at">sd=</span><span class="fu">sd</span>(score))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 5
-  emotion  variable     n  mean    sd
-  &lt;chr&gt;    &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 beerneg  score       20  4.45  17.3
-2 beerneut score       20 10     10.3
-3 beerpos  score       20 21.0   13.0</code></pre>
+<pre><code># A tibble: 3 × 4
+  emotion      n  mean    sd
+  &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 beerneg     20  4.45  17.3
+2 beerneut    20 10     10.3
+3 beerpos     20 21.0   13.0</code></pre>
 </div>
 </div>
 <p>Видим, что оценки разные и следуют логике увеличения по мере смены эмоции с негативной на позитивную.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Сделаем переменную эмоций факторной</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>alc_long<span class="sc">$</span>emotion<span class="ot">&lt;-</span><span class="fu">factor</span>(alc_long<span class="sc">$</span>emotion, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">"beerneg"</span>, <span class="st">"beerneut"</span>, <span class="st">"beerpos"</span>))</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Сделаем график</span></span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>bxp <span class="ot">&lt;-</span> <span class="fu">ggboxplot</span>(alc_long, <span class="at">x =</span> <span class="st">"emotion"</span>, <span class="at">y =</span> <span class="st">"score"</span>, <span class="at">fill=</span><span class="st">"emotion"</span>, <span class="at">add =</span> <span class="st">"point"</span>,  )</span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>bxp</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <p>Сделаем проверку на нормальность:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">%&gt;%</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(emotion) <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(score)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">|&gt;</span> </span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(emotion) <span class="sc">|&gt;</span> </span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(score)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   emotion  variable statistic      p
-  &lt;fct&gt;    &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+  &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;
 1 beerneg  score        0.896 0.0354
 2 beerneut score        0.961 0.573 
 3 beerpos  score        0.951 0.375 </code></pre>
@@ -1698,18 +1648,18 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Видим, что в группе с негативной эмоцией есть отклонения от нормальности, но мы пока закроем на это глаза.</p>
 <p>Сопроводим графической проверкой:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(alc_long, <span class="st">"score"</span>, <span class="at">facet.by =</span> <span class="st">"emotion"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggqqplot</span>(alc_long, <span class="st">"score"</span>, <span class="at">facet.by =</span> <span class="st">"emotion"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>res.aov <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(<span class="at">data =</span> alc_long, <span class="at">dv =</span> score, <span class="at">wid=</span>participant, <span class="at">within =</span> emotion)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_anova_table</span>(res.aov)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>res.aov <span class="ot">&lt;-</span> <span class="fu">anova_test</span>(<span class="at">data =</span> alc_long, <span class="at">dv =</span> score, <span class="at">wid=</span>participant, <span class="at">within =</span> emotion)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get_anova_table</span>(res.aov)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ANOVA Table (type III tests)
 
@@ -1720,12 +1670,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Результаты показывают, что оценки отношения к напитку были статистически различными в разных условиях эксперимента, F(2, 38) = 17.57 p &lt; 0.001, однако обобщенная величина эффекта не очень велика eta2[g] = 0.21.</p>
 <p>Проведем парные сравнения:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> alc_long <span class="sc">%&gt;%</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_t_test</span>(</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>    score <span class="sc">~</span> emotion, <span class="at">paired =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>pwc</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> alc_long <span class="sc">|&gt;</span> </span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise_t_test</span>(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    score <span class="sc">~</span> emotion, <span class="at">paired =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>pwc</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 10
   .y.   group1   group2    n1    n2 statistic    df       p   p.adj p.adj.signif
@@ -1738,32 +1688,28 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Различия значимы между оценками, полученными в результате предъявления позитивных материалов, и двумя другими группами (нейтральной и негативной), тогда как различия между негативными и нейтральными материалами не значимы.</p>
 <p>Добавим результаты статистического анализа в исходный график:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> pwc <span class="sc">%&gt;%</span> <span class="fu">add_xy_position</span>(<span class="at">x =</span> <span class="st">"emotion"</span>)</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>bxp <span class="sc">+</span> </span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pvalue_manual</span>(pwc) <span class="sc">+</span></span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">get_test_label</span>(res.aov, <span class="at">detailed =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">get_pwc_label</span>(pwc)</span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> pwc <span class="sc">%&gt;%</span> <span class="fu">add_xy_position</span>(<span class="at">x =</span> <span class="st">"emotion"</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>bxp <span class="sc">+</span> </span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pvalue_manual</span>(pwc) <span class="sc">+</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">get_test_label</span>(res.aov, <span class="at">detailed =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">get_pwc_label</span>(pwc)</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p>Ну, или вот так:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> alc_long,</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> emotion,</span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> score</span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> alc_long,</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> emotion,</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> score</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1772,7 +1718,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <section id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок" class="level3" data-number="10.4.4">
 <h3 data-number="10.4.4" class="anchored" data-anchor-id="критерий-фридмана---непараметрический-аналог-дисперсионного-анализа-для-зависимых-выборок"><span class="header-section-number">10.4.4</span> Критерий Фридмана - непараметрический аналог дисперсионного анализа для зависимых выборок</h3>
 <p>Тест Фридмана – разработан Милтоном Фридманом, американским экономистом и нобелевским лауреатом.</p>
-<div id="fig-friedman" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-friedman" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-friedman-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://www.nobelprize.org/images/friedman-13280-content-portrait-mobile-tiny.jpg" class="img-fluid figure-img">
@@ -1795,8 +1741,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>В тех случаях, когде <span class="math inline">\(n\)</span> или <span class="math inline">\(k\)</span> достаточно большие (например, <span class="math inline">\(n&gt;15\)</span> или <span class="math inline">\(k&gt;4\)</span> статистика критерия может быть аппроксимирована распределением <span class="math inline">\(\chi^2\)</span>. Если <span class="math inline">\(n\)</span> или <span class="math inline">\(k\)</span> маленькие, статистика <span class="math inline">\(\chi^2\)</span> может быть некорректной и лучше воспользоваться специальными таблицами.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>res.fried <span class="ot">&lt;-</span> alc_long <span class="sc">%&gt;%</span> <span class="fu">friedman_test</span>(score <span class="sc">~</span> emotion <span class="sc">|</span>participant)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>res.fried</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>res.fried <span class="ot">&lt;-</span> alc_long <span class="sc">%&gt;%</span> <span class="fu">friedman_test</span>(score <span class="sc">~</span> emotion <span class="sc">|</span>participant)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>res.fried</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .y.       n statistic    df        p method       
@@ -1818,7 +1764,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </ul>
 <p>Доверительные интервалы рассчитываются с помощью бутстрэпа (многократного расщепления выборки на наборы данных).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">%&gt;%</span> <span class="fu">friedman_effsize</span>(score <span class="sc">~</span> emotion <span class="sc">|</span>participant)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>alc_long <span class="sc">%&gt;%</span> <span class="fu">friedman_effsize</span>(score <span class="sc">~</span> emotion <span class="sc">|</span>participant)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
   .y.       n effsize method    magnitude
@@ -1829,9 +1775,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>В данном случае наблюдается средний эффект.</p>
 <p>Проведем парные сравнения с помощью теста Уилкоксона:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> alc_long <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wilcox_test</span>(score <span class="sc">~</span> emotion, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>)</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>pwc</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> alc_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wilcox_test</span>(score <span class="sc">~</span> emotion, <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>pwc</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 9
   .y.   group1   group2      n1    n2 statistic        p p.adj p.adj.signif
@@ -1844,33 +1790,33 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Результаты аналогичны тем, что были найдены в ходе применения параметрических процедур.</p>
 <p>Визуализируем это:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> pwc <span class="sc">%&gt;%</span> <span class="fu">add_xy_position</span>(<span class="at">x =</span> <span class="st">"emotion"</span>)</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(alc_long, <span class="at">x =</span> <span class="st">"emotion"</span>, <span class="at">y =</span> <span class="st">"score"</span>, <span class="at">fill=</span><span class="st">"emotion"</span>, <span class="at">add =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pvalue_manual</span>(pwc) <span class="sc">+</span></span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">get_test_label</span>(res.fried,  <span class="at">detailed =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">get_pwc_label</span>(pwc)</span>
-<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>pwc <span class="ot">&lt;-</span> pwc <span class="sc">%&gt;%</span> <span class="fu">add_xy_position</span>(<span class="at">x =</span> <span class="st">"emotion"</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggboxplot</span>(alc_long, <span class="at">x =</span> <span class="st">"emotion"</span>, <span class="at">y =</span> <span class="st">"score"</span>, <span class="at">fill=</span><span class="st">"emotion"</span>, <span class="at">add =</span> <span class="st">"point"</span>) <span class="sc">+</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_pvalue_manual</span>(pwc) <span class="sc">+</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">get_test_label</span>(res.fried,  <span class="at">detailed =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="fu">get_pwc_label</span>(pwc)</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Второй вариант визуализации:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> alc_long,</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> emotion,</span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> score,</span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type=</span><span class="st">"non-parametric"</span></span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggwithinstats</span>(</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> alc_long,</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> emotion,</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> score,</span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">type=</span><span class="st">"non-parametric"</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1911,8 +1857,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li><span class="math inline">\(n\)</span> объем выборки.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(<span class="at">x =</span> <span class="dv">370</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>res </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(<span class="at">x =</span> <span class="dv">370</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">p =</span> <span class="fl">0.7</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>res </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample proportions test with continuity correction
@@ -1931,7 +1877,7 @@ sample estimates:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1950,8 +1896,8 @@ sample estimates:
 </ul>
 <p>Допустим, мы анализируем результаты исследования по климату, и нам хотелось бы знать, как относятся к климатическим изменениям мужчины и женщины. Если точнее, считают ли мужчины более опасным проживание вблизи тающих ледников, чем женщины (или наоборот)?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>V1<span class="ot">&lt;-</span>sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(df<span class="sc">$</span>V1)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(df<span class="sc">$</span>V19, df<span class="sc">$</span>V1), <span class="at">margin =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>V1<span class="ot">&lt;-</span>sjlabelled<span class="sc">::</span><span class="fu">as_label</span>(df<span class="sc">$</span>V1)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(df<span class="sc">$</span>V19, df<span class="sc">$</span>V1), <span class="at">margin =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
       Мужской   Женский
@@ -1961,14 +1907,14 @@ sample estimates:
 </div>
 <p>На первый взгляд кажется, что женщины, действительно, воспринимают риски тающих ледников как более серьезные. Но как это доказать?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V19=</span><span class="fu">case_when</span>(</span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="st">"Да"</span>,</span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">2</span><span class="sc">~</span><span class="st">"Нет"</span></span>
-<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>pr_test<span class="ot">&lt;-</span><span class="fu">prop_test</span>(df, V19 <span class="sc">~</span> V1, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Мужской"</span>, <span class="st">"Женский"</span>))</span>
-<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a>pr_test</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">V19=</span><span class="fu">case_when</span>(</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="st">"Да"</span>,</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>    V19<span class="sc">==</span><span class="dv">2</span><span class="sc">~</span><span class="st">"Нет"</span></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a>pr_test<span class="ot">&lt;-</span><span class="fu">prop_test</span>(df, V19 <span class="sc">~</span> V1, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Мужской"</span>, <span class="st">"Женский"</span>))</span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a>pr_test</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   statistic chisq_df     p_value alternative lower_ci upper_ci
@@ -2006,7 +1952,7 @@ sample estimates:
 <p>Запрещается: использовать хи-квадрат для анализа непрерывных абсолютных данных, процентов и долей без предварительной перекодировки!</p>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>V19)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(df<span class="sc">$</span>V1, df<span class="sc">$</span>V19)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
@@ -2017,34 +1963,34 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 </div>
 <p>Одной из наиболее удачных идей визуализации таблиц сопряженности являются мозаичные диаграммы:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">options</span>(<span class="at">OutDec=</span> <span class="st">","</span>) </span>
-<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим базовую таблицу</span></span>
-<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>M<span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>V19, df<span class="sc">$</span>V1)</span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co">#подпишем оси</span></span>
-<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">dimnames</span>(M)) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Опасны ли тающие ледники?"</span>,<span class="st">"Пол"</span>)</span>
-<span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим таблицу с надписями</span></span>
-<span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">prop.table</span>(M,<span class="at">margin=</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="co">#обычная мозаичная диаграмма</span></span>
-<span id="cb97-10"><a href="#cb97-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(M, <span class="at">pop =</span> <span class="cn">FALSE</span>, <span class="at">shade =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb97-11"><a href="#cb97-11" aria-hidden="true" tabindex="-1"></a><span class="co">#добавим значения в ячейках</span></span>
-<span id="cb97-12"><a href="#cb97-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labeling_cells</span>(<span class="at">text =</span> labs, <span class="at">margin =</span> <span class="dv">0</span>)(M)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">options</span>(<span class="at">OutDec=</span> <span class="st">","</span>) </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим базовую таблицу</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>M<span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>V19, df<span class="sc">$</span>V1)</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="co">#подпишем оси</span></span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">dimnames</span>(M)) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Опасны ли тающие ледники?"</span>,<span class="st">"Пол"</span>)</span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="co">#создадим таблицу с надписями</span></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>labs <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">prop.table</span>(M,<span class="at">margin=</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="co">#обычная мозаичная диаграмма</span></span>
+<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(M, <span class="at">pop =</span> <span class="cn">FALSE</span>, <span class="at">shade =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a><span class="co">#добавим значения в ячейках</span></span>
+<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labeling_cells</span>(<span class="at">text =</span> labs, <span class="at">margin =</span> <span class="dv">0</span>)(M)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Еще один вариант - ассоциативный (структурный) график:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>struct <span class="ot">&lt;-</span> <span class="fu">structable</span>(<span class="sc">~</span> V19 <span class="sc">+</span> V1, <span class="at">data =</span> df)</span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assoc</span>(struct, <span class="at">data =</span> df, <span class="at">shade=</span>T, <span class="at">labeling_args =</span> <span class="fu">list</span>(<span class="at">set_varnames =</span> <span class="fu">c</span>(<span class="at">V1 =</span> <span class="st">"Пол"</span>, <span class="at">V19=</span><span class="st">"Опасны ли тающие ледники?"</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>struct <span class="ot">&lt;-</span> <span class="fu">structable</span>(<span class="sc">~</span> V19 <span class="sc">+</span> V1, <span class="at">data =</span> df)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assoc</span>(struct, <span class="at">data =</span> df, <span class="at">shade=</span>T, <span class="at">labeling_args =</span> <span class="fu">list</span>(<span class="at">set_varnames =</span> <span class="fu">c</span>(<span class="at">V1 =</span> <span class="st">"Пол"</span>, <span class="at">V19=</span><span class="st">"Опасны ли тающие ледники?"</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Statistical-Inference_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2059,7 +2005,7 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 <p>Назван в честь <strong>Куинна Майкла Макнемара</strong> (1900 –1986), американского психолога и статистика, президента Американской психологической ассоциации (1964), разработавшего критерий в 1947 году.</p>
 <p><img src="https://academictree.org/photo/069/cache.689490.Quinn_McNemar.jpg" class="img-fluid"></p>
 <p><strong>Тест МакНемара. Формула и процедура оценки</strong></p>
-<div id="fig-mc_table" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-mc_table" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mc_table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/StatInf/mc_table.png" class="img-fluid figure-img">
@@ -2082,12 +2028,12 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 <p><iconify-icon inline="" icon="arcticons:1dm" style="font-size: 42px;"></iconify-icon><a href="https://github.com/domelia/rcourse/blob/main/dataset-him-2014-2016-subset2.Rdata">Скачать данные</a></p>
 <p>Загрузим данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"dataset-him-2014-2016-subset2.Rdata"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"dataset-him-2014-2016-subset2.Rdata"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Создадим таблицу по данным 2014 и 2016 гг.:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>table_for_McNemar <span class="ot">&lt;-</span><span class="fu">table</span>(data<span class="sc">$</span>X<span class="fl">.2014</span>, data<span class="sc">$</span>X<span class="fl">.2016</span>c)</span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>table_for_McNemar</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>table_for_McNemar <span class="ot">&lt;-</span><span class="fu">table</span>(data<span class="sc">$</span>X<span class="fl">.2014</span>, data<span class="sc">$</span>X<span class="fl">.2016</span>c)</span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>table_for_McNemar</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     
       No  Yes
@@ -2098,7 +2044,7 @@ X-squared = 28.37, df = 1, p-value = 1.002e-07</code></pre>
 <p>Довольно заметно, что количество страховых компаний, покрывающих своими полисами инфузионную терапию за два года выросло довольно существенно: 105 компаний, которые в 2014 году отказывались от этой опции, в 2016 году включили ее в список услуг. Обратная ситуация встречается в два раза реже: только 54 организации, которые в 2014 году оплачивали стоимость инфузионной терапии по страховке, в 2016 году отказались это делать.</p>
 <p>Проведем тест МакНемара:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(table_for_McNemar)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcnemar.test</span>(table_for_McNemar)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     McNemar's Chi-squared test with continuity correction
@@ -2126,13 +2072,13 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 <p>Продолжим работу с предыдущим примером.</p>
 <p>Переведем данные из широкого в длинный формат и отберем данные без :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"c"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"X."</span>), <span class="at">values_to =</span> <span class="st">"outcome"</span>, <span class="at">names_to =</span> <span class="st">"year"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span> </span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"c"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"X."</span>), <span class="at">values_to =</span> <span class="st">"outcome"</span>, <span class="at">names_to =</span> <span class="st">"year"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Проведем тест Кохрана:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cochran_qtest</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cochran_qtest</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   .y.         n statistic    df            p method          
@@ -2143,10 +2089,10 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 <p>Выявлены значимые различия между периодами. Но какие? Как и всегда с множеством групп, необходимы парные сравнения.</p>
 <p>Сделаем сначала общую таблицу по трем периодам:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, outcome) <span class="sc">%&gt;%</span> </span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> outcome, <span class="at">values_from =</span> sum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, outcome) <span class="sc">%&gt;%</span> </span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> outcome, <span class="at">values_from =</span> sum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
 # Groups:   year [3]
@@ -2159,7 +2105,7 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 </div>
 <p>Теперь проведем парные сравнения, с помощью теста МакНемара:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise_mcnemar_test</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise_mcnemar_test</span>(data, outcome <span class="sc">~</span> year<span class="sc">|</span>IssuerId)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
   group1 group2            p        p.adj p.adj.signif method      
@@ -2182,8 +2128,8 @@ McNemar's chi-squared = 15,723, df = 1, p-value = 7,332e-05</code></pre>
 </ol>
 <p>Данные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datarium )</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"selfesteem"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li><p>Провести анализ таблиц сопряженности по исследованию по климату (две таблицы на ваш выбор) с помощью критерия хи-квадрат. Создать мозаичную диаграмму и ассоциативный график.</p></li>
@@ -2201,210 +2147,416 @@ Brown, Angus. <span>«<span>T</span>he strange origins of the <span>S</span>tude
 </main> <!-- /main -->
 <script>
 
+
+
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 </script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -2440,18 +2592,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2483,7 +2624,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -2518,7 +2699,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -2794,12 +2979,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ExploratoryDataAnalysis.html" class="pagination-link  aria-label=" &lt;span="" анализ="" данных="" в="" r&lt;="" span&gt;"="">
+      <a href="./ExploratoryDataAnalysis.html" class="pagination-link" aria-label="Разведочный анализ данных в R">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разведочный анализ данных в R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./PCA_CA.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Основы многомерного анализа: снижение размерности</span>">
+      <a href="./PCA_CA.html" class="pagination-link" aria-label="Основы многомерного анализа: снижение размерности">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

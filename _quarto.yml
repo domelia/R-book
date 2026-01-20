@@ -2,14 +2,23 @@ project:
   type: book
   output-dir: docs
 book:
-  title: R в социологических исследованиях
+  title: R в социологических исследованиях (2-е издание)
   author:
-  - name: Дарья Омельченко
+    name: Дарья Омельченко
+    affiliation: "Институт гуманитарных наук, Алтайский государственный университет"
+    url: "https://www.asu.ru/persons/484/"
     orcid: 0000-0002-2839-5070
+    github: "domelia"
     email: omelchenko@socio.asu.ru
   search: true
-  repo-url: https://github.com/domelia/R-book/
+  repo-url: https://github.com/domelia/R-book-2026/
   repo-actions: edit
+  page-footer:
+    left: |
+      R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ)
+      Çetinkaya-Rundel, and Garrett Grolemund.
+    right: |
+      Эта книга написана с помощью <a href="https://quarto.org/">Quarto</a>.
   cover-image: cover.jpg
   chapters:
   - index.qmd

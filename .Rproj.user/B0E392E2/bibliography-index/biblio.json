@@ -132,6 +132,40 @@
             "publisher": "https://www.physoc.org/magazine-articles/the-strange-origins-of-the-students-t-test/",
             "title": "The strange origins of the Student’s t-test — physoc.org",
             "type": ""
+        },
+        {
+            "DOI": "10.3390/life12050648",
+            "ISSN": "2075-1729",
+            "URL": "https://www.mdpi.com/2075-1729/12/5/648",
+            "abstract": "The R programming language is approaching its 30th birthday, and in the last three decades it has achieved a prominent role in statistics, bioinformatics, and data science in general. It currently ranks among the top 10 most popular languages worldwide, and its community has produced tens of thousands of extensions and packages, with scopes ranging from machine learning to transcriptome data analysis. In this review, we provide an historical chronicle of how R became what it is today, describing all its current features and capabilities. We also illustrate the major tools of R, such as the current R editors and integrated development environments (IDEs), the R Shiny web server, the R methods for machine learning, and its relationship with other programming languages. We also discuss the role of R in science in general as a driver for reproducibility. Overall, we hope to provide both a complete snapshot of R today and a practical compendium of the major features and applications of this programming language.",
+            "author": [
+                {
+                    "family": "Giorgi",
+                    "given": "Federico M."
+                },
+                {
+                    "family": "Ceraolo",
+                    "given": "Carmine"
+                },
+                {
+                    "family": "Mercatelli",
+                    "given": "Daniele"
+                }
+            ],
+            "container-title": "Life",
+            "id": "life12050648",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "title": "The r language: An engine for bioinformatics and data science",
+            "title-short": "The r language",
+            "type": "article-journal",
+            "volume": "12"
         }
     ],
     "project_biblios": [
