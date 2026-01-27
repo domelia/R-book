@@ -521,7 +521,7 @@ RStudio online
 </section>
 <section id="section-1" class="level4" data-number="2.3.1.6">
 <h4 data-number="2.3.1.6" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.3.1.6</span> ??</h4>
-<p>Если вдруг вы забыли как точно называется та или иная функция или хотите посмотреть общие материалы по теме, то можно использовать <code>??</code>.</p>
+<p>Если вдруг мы забыли как точно называется та или иная функция или нужно посмотреть общие материалы по теме, то можно использовать <code>??</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>??print</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -541,7 +541,7 @@ RStudio online
 </section>
 <section id="о-пользе-ошибок" class="level4" data-number="2.3.1.7">
 <h4 data-number="2.3.1.7" class="anchored" data-anchor-id="о-пользе-ошибок"><span class="header-section-number">2.3.1.7</span> О пользе ошибок</h4>
-<p>Ошибок и предупреждающих сообщений бояться не надо, напротив, в таких сообщениях практически всегда находится ответ на вопрос, почему такая ошибка возникла, а часто - и возможное решение проблемы. :::</p>
+<p>Ошибок и предупреждающих сообщений бояться не надо, напротив, в таких сообщениях практически всегда находится ответ на вопрос, почему такая ошибка возникла, а часто - и возможное решение проблемы.</p>
 </section>
 <section id="работа-с-пакетами" class="level4" data-number="2.3.1.8">
 <h4 data-number="2.3.1.8" class="anchored" data-anchor-id="работа-с-пакетами"><span class="header-section-number">2.3.1.8</span> Работа с пакетами</h4>
@@ -550,7 +550,7 @@ RStudio online
 <p>Пакеты хранятся в основном в двух местах:</p>
 <ul>
 <li><a href="https://cran.r-project.org/">CRAN</a></li>
-<li><a href="https://github.com/">Github</a> - нечто вроде социальной сети для программистов, где все друг друга знают, создают совместные проекты и делятся кодом.</li>
+<li><a href="https://github.com/">Github</a> - веб-сервис для хостинга IT-проектов и совместной разработки.</li>
 </ul>
 <section id="как-установить-пакет-с-помощью-cran" class="level5" data-number="2.3.1.8.1">
 <h5 data-number="2.3.1.8.1" class="anchored" data-anchor-id="как-установить-пакет-с-помощью-cran"><span class="header-section-number">2.3.1.8.1</span> Как установить пакет с помощью CRAN</h5>
@@ -577,9 +577,10 @@ RStudio online
 <p>Все самостоятельные работы «зашиты» в отдельный пакет - <code>r4ssr</code>, созданный специально для курса «R в социологических исследованиях».</p>
 <p>Поскольку его код расположен на GitHub, воспользуемся следующим кодом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"domelia/r4ssr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"domelia/r4ssr"</span>, <span class="at">dependencies=</span><span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Кроме пакета с примерами работ, нужно также установить пакет Для получения первого опыта нужно будет выполнить работу <code>Assignment0</code>.</p>
+<p>Вместе с пакетом <code>r4ssr</code> установятся два других пакета - <code>learnr</code> и <code>tutorial.helpers</code>, которые нужны для корректного отображения заданий.</p>
+<p>Для получения первого опыта нужно будет выполнить работу <code>Assignment0</code>.</p>
 <p>Для запуска интерактивной среды запустить следующий код:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"Assignment0"</span>, <span class="at">package=</span><span class="st">"r4ssr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
