@@ -31,8 +31,8 @@ book:
   - Base_ggplot2.qmd
   - ExploratoryDataAnalysis.qmd
   - Statistical-Inference.qmd
-  - PCA_CA.qmd
   - Regression.qmd
+  - PCA_CA.qmd
   - references.qmd
 lang: ru
 comments:
