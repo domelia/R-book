@@ -749,7 +749,7 @@ housetasks
 -   husband - только мужем
 -   jointly - совместно (вместе)
 
-![](images/PCA/pic4.png)
+![](images/PCA/pic4.png){width=400px}
 
 ### Графическое представление таблицы и тест хи-квадрат
 

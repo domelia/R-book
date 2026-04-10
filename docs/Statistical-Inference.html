@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./PCA_CA.html" rel="next">
+<link href="./Regression.html" rel="next">
 <link href="./ExploratoryDataAnalysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -277,20 +277,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./PCA_CA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
+  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span></a>
+  <a href="./PCA_CA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Base_SEM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Моделирование структурными уравнениями в R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
   </div>
 </li>
     </ul>
@@ -500,8 +506,7 @@ window.Quarto = {
 <section id="мощность-статистического-критерия" class="level3" data-number="10.1.5">
 <h3 data-number="10.1.5" class="anchored" data-anchor-id="мощность-статистического-критерия"><span class="header-section-number">10.1.5</span> Мощность статистического критерия</h3>
 <p>Мощность статистического критерия — это способность критерия обнаружить эффект, в случае если этот эффект действительно существует. С точки зрения статистики, это вероятность справедливого опровержения нулевой гипотезы.</p>
-<p>При проверке любой статистической гипотезы желательно использовать наиболее мощный критерий, который для заданной вероятности <span class="math inline">\(𝛼\)</span> ошибки 1-го рода обеспечивает минимальную вероятность <span class="math inline">\(𝛽\)</span> ошибки 2-го рода относительно любой конкурирующей гипотезы <span class="math inline">\(H_1\)</span>.</p>
-<p>Желательно всегда, если позволяют данные, применять более мощный критерий, так как это позволяет избежать ошибки 2-го рода.</p>
+<p>От чего зависит мощность: - Размер эффекта (насколько сильно отличаются группы/средние). - Объём выборки (Чем больше выборка, тем меньше перекрытие → мощность растёт).</p>
 <div id="fig-power" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-power-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2967,8 +2972,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./PCA_CA.html" class="pagination-link" aria-label="Основы многомерного анализа: снижение размерности">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Regression.html" class="pagination-link" aria-label="Регрессионный анализ в R">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
