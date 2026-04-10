@@ -33,6 +33,7 @@ book:
   - Statistical-Inference.qmd
   - Regression.qmd
   - PCA_CA.qmd
+  - Base_SEM.qmd
   - references.qmd
 lang: ru
 comments:

@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>13&nbsp; Моделирование структурными уравнениями в R – R в социологических исследованиях (2-е издание)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./PCA_CA.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f2f0dbba23cfc2b7cc07adbd75f80764.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+
+<script src="site_libs/grViz-binding-1.0.11/grViz.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Base_SEM.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Моделирование структурными уравнениями в R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R в социологических исследованиях (2-е издание)</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/domelia/R-book-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Предисловие</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./About-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основные сведения об R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Install-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Установка и начало работы с R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data-types-and-structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Типы и структуры данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Intro-to-RMarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Основы работы с R Markdown</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Основы функционального программирования</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImportExport.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TidyverseTransformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tidyverse и трансформация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Base_ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Основы визуализации в ggplot2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ExploratoryDataAnalysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Разведочный анализ данных в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Statistical-Inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Статистический вывод и тестирование исследовательских гипотез</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Регрессионный анализ в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PCA_CA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Base_SEM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Моделирование структурными уравнениями в R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Список источников</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#введение" id="toc-введение" class="nav-link active" data-scroll-target="#введение"><span class="header-section-number">13.1</span> Введение</a></li>
+  <li><a href="#план" id="toc-план" class="nav-link" data-scroll-target="#план"><span class="header-section-number">13.2</span> План</a></li>
+  <li><a href="#ограничения-классических-методов-первого-поколения" id="toc-ограничения-классических-методов-первого-поколения" class="nav-link" data-scroll-target="#ограничения-классических-методов-первого-поколения"><span class="header-section-number">13.3</span> Ограничения классических методов «первого поколения»</a></li>
+  <li><a href="#история-разработки-моделей-sem" id="toc-история-разработки-моделей-sem" class="nav-link" data-scroll-target="#история-разработки-моделей-sem"><span class="header-section-number">13.4</span> История разработки моделей SEM</a></li>
+  <li><a href="#структура-sem-модели" id="toc-структура-sem-модели" class="nav-link" data-scroll-target="#структура-sem-модели"><span class="header-section-number">13.5</span> Структура SEM-модели</a></li>
+  <li><a href="#рефлективные-отражающие-reflective-и-формирующие-formative-индикаторы" id="toc-рефлективные-отражающие-reflective-и-формирующие-formative-индикаторы" class="nav-link" data-scroll-target="#рефлективные-отражающие-reflective-и-формирующие-formative-индикаторы"><span class="header-section-number">13.6</span> Рефлективные, отражающие (Reflective) и формирующие (Formative) индикаторы</a></li>
+  <li><a href="#моделирование-структурными-уравнениями-в-r-основные-библиотеки" id="toc-моделирование-структурными-уравнениями-в-r-основные-библиотеки" class="nav-link" data-scroll-target="#моделирование-структурными-уравнениями-в-r-основные-библиотеки"><span class="header-section-number">13.7</span> Моделирование структурными уравнениями в R: основные библиотеки</a>
+  <ul class="collapse">
+  <li><a href="#основные-пакеты" id="toc-основные-пакеты" class="nav-link" data-scroll-target="#основные-пакеты"><span class="header-section-number">13.7.1</span> Основные пакеты</a></li>
+  <li><a href="#дополнительные-инструменты" id="toc-дополнительные-инструменты" class="nav-link" data-scroll-target="#дополнительные-инструменты"><span class="header-section-number">13.7.2</span> Дополнительные инструменты</a></li>
+  </ul></li>
+  <li><a href="#пример-анализа-в-r" id="toc-пример-анализа-в-r" class="nav-link" data-scroll-target="#пример-анализа-в-r"><span class="header-section-number">13.8</span> Пример анализа в R</a>
+  <ul class="collapse">
+  <li><a href="#описание-измерительной-модели" id="toc-описание-измерительной-модели" class="nav-link" data-scroll-target="#описание-измерительной-модели"><span class="header-section-number">13.8.1</span> Описание измерительной модели</a></li>
+  <li><a href="#описание-структурной-модели" id="toc-описание-структурной-модели" class="nav-link" data-scroll-target="#описание-структурной-модели"><span class="header-section-number">13.8.2</span> Описание структурной модели</a></li>
+  <li><a href="#оценка-модели" id="toc-оценка-модели" class="nav-link" data-scroll-target="#оценка-модели"><span class="header-section-number">13.8.3</span> Оценка модели</a></li>
+  <li><a href="#отчетность-по-оцененной-модели" id="toc-отчетность-по-оцененной-модели" class="nav-link" data-scroll-target="#отчетность-по-оцененной-модели"><span class="header-section-number">13.8.4</span> Отчетность по оцененной модели</a></li>
+  <li><a href="#визуализация-моделей" id="toc-визуализация-моделей" class="nav-link" data-scroll-target="#визуализация-моделей"><span class="header-section-number">13.8.5</span> Визуализация моделей</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/Base_SEM.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Моделирование структурными уравнениями в R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="введение" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="введение"><span class="header-section-number">13.1</span> Введение</h2>
+<p>Моделирование структурными уравнениями (Structural Equation Modeling, SEM) представляет собой мощный статистический метод для моделирования сложных взаимосвязей между наблюдаемыми и латентными переменными. Его история насчитывает более века, начиная с работ по факторному и путевому анализу. В R реализация SEM доступна через такие пакеты как sem, lavaan, seminr, что делает метод доступным и удобным для социальных исследователей.</p>
+</section>
+<section id="план" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="план"><span class="header-section-number">13.2</span> План</h2>
+<ul>
+<li>Ограничения классических методов “первого поколения”</li>
+<li>О теоретической модели SEM</li>
+<li>Рефлективные (Reflective) vs Формирующие (Formative) индикаторы</li>
+<li>Моделирование структурными уравнениями в R: основные библиотеки</li>
+<li>Пример структурного моделирования в R</li>
+<li>Самостоятельная работа</li>
+</ul>
+</section>
+<section id="ограничения-классических-методов-первого-поколения" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="ограничения-классических-методов-первого-поколения"><span class="header-section-number">13.3</span> Ограничения классических методов «первого поколения»</h2>
+<p>Многомерные методы первого поколения, такие как регрессионный анализ, дискриминантный анализ, логистическая регрессия, дисперсионный анализ, а также факторный или кластерный анализ, относятся к основному набору статистических инструментов, которые могут использоваться для выявления или подтверждения теоретических гипотез на основе анализа эмпирических данных.</p>
+<p>Многие ученые по всему миру использовали в прошлом и, наверняка, будут использовать эти методы в будущем для создания научных открытий, которые изменили наши представления о мире.</p>
+<p>Например, с помощью факторного анализа Ч. Спирмен (1904) обосновал наличие общего фактора интеллекта (g), а Гирт Ховстеде (1980) провел свои знаменитые кросс-культурные измерения, выведя пять факторов, по которым можно различать культуру (в том числе корпоративную) : индивидуализм / коллективизм, дистанция власти, мужественность / женственность и избегание неопределенности. Эдвард Альтман (1968) на основе дискриминантного анализа предложил Z-формулу, учитывающую пять ключевых коэффициентов, описывающих финансовое состояние предприятий, сделавшую прорыв в предсказании их банкротства и устойчивости на рынке.</p>
+<p>Однако, у всех этих методов есть три довольно существенных ограничения:</p>
+<ol type="1">
+<li>Предположение о простой структуре модели. Например, в регрессионном анализе только одна переменная назначается как зависимая, а другие определяются как независимые, другие отношения не учитываются.</li>
+<li>Допущение, что все переменные можно считать наблюдаемыми, то есть полученными в результате реальных экспериментов. Хотя факторный анализ позволяет анализировать латентные переменные, установить взаимосвязи между ними невозможно.</li>
+<li>Предположение, что все переменные измеряются без ошибки, что может ограничивать их применимость в некоторых исследовательских ситуациях.</li>
+</ol>
+<p>Методология SEM, собственно, и была разработана для преодоления ограничений методов первого поколения, став для них конкурентоспособной альтернативой.</p>
+<p>SEM позволяет одновременно моделировать отношения среди множества независимых и зависимых конструктов.</p>
+<p>Первые представляют собой переменные, которые не объясняются исследуемой моделью (т.е. всегда выступают в роли независимых переменных), а вторые, напротив, являются переменными, объясняемыми отношениями, содержащимися в модели.</p>
+</section>
+<section id="история-разработки-моделей-sem" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="история-разработки-моделей-sem"><span class="header-section-number">13.4</span> История разработки моделей SEM</h2>
+<p>Истоки SEM можно найти в работах Карла Пирсона (1901), предложившего основания метода главных компонент, а затем Чарльза Спирмена (1904), разработавшего факторный анализ для выявления общего интеллекта на основе тестовых показателей. Сьюэлл Райт (1918–1934) стал основоположником путевого анализ (path analysis), применяя его к генетике, биологии и экономике. Эти подходы фокусировались на наблюдаемых переменных с ad hoc оценкой параметров через корреляции, без общей формализации.</p>
+<p>1960-е и 1970-е можно назвать периодом второго рождения SEM. В 1960-х Х.М. Блэлок (1961–1964) и О.Д. Дункана (1966) популяризировали путевой анализ социальных науках, обобщив статистические методы в единую модель, что стерло границы между эконометрикой, психометрикой и социометрикой. Они продемонстрировали, как общая модель может включать модели одновременных уравнений из эконометрики и социологии, одновременно контролируя ошибки измерения и множественные индикаторы. Факторный анализ был представлен как частный случай той же рамки. Одновременно это обеспечивало структурную или причинную интерпретацию параметров при введении аналитиками причинных предположений. Еще одна тенденция этого периода — распространение SEM по многочисленным дисциплинам. Это способствовало осознанию, что многие традиционные модели подпадают под более общую модель, что открыло возможности для междисциплинарных исследований. Ключевым стал 1973 год: Карл Йореског, Уилли Кислинг и Дэвид Уайли предложили общую нотацию LISREL, объединившую факторный анализ, множественную регрессию и системы одноврвменных уравнений. Программа LISREL (1974) с методом максимального правдоподобия (ML) сделала SEM доступным.</p>
+<p>В 1980-х появились правила идентифицируемости (например, Two Indicator Rule, 1979) и индексы подгонки (RMSEA, CFI). Кен Боллен (1989) систематизировал SEM в своем учебном пособии, подчеркнув важность оценки, идентификации и тестирования. Распространение в R началось с пакета sem Джона Фокса (2006), а lavaan (с 2010-х) стал стандартом благодаря интуитивному синтаксису для CFA, path analysis и сложных моделей.</p>
+</section>
+<section id="структура-sem-модели" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="структура-sem-модели"><span class="header-section-number">13.5</span> Структура SEM-модели</h2>
+<p>Мы уже знаем, что SEM может использоваться (и часто используется) для проверки теоретических предположений на эмпирических данных. Поэтому крайне важно иметь представление о том, как теоретические положения связываются с различными частями модели SEM.</p>
+<p>Согласно <span class="citation" data-cites="haenlein2004pls">(<a href="PCA_CA.html#ref-haenlein2004pls" role="doc-biblioref"><strong>haenlein2004pls?</strong></a>)</span> теория может содержать три различных типа концептов:</p>
+<ul>
+<li><strong>теоретические концепты</strong>, которые представляют собой «абстрактные, ненаблюдаемые свойства или атрибуты социального явления» (например, справедливость, которую нельзя “увидеть”, сложно подобрать индикаторы, существует множественность трактовок и интерпретаций;</li>
+<li><strong>эмпирические концепты</strong>, которые «относится к свойствам или отношениям, наличие или отсутствие которых может быть установлено посредством прямых наблюдений» (например, доход, частота сердечных сокращений, длительность рабочего дня и т.д.);</li>
+<li><strong>производные концепты</strong>, которые являются ненаблюдаемыми (как теоретические концепты), но «в отличие от теоретических концептов связаны с какими-либо эмпирическими концептами» (например, дипрессия - это совокупность симптомов, которые можно наблюдать и по их наличию поставить диагноз).</li>
+</ul>
+<p>Соответственно, существуют три возможных типа отношений:</p>
+<ul>
+<li><strong>ненаблюдаемые гипотезы</strong>, которые связывают теоретические концепты с другими теоретическими концептами;</li>
+<li><strong>теоретические определения</strong>, которые переводят теоретические концепты в производные; и</li>
+<li><strong>правила соответствия</strong>, которые связывают теоретические или производные концепты с эмпирическими и служат «для предоставления эмпирического значения теоретическим терминам» (то, что социологи обычно называют термином «операционализация»).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\SEM\SEM1.png" class="img-fluid figure-img"></p>
+<figcaption>Рис 1. Теоретические концепты, используемые в ходе моделирования структурными уравнениями.</figcaption>
+</figure>
+</div>
+<p>Используя эту схему, мы можем разработать исследовательскую модель, которая представляет какую-то определенную теорию, переведя теоретические и производные концепты в ненаблюдаемые (латентные) переменные, а эмпирические концепты в индикаторы, связанные с определенными гипотезами, которые могут касаться ненаблюдаемых гипотез, теоретических определений или правил соответствия.</p>
+<p>Представим это все в гипотетической исследовательской модели (рис. 2), используя следующие обозначения:</p>
+<ul>
+<li><span class="math inline">\(\eta\)</span> (эта) — латентная эндогенная переменная (зависимый конструкт).</li>
+<li><span class="math inline">\(\xi\)</span> (кси) — латентная экзогенная переменная (независимый конструкт).</li>
+<li><span class="math inline">\(\zeta\)</span> (дзета) — случайный возмущающий термин (ошибка в структурном уравнении).</li>
+<li><span class="math inline">\(\gamma\)</span> (гамма) — структурный коэффициент связи между латентными переменными.</li>
+<li><span class="math inline">\(\phi\)</span> (фи) — некаузальная (корреляционная) связь между двумя латентными экзогенными переменными.</li>
+<li><span class="math inline">\(y_i\)</span> — индикаторы (наблюдаемые переменные) эндогенных латентных переменных.</li>
+<li><span class="math inline">\(\epsilon_i\)</span> (эпсилон) — ошибки измерения индикаторов эндогенных переменных.</li>
+<li><span class="math inline">\(\lambda_{yi}\)</span> — нагрузки индикаторов эндогенных переменных (lambda y).</li>
+<li><span class="math inline">\(x_i\)</span> — индикаторы (наблюдаемые переменные) экзогенных латентных переменных.</li>
+<li><span class="math inline">\(\delta_i\)</span> (дельта) — ошибки измерения индикаторов экзогенных переменных.</li>
+<li><span class="math inline">\(\lambda_{xi}\)</span> — нагрузки индикаторов экзогенных переменных (lambda x).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\SEM\SEM2.png" class="img-fluid figure-img"></p>
+<figcaption>Рис. 2. Гипотетическая исследовательская модель</figcaption>
+</figure>
+</div>
+<p>Основными для этой модели являются следующие уравнения.</p>
+<section id="модель-измерения-экзогенных-латентных-переменных" class="level4" data-number="13.5.0.1">
+<h4 data-number="13.5.0.1" class="anchored" data-anchor-id="модель-измерения-экзогенных-латентных-переменных"><span class="header-section-number">13.5.0.1</span> Модель измерения экзогенных латентных переменных</h4>
+<p>Первый блок уравнений связывает индикаторы экзогенных переменных (x) с их ошибками (δ) и латентными экзогенными переменными (ξ):</p>
+<p><span class="math display">\[
+\begin{align}
+x_1 &amp;= \lambda_{x11} \xi_1 + \delta_1 \\
+x_2 &amp;= \lambda_{x21} \xi_1 + \delta_2  \\
+x_3 &amp;= \lambda_{x32} \xi_2 + \delta_3  \\
+x_4 &amp;= \lambda_{x42} \xi_2 + \delta_4  \\
+x_5 &amp;= \lambda_{x53} \xi_2 + \delta_5  \\
+x_6 &amp;= \lambda_{x63} \xi_2 + \delta_6
+\end{align}
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Символ</th>
+<th><strong>Значение</strong></th>
+<th><strong>Размерность</strong></th>
+<th><strong>Описание</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{x}\)</span></td>
+<td>Вектор наблюдаемых индикаторов</td>
+<td><span class="math inline">\((p \times 1)\)</span></td>
+<td><strong>Манифестные переменные</strong> <span class="math inline">\(x_1, x_2, \dots, x_6\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{\Lambda}_x\)</span></td>
+<td>Матрица факторных нагрузок</td>
+<td><span class="math inline">\((p \times m)\)</span></td>
+<td><strong>Факторные нагрузки</strong> <span class="math inline">\(\lambda_{x11}, \lambda_{x21}, \dots\)</span> (0-1)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{\xi}\)</span></td>
+<td>Вектор латентных экзогенных</td>
+<td><span class="math inline">\((m \times 1)\)</span></td>
+<td><strong>Латентные независимые</strong> <span class="math inline">\(\xi_1, \xi_2, \dots, \xi_6\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{\Delta}\)</span></td>
+<td>Вектор ошибок измерения</td>
+<td><span class="math inline">\((p \times 1)\)</span></td>
+<td><strong>Ошибки</strong> <span class="math inline">\(\delta_1, \delta_2, \dots, \delta_6\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="модель-измерения-для-эндогенных-латентных-переменных" class="level4" data-number="13.5.0.2">
+<h4 data-number="13.5.0.2" class="anchored" data-anchor-id="модель-измерения-для-эндогенных-латентных-переменных"><span class="header-section-number">13.5.0.2</span> Модель измерения для эндогенных латентных переменных</h4>
+<p>Второй блок описывает взаимосвязи между индикаторами эндогенных переменных (y), их ошибками измерения (ε), и соответствеющими им эндогенными латентными переменными (η ):</p>
+<p><span class="math display">\[
+\begin{align}
+y_1 &amp;= \lambda_{y11} \eta_1 + \epsilon_1 \\
+y_2 &amp;= \lambda_{y21} \eta_1 + \epsilon_2 \\
+y_3 &amp;= \lambda_{y32} \eta_2 + \epsilon_3 \\
+y_4 &amp;= \lambda_{y42} \eta_2 + \epsilon_4
+\end{align}
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Символ</th>
+<th><strong>Значение</strong></th>
+<th><strong>Размерность</strong></th>
+<th><strong>Описание</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{y}\)</span></td>
+<td>Вектор наблюдаемых индикаторов</td>
+<td><span class="math inline">\((q \times 1)\)</span></td>
+<td><strong>Манифестные</strong> <span class="math inline">\(y_1, y_2, \dots, y_q\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{\Lambda}_y\)</span></td>
+<td>Матрица факторных нагрузок</td>
+<td><span class="math inline">\((q \times n)\)</span></td>
+<td><strong>Нагрузки</strong> <span class="math inline">\(\lambda_{y11}, \lambda_{y21}, \dots\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{\eta}\)</span></td>
+<td>Вектор латентных эндогенных</td>
+<td><span class="math inline">\((n \times 1)\)</span></td>
+<td><strong>Зависимые конструкты</strong> <span class="math inline">\(\eta_1, \eta_2, \dots, \eta_n\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{\epsilon}\)</span></td>
+<td>Вектор ошибок измерения</td>
+<td><span class="math inline">\((q \times 1)\)</span></td>
+<td><strong>Ошибки</strong> <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_q\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="структурная-модель" class="level4" data-number="13.5.0.3">
+<h4 data-number="13.5.0.3" class="anchored" data-anchor-id="структурная-модель"><span class="header-section-number">13.5.0.3</span> Структурная модель</h4>
+<p>В конечном итоге, третья часть моделирует отношения меду латентными эндогенными переменными (η) и экзогенными (ξ) переменными:</p>
+<p><span class="math display">\[
+\begin{align}
+\eta_1 &amp; = \gamma_{11}\xi_1 + \zeta_1\\
+\eta_2 &amp; = \beta_{21}\eta_1+ \gamma_{21}\xi_1+\gamma_{22}\xi_2+\gamma_{23}\xi_3+\zeta_2
+\end{align}
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Символ</th>
+<th><strong>Значение</strong></th>
+<th><strong>Размерность</strong></th>
+<th><strong>Описание</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{\eta}\)</span></td>
+<td>Латентные эндогенные (слева)</td>
+<td><span class="math inline">\((n \times 1)\)</span></td>
+<td><strong>Зависимые конструкты</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{B}\)</span></td>
+<td>Коэффициенты эндогенных связей</td>
+<td><span class="math inline">\((n \times n)\)</span></td>
+<td><strong>Внутриэндогенные</strong> <span class="math inline">\(\beta_{21}\)</span> (от <span class="math inline">\(\eta_1\)</span> к <span class="math inline">\(\eta_2\)</span>)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{\Gamma}\)</span></td>
+<td>Коэффициенты экзогенных связей</td>
+<td><span class="math inline">\((n \times m)\)</span></td>
+<td><strong>Экзогенно-эндогенные</strong> <span class="math inline">\(\gamma_{11}, \gamma_{21}, \gamma_{22}, \dots\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mathbf{\xi}\)</span></td>
+<td>Латентные экзогенные</td>
+<td><span class="math inline">\((m \times 1)\)</span></td>
+<td><strong>Независимые конструкты</strong></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathbf{\zeta}\)</span></td>
+<td>Структурные ошибки</td>
+<td><span class="math inline">\((n \times 1)\)</span></td>
+<td><strong>Ошибки уравнения</strong> <span class="math inline">\(\zeta_1, \zeta_2, \dots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Можно представить все уравнения в более компактном матричном виде:</p>
+<p><strong>Модель измерения для экзогенных переменных:</strong> <span class="math display">\[\mathbf{x} = \mathbf{\Lambda}_x \mathbf{\xi} + \mathbf{\Delta}\\(1)\]</span></p>
+<p><strong>Модель измерения для эндогенных переменных:</strong> <span class="math display">\[\mathbf{y} = \mathbf{\Lambda}_y \mathbf{\eta} + \mathbf{\epsilon}\\(2)\]</span></p>
+<p><strong>Структурная модель:</strong> <span class="math display">\[\mathbf{\eta} = \mathbf{B}\mathbf{\eta} + \mathbf{\Gamma}\mathbf{\xi} + \mathbf{\zeta}\\(3)\]</span></p>
+<p>Где: <span class="math inline">\(\mathbf{\Lambda}_x\)</span> — матрица факторных нагрузок экзогенных переменных <span class="math inline">\(\mathbf{\Lambda}_y\)</span> — матрица факторных нагрузок эндогенных переменных <span class="math inline">\(\mathbf{\xi}\)</span> — латентные экзогенные, <span class="math inline">\(\mathbf{\eta}\)</span> — латентные эндогенные переменные, <span class="math inline">\(\mathbf{\Delta}\)</span> — ошибки измерения экзогенных индикаторов <span class="math inline">\(\mathbf{\epsilon}\)</span> — ошибки измерения эндогенных индикаторов, <span class="math inline">\(\mathbf{B}\)</span> — матрица эндогенных связей (η влияет на η), <span class="math inline">\(\mathbf{\Gamma}\)</span> — матрица структурных коэффициентов от экзогенных к эндогенным.</p>
+<p>Последнее уравнение (3) представляет как раз ненаблюдаемые гипотезы и теоретические опреления, тогда как первое (1) и второе (2) уравнения являются правилами соответствия.</p>
+</section>
+</section>
+<section id="рефлективные-отражающие-reflective-и-формирующие-formative-индикаторы" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="рефлективные-отражающие-reflective-и-формирующие-formative-индикаторы"><span class="header-section-number">13.6</span> Рефлективные, отражающие (Reflective) и формирующие (Formative) индикаторы</h2>
+<p>Наблюдаемые индикаторы могут быть распределены на две группы (и мы уже это обсуждали):</p>
+<p>(a) рефлективные, отражающие (reflective) индикаторы, которые зависят от конструкта (например, если рассматривать депрессию как такой конструкт, то симптомы как раз и будут зависеть от ее наличия и выраженности)</p>
+<p>(b) формирующие, также известные как причинные индикаторы, которые, напротив, приводят к изменению в ненаблюдаемой (латентной) переменной (Bollen &amp; Lennox, 1991).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images\SEM\SEM3.png" class="img-fluid figure-img"></p>
+<figcaption>Рис 3. Рефлексивные и формирующие индикаторы</figcaption>
+</figure>
+</div>
+<p>Рефлексивные индикаторы могут быть выражены как функция от их латентных переменных, например:</p>
+<p><span class="math display">\[
+y1 = λy_1 η + ε_1\\
+y2 = λy_2 η + ε_2\\
+y3 = λy_3 η + ε_3
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Тип</th>
+<th>Модель</th>
+<th>Корреляция индикаторов</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Reflective</td>
+<td><span class="math inline">\(y_i = \lambda_{yi} \eta_i + \epsilon_i\)</span></td>
+<td>Высокая</td>
+<td>“Оперативность”</td>
+</tr>
+<tr class="even">
+<td>Formative</td>
+<td><span class="math inline">\(\xi_i = \beta_{i1}x_1 + \beta_{i2}x_2 + \dots\)</span></td>
+<td>Произвольная</td>
+<td>“Стресс”</td>
+</tr>
+</tbody>
+</table>
+<p>Формативные индикаторы в SEM не являются следствием латентной переменной, а сами формируют её, поэтому уравнение записывают так:</p>
+<p><span class="math display">\[
+\eta = \gamma_{x1} x_1 + \gamma_{x2} x_2 + \gamma_{x3} x_3 + \zeta
+\]</span></p>
+<p>где <span class="math inline">\(\gamma_{x_1}\)</span>, <span class="math inline">\(\gamma_{x_2}\)</span>, <span class="math inline">\(\gamma_{x_3}\)</span> — веса (коэффициенты) индикаторов <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_3\)</span>, а <span class="math inline">\(\zeta\)</span> — ошибка уравнения.</p>
+<p>Таким образом, если ненаблюдаемая переменная порождает наблюдаемое поведение, как в случае личностных черт или установок, используют <strong>рефлективные индикаторы</strong> (например, латентная переменная восприятия времени «оперативность» определяется индикаторами: выполнение срочных запросов, пунктуальность в соблюдении сроков, скорость ответа на телефонные звонки).</p>
+<p>Если же конструкт понимается как <strong>комбинация формирующих его индикаторов</strong>, применяют <strong>формативные индикаторы</strong> (например, «стресс» как сочетание потери работы, развода, недавней аварии, смерти близкого).</p>
+<p>Еще одно существенное отличие: - у рефлективных индикаторов ожидается высокая взаимная корреляция, - у формативных (композитных_) индикаторов корреляции могут быть положительными, отрицательными или нулевыми, и изменение одного индикатора не требует аналогичного изменения других.</p>
+<p>В приведенных примерах ожидается, что человек с более высоким уровнем оперативности будет способен выполнять срочные поручения <strong>И</strong> будет более пунктуальным <strong>И</strong> будет быстрее отвечать на звонки. С другой стороны, уровень жизненного стресса не обязательно предполагает, что все несчастья (потеря работы, развод и какой-то инцидент) произойдут одновременно.</p>
+</section>
+<section id="моделирование-структурными-уравнениями-в-r-основные-библиотеки" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="моделирование-структурными-уравнениями-в-r-основные-библиотеки"><span class="header-section-number">13.7</span> Моделирование структурными уравнениями в R: основные библиотеки</h2>
+<p>В R существует несколько библиотек для моделирования структурными уравнениями (SEM), которые различаются по гибкости, синтаксису и методам оценки. Основные — lavaan, sem и OpenMx — охватывают от базовых до продвинутых моделей, включая CFA, path analysis и многоуровневые структуры. Выбор зависит от сложности задачи и предпочтений пользователя.</p>
+<section id="основные-пакеты" class="level3" data-number="13.7.1">
+<h3 data-number="13.7.1" class="anchored" data-anchor-id="основные-пакеты"><span class="header-section-number">13.7.1</span> Основные пакеты</h3>
+<ul>
+<li><strong>lavaan</strong>: Самый популярный и удобный для начинающих, с синтаксисом, похожим на Mplus; поддерживает ML, GLS, WLS и многоуровневые модели.</li>
+<li><strong>sem</strong>: Классический пакет (с 2001 г.) на базе RAM-подхода для общих линейных моделей, использует 2SLS и FIML; подходит для наблюдаемых и латентных переменных.</li>
+<li><strong>OpenMx</strong>: Максимально гибкий для сложных моделей (генетические, байесовские), но требует больше кода; расширяется mxsem для lavaan-подобного синтаксиса.</li>
+<li><strong>seminr</strong>: Современный пакет для PLS-SEM (Partial Least Squares), популярен в маркетинге и бизнес-исследованиях; использует bootstrapping и поддерживает композитные модели.</li>
+</ul>
+</section>
+<section id="дополнительные-инструменты" class="level3" data-number="13.7.2">
+<h3 data-number="13.7.2" class="anchored" data-anchor-id="дополнительные-инструменты"><span class="header-section-number">13.7.2</span> Дополнительные инструменты</h3>
+<ul>
+<li><strong>semTools</strong>: Расширения для lavaan (индексы подгонки, бутстреп).</li>
+<li><strong>plspm/semPLS</strong>: Альтернативы для PLS-SEM в маркетинге.</li>
+<li><strong>bsem/blavaan</strong>: Байесовские варианты для неопределенных моделей.</li>
+<li><strong>lavaanExtra</strong>: Расширение для lavaan с векторным синтаксисом (write_lavaan()), автоматическим определением косвенных эффектов и возможностями для создания таблиц с результатами моделирования по требованиям научных публикаций.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 9%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Пакет</th>
+<th>Тип SEM</th>
+<th>Синтаксис</th>
+<th>Методы оценки</th>
+<th>Гибкость</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>lavaan</td>
+<td>CB-SEM</td>
+<td>Интуитивный</td>
+<td>ML, GLS, многоуровень</td>
+<td>Высокая</td>
+<td>Социальные науки, CFA [web:83]</td>
+</tr>
+<tr class="even">
+<td>sem</td>
+<td>CB-SEM</td>
+<td>Формульный</td>
+<td>2SLS, FIML</td>
+<td>Средняя</td>
+<td>Базовый SEM [web:22]</td>
+</tr>
+<tr class="odd">
+<td>OpenMx</td>
+<td>CB-SEM</td>
+<td>Продвинутый</td>
+<td>Полная кастомизация</td>
+<td>Максимум</td>
+<td>Генетика, сложные модели [web:72]</td>
+</tr>
+<tr class="even">
+<td>seminr</td>
+<td>PLS-SEM</td>
+<td>Простой</td>
+<td>Bootstrapping</td>
+<td>Высокая</td>
+<td>Маркетинг, бизнес [web:37]</td>
+</tr>
+</tbody>
+</table>
+<p>Эти библиотеки активно развиваются, с lavaan как стандартом для социальных наук и seminr для PLS-подходов в прикладных исследованиях.</p>
+</section>
+</section>
+<section id="пример-анализа-в-r" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="пример-анализа-в-r"><span class="header-section-number">13.8</span> Пример анализа в R</h2>
+<p>В рамках курса “Введение в моделирование структурными уравнениями” мы уже изучили разные модели, а работа в программе JASP помогла осноить основы синтаксиса, принятого в пакете <code>lavaan</code>.</p>
+<p>В данном разделе мы познакомимся с возможностями пакета <code>seminr</code>, синтаксис которого, с одной стороны, довольно сильно отличается от <code>lavaan</code> представлением различных типов латентных и манифестных переменных, структурных уравнений, с другой, имеет свои собственные преимущества, в том числе в части графического представления результатов.</p>
+<p>Авторы пакета выделяют следующие преимущества:</p>
+<ul>
+<li><strong>Естественный синтаксис</strong>: Специфический для предметной области язык для построения и оценки SEM в R.</li>
+<li><strong>Высокоуровневые функции</strong>: Быстрое определение взаимодействий и сложных структурных моделей.</li>
+<li><strong>Модульный дизайн</strong>: Модели, способствующие повторному использованию компонентов.</li>
+<li><strong>Лучшие практики</strong>: Поощряются умными настройками по умолчанию и предупреждениями.</li>
+</ul>
+<p>Пример синтаксиса и модульного дизайна в <code>seminr</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Определение модели измерения через рефлективные и композитные индикаторы, быстрый ввод однотипных индикаторов</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">constructs</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reflective</span>(<span class="st">"Image"</span>,       <span class="fu">multi_items</span>(<span class="st">"IMAG"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Expectation"</span>, <span class="fu">multi_items</span>(<span class="st">"CUEX"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Loyalty"</span>,     <span class="fu">multi_items</span>(<span class="st">"CUSL"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">weights =</span> mode_B),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Complaints"</span>,  <span class="fu">single_item</span>(<span class="st">"CUSCO"</span>)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Создание четырех связей (двух регрессий) в одной строчке кода</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>structure <span class="ot">&lt;-</span> <span class="fu">relationships</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="fu">c</span>(<span class="st">"Image"</span>, <span class="st">"Expectation"</span>), <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Complaints"</span>, <span class="st">"Loyalty"</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Оценка модели с помощью метода PLS (Consistent PLS для рефлективных индикаторов)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>pls_model <span class="ot">&lt;-</span> <span class="fu">estimate_pls</span>(<span class="at">data =</span> mobi, measurements, structure)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Переоценка модели как полностью рефлективной через CBSEM</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>cbsem_model <span class="ot">&lt;-</span> <span class="fu">estimate_cbsem</span>(<span class="at">data =</span> mobi, <span class="fu">as.reflective</span>(measurements), structure)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>SEMinR can plot models using the semplot (for CBSEM models) or DiagrammeR (for PLS models) packages with a simple plot method.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pls_model, <span class="at">title =</span> <span class="st">"PLS Model"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-a99aa80bfecf1d2865d6" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-a99aa80bfecf1d2865d6">{"x":{"diagram":"digraph G {\n\n// ----------------------\n// General graph settings\n// ----------------------\ngraph [\ncharset = \"UTF-8\",\nlayout = dot,\nlabel = \"PLS Model\",\nfontsize = 24,\nfontcolor = black,\nfontname = helvetica,\nrankdir = LR,\nlabelloc = t,\nsplines = TRUE\nbgcolor = transparent\n]\n\n// --------------------\n// The structural model\n// --------------------\nsubgraph sm {\nrankdir = LR;\nnode [\nshape = ellipse,\ncolor = black,\nfillcolor = white,\nstyle = filled,\nfontsize = 12,\nfontcolor = black,\nheight = 1.00833333333333,\nwidth = 1.48854166666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"Image\" [label=<<B>Image <\/B>>, shape = ellipse]\n\"Expectation\" [label=<<B>Expectation <\/B>>, shape = hexagon]\n\"Complaints\" [label=<<B>Complaints <\/B><BR /><FONT POINT-SIZE=\"10\">r² = 0.332<\/FONT>>, shape = hexagon]\n\"Loyalty\" [label=<<B>Loyalty <\/B><BR /><FONT POINT-SIZE=\"10\">r² = 0.428<\/FONT>>, shape = hexagon]\nedge [\ncolor = black,\nfontsize = 9,\nfontcolor = black,\nfontname = helvetica,\ndir = both,\narrowhead = normal,\narrowtail = none\n]\n\"Image\" -> {\"Complaints\"}[weight = 1, label = < 𝛽 = 0.783<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 4.415, style = solid, color = black]\n\"Expectation\" -> {\"Complaints\"}[weight = 1, label = < 𝛽 = -0.273<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 1.865, style = dashed, color = black]\n\"Image\" -> {\"Loyalty\"}[weight = 1, label = < 𝛽 = 0.623<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 3.615, style = solid, color = black]\n\"Expectation\" -> {\"Loyalty\"}[weight = 1, label = < 𝛽 = 0.036<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 0.68, style = solid, color = black]\n}\n// ---------------------\n// The measurement model\n// ---------------------\n\nsubgraph construct_1 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 0.541666666666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"IMAG1\" [label = \"IMAG1\", shape = box]\n\"IMAG2\" [label = \"IMAG2\", shape = box]\n\"IMAG3\" [label = \"IMAG3\", shape = box]\n\"IMAG4\" [label = \"IMAG4\", shape = box]\n\"IMAG5\" [label = \"IMAG5\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"IMAG1\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.642 >, penwidth = 2.426, style = solid, color = dimgrey]\n\"IMAG2\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.417 >, penwidth = 1.751, style = solid, color = dimgrey]\n\"IMAG3\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.428 >, penwidth = 1.784, style = solid, color = dimgrey]\n\"IMAG4\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.737 >, penwidth = 2.711, style = solid, color = dimgrey]\n\"IMAG5\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.693 >, penwidth = 2.579, style = solid, color = dimgrey]\n\n}\nsubgraph construct_2 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 0.541666666666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"CUEX1\" [label = \"CUEX1\", shape = box]\n\"CUEX2\" [label = \"CUEX2\", shape = box]\n\"CUEX3\" [label = \"CUEX3\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"CUEX1\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.751 >, penwidth = 2.753, style = solid, color = dimgrey]\n\"CUEX2\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.779 >, penwidth = 2.837, style = solid, color = dimgrey]\n\"CUEX3\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.517 >, penwidth = 2.051, style = solid, color = dimgrey]\n\n}\nsubgraph construct_3 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 0.541666666666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"CUSCO\" [label = \"CUSCO\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = normal\narrowtail = none\n]\n\"Complaints\" -> {\"CUSCO\"}[weight = 1000, label = < 𝜆 = 1 >, penwidth = 3.5, style = solid, color = dimgrey]\n\n}\nsubgraph construct_4 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 0.541666666666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"CUSL1\" [label = \"CUSL1\", shape = box]\n\"CUSL2\" [label = \"CUSL2\", shape = box]\n\"CUSL3\" [label = \"CUSL3\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"Loyalty\" -> {\"CUSL1\"}[weight = 1000, label = < w = 0.365 >, penwidth = 1.595, style = solid, color = dimgrey]\n\"Loyalty\" -> {\"CUSL2\"}[weight = 1000, label = < w = 0.102 >, penwidth = 0.806, style = solid, color = dimgrey]\n\"Loyalty\" -> {\"CUSL3\"}[weight = 1000, label = < w = 0.739 >, penwidth = 2.717, style = solid, color = dimgrey]\n\n}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(<span class="st">"myfigure.pdf"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p><strong>SEMinR</strong> поддерживает различные методы оценки конструктов и SEM:</p>
+<ul>
+<li><strong>SEM, основанный на ковариациях (CB-SEM)</strong>
+<ul>
+<li>Оценка SEM на основе ковариаций с использованием популярного пакета <a href="https://github.com/yrosseel/lavaan">Lavaan</a>.<br>
+</li>
+<li>Поддерживает модели медиации и модерации с конструктами.<br>
+</li>
+<li>Легко задавать взаимодействия между конструктами.<br>
+</li>
+<li>Добавляет извлечение факторных оценок <em>ten Berge</em> для сохранения корреляционных паттернов латентных факторов.<br>
+</li>
+<li>Добавляет VIF и другие оценки валидности.</li>
+</ul></li>
+<li><strong>Конфирматорный факторный анализ (CFA) через Lavaan</strong>
+<ul>
+<li>Использует пакет <a href="https://github.com/yrosseel/lavaan">Lavaan</a> и возвращает результаты с синтаксисом.<br>
+</li>
+<li>Добавляет извлечение факторных оценок <em>ten Berge</em> для сохранения корреляционных паттернов латентных факторов.</li>
+</ul></li>
+<li><strong>Моделирование путей методом частичных наименьших квадратов (PLS-PM)</strong>
+<ul>
+<li>Использует непараметрическую оценку на основе дисперсии для построения композитных и общих факторов.<br>
+</li>
+<li>Автоматически оценивает с помощью <em>Consistent PLS (PLSc)</em> при эмуляции рефлексивных общих факторов.<br>
+</li>
+<li>Корректирует известные смещения во взаимодействиях PLS-моделей.<br>
+</li>
+<li>Постоянно тестируется на соответствие лидерам PLS-PM: SmartPLS, ADANCO, semPLS, matrixpls.<br>
+</li>
+<li>Высокопроизводительный бутстреп с поддержкой многоядерности.</li>
+</ul></li>
+</ul>
+<p>Установим и загрузим пакет:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"seminr"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seminr)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Для демонстрации возможностей пакета воспользуемся встроенным датасетом <code>mobi</code>, входящим в состав пакета <code>seminr</code> (также доступен в пакете <code>semPLS</code>). Этот датасет содержит результаты европейского исследования удовлетворенности потребителей <strong>European Customer Satisfaction Index (ECSI)</strong>, адаптированного для рынка мобильных телефонов (Tenenhaus et al.&nbsp;2005).</p>
+<p>Описание и пример содержимого датасета <code>mobi</code> можно увидеть с помощью уже известных нам функций <code>dims()</code> и <code>head()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mobi)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  CUEX1 CUEX2 CUEX3 CUSA1 CUSA2 CUSA3 CUSCO CUSL1 CUSL2 CUSL3 IMAG1 IMAG2 IMAG3
+1     7     7     6     6     4     7     7     6     5     6     7     5     5
+2    10    10     9    10    10     8    10    10     2    10    10     9    10
+3     7     7     7     8     7     7     6     6     2     7     8     7     6
+4     7    10     5    10    10    10     5    10     4    10    10    10     5
+5     8     7    10    10     8     8     5    10     3     8    10    10     5
+6    10     9     7     8     7     7     8    10     3    10     8     9    10
+  IMAG4 IMAG5 PERQ1 PERQ2 PERQ3 PERQ4 PERQ5 PERQ6 PERQ7 PERV1 PERV2
+1     5     4     7     6     4     7     6     5     5     2     3
+2    10     9    10     9    10    10     9    10    10    10    10
+3     4     7     7     8     5     7     8     7     7     7     7
+4     5    10     8    10    10     8     4     5     8     5     5
+5     8     9    10     9     8    10     9     9     8     6     6
+6     8     9     9    10     9    10     8     9     9    10    10</code></pre>
+</div>
+</div>
+<section id="описание-измерительной-модели" class="level3" data-number="13.8.1">
+<h3 data-number="13.8.1" class="anchored" data-anchor-id="описание-измерительной-модели"><span class="header-section-number">13.8.1</span> Описание измерительной модели</h3>
+<p><strong>SEMinR</strong> использует следующие функции для описания измерительных моделей:</p>
+<ul>
+<li><code>constructs()</code> собирает все измерительные модели конструктов</li>
+<li><code>composite()</code> или <code>reflective()</code> определяют режим измерения отдельных конструктов как композитные (формирующие) или рефлективные (отражающие)</li>
+<li><code>interaction_term()</code> задает взаимодействия, <code>higher_composite()</code> — конструкты высшего порядка</li>
+<li><code>multi_items()</code> или <code>single_item()</code> определяют одиночные или множественные индикаторы конструкта</li>
+</ul>
+<p>Эти функции естественны для практиков SEM и побуждают явно указывать основную природу измерительных моделей: <strong>композитная</strong> или <strong>общий фактор</strong> (см. Sarstedt et al., 2016; Henseler et al., 2013 для четких определений).</p>
+<p><strong>Примечание</strong>: конструкты высшего порядка поддерживаются только для метода <strong>PLS-PM</strong>.</p>
+<p>Опишем нашу модель измерения:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">constructs</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Image"</span>,         <span class="fu">multi_items</span>(<span class="st">"IMAG"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">weights =</span> mode_B),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Expectation"</span>,   <span class="fu">multi_items</span>(<span class="st">"CUEX"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">weights =</span> regression_weights),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Quality"</span>,       <span class="fu">multi_items</span>(<span class="st">"PERQ"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>), <span class="at">weights =</span> mode_A),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Value"</span>,         <span class="fu">multi_items</span>(<span class="st">"PERV"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>), <span class="at">weights =</span> correlation_weights),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reflective</span>(<span class="st">"Satisfaction"</span>, <span class="fu">multi_items</span>(<span class="st">"CUSA"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reflective</span>(<span class="st">"Complaints"</span>,   <span class="fu">single_item</span>(<span class="st">"CUSCO"</span>)),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">higher_composite</span>(<span class="st">"HOC"</span>, <span class="fu">c</span>(<span class="st">"Value"</span>, <span class="st">"Satisfaction"</span>), orthogonal, mode_A),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">interaction_term</span>(<span class="at">iv =</span> <span class="st">"Image"</span>, <span class="at">moderator =</span> <span class="st">"Expectation"</span>, <span class="at">method =</span>  orthogonal, <span class="at">weights =</span> mode_A),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reflective</span>(<span class="st">"Loyalty"</span>,      <span class="fu">multi_items</span>(<span class="st">"CUSL"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="описание-структурной-модели" class="level3" data-number="13.8.2">
+<h3 data-number="13.8.2" class="anchored" data-anchor-id="описание-структурной-модели"><span class="header-section-number">13.8.2</span> Описание структурной модели</h3>
+<p><strong>SEMinR</strong> обеспечивает <strong>читабельную для человека</strong> и <strong>явную</strong> спецификацию структурной модели с помощью следующих функций:</p>
+<ul>
+<li><code>relationships()</code> собирает все структурные связи между конструктами</li>
+<li><code>paths()</code> задает связи между наборами предикторов и исходов</li>
+</ul>
+<p><strong>Пример</strong>: для датасета <code>mobi</code> структурная модель может быть описана следующим образом:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mobi_sm <span class="ot">&lt;-</span> <span class="fu">relationships</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Image"</span>,        <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Expectation"</span>, <span class="st">"Satisfaction"</span>, <span class="st">"Loyalty"</span>)),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Expectation"</span>,  <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Quality"</span>, <span class="st">"Value"</span>, <span class="st">"Satisfaction"</span>)),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Quality"</span>,      <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Value"</span>, <span class="st">"Satisfaction"</span>)),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Value"</span>,        <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Satisfaction"</span>)),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Satisfaction"</span>, <span class="at">to =</span> <span class="fu">c</span>(<span class="st">"Complaints"</span>, <span class="st">"Loyalty"</span>)),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">from =</span> <span class="st">"Complaints"</span>,   <span class="at">to =</span> <span class="st">"Loyalty"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="оценка-модели" class="level3" data-number="13.8.3">
+<h3 data-number="13.8.3" class="anchored" data-anchor-id="оценка-модели"><span class="header-section-number">13.8.3</span> Оценка модели</h3>
+<p><strong>SEMinR</strong> может оценивать CFA или полную SEM-модель, включая измерительную и структурную части:</p>
+<ul>
+<li><code>estimate_pls()</code> оценивает параметры PLS-SEM модели</li>
+<li><code>estimate_cfa()</code> оценивает параметры CFA-модели с использованием пакета Lavaan</li>
+<li><code>estimate_cbsem()</code> оценивает параметры CB-SEM модели с использованием пакета Lavaan</li>
+</ul>
+<p>Вышеуказанные функции принимают комбинацию следующих параметров:</p>
+<ul>
+<li><code>data</code>: датасет, содержащий индикаторы измерительной модели, указанные в <code>constructs()</code></li>
+<li><code>measurement_model</code>: измерительная модель, описанная функцией <code>constructs()</code></li>
+<li><code>structural_model</code> (только для PLS-PM и CB-SEM): структурная модель, описанная функцией <code>paths()</code></li>
+<li><code>inner_weights</code> (только для PLS-PM): схема взвешивания для оценки путей — либо <code>path_weighting</code> для взвешивания по путям (по умолчанию), либо <code>path_factorial</code> для взвешивания по факторам (Lohmöller 1989)</li>
+</ul>
+<p>Пример анализа:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Определяем модель измерения</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mobi_mm <span class="ot">&lt;-</span> <span class="fu">constructs</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Image"</span>,        <span class="fu">multi_items</span>(<span class="st">"IMAG"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Expectation"</span>,  <span class="fu">multi_items</span>(<span class="st">"CUEX"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Value"</span>,        <span class="fu">multi_items</span>(<span class="st">"PERV"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">composite</span>(<span class="st">"Satisfaction"</span>, <span class="fu">multi_items</span>(<span class="st">"CUSA"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">interaction_term</span>(<span class="at">iv =</span> <span class="st">"Image"</span>, <span class="at">moderator =</span> <span class="st">"Expectation"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">interaction_term</span>(<span class="at">iv =</span> <span class="st">"Image"</span>, <span class="at">moderator =</span> <span class="st">"Value"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Определяем структурную модель</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>mobi_sm <span class="ot">&lt;-</span> <span class="fu">relationships</span>(</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paths</span>(<span class="at">to =</span> <span class="st">"Satisfaction"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">from =</span> <span class="fu">c</span>(<span class="st">"Image"</span>, <span class="st">"Expectation"</span>, <span class="st">"Value"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Image*Expectation"</span>, <span class="st">"Image*Value"</span>))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>mobi_pls <span class="ot">&lt;-</span> <span class="fu">estimate_pls</span>(</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mobi,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">measurement_model =</span> mobi_mm,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">structural_model =</span> mobi_sm,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">inner_weights =</span> path_weighting</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>mobi_cfa <span class="ot">&lt;-</span> <span class="fu">estimate_cfa</span>(</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mobi,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">measurement_model =</span> <span class="fu">as.reflective</span>(mobi_mm)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>mobi_cbsem <span class="ot">&lt;-</span> <span class="fu">estimate_cbsem</span>(</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mobi,</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">measurement_model =</span> <span class="fu">as.reflective</span>(mobi_mm),</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">structural_model =</span> mobi_sm</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="отчетность-по-оцененной-модели" class="level3" data-number="13.8.4">
+<h3 data-number="13.8.4" class="anchored" data-anchor-id="отчетность-по-оцененной-модели"><span class="header-section-number">13.8.4</span> Отчетность по оцененной модели</h3>
+<p>Существует несколько способов представления результатов оцененной модели. Функция <code>estimate_pls()</code> возвращает объект класса <code>seminr_model</code>, который можно передать базовой функции R <code>summary()</code>. Это можно использовать двумя основными способами.</p>
+<ol type="1">
+<li><code>summary(seminr_model)</code> отображает:</li>
+</ol>
+<ul>
+<li><strong>R² и скорректированный R²</strong> структурной модели</li>
+<li><strong>Коэффициенты путей</strong> структурной модели<br>
+</li>
+<li><strong>Метрики надежности конструктов</strong>:
+<ul>
+<li><code>rhoC</code> (композитная надежность, Dillon and Goldstein 1987)</li>
+<li><code>AVE</code> (средняя дисперсия извлеченной общности, Fornell and Larcker 1981)</li>
+<li><code>rhoA</code> (Dijkstra and Henseler 2015)</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mobi_pls)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Results from  package seminr (2.3.7)
+
+Path Coefficients:
+                  Satisfaction
+R^2                      0.614
+AdjR^2                   0.606
+Image                    0.470
+Expectation              0.132
+Value                    0.320
+Image*Expectation       -0.140
+Image*Value              0.023
+
+Reliability:
+                  alpha  rhoC   AVE  rhoA
+Image             0.723 0.818 0.478 0.745
+Expectation       0.452 0.733 0.481 0.462
+Value             0.824 0.918 0.848 0.858
+Image*Expectation 0.802 0.833 0.291 1.000
+Image*Value       0.810 0.918 0.574 1.000
+Satisfaction      0.779 0.871 0.693 0.784
+
+Alpha, rhoC, and rhoA should exceed 0.7 while AVE should exceed 0.5</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>model_summary &lt;- summary(seminr_model) Возвращает объект класса <code>summary.seminr_model</code> со следующими доступными объектами (могут варьироваться в зависимости от CB-SEM или PLS-модели):</li>
+</ol>
+<ul>
+<li><code>meta</code> — метаданные об оценке и версии</li>
+<li><code>model_summary$iterations</code> (только PLS) — количество итераций для сходимости</li>
+<li><code>model_summary$paths</code> — матрица коэффициентов путей, <strong>R² и скорректированный R²</strong></li>
+<li><code>total_effects</code> — <strong>общие эффекты</strong> структурной модели</li>
+<li><code>total_indirect_effects</code> — <strong>общие косвенные эффекты</strong> структурной модели</li>
+<li><code>model_summary$loadings</code> — оцененные <strong>факторные нагрузки</strong> измерительной модели</li>
+<li><code>model_summary$weights</code> — оцененные <strong>веса</strong> измерительной модели</li>
+<li><code>model_summary$validity$vif_items</code> — <strong>VIF</strong> для измерительной модели</li>
+<li><code>model_summary$validity$htmt</code> — <strong>HTMT</strong> для конструктов (дискриминантная валидность)</li>
+<li><code>model_summary$validity$fl_criteria</code> — <strong>Fornell-Larcker критерии</strong> для конструктов</li>
+<li><code>model_summary$validity$cross_loadings</code> (только PLS) — все возможные нагрузки между конструктами и индикаторами</li>
+<li><code>model_summary$reliability</code> — композитная надежность (<strong>rhoC</strong>), альфа Кронбаха, <strong>AVE</strong>, <strong>rhoA</strong></li>
+<li><code>model_summary$composite_scores</code> — оценки конструктов для композитов</li>
+<li><code>model_summary$vif_antecedents</code> — <strong>VIF</strong> для структурной модели</li>
+<li><code>model_summary$fSquare</code> — <strong>эффект-размеры (f²)</strong> структурной модели</li>
+<li><code>model_summary$descriptives</code> — описательная статистика и корреляции для индикаторов и конструктов</li>
+<li><code>it_criteria</code> — <strong>AIC и BIC</strong> для исходных конструктов</li>
+</ul>
+<p><strong>Примечание</strong>: оценки общих факторов неопределимы, поэтому для рефлексивных общих факторов используются оценки по процедуре <em>ten Berge</em>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(mobi_pls)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>descriptives<span class="sc">$</span>statistics<span class="sc">$</span>items</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         No. Missing  Mean Median   Min    Max Std.Dev. Kurtosis Skewness
+IMAG1  1.000   0.000 7.640  8.000 1.000 10.000    1.700    4.726   -0.907
+IMAG2  2.000   0.000 7.780  8.000 1.000 10.000    1.687    3.994   -0.798
+IMAG3  3.000   0.000 6.744  7.000 1.000 10.000    2.132    3.687   -0.798
+IMAG4  4.000   0.000 7.588  8.000 1.000 10.000    1.842    4.356   -0.929
+IMAG5  5.000   0.000 7.932  8.000 1.000 10.000    1.557    5.727   -1.076
+CUEX1  6.000   0.000 7.580  8.000 1.000 10.000    1.622    3.860   -0.667
+CUEX2  7.000   0.000 7.532  8.000 1.000 10.000    1.793    4.483   -0.804
+CUEX3  8.000   0.000 7.424  8.000 1.000 10.000    2.103    3.645   -0.854
+PERV1  9.000   0.000 6.156  6.000 1.000 10.000    2.183    2.808   -0.400
+PERV2 10.000   0.000 6.916  7.000 1.000 10.000    1.842    4.003   -0.648
+CUSA1 11.000   0.000 7.988  8.000 4.000 10.000    1.234    3.178   -0.222
+CUSA2 12.000   0.000 7.128  7.000 1.000 10.000    1.765    3.587   -0.550
+CUSA3 13.000   0.000 7.316  7.000 1.000 10.000    1.747    3.993   -0.671</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>descriptives<span class="sc">$</span>correlations<span class="sc">$</span>items</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             IMAG1  IMAG2  IMAG3  IMAG4  IMAG5  CUEX1  CUEX2  CUEX3  PERV1
+IMAG1        1.000  0.390  0.263  0.445  0.429  0.242  0.277  0.209  0.345
+IMAG2        0.390  1.000  0.131  0.298  0.295  0.286  0.203  0.301  0.221
+IMAG3        0.263  0.131  1.000  0.414  0.337  0.220  0.249  0.117  0.275
+IMAG4        0.445  0.298  0.414  1.000  0.427  0.223  0.304  0.248  0.343
+IMAG5        0.429  0.295  0.337  0.427  1.000  0.257  0.364  0.120  0.187
+CUEX1        0.242  0.286  0.220  0.223  0.257  1.000  0.326  0.214  0.265
+CUEX2        0.277  0.203  0.249  0.304  0.364  0.326  1.000  0.107  0.136
+CUEX3        0.209  0.301  0.117  0.248  0.120  0.214  0.107  1.000  0.244
+PERV1        0.345  0.221  0.275  0.343  0.187  0.265  0.136  0.244  1.000
+PERV2        0.383  0.280  0.342  0.516  0.300  0.277  0.190  0.261  0.700
+CUSA1        0.452  0.406  0.219  0.440  0.443  0.325  0.370  0.332  0.329
+CUSA2        0.381  0.271  0.320  0.434  0.387  0.299  0.270  0.255  0.387
+CUSA3        0.528  0.367  0.287  0.491  0.451  0.306  0.279  0.221  0.487
+IMAG1*CUEX1  0.113  0.021  0.056 -0.030 -0.067 -0.125 -0.021 -0.002  0.094
+IMAG1*CUEX2  0.077  0.019  0.045 -0.051 -0.016 -0.019 -0.146  0.019  0.055
+IMAG1*CUEX3  0.167  0.088  0.038 -0.016  0.034 -0.002  0.021 -0.098  0.029
+IMAG2*CUEX1  0.021  0.108 -0.079 -0.044 -0.013 -0.085  0.024 -0.086 -0.010
+IMAG2*CUEX2  0.019  0.011 -0.051 -0.153  0.049  0.022 -0.020  0.046 -0.012
+IMAG2*CUEX3  0.094  0.025 -0.052 -0.063 -0.066 -0.094  0.055 -0.101 -0.048
+IMAG3*CUEX1  0.049 -0.069 -0.027 -0.031 -0.142 -0.160 -0.075 -0.023 -0.017
+IMAG3*CUEX2  0.052 -0.059  0.056  0.095  0.058 -0.091 -0.045  0.099  0.005
+IMAG3*CUEX3  0.035 -0.045 -0.010  0.032 -0.003 -0.025  0.089 -0.206 -0.089
+IMAG4*CUEX1 -0.030 -0.044 -0.035  0.108 -0.063 -0.050 -0.072  0.001  0.035
+IMAG4*CUEX2 -0.051 -0.153  0.083  0.053 -0.019 -0.066 -0.147  0.061 -0.060
+IMAG4*CUEX3 -0.017 -0.061  0.036  0.009 -0.072  0.001  0.070 -0.192 -0.043
+IMAG5*CUEX1 -0.070 -0.013 -0.170 -0.065 -0.112  0.051 -0.024  0.064  0.095
+IMAG5*CUEX2 -0.021  0.061  0.063 -0.024 -0.029 -0.027  0.088  0.164 -0.032
+IMAG5*CUEX3  0.039 -0.072 -0.004 -0.080  0.200  0.074  0.170  0.088 -0.014
+IMAG1*PERV1 -0.119 -0.002  0.028 -0.132  0.130  0.091  0.057  0.027 -0.059
+IMAG1*PERV2 -0.103  0.089 -0.086 -0.206  0.057  0.018  0.031 -0.044 -0.093
+IMAG2*PERV1 -0.002 -0.197  0.162  0.040  0.001 -0.010 -0.013 -0.044  0.127
+IMAG2*PERV2  0.098 -0.114  0.104 -0.002 -0.084 -0.098 -0.062 -0.081  0.083
+IMAG3*PERV1  0.029  0.159 -0.178 -0.119  0.055 -0.020  0.005 -0.094 -0.066
+IMAG3*PERV2 -0.096  0.105 -0.092 -0.130  0.062  0.026  0.017 -0.072 -0.158
+IMAG4*PERV1 -0.134  0.039 -0.117 -0.207 -0.046  0.034 -0.063 -0.040 -0.080
+IMAG4*PERV2 -0.227 -0.002 -0.128 -0.253  0.011  0.018  0.059 -0.034 -0.235
+IMAG5*PERV1  0.130  0.001  0.053 -0.045 -0.071  0.088 -0.027 -0.011  0.119
+IMAG5*PERV2  0.066 -0.087  0.064  0.011 -0.062  0.020 -0.001 -0.049  0.023
+             PERV2  CUSA1  CUSA2  CUSA3 IMAG1*CUEX1 IMAG1*CUEX2 IMAG1*CUEX3
+IMAG1        0.383  0.452  0.381  0.528       0.113       0.077       0.167
+IMAG2        0.280  0.406  0.271  0.367       0.021       0.019       0.088
+IMAG3        0.342  0.219  0.320  0.287       0.056       0.045       0.038
+IMAG4        0.516  0.440  0.434  0.491      -0.030      -0.051      -0.016
+IMAG5        0.300  0.443  0.387  0.451      -0.067      -0.016       0.034
+CUEX1        0.277  0.325  0.299  0.306      -0.125      -0.019      -0.002
+CUEX2        0.190  0.370  0.270  0.279      -0.021      -0.146       0.021
+CUEX3        0.261  0.332  0.255  0.221      -0.002       0.019      -0.098
+PERV1        0.700  0.329  0.387  0.487       0.094       0.055       0.029
+PERV2        1.000  0.420  0.507  0.605       0.022       0.034      -0.055
+CUSA1        0.420  1.000  0.539  0.490      -0.087      -0.071      -0.123
+CUSA2        0.507  0.539  1.000  0.592      -0.075      -0.054      -0.101
+CUSA3        0.605  0.490  0.592  1.000      -0.053      -0.013      -0.037
+IMAG1*CUEX1  0.022 -0.087 -0.075 -0.053       1.000       0.590       0.453
+IMAG1*CUEX2  0.034 -0.071 -0.054 -0.013       0.590       1.000       0.281
+IMAG1*CUEX3 -0.055 -0.123 -0.101 -0.037       0.453       0.281       1.000
+IMAG2*CUEX1 -0.109 -0.060 -0.119 -0.149       0.392       0.358       0.287
+IMAG2*CUEX2 -0.063  0.039 -0.030 -0.015       0.378       0.472       0.229
+IMAG2*CUEX3 -0.099 -0.015 -0.027 -0.101       0.296       0.214       0.310
+IMAG3*CUEX1  0.024 -0.118 -0.056 -0.081       0.259       0.182       0.046
+IMAG3*CUEX2  0.019 -0.008 -0.023  0.048       0.240       0.345       0.024
+IMAG3*CUEX3 -0.074 -0.000 -0.018 -0.047       0.061       0.032       0.303
+IMAG4*CUEX1  0.020 -0.047 -0.002 -0.061       0.500       0.264       0.216
+IMAG4*CUEX2  0.061 -0.070 -0.034  0.009       0.256       0.538       0.115
+IMAG4*CUEX3 -0.040 -0.136 -0.016 -0.023       0.212       0.115       0.531
+IMAG5*CUEX1  0.022 -0.005  0.058  0.019       0.389       0.157       0.143
+IMAG5*CUEX2 -0.001  0.054  0.090  0.100       0.175       0.388       0.044
+IMAG5*CUEX3 -0.062  0.067  0.009 -0.003       0.184       0.077       0.395
+IMAG1*PERV1 -0.109  0.040  0.048 -0.037       0.097       0.105       0.153
+IMAG1*PERV2 -0.189 -0.029 -0.071 -0.126       0.230       0.243       0.307
+IMAG2*PERV1  0.093 -0.056  0.063  0.043       0.164       0.165       0.072
+IMAG2*PERV2  0.065 -0.094 -0.014  0.028       0.394       0.380       0.304
+IMAG3*PERV1 -0.171  0.014 -0.004 -0.098       0.052       0.084       0.129
+IMAG3*PERV2 -0.173  0.005 -0.042 -0.104      -0.165      -0.011       0.029
+IMAG4*PERV1 -0.255 -0.087 -0.065 -0.127      -0.030       0.091       0.045
+IMAG4*PERV2 -0.272 -0.053 -0.134 -0.184      -0.037       0.067       0.046
+IMAG5*PERV1  0.023 -0.146  0.025 -0.014       0.353       0.334       0.181
+IMAG5*PERV2  0.086 -0.100 -0.011 -0.063       0.323       0.290       0.234
+            IMAG2*CUEX1 IMAG2*CUEX2 IMAG2*CUEX3 IMAG3*CUEX1 IMAG3*CUEX2
+IMAG1             0.021       0.019       0.094       0.049       0.052
+IMAG2             0.108       0.011       0.025      -0.069      -0.059
+IMAG3            -0.079      -0.051      -0.052      -0.027       0.056
+IMAG4            -0.044      -0.153      -0.063      -0.031       0.095
+IMAG5            -0.013       0.049      -0.066      -0.142       0.058
+CUEX1            -0.085       0.022      -0.094      -0.160      -0.091
+CUEX2             0.024      -0.020       0.055      -0.075      -0.045
+CUEX3            -0.086       0.046      -0.101      -0.023       0.099
+PERV1            -0.010      -0.012      -0.048      -0.017       0.005
+PERV2            -0.109      -0.063      -0.099       0.024       0.019
+CUSA1            -0.060       0.039      -0.015      -0.118      -0.008
+CUSA2            -0.119      -0.030      -0.027      -0.056      -0.023
+CUSA3            -0.149      -0.015      -0.101      -0.081       0.048
+IMAG1*CUEX1       0.392       0.378       0.296       0.259       0.240
+IMAG1*CUEX2       0.358       0.472       0.214       0.182       0.345
+IMAG1*CUEX3       0.287       0.229       0.310       0.046       0.024
+IMAG2*CUEX1       1.000       0.378       0.466       0.237       0.002
+IMAG2*CUEX2       0.378       1.000       0.180       0.018       0.204
+IMAG2*CUEX3       0.466       0.180       1.000       0.160      -0.106
+IMAG3*CUEX1       0.237       0.018       0.160       1.000       0.411
+IMAG3*CUEX2       0.002       0.204      -0.106       0.411       1.000
+IMAG3*CUEX3       0.183      -0.046       0.059       0.129       0.063
+IMAG4*CUEX1       0.276       0.171       0.064       0.469       0.296
+IMAG4*CUEX2       0.143       0.459      -0.003       0.218       0.515
+IMAG4*CUEX3       0.059       0.027       0.204       0.135       0.021
+IMAG5*CUEX1       0.224       0.194       0.051       0.468       0.168
+IMAG5*CUEX2       0.190       0.286       0.074       0.143       0.344
+IMAG5*CUEX3       0.092       0.135       0.327       0.003       0.005
+IMAG1*PERV1       0.124       0.151       0.027       0.037       0.085
+IMAG1*PERV2       0.334       0.346       0.258      -0.129      -0.011
+IMAG2*PERV1       0.265       0.126       0.352       0.301       0.116
+IMAG2*PERV2       0.456       0.304       0.514       0.264       0.024
+IMAG3*PERV1       0.321       0.099       0.113       0.209       0.057
+IMAG3*PERV2       0.286       0.021       0.094       0.236       0.071
+IMAG4*PERV1       0.223       0.187       0.142       0.056       0.019
+IMAG4*PERV2       0.193       0.239       0.173      -0.030      -0.021
+IMAG5*PERV1       0.168       0.064       0.180       0.238       0.145
+IMAG5*PERV2       0.126       0.074       0.173       0.173       0.205
+            IMAG3*CUEX3 IMAG4*CUEX1 IMAG4*CUEX2 IMAG4*CUEX3 IMAG5*CUEX1
+IMAG1             0.035      -0.030      -0.051      -0.017      -0.070
+IMAG2            -0.045      -0.044      -0.153      -0.061      -0.013
+IMAG3            -0.010      -0.035       0.083       0.036      -0.170
+IMAG4             0.032       0.108       0.053       0.009      -0.065
+IMAG5            -0.003      -0.063      -0.019      -0.072      -0.112
+CUEX1            -0.025      -0.050      -0.066       0.001       0.051
+CUEX2             0.089      -0.072      -0.147       0.070      -0.024
+CUEX3            -0.206       0.001       0.061      -0.192       0.064
+PERV1            -0.089       0.035      -0.060      -0.043       0.095
+PERV2            -0.074       0.020       0.061      -0.040       0.022
+CUSA1            -0.000      -0.047      -0.070      -0.136      -0.005
+CUSA2            -0.018      -0.002      -0.034      -0.016       0.058
+CUSA3            -0.047      -0.061       0.009      -0.023       0.019
+IMAG1*CUEX1       0.061       0.500       0.256       0.212       0.389
+IMAG1*CUEX2       0.032       0.264       0.538       0.115       0.157
+IMAG1*CUEX3       0.303       0.216       0.115       0.531       0.143
+IMAG2*CUEX1       0.183       0.276       0.143       0.059       0.224
+IMAG2*CUEX2      -0.046       0.171       0.459       0.027       0.194
+IMAG2*CUEX3       0.059       0.064      -0.003       0.204       0.051
+IMAG3*CUEX1       0.129       0.469       0.218       0.135       0.468
+IMAG3*CUEX2       0.063       0.296       0.515       0.021       0.168
+IMAG3*CUEX3       1.000       0.159       0.033       0.453       0.000
+IMAG4*CUEX1       0.159       1.000       0.419       0.344       0.473
+IMAG4*CUEX2       0.033       0.419       1.000       0.163       0.045
+IMAG4*CUEX3       0.453       0.344       0.163       1.000       0.100
+IMAG5*CUEX1       0.000       0.473       0.045       0.100       1.000
+IMAG5*CUEX2      -0.006       0.052       0.423      -0.042       0.284
+IMAG5*CUEX3       0.279       0.142       0.006       0.315       0.112
+IMAG1*PERV1       0.127      -0.025       0.082       0.035       0.334
+IMAG1*PERV2       0.039      -0.009       0.076       0.052       0.274
+IMAG2*PERV1       0.140       0.267       0.195       0.180       0.180
+IMAG2*PERV2       0.124       0.251       0.252       0.229       0.134
+IMAG3*PERV1       0.278       0.077       0.018       0.146       0.271
+IMAG3*PERV2       0.322      -0.009      -0.003       0.070       0.184
+IMAG4*PERV1       0.147       0.208       0.137       0.265       0.134
+IMAG4*PERV2       0.077       0.112       0.137       0.181       0.194
+IMAG5*PERV1       0.019       0.161       0.135       0.099       0.295
+IMAG5*PERV2       0.038       0.244       0.257       0.164       0.259
+            IMAG5*CUEX2 IMAG5*CUEX3 IMAG1*PERV1 IMAG1*PERV2 IMAG2*PERV1
+IMAG1            -0.021       0.039      -0.119      -0.103      -0.002
+IMAG2             0.061      -0.072      -0.002       0.089      -0.197
+IMAG3             0.063      -0.004       0.028      -0.086       0.162
+IMAG4            -0.024      -0.080      -0.132      -0.206       0.040
+IMAG5            -0.029       0.200       0.130       0.057       0.001
+CUEX1            -0.027       0.074       0.091       0.018      -0.010
+CUEX2             0.088       0.170       0.057       0.031      -0.013
+CUEX3             0.164       0.088       0.027      -0.044      -0.044
+PERV1            -0.032      -0.014      -0.059      -0.093       0.127
+PERV2            -0.001      -0.062      -0.109      -0.189       0.093
+CUSA1             0.054       0.067       0.040      -0.029      -0.056
+CUSA2             0.090       0.009       0.048      -0.071       0.063
+CUSA3             0.100      -0.003      -0.037      -0.126       0.043
+IMAG1*CUEX1       0.175       0.184       0.097       0.230       0.164
+IMAG1*CUEX2       0.388       0.077       0.105       0.243       0.165
+IMAG1*CUEX3       0.044       0.395       0.153       0.307       0.072
+IMAG2*CUEX1       0.190       0.092       0.124       0.334       0.265
+IMAG2*CUEX2       0.286       0.135       0.151       0.346       0.126
+IMAG2*CUEX3       0.074       0.327       0.027       0.258       0.352
+IMAG3*CUEX1       0.143       0.003       0.037      -0.129       0.301
+IMAG3*CUEX2       0.344       0.005       0.085      -0.011       0.116
+IMAG3*CUEX3      -0.006       0.279       0.127       0.039       0.140
+IMAG4*CUEX1       0.052       0.142      -0.025      -0.009       0.267
+IMAG4*CUEX2       0.423       0.006       0.082       0.076       0.195
+IMAG4*CUEX3      -0.042       0.315       0.035       0.052       0.180
+IMAG5*CUEX1       0.284       0.112       0.334       0.274       0.180
+IMAG5*CUEX2       1.000       0.061       0.358       0.275       0.047
+IMAG5*CUEX3       0.061       1.000       0.209       0.249       0.233
+IMAG1*PERV1       0.358       0.209       1.000       0.735       0.102
+IMAG1*PERV2       0.275       0.249       0.735       1.000       0.026
+IMAG2*PERV1       0.047       0.233       0.102       0.026       1.000
+IMAG2*PERV2       0.056       0.226       0.020       0.199       0.704
+IMAG3*PERV1       0.119       0.015       0.414       0.435       0.051
+IMAG3*PERV2       0.179       0.042       0.461       0.390       0.024
+IMAG4*PERV1       0.114       0.118       0.413       0.466       0.074
+IMAG4*PERV2       0.231       0.186       0.472       0.626       0.017
+IMAG5*PERV1       0.149       0.205       0.280       0.212       0.327
+IMAG5*PERV2       0.234       0.257       0.223       0.272       0.270
+            IMAG2*PERV2 IMAG3*PERV1 IMAG3*PERV2 IMAG4*PERV1 IMAG4*PERV2
+IMAG1             0.098       0.029      -0.096      -0.134      -0.227
+IMAG2            -0.114       0.159       0.105       0.039      -0.002
+IMAG3             0.104      -0.178      -0.092      -0.117      -0.128
+IMAG4            -0.002      -0.119      -0.130      -0.207      -0.253
+IMAG5            -0.084       0.055       0.062      -0.046       0.011
+CUEX1            -0.098      -0.020       0.026       0.034       0.018
+CUEX2            -0.062       0.005       0.017      -0.063       0.059
+CUEX3            -0.081      -0.094      -0.072      -0.040      -0.034
+PERV1             0.083      -0.066      -0.158      -0.080      -0.235
+PERV2             0.065      -0.171      -0.173      -0.255      -0.272
+CUSA1            -0.094       0.014       0.005      -0.087      -0.053
+CUSA2            -0.014      -0.004      -0.042      -0.065      -0.134
+CUSA3             0.028      -0.098      -0.104      -0.127      -0.184
+IMAG1*CUEX1       0.394       0.052      -0.165      -0.030      -0.037
+IMAG1*CUEX2       0.380       0.084      -0.011       0.091       0.067
+IMAG1*CUEX3       0.304       0.129       0.029       0.045       0.046
+IMAG2*CUEX1       0.456       0.321       0.286       0.223       0.193
+IMAG2*CUEX2       0.304       0.099       0.021       0.187       0.239
+IMAG2*CUEX3       0.514       0.113       0.094       0.142       0.173
+IMAG3*CUEX1       0.264       0.209       0.236       0.056      -0.030
+IMAG3*CUEX2       0.024       0.057       0.071       0.019      -0.021
+IMAG3*CUEX3       0.124       0.278       0.322       0.147       0.077
+IMAG4*CUEX1       0.251       0.077      -0.009       0.208       0.112
+IMAG4*CUEX2       0.252       0.018      -0.003       0.137       0.137
+IMAG4*CUEX3       0.229       0.146       0.070       0.265       0.181
+IMAG5*CUEX1       0.134       0.271       0.184       0.134       0.194
+IMAG5*CUEX2       0.056       0.119       0.179       0.114       0.231
+IMAG5*CUEX3       0.226       0.015       0.042       0.118       0.186
+IMAG1*PERV1       0.020       0.414       0.461       0.413       0.472
+IMAG1*PERV2       0.199       0.435       0.390       0.466       0.626
+IMAG2*PERV1       0.704       0.051       0.024       0.074       0.017
+IMAG2*PERV2       1.000       0.023      -0.030       0.028      -0.011
+IMAG3*PERV1       0.023       1.000       0.779       0.599       0.533
+IMAG3*PERV2      -0.030       0.779       1.000       0.550       0.564
+IMAG4*PERV1       0.028       0.599       0.550       1.000       0.784
+IMAG4*PERV2      -0.011       0.533       0.564       0.784       1.000
+IMAG5*PERV1       0.253       0.286       0.133       0.178       0.060
+IMAG5*PERV2       0.267       0.129       0.090       0.060       0.189
+            IMAG5*PERV1 IMAG5*PERV2
+IMAG1             0.130       0.066
+IMAG2             0.001      -0.087
+IMAG3             0.053       0.064
+IMAG4            -0.045       0.011
+IMAG5            -0.071      -0.062
+CUEX1             0.088       0.020
+CUEX2            -0.027      -0.001
+CUEX3            -0.011      -0.049
+PERV1             0.119       0.023
+PERV2             0.023       0.086
+CUSA1            -0.146      -0.100
+CUSA2             0.025      -0.011
+CUSA3            -0.014      -0.063
+IMAG1*CUEX1       0.353       0.323
+IMAG1*CUEX2       0.334       0.290
+IMAG1*CUEX3       0.181       0.234
+IMAG2*CUEX1       0.168       0.126
+IMAG2*CUEX2       0.064       0.074
+IMAG2*CUEX3       0.180       0.173
+IMAG3*CUEX1       0.238       0.173
+IMAG3*CUEX2       0.145       0.205
+IMAG3*CUEX3       0.019       0.038
+IMAG4*CUEX1       0.161       0.244
+IMAG4*CUEX2       0.135       0.257
+IMAG4*CUEX3       0.099       0.164
+IMAG5*CUEX1       0.295       0.259
+IMAG5*CUEX2       0.149       0.234
+IMAG5*CUEX3       0.205       0.257
+IMAG1*PERV1       0.280       0.223
+IMAG1*PERV2       0.212       0.272
+IMAG2*PERV1       0.327       0.270
+IMAG2*PERV2       0.253       0.267
+IMAG3*PERV1       0.286       0.129
+IMAG3*PERV2       0.133       0.090
+IMAG4*PERV1       0.178       0.060
+IMAG4*PERV2       0.060       0.189
+IMAG5*PERV1       1.000       0.747
+IMAG5*PERV2       0.747       1.000</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>descriptives<span class="sc">$</span>statistics<span class="sc">$</span>constructs</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    No. Missing   Mean Median    Min   Max Std.Dev. Kurtosis
+Image             1.000   0.000 -0.000  0.041 -3.484 1.944    1.000    3.283
+Expectation       2.000   0.000 -0.000 -0.018 -3.295 1.976    1.000    3.191
+Value             3.000   0.000 -0.000  0.212 -3.073 1.855    1.000    3.593
+Image*Expectation 4.000   0.000  0.000 -0.174 -6.262 8.226    1.160   20.472
+Image*Value       5.000   0.000  0.000 -0.354 -3.800 8.815    1.240   15.344
+Satisfaction      6.000   0.000 -0.000  0.078 -3.109 1.915    1.000    3.210
+                  Skewness
+Image               -0.413
+Expectation         -0.168
+Value               -0.578
+Image*Expectation    1.125
+Image*Value          2.404
+Satisfaction        -0.447</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model_summary<span class="sc">$</span>descriptives<span class="sc">$</span>correlations<span class="sc">$</span>constructs</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Image Expectation  Value Image*Expectation Image*Value
+Image              1.000       0.506  0.511             0.007      -0.129
+Expectation        0.506       1.000  0.358            -0.167      -0.014
+Value              0.511       0.358  1.000            -0.029      -0.207
+Image*Expectation  0.007      -0.167 -0.029             1.000       0.266
+Image*Value       -0.129      -0.014 -0.207             0.266       1.000
+Satisfaction       0.696       0.511  0.606            -0.183      -0.144
+                  Satisfaction
+Image                    0.696
+Expectation              0.511
+Value                    0.606
+Image*Expectation       -0.183
+Image*Value             -0.144
+Satisfaction             1.000</code></pre>
+</div>
+</div>
+</section>
+<section id="визуализация-моделей" class="level3" data-number="13.8.5">
+<h3 data-number="13.8.5" class="anchored" data-anchor-id="визуализация-моделей"><span class="header-section-number">13.8.5</span> Визуализация моделей</h3>
+<p><strong>SEMinR</strong> может визуализировать все поддерживаемые модели с использованием языка <strong>dot</strong> и виджета <strong>graphViz.js</strong> из пакета <strong>DiagrammeR</strong>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mobi_pls, <span class="at">title =</span> <span class="st">"PLS Model"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-5fcde79d6028a208af9a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5fcde79d6028a208af9a">{"x":{"diagram":"digraph G {\n\n// ----------------------\n// General graph settings\n// ----------------------\ngraph [\ncharset = \"UTF-8\",\nlayout = dot,\nlabel = \"PLS Model\",\nfontsize = 24,\nfontcolor = black,\nfontname = helvetica,\nrankdir = LR,\nlabelloc = t,\nsplines = TRUE\nbgcolor = transparent\n]\n\n// --------------------\n// The structural model\n// --------------------\nsubgraph sm {\nrankdir = LR;\nnode [\nshape = ellipse,\ncolor = black,\nfillcolor = white,\nstyle = filled,\nfontsize = 12,\nfontcolor = black,\nheight = 1.00833333333333,\nwidth = 2.08229166666667,\nfontname = helvetica,\nfixedsize = true\n]\n\"Image\" [label=<<B>Image <\/B>>, shape = hexagon]\n\"Expectation\" [label=<<B>Expectation <\/B>>, shape = hexagon]\n\"Value\" [label=<<B>Value <\/B>>, shape = hexagon]\n\"Image*Expectation\" [label=<<B>Image*Expectation <\/B>>, shape = ellipse]\n\"Image*Value\" [label=<<B>Image*Value <\/B>>, shape = ellipse]\n\"Satisfaction\" [label=<<B>Satisfaction <\/B><BR /><FONT POINT-SIZE=\"10\">r² = 0.614<\/FONT>>, shape = hexagon]\nedge [\ncolor = black,\nfontsize = 9,\nfontcolor = black,\nfontname = helvetica,\ndir = both,\narrowhead = normal,\narrowtail = none\n]\n\"Image\" -> {\"Satisfaction\"}[weight = 1, label = < 𝛽 = 0.47<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 2.85, style = solid, color = black]\n\"Expectation\" -> {\"Satisfaction\"}[weight = 1, label = < 𝛽 = 0.132<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 1.16, style = solid, color = black]\n\"Value\" -> {\"Satisfaction\"}[weight = 1, label = < 𝛽 = 0.32<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 2.1, style = solid, color = black]\n\"Image*Expectation\" -> {\"Satisfaction\"}[weight = 1, label = < 𝛽 = -0.14<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 1.2, style = dashed, color = black]\n\"Image*Value\" -> {\"Satisfaction\"}[weight = 1, label = < 𝛽 = 0.023<BR /><FONT POINT-SIZE=\"7\">   <\/FONT> >, penwidth = 0.615, style = solid, color = black]\n}\n// ---------------------\n// The measurement model\n// ---------------------\n\nsubgraph construct_1 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 1.109375,\nfontname = helvetica,\nfixedsize = true\n]\n\"IMAG1\" [label = \"IMAG1\", shape = box]\n\"IMAG2\" [label = \"IMAG2\", shape = box]\n\"IMAG3\" [label = \"IMAG3\", shape = box]\n\"IMAG4\" [label = \"IMAG4\", shape = box]\n\"IMAG5\" [label = \"IMAG5\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"IMAG1\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.763 >, penwidth = 2.789, style = solid, color = dimgrey]\n\"IMAG2\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.599 >, penwidth = 2.297, style = solid, color = dimgrey]\n\"IMAG3\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.561 >, penwidth = 2.183, style = solid, color = dimgrey]\n\"IMAG4\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.769 >, penwidth = 2.807, style = solid, color = dimgrey]\n\"IMAG5\" -> {\"Image\"}[weight = 1000, label = < 𝜆 = 0.736 >, penwidth = 2.708, style = solid, color = dimgrey]\n\n}\nsubgraph construct_2 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 1.109375,\nfontname = helvetica,\nfixedsize = true\n]\n\"CUEX1\" [label = \"CUEX1\", shape = box]\n\"CUEX2\" [label = \"CUEX2\", shape = box]\n\"CUEX3\" [label = \"CUEX3\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"CUEX1\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.761 >, penwidth = 2.783, style = solid, color = dimgrey]\n\"CUEX2\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.71 >, penwidth = 2.63, style = solid, color = dimgrey]\n\"CUEX3\" -> {\"Expectation\"}[weight = 1000, label = < 𝜆 = 0.598 >, penwidth = 2.294, style = solid, color = dimgrey]\n\n}\nsubgraph construct_3 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 1.109375,\nfontname = helvetica,\nfixedsize = true\n]\n\"PERV1\" [label = \"PERV1\", shape = box]\n\"PERV2\" [label = \"PERV2\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = none\narrowtail = normal\n]\n\"PERV1\" -> {\"Value\"}[weight = 1000, label = < 𝜆 = 0.901 >, penwidth = 3.203, style = solid, color = dimgrey]\n\"PERV2\" -> {\"Value\"}[weight = 1000, label = < 𝜆 = 0.94 >, penwidth = 3.32, style = solid, color = dimgrey]\n\n}\n\n\nsubgraph construct_6 {\nnode [\nshape = box,\ncolor = dimgrey,\nfillcolor = white,\nstyle = filled,\nfontsize = 8,\nfontcolor = black,\nheight = 0.164583333333333,\nwidth = 1.109375,\nfontname = helvetica,\nfixedsize = true\n]\n\"CUSA1\" [label = \"CUSA1\", shape = box]\n\"CUSA2\" [label = \"CUSA2\", shape = box]\n\"CUSA3\" [label = \"CUSA3\", shape = box]\nedge [\ncolor = dimgrey,\nfontsize = 7,\nfontcolor = black,\nfontname = helvetica,\nminlen = 1,\ndir = both\narrowhead = normal\narrowtail = none\n]\n\"Satisfaction\" -> {\"CUSA1\"}[weight = 1000, label = < 𝜆 = 0.804 >, penwidth = 2.912, style = solid, color = dimgrey]\n\"Satisfaction\" -> {\"CUSA2\"}[weight = 1000, label = < 𝜆 = 0.843 >, penwidth = 3.029, style = solid, color = dimgrey]\n\"Satisfaction\" -> {\"CUSA3\"}[weight = 1000, label = < 𝜆 = 0.85 >, penwidth = 3.05, style = solid, color = dimgrey]\n\n}\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#save_plot("myfigure.png")</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+
+    p = t[i].parentElement;
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
+  }
+
+}
+
+
+
+/* webex-solution button toggling function */
+
+b_func = function() {
+
+  console.log("webex: toggle hide");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('open')) {
+
+    cl.remove("open");
+
+  } else {
+
+    cl.add("open");
+
+  }
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answers");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('unchecked')) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = "Hide Answers";
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = "Show Answers";
+
+  }
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  console.log("webex: check solveme");
+
+
+
+  var real_answers = JSON.parse(this.dataset.answer);
+
+  var my_answer = this.value;
+
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+
+    my_answer = my_answer.toLowerCase();
+
+  }
+
+  if (cl.contains("nospaces")) {
+
+    my_answer = my_answer.replace(/ /g, "")
+
+  }
+
+
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+
+    cl.add("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  }
+
+
+
+  // match numeric answers within a specified tolerance
+
+  if(this.dataset.tol > 0){
+
+    var tol = JSON.parse(this.dataset.tol);
+
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+
+    }
+
+  }
+
+
+
+  // added regex bit
+
+  if (cl.contains("regex")){
+
+    answer_regex = RegExp(real_answers.join("|"))
+
+    if (answer_regex.test(my_answer)) {
+
+      cl.add("webex-correct");
+
+    }
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var cl = this.classList
+
+
+
+  /* add style */
+
+  cl.remove("webex-incorrect");
+
+  cl.remove("webex-correct");
+
+  if (this.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
+  var cl = checked_button.parentElement.classList;
+
+  var labels = checked_button.parentElement.parentElement.children;
+
+
+
+  /* get rid of styles */
+
+  for (i = 0; i < labels.length; i++) {
+
+    labels[i].classList.remove("webex-incorrect");
+
+    labels[i].classList.remove("webex-correct");
+
+  }
+
+
+
+  /* add style */
+
+  if (checked_button.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+window.onload = function() {
+
+  console.log("webex onload");
+
+  /* set up solution buttons */
+
+  var buttons = document.getElementsByTagName("button");
+
+
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
+      buttons[i].onclick = b_func;
+
+    }
+
+  }
+
+
+
+  var check_sections = document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+
+
+    let btn = document.createElement("button");
+
+    btn.innerHTML = "Show Answers";
+
+    btn.classList.add("webex-check-button");
+
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+
+  }
+
+
+
+  /* set up webex-solveme inputs */
+
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+
+    solveme[i].setAttribute("autocomplete","off");
+
+    solveme[i].setAttribute("autocorrect", "off");
+
+    solveme[i].setAttribute("autocapitalize", "off");
+
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+
+    /* adjust answer for ignorecase or nospaces */
+
+    var cl = solveme[i].classList;
+
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+
+      real_answer = real_answer.toLowerCase();
+
+    }
+
+    if (cl.contains("nospaces")) {
+
+      real_answer = real_answer.replace(/ /g, "");
+
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+
+    /* attach checking function */
+
+    solveme[i].onkeyup = solveme_func;
+
+    solveme[i].onchange = solveme_func;
+
+
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  /* set up radiogroups */
+
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+
+    radiogroups[i].onchange = radiogroups_func;
+
+  }
+
+
+
+  /* set up selects */
+
+  var selects = document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./PCA_CA.html" class="pagination-link" aria-label="Основы многомерного анализа: снижение размерности">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Основы многомерного анализа: снижение размерности</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Список источников">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Список источников</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R в социологических исследованиях (2-e издание), Д. А. Омельченко (ИГН АлтГУ).</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/domelia/R-book-2026/edit/main/Base_SEM.qmd" class="toc-action"><i class="bi bi-github"></i>Редактировать страницу</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Эта книга написана с помощью <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

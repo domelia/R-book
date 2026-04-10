@@ -222,6 +222,9 @@ $$\hat{y}=\hat{\alpha}+\hat{\beta}x$$
 ![](https://assets.coursehero.com/study-guides/lumen/images/pima-concepts-statistics/linear-regression-3-of-4/m3_examining_relationships_topic_3_2_fit_line_algebra11.gif)
 
 Чтобы найти коэффициенты $\alpha$ и $\beta$ нам нужно понять, как они вычисляются. Начнем с коэффициентов $\beta$:
+```{r}
+
+```
 
 $$\hat{\beta}=\frac{cov(x,y)}{var(x)}$$
 
