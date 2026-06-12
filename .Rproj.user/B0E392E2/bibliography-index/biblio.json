@@ -166,6 +166,33 @@
             "title-short": "The r language",
             "type": "article-journal",
             "volume": "12"
+        },
+        {
+            "DOI": "10.1207/s15328031us0304_4",
+            "author": [
+                {
+                    "family": "Haenlein",
+                    "given": "Michael"
+                },
+                {
+                    "family": "Kaplan",
+                    "given": "Andreas M."
+                }
+            ],
+            "container-title": "Understanding Statistics",
+            "id": "HaenleinKaplan2004",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "283-297",
+            "title": "A beginner’s guide to partial least squares analysis",
+            "type": "article-journal",
+            "volume": "3"
         }
     ],
     "project_biblios": [
